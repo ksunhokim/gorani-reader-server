@@ -1,0 +1,7 @@
+.vscode
+*.log*
+public/.DS_STORE
+public/node_modules
+public/.module-cache
+public/build
+public/dist
