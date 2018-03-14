@@ -70,7 +70,6 @@ func (h *HTTPServer) listenAndServeTLS(cert, key string) error {
 	if !util.FileExist(key) {
 		return fmt.Errorf(`Cannot find SSL key at %s from %s`, key, config.KEYFILE)
 	}
-
 	//https://github.com/denji/golang-tls
 	cfg := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
