@@ -1,0 +1,10 @@
+package config
+
+const (
+	PROTOCOL   = "PROTOCOL"
+	MYSQLURL   = "MYSQL_URL"
+	LISTENADDR = "ADDR"
+	CERTFILE   = "CERT_FILE"
+	KEYFILE    = "KEY_FILE"
+	DEBUG      = "DEBUG"
+)

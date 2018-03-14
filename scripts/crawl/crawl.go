@@ -20,29 +20,31 @@ import (
 var list = []string{}
 var db *gorm.DB
 
-type Word struct {
-	gorm.Model
-	Word   string
-	Pron   string
-	Source string
-	Type   string
-	Def    []Def
-}
+type (
+	Word struct {
+		gorm.Model
+		Word   string `gorm:"unique;not null"`
+		Pron   string
+		Source string `gorm:"unique;not null"`
+		Type   string `gorm:"not null"`
+		Def    []Def
+	}
 
-type Def struct {
-	gorm.Model
-	WordID  uint
-	Part    string
-	Def     string
-	Example []Example
-}
+	Def struct {
+		gorm.Model
+		WordID  uint `gorm:"not null"`
+		Part    string
+		Def     string `gorm:"not null"`
+		Example []Example
+	}
 
-type Example struct {
-	gorm.Model
-	DefID uint
-	Kor   string
-	Eng   string
-}
+	Example struct {
+		gorm.Model
+		DefID uint `gorm:"not null"`
+		Kor   string
+		Eng   string
+	}
+)
 
 func getBody(url string) io.ReadCloser {
 	client := &http.Client{}
@@ -170,7 +172,6 @@ func main() {
 	db = tdb
 	db.Model(&Def{}).AddForeignKey("word_id", "words(id)", "CASCADE", "RESTRICT")
 	db.Model(&Example{}).AddForeignKey("def_id", "defs(id)", "CASCADE", "RESTRICT")
-	db.Model(&Word{}).AddUniqueIndex("word_unique", "source", "word")
 	txt, err := ioutil.ReadFile("words.txt")
 	if err != nil {
 		fmt.Println(err)

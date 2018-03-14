@@ -1,8 +1,20 @@
 package main
 
-import "github.com/sunho/engbreaker/pkg/models"
+import (
+	"github.com/sirupsen/logrus"
+	"github.com/sunho/engbreaker/pkg/api"
+	_ "github.com/sunho/engbreaker/pkg/db"
+)
 
 func main() {
-	user := models.User{Username: "hello, world"}
-	models.DB.NewRecord(user)
+	formatter := &logrus.TextFormatter{
+		FullTimestamp: true,
+	}
+	formatter.DisableColors = true
+	logrus.SetFormatter(formatter)
+	server := api.NewHTTPServer()
+	err := server.Start()
+	if err != nil {
+		logrus.Panic(err)
+	}
 }
