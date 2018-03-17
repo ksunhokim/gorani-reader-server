@@ -19,7 +19,7 @@ func init() {
 	)
 }
 
-func beginAuthHandler(w http.ResponseWriter, r *http.Request) {
+var beginAuthHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	provider := mux.Vars(r)["provider"]
 	url, err := auth.GetAuthURL(provider)
 	if err != nil {
@@ -28,10 +28,9 @@ func beginAuthHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
+})
 
-}
-
-func completeAuthHandler(w http.ResponseWriter, r *http.Request) {
+var completeAuthHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	provider := mux.Vars(r)["provider"]
 	user, err := auth.CompleteAuth(provider, r.URL)
 	if err != nil {
@@ -42,4 +41,5 @@ func completeAuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	cookie := http.Cookie{Path: "/", Name: auth.CookieName, Value: auth.GetTokenOrRegister(user), HttpOnly: true}
 	http.SetCookie(w, &cookie)
-}
+	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+})

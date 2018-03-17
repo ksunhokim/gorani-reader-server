@@ -86,10 +86,13 @@ func CompleteAuth(provider string, url *url.URL) (goth.User, error) {
 		return goth.User{}, err
 	}
 
-	payload, err := dbs.RDB.Get("authstate:" + url.Query().Get("state")).Result()
+	name := "authstate:" + url.Query().Get("state")
+	payload, err := dbs.RDB.Get(name).Result()
 	if err != nil {
 		return goth.User{}, err
 	}
+
+	dbs.RDB.Del(name)
 
 	sess, err := p.UnmarshalSession(payload)
 	if err != nil {

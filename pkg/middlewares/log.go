@@ -12,9 +12,7 @@ func Log(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		crw := newCustomResponseWriter(w)
-		h.ServeHTTP(crw, r)
-
-		logrus.WithFields(logrus.Fields{
+		defer logrus.WithFields(logrus.Fields{
 			"status":   crw.status,
 			"method":   r.Method,
 			"path":     r.URL.Path,
@@ -22,6 +20,7 @@ func Log(h http.Handler) http.Handler {
 			"size":     crw.size,
 			"duration": time.Since(start).Nanoseconds() / int64(time.Millisecond),
 		}).Info("http request")
+		h.ServeHTTP(crw, r)
 	})
 }
 
