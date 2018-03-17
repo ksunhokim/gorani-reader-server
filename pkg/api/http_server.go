@@ -24,14 +24,16 @@ func NewHTTPServer() *HTTPServer {
 
 func (h *HTTPServer) Start() error {
 	h.registerRoutes()
-	protocol := config.GetString(config.PROTOCOL)
+
 	addr := config.GetString(config.LISTENADDR)
 	handler := middlewares.Log(h.route)
 	h.httpSrv = &http.Server{
 		Addr:    addr,
 		Handler: handler,
 	}
+
 	var err error
+	protocol := config.GetString(config.PROTOCOL)
 	switch protocol {
 	case "HTTPS":
 		logrus.Info("api server started as https server")
@@ -58,7 +60,6 @@ func (h *HTTPServer) listenAndServeTLS(cert, key string) error {
 	if cert == "" {
 		return fmt.Errorf(`%s is empty`, config.CERTFILE)
 	}
-
 	if key == "" {
 		return fmt.Errorf(`%s is empty`, config.KEYFILE)
 	}
@@ -66,10 +67,10 @@ func (h *HTTPServer) listenAndServeTLS(cert, key string) error {
 	if !util.FileExist(cert) {
 		return fmt.Errorf(`cannot find SSL cert at %s from %s`, cert, config.CERTFILE)
 	}
-
 	if !util.FileExist(key) {
 		return fmt.Errorf(`Cannot find SSL key at %s from %s`, key, config.KEYFILE)
 	}
+
 	//https://github.com/denji/golang-tls
 	cfg := &tls.Config{
 		MinVersion:               tls.VersionTLS12,

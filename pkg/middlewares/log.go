@@ -10,22 +10,17 @@ import (
 
 func Log(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		crw := newCustomResponseWriter(w)
 		start := time.Now()
+		crw := newCustomResponseWriter(w)
 		h.ServeHTTP(crw, r)
-		ip := realip.FromRequest(r)
-		path := r.URL.Path
-		method := r.Method
-		duration := time.Since(start)
-		size := crw.size
-		status := crw.status
+
 		logrus.WithFields(logrus.Fields{
-			"status":   status,
-			"method":   method,
-			"path":     path,
-			"ip":       ip,
-			"size":     size,
-			"duration": duration.Nanoseconds() / int64(time.Millisecond),
+			"status":   crw.status,
+			"method":   r.Method,
+			"path":     r.URL.Path,
+			"ip":       realip.FromRequest(r),
+			"size":     crw.size,
+			"duration": time.Since(start).Nanoseconds() / int64(time.Millisecond),
 		}).Info("http request")
 	})
 }

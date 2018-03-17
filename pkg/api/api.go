@@ -6,5 +6,4 @@ import (
 
 func (h *HTTPServer) registerRoutes() {
 	h.route = mux.NewRouter()
-	
 }
