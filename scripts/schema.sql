@@ -3,8 +3,8 @@ CREATE TABLE users (
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    CONSTRAINT uc_username_email UNIQUE (username),
-    CONSTRAINT uc_username_email UNIQUE (email)
+    CONSTRAINT uc_username UNIQUE (username),
+    CONSTRAINT uc_email UNIQUE (email)
 );
 
 CREATE TABLE words (
