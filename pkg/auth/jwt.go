@@ -33,6 +33,7 @@ func GetTokenOrRegister(user goth.User) string {
 	if err == nil {
 		return CreateToken(user.Email)
 	}
+
 	err = models.AddUser(models.User{
 		Username: user.NickName,
 		Email:    user.Email,
@@ -40,6 +41,7 @@ func GetTokenOrRegister(user goth.User) string {
 	if err != nil {
 		logrus.Error(err)
 	}
+
 	return CreateToken(user.Email)
 }
 
@@ -54,7 +56,6 @@ func ParseToken(tokenString string) (models.User, error) {
 	if err != nil {
 		return models.User{}, err
 	}
-
 	if !token.Valid {
 		return models.User{}, fmt.Errorf("not valid token")
 	}

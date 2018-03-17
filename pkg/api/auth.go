@@ -27,6 +27,7 @@ var beginAuthHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Requ
 		fmt.Fprintln(w, err)
 		return
 	}
+
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 })
 

@@ -10,6 +10,7 @@ type (
 		Source string
 		Type   sql.NullString
 	}
+
 	Def struct {
 		ID     int
 		WordID int

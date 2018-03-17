@@ -13,6 +13,7 @@ type (
 		SeenAt    time.Time `db:"seen_at"`
 		Name      string
 	}
+
 	WordBookDef struct {
 		WordBookID int `db:"wordbook_id"`
 		No         int `db:"sr_no"`

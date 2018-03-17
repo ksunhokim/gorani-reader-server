@@ -22,6 +22,7 @@ func Auth(h http.Handler) http.Handler {
 			fmt.Fprintln(w, err)
 			return
 		}
+
 		token := c.Value
 		user, err := auth.ParseToken(token)
 		if err != nil {
@@ -29,6 +30,7 @@ func Auth(h http.Handler) http.Handler {
 			fmt.Fprintln(w, err)
 			return
 		}
+
 		ctx := context.WithValue(r.Context(), authContextKey("user"), user)
 		h.ServeHTTP(w, r.WithContext(ctx))
 	})

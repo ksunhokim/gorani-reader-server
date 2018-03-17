@@ -26,6 +26,7 @@ func state() string {
 	}
 	return base64.URLEncoding.EncodeToString(nonceBytes)
 }
+
 func checkState(s string) bool {
 	b, err := dbs.RDB.Exists("authstate:" + s).Result()
 	if err != nil {
@@ -33,6 +34,7 @@ func checkState(s string) bool {
 	}
 	return b == 1
 }
+
 func GenerateAuthSession(provider goth.Provider) (goth.Session, error) {
 	st := state()
 	for checkState(st) {
