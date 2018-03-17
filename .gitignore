@@ -5,3 +5,5 @@ public/node_modules
 public/.module-cache
 public/build
 public/dist
+pkg/cmd/cmd
+pkg/cmd/cmd.exe
