@@ -18,9 +18,9 @@ type (
 		WordBookID int            `db:"wordbook_id" json:"-"`
 		No         int            `db:"sr_no" json:"no"`
 		DefID      int            `db:"def_id" json:"def_id"`
-		Star       sql.NullBool   `json:"star"`
+		Star       string         `json:"star"`
 		Def        string         `json:"def"`
-		Part       sql.NullString `json:"part"`
+		Part       sql.NullString `json:"-"`
 	}
 )
 

@@ -11,20 +11,31 @@ import (
 )
 
 var wordBookListHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	user, _ := r.Context().Value(middlewares.AuthContextKey("user")).(models.User)
+	user, err := middlewares.GetUser(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, err)
+		return
+	}
+
 	books, _ := user.GetWordBooks()
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(books)
 })
 
 var wordBookDetailHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	user, _ := r.Context().Value(middlewares.AuthContextKey("user")).(models.User)
+	user, err := middlewares.GetUser(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, err)
+		return
+	}
 	name := mux.Vars(r)["name"]
 
 	wb, err := user.GetWordBook(name)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintln(w, err)
+		fmt.Fprint(w, err)
 		return
 	}
 
@@ -34,14 +45,19 @@ var wordBookDetailHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
 })
 
 var wordBookAddHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	user, _ := r.Context().Value(middlewares.AuthContextKey("user")).(models.User)
-	name := mux.Vars(r)["name"]
-
-	wb := models.WordBook{}
-	err := json.NewDecoder(r.Body).Decode(&wb)
+	user, err := middlewares.GetUser(r)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintln(w, err)
+		return
+	}
+	name := mux.Vars(r)["name"]
+
+	wb := models.WordBook{}
+	err = json.NewDecoder(r.Body).Decode(&wb)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, err)
 		return
 	}
 	wb.Name = name
@@ -49,27 +65,32 @@ var wordBookAddHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Re
 	err = user.AddWordBook(wb)
 	if err != nil {
 		w.WriteHeader(http.StatusConflict)
-		fmt.Fprintln(w, err)
+		fmt.Fprint(w, err)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
 })
 
 var wordBookRemoveHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	user, _ := r.Context().Value(middlewares.AuthContextKey("user")).(models.User)
+	user, err := middlewares.GetUser(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, err)
+		return
+	}
 	name := mux.Vars(r)["name"]
 
 	wb, err := user.GetWordBook(name)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintln(w, err)
+		fmt.Fprint(w, err)
 		return
 	}
 
 	err = wb.Remove()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, err)
+		fmt.Fprint(w, err)
 		return
 	}
 	w.WriteHeader(http.StatusOK)

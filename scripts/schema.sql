@@ -12,8 +12,7 @@ CREATE TABLE words (
     word VARCHAR(255) NOT NULL,
     pron VARCHAR(255) DEFAULT NULL,
     source VARCHAR(255) NOT NULL,
-    type VARCHAR(10) DEFAULT NULL,
-    CONSTRAINT uc_word UNIQUE (word),
+    type VARCHAR(10) NOT NULL,
     CONSTRAINT uc_source UNIQUE (source)
 );
 
@@ -53,7 +52,7 @@ CREATE TABLE wordbook_entries (
     wordbook_id INT NOT NULL,
     sr_no INT DEFAULT NULL,
     def_id INT NOT NULL,
-    star BOOLEAN DEFAULT FALSE,
+    star BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (def_id)
         REFERENCES defs(id)
         ON DELETE CASCADE,
@@ -63,7 +62,7 @@ CREATE TABLE wordbook_entries (
     CONSTRAINT uc_wordbook_def UNIQUE (wordbook_id, def_id)
 );
 
-delimiter //
+delimiter $$
 CREATE TRIGGER wordbooks_composite_auto BEFORE INSERT ON wordbook_entries
 FOR EACH ROW BEGIN
     SET NEW.sr_no = (
@@ -71,7 +70,8 @@ FOR EACH ROW BEGIN
        FROM wordbook_entries
        WHERE wordbook_id  = NEW.wordbook_id
     );
-END;//
+END;$$
+delimiter ;
 
 CREATE VIEW defs_of_wordbooks AS 
 SELECT wordbook_id, sr_no, defs.id as def_id, star, def, part FROM wordbook_entries

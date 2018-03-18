@@ -16,7 +16,7 @@ const CookieName = "_eng_token"
 var jwtSecret []byte
 
 func init() {
-	jwtSecret = []byte(config.GetString(config.JWTSECRET))
+	jwtSecret = []byte(config.GetString("JWT_SECRET", "ASDF"))
 }
 
 func CreateToken(email string) string {

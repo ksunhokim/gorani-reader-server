@@ -1,7 +1,31 @@
 package config
 
-import "os"
+import (
+	"os"
 
-func GetString(name string) string {
-	return os.Getenv(name)
+	"github.com/sirupsen/logrus"
+)
+
+var Debug = false
+
+func init() {
+	if GetString("DEBUG", "false") == "true" {
+		Debug = true
+	}
+}
+
+func GetString(name, defaul string) string {
+	s := os.Getenv(name)
+	if s == "" {
+		s = defaul
+	}
+	if Debug {
+		logrus.WithFields(
+			logrus.Fields{
+				"name":  name,
+				"value": s,
+			},
+		).Info("config fetched")
+	}
+	return s
 }

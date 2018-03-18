@@ -12,39 +12,14 @@ import (
 	"sync"
 	"time"
 
+	"github.com/jmoiron/sqlx"
+
 	"github.com/PuerkitoBio/goquery"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 )
 
 var list = []string{}
-var db *gorm.DB
-
-type (
-	Word struct {
-		gorm.Model
-		Word   string `gorm:"unique;not null"`
-		Pron   string
-		Source string `gorm:"unique;not null"`
-		Type   string `gorm:"not null"`
-		Def    []Def
-	}
-
-	Def struct {
-		gorm.Model
-		WordID  uint `gorm:"not null"`
-		Part    string
-		Def     string `gorm:"not null"`
-		Example []Example
-	}
-
-	Example struct {
-		gorm.Model
-		DefID uint `gorm:"not null"`
-		Kor   string
-		Eng   string
-	}
-)
+var db *sqlx.DB
 
 func getBody(url string) io.ReadCloser {
 	client := &http.Client{}
@@ -62,7 +37,7 @@ func getBody(url string) io.ReadCloser {
 	return resp.Body
 }
 
-func getDefinition(word string, url string, primary bool) {
+func getDefinition(word string, url string, primary bool, source string) {
 	log.Println("definition:", url)
 	body := getBody(url)
 	if body == nil {
@@ -76,19 +51,19 @@ func getDefinition(word string, url string, primary bool) {
 	typ := "word"
 	if primary {
 		typ = "primary"
-	} else if strings.Contains(url, "idiom") {
+	} else if strings.Contains(url, "idiomId") {
 		typ = "idiom"
 	} else {
 		typ = "word"
 	}
 	pron := doc.Find(".word_view .pron .fy .first .fnt_e16").First().Text()
-	wordNode := Word{
-		Word:   word,
-		Pron:   pron,
-		Source: url,
-		Type:   typ,
+	re, err := db.Exec("INSERT INTO words(word, pron, source, type) VALUES (?,?,?,?)",
+		word, pron, source, typ)
+	if err != nil {
+		log.Println(err)
+		return
 	}
-	defs := []Def{}
+	wordID, _ := re.LastInsertId()
 	doc.Find(".box_wrap1").Each(func(i int, s *goquery.Selection) {
 		part := s.Find("h3 .fnt_syn").First().Text()
 		s.Find("dl dt").Each(func(i int, ss *goquery.Selection) {
@@ -97,11 +72,13 @@ func getDefinition(word string, url string, primary bool) {
 			re_inside_whtsp := regexp.MustCompile(`[\s\p{Zs}]{2,}`)
 			final := re_leadclose_whtsp.ReplaceAllString(input, "")
 			final = re_inside_whtsp.ReplaceAllString(final, " ")
-			def := Def{
-				Part: part,
-				Def:  final,
+			re, err = db.Exec("INSERT INTO defs(def, part, word_id) VALUES (?,?,?)",
+				final, part, wordID)
+			if err != nil {
+				log.Println(err)
+				return
 			}
-			exs := []Example{}
+			defID, _ := re.LastInsertId()
 			ss.NextUntil("dt").Each(func(i int, sss *goquery.Selection) {
 				eng := ""
 				kor := ""
@@ -112,20 +89,11 @@ func getDefinition(word string, url string, primary bool) {
 						kor = ssss.Text()
 					}
 				})
-				exs = append(exs, Example{
-					Eng: eng,
-					Kor: kor,
-				})
+				db.Exec("INSERT INTO examples(kor, eng, def_id) VALUES (?,?,?)",
+					kor, eng, defID)
 			})
-			def.Example = exs
-			defs = append(defs, def)
 		})
 	})
-	wordNode.Def = defs
-	if db.NewRecord(wordNode) {
-		db.Create(&wordNode)
-		db.Save(&wordNode)
-	}
 }
 
 func getQuery(word string) {
@@ -145,10 +113,14 @@ func getQuery(word string) {
 		if sect == "단어/숙어" {
 			s.Find(".list_e2 dt span a").Each(func(i int, s *goquery.Selection) {
 				href, _ := s.Attr("href")
-				if s.Text() == word {
-					getDefinition(s.Text(), "http://endic.naver.com"+href, true)
-				} else {
-					getDefinition(s.Text(), "http://endic.naver.com"+href, false)
+				pat := regexp.MustCompile("(entryId=([^&]+))|(idiomId=([^&]+))")
+				res := pat.FindAllStringSubmatch(href, -1)
+				if len(res) == 1 {
+					if s.Text() == word {
+						getDefinition(s.Text(), "http://endic.naver.com"+href, true, res[0][0])
+					} else {
+						getDefinition(s.Text(), "http://endic.naver.com"+href, false, res[0][0])
+					}
 				}
 
 			})
@@ -165,13 +137,11 @@ func worker(input chan int) {
 }
 
 func main() {
-	tdb, err := gorm.Open("mysql", os.Getenv("MYSQL_URL"))
+	tdb, err := sqlx.Open("mysql", os.Getenv("MYSQL_URL"))
 	if err != nil {
 		panic(err)
 	}
 	db = tdb
-	db.Model(&Def{}).AddForeignKey("word_id", "words(id)", "CASCADE", "RESTRICT")
-	db.Model(&Example{}).AddForeignKey("def_id", "defs(id)", "CASCADE", "RESTRICT")
 	txt, err := ioutil.ReadFile("words.txt")
 	if err != nil {
 		fmt.Println(err)
@@ -198,9 +168,9 @@ func main() {
 	for index, _ := range list {
 		input <- index
 	}
-
+	close(input)
 	log.Println("done")
-	wg.Wait()
+	wg.Done()
 	log.Println(time.Now().Sub(t).Minutes(), " minutes")
 	time.Sleep(time.Second * 60)
 	log.Println("exiting")

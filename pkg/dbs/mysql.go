@@ -11,7 +11,7 @@ import (
 var MDB *sqlx.DB
 
 func init() {
-	url := config.GetString(config.MYSQLURL)
+	url := config.GetString("MYSQL_URL", "engbreaker:engbreaker@/engbreaker")
 	tdb, err := sqlx.Connect("mysql", fmt.Sprintf(`%s?parseTime=true`, url))
 	if err != nil {
 		logrus.Panic(err)

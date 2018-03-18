@@ -25,7 +25,7 @@ func NewHTTPServer() *HTTPServer {
 func (h *HTTPServer) Start() error {
 	h.registerRoutes()
 
-	addr := config.GetString(config.LISTENADDR)
+	addr := config.GetString("ADDR", "localhost:3000")
 	handler := middlewares.Log(h.route)
 	h.httpSrv = &http.Server{
 		Addr:    addr,
@@ -33,12 +33,12 @@ func (h *HTTPServer) Start() error {
 	}
 
 	var err error
-	protocol := config.GetString(config.PROTOCOL)
+	protocol := config.GetString("PROTOCOL", "HTTP")
 	switch protocol {
 	case "HTTPS":
 		logrus.Info("api server started as https server")
-		err = h.listenAndServeTLS(config.GetString(config.CERTFILE),
-			config.GetString(config.KEYFILE))
+		err = h.listenAndServeTLS(config.GetString("CERT", "cert file"),
+			config.GetString("KEY", "key file"))
 		if err == http.ErrServerClosed {
 			logrus.Info("api server was shutdown gracefully")
 			return nil
@@ -58,17 +58,17 @@ func (h *HTTPServer) Start() error {
 
 func (h *HTTPServer) listenAndServeTLS(cert, key string) error {
 	if cert == "" {
-		return fmt.Errorf(`%s is empty`, config.CERTFILE)
+		return fmt.Errorf("CERT is empty")
 	}
 	if key == "" {
-		return fmt.Errorf(`%s is empty`, config.KEYFILE)
+		return fmt.Errorf("KEY is empty")
 	}
 
 	if !util.FileExist(cert) {
-		return fmt.Errorf(`cannot find SSL cert at %s from %s`, cert, config.CERTFILE)
+		return fmt.Errorf("cannot find SSL cert at %s from cert", cert)
 	}
 	if !util.FileExist(key) {
-		return fmt.Errorf(`cannot find SSL key at %s from %s`, key, config.KEYFILE)
+		return fmt.Errorf("cannot find SSL key at %s from key", key)
 	}
 
 	//https://github.com/denji/golang-tls

@@ -9,7 +9,7 @@ import (
 var RDB *redis.Client
 
 func init() {
-	url := config.GetString(config.REDISURL)
+	url := config.GetString("REDIS_URL", "asdf")
 	ops, err := redis.ParseURL(url)
 	if err != nil {
 		logrus.Panic(err)
