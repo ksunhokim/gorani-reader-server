@@ -21,7 +21,7 @@ func init() {
 
 func CreateToken(email string) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp":   time.Now().Add(time.Minute).Unix(),
+		"exp":   time.Now().Add(time.Minute * 60).Unix(),
 		"email": email,
 	})
 	tokenstring, _ := token.SignedString(jwtSecret)

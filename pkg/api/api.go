@@ -7,8 +7,27 @@ import (
 
 func (h *HTTPServer) registerRoutes() {
 	h.route = mux.NewRouter()
-	h.route.Handle("/auth/{provider}", beginAuthHandler)
-	h.route.Handle("/auth/{provider}/callback", completeAuthHandler)
-	h.route.Handle("/dummy", middlewares.Auth(dummy))
-	h.route.Handle("/", middlewares.AuthOrRedirect(dummy, "/login"))
+	h.route.
+		Handle("/auth/{provider}", beginAuthHandler).
+		Methods("GET")
+	h.route.
+		Handle("/auth/{provider}/callback", completeAuthHandler).
+		Methods("GET")
+
+	h.route.
+		Handle("/wordbooks", middlewares.Auth(wordBookListHandler)).
+		Methods("GET")
+	h.route.
+		Handle("/wordbooks/{name}", middlewares.Auth(wordBookDetailHandler)).
+		Methods("GET")
+	h.route.
+		Handle("/wordbooks/{name}", middlewares.Auth(wordBookAddHandler)).
+		Methods("POST")
+	h.route.
+		Handle("/wordbooks/{name}", middlewares.Auth(wordBookRemoveHandler)).
+		Methods("DELETE")
+
+	h.route.
+		Handle("/", middlewares.AuthOrRedirect(wordBookListHandler, "/login")).
+		Methods("GET")
 }

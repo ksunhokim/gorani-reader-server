@@ -7,20 +7,20 @@ import (
 
 type (
 	WordBook struct {
-		ID        int
-		UserID    int       `db:"user_id"`
-		CreatedAt time.Time `db:"created_at"`
-		SeenAt    time.Time `db:"seen_at"`
-		Name      string
+		ID        int       `json:"-"`
+		UserID    int       `db:"user_id" json:"-"`
+		CreatedAt time.Time `db:"created_at" json:"created_at"`
+		SeenAt    time.Time `db:"seen_at" json:"seen_at"`
+		Name      string    `json:"name"`
 	}
 
 	WordBookDef struct {
-		WordBookID int `db:"wordbook_id"`
-		No         int `db:"sr_no"`
-		DefID      int `db:"def_id"`
-		Star       sql.NullBool
-		Def        string
-		Part       sql.NullString
+		WordBookID int            `db:"wordbook_id" json:"-"`
+		No         int            `db:"sr_no" json:"no"`
+		DefID      int            `db:"def_id" json:"def_id"`
+		Star       sql.NullBool   `json:"star"`
+		Def        string         `json:"def"`
+		Part       sql.NullString `json:"part"`
 	}
 )
 
