@@ -14,7 +14,8 @@
         "no-var-requires": false,
         "interface-name": [
             false
-        ]
+        ],
+        "quotemark": [true, "single", "jsx-double"]
     },
     "rulesDirectory": []
 }

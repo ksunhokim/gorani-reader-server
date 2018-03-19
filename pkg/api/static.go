@@ -7,9 +7,13 @@ import (
 
 const indexHTML = `
 <html>
-	<body>
-		hello world
-	</body>
+  <head>
+    <title>asdf</title>
+  </head>
+  <body>
+	<div id="root"></div>
+	<script src="http://localhost:3333/bundle.js"></script>
+  </body>
 </html>
 `
 

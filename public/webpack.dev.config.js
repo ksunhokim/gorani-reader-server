@@ -11,13 +11,15 @@ var devConfigExtension = {
   entry: {
       app: [
         // We are using next two entries for hot-reload
-        'webpack-dev-server/client?http://localhost:3333',
+        'webpack-dev-server/client?http://localhost:3333/',
         'webpack/hot/only-dev-server',
+        './index.tsx'
       ]
   },
 
   output: {
-    filename: '[name].js',
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
     publicPath: "http://localhost:3333/"
   },
 
@@ -31,7 +33,7 @@ var devConfigExtension = {
         enforce: 'pre',
         loader: 'tslint-loader',
         options: { emitErrors: true },
-        include: path.join(__dirname, "App")
+        include: path.join(__dirname, "app")
       },
       {
         test: /\.tsx?$/,

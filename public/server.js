@@ -10,6 +10,7 @@ var server = new WebpackDevServer(compiler, {
     // display no info to console (only warnings and errors)
     noInfo: false,
     publicPath: config.output.publicPath,
+    headers: { "Access-Control-Allow-Origin": "*" },
     stats: {
       // With console colors
       colors: true,

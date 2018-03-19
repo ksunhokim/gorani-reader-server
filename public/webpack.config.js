@@ -1,31 +1,22 @@
 var path = require("path");
 var webpack = require("webpack");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var nodeModulesPath = path.join(__dirname, 'node_modules');
 var isProduction = process.env.NODE_ENV == "production";
 
 var config = {
-  entry: {
-    vendors: [
-      'react',
-      'react-dom',
-      'babel-polyfill',
-       path.join(__dirname, 'babel', 'babelhelpers.js')
-    ],
-    app: [
-      path.join(__dirname, 'app', 'index.tsx')
-    ]
-  },
+  context: path.join(__dirname, 'src'),
+
+  entry: './index.tsx',
 
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.less', '.css'],
-    modules: ["node_modules", "resources"],
   },
 
   output: {
-      path: path.join(__dirname, 'build'),
-      filename: '[name]_[chunkhash].js'
+      path: path.join(__dirname, 'dist'),
+      filename: 'bundle.js',
+      publicPath: '/'
   },
 
   module: {
@@ -61,10 +52,6 @@ var config = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendors', filename: 'vendors_[hash].js' }),
-    new HtmlWebpackPlugin({
-      template: 'index.html'
-    }),
     new webpack.DefinePlugin({
       DEBUG: true
     })
