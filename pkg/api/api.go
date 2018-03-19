@@ -35,12 +35,18 @@ func (h *HTTPServer) registerRoutes() {
 	api.
 		Handle("/wordbooks/{name}", middlewares.Auth(wordBookRemoveHandler)).
 		Methods("DELETE")
+	api.
+		Handle("/wordbooks/{name}/{def}", middlewares.Auth(wordBookAddDefHandler)).
+		Methods("POST")
+	api.
+		Handle("/wordbooks/{name}/{def}", middlewares.Auth(wordBookRemoveDefHandler)).
+		Methods("DELETE")
+	api.
+		Handle("/wordbooks/{name}/{def}", middlewares.Auth(wordBookRemoveDefHandler)).
+		Methods("PATCH")
 
 	api.
-		Handle("/words/{word}", wordsHandler).
-		Methods("GET")
-	api.
-		Handle("/words/{word}/{index}", wordHandler).
+		Handle("/words/{id:[0-9]+}", wordHandler).
 		Methods("GET")
 
 	resDir := config.GetString("RESOURCE", "../../public/dist/")

@@ -1,129 +1,86 @@
-var webpack = require('webpack');
-var path = require('path');
+var path = require("path");
+var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// variables
-var isProduction = process.argv.indexOf('-p') >= 0;
-var sourcePath = path.join(__dirname, './src');
-var outPath = path.join(__dirname, './dist');
+var nodeModulesPath = path.join(__dirname, 'node_modules');
+var isProduction = process.env.NODE_ENV == "production";
 
-// plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-
-module.exports = {
-  context: sourcePath,
+var config = {
   entry: {
-    app: './main.tsx'
-  },
-  output: {
-    path: outPath,
-    filename: 'bundle.js',
-    chunkFilename: '[chunkhash].js',
-    publicPath: '/'
-  },
-  target: 'web',
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
-    // Fix webpack's default behavior to not load packages with jsnext:main module
-    // (jsnext:main directs not usually distributable es6 format, but es6 sources)
-    mainFields: ['module', 'browser', 'main'],
-    alias: {
-      app: path.resolve(__dirname, 'src/app/')
-    }
-  },
-  module: {
-    rules: [
-      // .ts, .tsx
-      {
-        test: /\.tsx?$/,
-        use: isProduction
-          ? 'ts-loader'
-          : ['babel-loader?plugins=react-hot-loader/babel', 'ts-loader']
-      },
-      // css
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                sourceMap: !isProduction,
-                importLoaders: 1,
-                localIdentName: '[local]__[hash:base64:5]'
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: [
-                  require('postcss-import')({ addDependencyTo: webpack }),
-                  require('postcss-url')(),
-                  require('postcss-cssnext')(),
-                  require('postcss-reporter')(),
-                  require('postcss-browser-reporter')({
-                    disabled: isProduction
-                  })
-                ]
-              }
-            }
-          ]
-        })
-      },
-      // static assets
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(png|svg)$/, use: 'url-loader?limit=10000' },
-      { test: /\.(jpg|gif)$/, use: 'file-loader' }
+    vendors: [
+      'react',
+      'react-dom',
+      'babel-polyfill',
+       path.join(__dirname, 'babel', 'babelhelpers.js')
+    ],
+    app: [
+      path.join(__dirname, 'app', 'index.tsx')
     ]
   },
-  optimization: {
-    splitChunks: {
-      name: true,
-      cacheGroups: {
-        commons: {
-          chunks: 'initial',
-          minChunks: 2
-        },
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          priority: -10
-        }
+
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.less', '.css'],
+    modules: ["node_modules", "resources"],
+  },
+
+  output: {
+      path: path.join(__dirname, 'build'),
+      filename: '[name]_[chunkhash].js'
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: { emitErrors: true }
+      },
+      {
+        test: /\.tsx?$/,
+        loaders: ["babel-loader?cacheDirectory", "awesome-typescript-loader?tsconfig=tsconfig.webpack.json&useCache=true"]
+      },
+      {
+        test: /\.css$/,
+        loaders: ["style-loader", "css-loader?minimize"]
+      },
+      {
+        test: /\.less$/,
+        exclude: /\.module\.less$/,
+        loaders: ["style-loader", "css-loader?minimize", "less-loader?compress"]
+      },
+      {
+        test: /\.module\.less$/,
+        loaders: ["style-loader", "css-loader?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]", "less-loader?-compress"]
+      },
+      {
+        test: /\.(jpg|png|woff|eot|ttf|svg|gif)$/,
+        loader: "file-loader?name=[name]_[hash].[ext]"
       }
-    },
-    runtimeChunk: true
+    ]
   },
+
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-      DEBUG: false
-    }),
-    new WebpackCleanupPlugin(),
-    new ExtractTextPlugin({
-      filename: 'styles.css',
-      disable: !isProduction
-    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendors', filename: 'vendors_[hash].js' }),
     new HtmlWebpackPlugin({
-      template: 'assets/index.html'
+      template: 'index.html'
+    }),
+    new webpack.DefinePlugin({
+      DEBUG: true
     })
-  ],
-  devServer: {
-    contentBase: sourcePath,
-    hot: true,
-    inline: true,
-    historyApiFallback: {
-      disableDotRule: true
-    },
-    stats: 'minimal'
-  },
-  node: {
-    // workaround for webpack-dev-server issue
-    // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
-    fs: 'empty',
-    net: 'empty'
-  }
+  ]
 };
+
+if (isProduction) {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+     compress: {
+        warnings: false
+    }
+  }));
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {NODE_ENV: '"production"'},
+    DEBUG: false
+  }));
+}
+
+module.exports = config;

@@ -2,41 +2,31 @@ package models
 
 import (
 	"database/sql"
-	"fmt"
 )
 
 type (
 	Word struct {
-		ID     int            `json:"-"`
-		Word   string         `json:"word"`
-		Pron   sql.NullString `json:"-"`
-		Source string         `json:"-"`
-		Type   sql.NullString `json:"type"`
+		ID     int
+		Word   string
+		Pron   sql.NullString
+		Source string
+		Type   string
 	}
 
 	Def struct {
-		ID     int    `json:"id"`
-		WordID int    `db:"word_id" json:"-"`
-		Part   string `json:"part"`
-		Def    string `json:"def"`
+		ID     int
+		WordID int `db:"word_id"`
+		Part   sql.NullString
+		Def    string
 	}
 )
 
-func GetWords(word string) ([]Word, error) {
-	words := []Word{}
-	err := db.Select(&words,
+func GetWord(id int) (Word, error) {
+	word := Word{}
+	err := db.Get(&word,
 		`SELECT * from words
-		WHERE word = ?
-		ORDER BY type, id`, word)
-	return words, err
-}
-
-func GetWord(word string, index int) (Word, error) {
-	words, _ := GetWords(word)
-	if index >= len(words) {
-		return Word{}, fmt.Errorf("word for %s:%d doesn't exist", word, index)
-	}
-	return words[index], nil
+		WHERE id = ?`, id)
+	return word, err
 }
 
 func (w Word) GetDefs() ([]Def, error) {
@@ -46,4 +36,20 @@ func (w Word) GetDefs() ([]Def, error) {
 		WHERE word_id = ?
 		ORDER BY id`, w.ID)
 	return defs, err
+}
+
+func GetDef(id int) (Def, error) {
+	def := Def{}
+	err := db.Get(&def,
+		`SELECT * from defs
+		WHERE id = ?`, id)
+	return def, err
+}
+
+func (d Def) GetWord() (Word, error) {
+	word := Word{}
+	err := db.Get(&word,
+		`SELECT * from words
+		WHERE id = ?`, d.WordID)
+	return word, err
 }

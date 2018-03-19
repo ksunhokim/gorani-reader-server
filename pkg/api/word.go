@@ -10,70 +10,59 @@ import (
 	"github.com/sunho/engbreaker/pkg/models"
 )
 
-type briefWord struct {
+type detailWord struct {
 	No   int    `json:"no"`
 	Pron string `json:"pron"`
 	Word string `json:"word"`
 	Type string `json:"type"`
+	Defs []def  `json:"defs"`
 }
 
-var wordsHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	word := mux.Vars(r)["word"]
-
-	ws, err := models.GetWords(word)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprint(w, err)
-		return
-	}
-
-	res := []briefWord{}
-	for index, word := range ws {
-		res = append(res, briefWord{
-			No:   index,
-			Pron: word.Pron.String,
-			Word: word.Word,
-			Type: word.Type.String,
-		})
-	}
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(res)
-})
-
-type detailWord struct {
-	No   int          `json:"no"`
-	Pron string       `json:"pron"`
-	Word string       `json:"word"`
-	Type string       `json:"type"`
-	Defs []models.Def `json:"defs"`
+type def struct {
+	ID   int    `json:"id"`
+	Def  string `json:"def"`
+	Part string `json:"part"`
 }
 
 var wordHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	word := mux.Vars(r)["word"]
-	index := mux.Vars(r)["index"]
-	i, _ := strconv.Atoi(index)
+	var err error
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintln(w, err)
+		}
+	}()
 
-	wo, err := models.GetWord(word, i)
+	id := mux.Vars(r)["id"]
+	i, _ := strconv.Atoi(id)
+
+	wo, err := models.GetWord(i)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprint(w, err)
 		return
 	}
 
 	defs, err := wo.GetDefs()
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprint(w, err)
 		return
+	}
+
+	rdefs := []def{}
+	for _, de := range defs {
+		rdefs = append(rdefs, def{
+			Def:  de.Def,
+			ID:   de.ID,
+			Part: de.Part.String,
+		})
 	}
 
 	res := detailWord{
 		Word: wo.Word,
-		Type: wo.Type.String,
+		Type: wo.Type,
 		Pron: wo.Pron.String,
 		No:   i,
-		Defs: defs,
+		Defs: rdefs,
 	}
+
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
 })
