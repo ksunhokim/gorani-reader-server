@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-export const Wordbooks = () => (
+export const Home = () => (
   <main>
-    wordbooks
+    login
   </main>
 );
