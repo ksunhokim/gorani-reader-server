@@ -10,7 +10,7 @@ var config = {
   entry: './index.tsx',
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.less', '.css'],
+    extensions: ['.tsx', '.ts', '.js', '.scss', '.css'],
   },
 
   output: {
@@ -36,13 +36,18 @@ var config = {
         loaders: ["style-loader", "css-loader?minimize"]
       },
       {
-        test: /\.less$/,
-        exclude: /\.module\.less$/,
-        loaders: ["style-loader", "css-loader?minimize", "less-loader?compress"]
-      },
-      {
-        test: /\.module\.less$/,
-        loaders: ["style-loader", "css-loader?minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]", "less-loader?-compress"]
+        test: /(\.scss$)/,
+        loaders: [{
+            loader: 'style-loader'
+        }, {
+            loader: 'css-loader'
+        }, {
+            loader: 'sass-loader',
+            options: {
+                outputStyle: 'compressed',
+                includePaths: ['./node_modules']
+            }
+        }]
       },
       {
         test: /\.(jpg|png|woff|eot|ttf|svg|gif)$/,

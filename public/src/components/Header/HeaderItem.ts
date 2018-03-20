@@ -6,6 +6,7 @@ export enum SeenMode {
 
 export interface HeaderItem {
   name: string;
-  endPoint: string;
+  callback?: any;
+  endPoint?: string;
   seenMode: SeenMode;
 }

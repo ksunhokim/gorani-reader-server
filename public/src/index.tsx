@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import './styles';
 import { App } from './app';
 import { BrowserRouter } from 'react-router-dom';
 import { Store } from 'redux';

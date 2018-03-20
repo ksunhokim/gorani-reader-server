@@ -37,20 +37,25 @@ var devConfigExtension = {
       },
       {
         test: /\.tsx?$/,
-        loaders: ["react-hot-loader", "babel-loader?cacheDirectory", "awesome-typescript-loader?tsconfig=tsconfig.webpack.json&useCache=true"]
+        loaders: ["babel-loader?cacheDirectory", "awesome-typescript-loader?tsconfig=tsconfig.webpack.json&useCache=true"]
       },
       {
         test: /\.css$/,
         loaders: ["style-loader", "css-loader"]
       },
       {
-        test: /\.less$/,
-        exclude: /\.module\.less$/,
-        loaders: ["style-loader", "css-loader", "less-loader"]
-      },
-      {
-        test: /\.module\.less$/,
-        loaders: ["style-loader", "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]", "less-loader"]
+        test: /(\.scss$)/,
+        loaders: [{
+            loader: 'style-loader'
+        }, {
+            loader: 'css-loader'
+        }, {
+            loader: 'sass-loader',
+            options: {
+                outputStyle: 'compressed',
+                includePaths: ['./node_modules']
+            }
+        }]
       },
       {
         test: /\.(jpg|png|woff|eot|ttf|svg|gif)$/,

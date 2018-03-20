@@ -1,26 +1,23 @@
 import * as React from 'react';
-import { refreshAuth } from '../../actions/auth'
+import { gettext } from '../../translation';
+import { refreshAuth } from '../../actions/auth';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Header, HeaderItem, SeenMode } from '../../components/Header';
 import { Content } from '../Content';
 import { Auth } from '../../models';
+import { App } from 'grommet';
 
 const items: HeaderItem[] = [
   {
-    name: 'main',
-    endPoint: '/',
+    name: gettext('wordbooks'),
+    endPoint: '/wordbooks',
     seenMode: SeenMode.LOGIN,
   },
   {
-    name: 'main',
-    endPoint: '/',
-    seenMode: SeenMode.EVERY,
-  },
-  {
-    name: 'go',
+    name: gettext('login'),
     endPoint: '/login',
-    seenMode: SeenMode.EVERY,
+    seenMode: SeenMode.LOGOUT,
   },
 ];
 
@@ -33,17 +30,20 @@ class Main extends React.Component<Props, {}> {
   timer: number;
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(refreshAuth());
     this.timer = setInterval(() => {
       dispatch(refreshAuth());
-    }, 1000);
+    }, 30000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
   render() {
-    const { auth } = this.props;
+    const { auth, dispatch } = this.props;
     return (
-      <div>
-        <Header auth = {auth} items = {items}/>
-        <Content />
-      </div>
+      <App center={true}>
+        <Header auth={auth} dispatch={dispatch} items={items}/>
+      </App>
     );
   }
 }
