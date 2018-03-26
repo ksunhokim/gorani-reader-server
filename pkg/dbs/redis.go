@@ -2,24 +2,22 @@ package dbs
 
 import (
 	"github.com/go-redis/redis"
-	"github.com/sirupsen/logrus"
 	"github.com/sunho/engbreaker/pkg/config"
 )
 
-var RDB *redis.Client
+var RDB redis.UniversalClient
 
-func init() {
-	url := config.GetString("REDIS_URL", "asdf")
-	ops, err := redis.ParseURL(url)
-	if err != nil {
-		logrus.Panic(err)
+func initRedis() {
+	addr := config.GetString("REDIS_ADDR", "")
+	pw := config.GetString("REDIS_PW", "")
+	db := config.GetInt("REDIS_DB", 0)
+	if config.GetString("REDIS_CLUSTER", "false") == "false" {
+		RDB = redis.NewClient(&redis.Options{
+			Addr:     addr,
+			Password: pw,
+			DB:       db,
+		})
+	} else {
+		// cluster
 	}
-
-	tdb := redis.NewClient(ops)
-	_, err = tdb.Ping().Result()
-	if err != nil {
-		logrus.Panic(err)
-	}
-
-	RDB = tdb
 }

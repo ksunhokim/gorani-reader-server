@@ -1,31 +1,31 @@
 package config
 
 import (
-	"os"
+	"strconv"
 
 	"github.com/sirupsen/logrus"
 )
 
-var Debug = false
-
-func init() {
-	if GetString("DEBUG", "false") == "true" {
-		Debug = true
-	}
+type ConfigImpl interface {
+	GetString(name string, initial string) string
 }
 
-func GetString(name, defaul string) string {
-	s := os.Getenv(name)
-	if s == "" {
-		s = defaul
-	}
+var Impl ConfigImpl = EnvImpl{}
+
+var Debug = true
+
+func GetString(name string, initial string) string {
+	return Impl.GetString(name, initial)
+}
+
+func GetInt(name string, initial int) int {
+	initialStr := strconv.Itoa(initial)
+	value := Impl.GetString(name, initialStr)
+	i, err := strconv.Atoi(value)
 	if Debug {
-		logrus.WithFields(
-			logrus.Fields{
-				"name":  name,
-				"value": s,
-			},
-		).Info("config fetched")
+		if err != nil {
+			logrus.Error("Config int field parse error ", name, ":", value)
+		}
 	}
-	return s
+	return i
 }

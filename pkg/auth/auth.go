@@ -35,7 +35,7 @@ func checkState(s string) bool {
 	return b == 1
 }
 
-func GenerateAuthSession(provider goth.Provider) (goth.Session, error) {
+func generateAuthSession(provider goth.Provider) (goth.Session, error) {
 	st := state()
 	for checkState(st) {
 		st = state()
@@ -65,7 +65,7 @@ func GetAuthURL(provider string) (string, error) {
 		return "", err
 	}
 
-	s, err := GenerateAuthSession(p)
+	s, err := generateAuthSession(p)
 	if err != nil {
 		return "", err
 	}
