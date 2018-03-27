@@ -1,8 +1,8 @@
 package dbs
 
 import (
-	"github.com/go-bongo/bongo"
 	"github.com/sirupsen/logrus"
+	"github.com/sunho/bongo"
 	"github.com/sunho/engbreaker/pkg/config"
 )
 

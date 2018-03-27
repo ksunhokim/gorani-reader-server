@@ -7,12 +7,12 @@ type Word struct {
 	Word               string
 	Pronunciation      string
 	Definitions        []Definition
-	Examples           []Example
 }
 
 type Definition struct {
 	Definition string
 	Part       string
+	Examples   []Example
 }
 
 type Example struct {

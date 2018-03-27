@@ -9,6 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/sunho/engbreaker/pkg/config"
 	"github.com/sunho/engbreaker/pkg/model"
+	"gopkg.in/mgo.v2/bson"
 )
 
 var jwtSecret []byte
@@ -28,17 +29,19 @@ func CreateToken(user goth.User) string {
 }
 
 func GetTokenOrRegister(user goth.User) string {
-	_, err := model.GetUser(user.Provider, user.UserID)
+	nuser := model.User{}
+	err := model.Get(&nuser, bson.M{"authid": user.UserID, "authprovider": user.Provider})
 	if err == nil {
 		return CreateToken(user)
 	}
 
-	err = models.AddUser(model.User{
-		AuthType: user.Provider,
-		AuthID:   user.UserID,
-		Nickname: user.NickName,
-		Email:    user.Email,
-	})
+	nuser = model.User{
+		AuthProvider: user.Provider,
+		AuthID:       user.UserID,
+		Nickname:     user.NickName,
+		Email:        user.Email,
+	}
+	err = model.Save(&nuser)
 
 	if err != nil {
 		logrus.Error(err)
@@ -47,7 +50,7 @@ func GetTokenOrRegister(user goth.User) string {
 	return CreateToken(user)
 }
 
-func ParseToken(tokenString string) (model.User, error) {
+func ParseToken(tokenString string) (*model.User, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -56,26 +59,32 @@ func ParseToken(tokenString string) (model.User, error) {
 	})
 
 	if err != nil {
-		return models.User{}, err
+		return &model.User{}, err
 	}
 	if !token.Valid {
-		return models.User{}, fmt.Errorf("not valid token")
+		return &model.User{}, fmt.Errorf("not valid token")
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return models.User{}, fmt.Errorf("not valid token")
+		return &model.User{}, fmt.Errorf("not valid token")
 	}
 
-	email, ok := claims["email"]
+	id, ok := claims["id"].(string)
 	if !ok {
-		return models.User{}, fmt.Errorf("not valid token")
+		return &model.User{}, fmt.Errorf("not valid token")
 	}
 
-	user, err := models.GetUser(email.(string))
+	provider, ok := claims["provider"].(string)
+	if !ok {
+		return &model.User{}, fmt.Errorf("not valid token")
+	}
+
+	user := model.User{}
+	err = model.Get(&user, bson.M{"authid": id, "authprovider": provider})
 	if err != nil {
-		return models.User{}, err
+		return &model.User{}, err
 	}
 
-	return user, nil
+	return &user, nil
 }

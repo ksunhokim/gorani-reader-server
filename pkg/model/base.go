@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/go-bongo/bongo"
 	"github.com/sunho/engbreaker/pkg/dbs"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -28,5 +29,22 @@ func Get(ptr interface{}, query bson.M) error {
 		val.Elem().Set(slicePtr.Elem())
 		return nil
 	}
-	return nil
+	err := dbs.MDB.Collection(makeName(typ.Name())).FindOne(query, ptr)
+	return err
+}
+
+func Save(ptr interface{}) error {
+	val := reflect.ValueOf(ptr).Elem()
+	if val.Type().Kind() == reflect.Slice {
+		typ := val.Type().Elem().Elem()
+		for i := 0; i < val.Len(); i++ {
+			err := dbs.MDB.Collection(makeName(typ.Name())).Save(val.Index(i).Interface().(bongo.Document))
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+	}
+	err := dbs.MDB.Collection(makeName(val.Type().Name())).Save(ptr.(bongo.Document))
+	return err
 }

@@ -20,7 +20,6 @@ func init() {
 }
 
 func TestConfigGetString(t *testing.T) {
-	t.Parallel()
 	a := assert.New(t)
 
 	a.Equal("string", config.GetString("string", "default"))
@@ -28,7 +27,6 @@ func TestConfigGetString(t *testing.T) {
 }
 
 func TestConfigGetInt(t *testing.T) {
-	t.Parallel()
 	a := assert.New(t)
 
 	a.Equal(1234, config.GetInt("int", 5124))

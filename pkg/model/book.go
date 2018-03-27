@@ -7,10 +7,10 @@ import (
 
 type Book struct {
 	bongo.DocumentBase `bson:",inline"`
-	UserID             bson.ObjectId
-	Title              string
-	Picture            string
-	Chapters           []Chapter
+	UserID             bson.ObjectId `json:"user_id"`
+	Title              string        `json:"title"`
+	Picture            string        `json:"picture"`
+	Chapters           []Chapter     `json:"chapters"`
 }
 
 type Chapter struct {

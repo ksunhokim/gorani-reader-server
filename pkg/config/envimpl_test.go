@@ -9,7 +9,6 @@ import (
 )
 
 func TestEnvImplDefault(t *testing.T) {
-	t.Parallel()
 	a := assert.New(t)
 
 	impl := config.EnvImpl{}
@@ -17,7 +16,6 @@ func TestEnvImplDefault(t *testing.T) {
 }
 
 func TestEnvImplGetString(t *testing.T) {
-	t.Parallel()
 	a := assert.New(t)
 
 	impl := config.EnvImpl{}
@@ -26,7 +24,6 @@ func TestEnvImplGetString(t *testing.T) {
 }
 
 func TestEnvImplInvalid(t *testing.T) {
-	t.Parallel()
 	a := assert.New(t)
 
 	impl := config.EnvImpl{}
