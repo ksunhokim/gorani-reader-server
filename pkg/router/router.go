@@ -11,7 +11,8 @@ import (
 func New() http.Handler {
 	r := gin.New()
 	r.Use(middlewares.Auth())
-	r.GET("/wordbooks", view.RetrieveWordBooks)
+	r.GET("/wordbooks", view.ListWordbooks)
 	r.POST("/wordbooks/:name", view.CreateWordBook)
+	r.GET("/wordbooks/:name", view.GetWordBook)
 	return r
 }

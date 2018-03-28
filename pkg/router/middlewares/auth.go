@@ -6,8 +6,8 @@ import (
 	"github.com/sunho/engbreaker/pkg/model"
 )
 
-func User(c *gin.Context) *model.User {
-	return c.MustGet("user").(*model.User) //ㅁㄴㅇㄹ
+func User(c *gin.Context) model.User {
+	return c.MustGet("user").(model.User) //ㅁㄴㅇㄹ
 }
 
 func parseToken(c *gin.Context) string {

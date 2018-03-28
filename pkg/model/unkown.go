@@ -12,7 +12,7 @@ type Unkown struct {
 }
 
 type UnkownWord struct {
-	Word string `json:"word"`
-	Def  uint   `json:"def"`
-	Book string `json:"book"`
+	Word       string `json:"word"`
+	Definition uint   `json:"def"`
+	Book       string `json:"book"`
 }

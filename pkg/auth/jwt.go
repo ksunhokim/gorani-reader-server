@@ -50,7 +50,7 @@ func GetTokenOrRegister(user goth.User) string {
 	return CreateToken(user)
 }
 
-func ParseToken(tokenString string) (*model.User, error) {
+func ParseToken(tokenString string) (model.User, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -59,32 +59,32 @@ func ParseToken(tokenString string) (*model.User, error) {
 	})
 
 	if err != nil {
-		return &model.User{}, err
+		return model.User{}, err
 	}
 	if !token.Valid {
-		return &model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("not valid token")
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return &model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("not valid token")
 	}
 
 	id, ok := claims["id"].(string)
 	if !ok {
-		return &model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("not valid token")
 	}
 
 	provider, ok := claims["provider"].(string)
 	if !ok {
-		return &model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("not valid token")
 	}
 
 	user := model.User{}
 	err = model.Get(&user, bson.M{"authid": id, "authprovider": provider})
 	if err != nil {
-		return &model.User{}, err
+		return model.User{}, err
 	}
 
-	return &user, nil
+	return user, nil
 }

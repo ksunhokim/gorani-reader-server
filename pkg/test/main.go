@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 func main() {
-	m := make(map[string]interface{})
-
-	if !err {
-		fmt.Println("asdf")
-	}
+	maxUint := ^uint(0)
+	maxInt := int(maxUint >> 1)
+	maxi := strconv.FormatInt(int64(maxInt), 10)
+	fmt.Println(maxi)
 }

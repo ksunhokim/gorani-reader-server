@@ -48,8 +48,10 @@ func TestGetOne(t *testing.T) {
 	err := model.Get(&user, bson.M{"nickname": "test2"})
 	a.Equal(nil, err)
 	a.Equal("test2", user.Nickname)
+
 	err = model.Get(&user, bson.M{"nickname": "test"})
 	a.Equal(nil, err)
+
 	err = model.Get(&user, bson.M{"nickname": "sklasjgwr"})
 	a.NotEqual(nil, err)
 }
@@ -62,7 +64,7 @@ func TestGetSliceFail(t *testing.T) {
 		}
 	}()
 
-	users := []model.User{}
+	users := []*model.User{}
 	model.Get(&users, bson.M{"nickname": "test"})
 }
 
@@ -70,10 +72,11 @@ func TestGetSlice(t *testing.T) {
 	initDB()
 	a := assert.New(t)
 
-	users := []*model.User{}
+	users := []model.User{}
 	model.Get(&users, bson.M{"nickname": "test"})
 	a.Equal(len(users), 2)
 	a.Equal("test", users[1].Nickname)
+
 	model.Get(&users, bson.M{"nickname": "sklasjgwr"})
 	a.Equal(len(users), 0)
 }
@@ -86,6 +89,7 @@ func TestSave(t *testing.T) {
 		Nickname: "test3",
 	}
 	model.Save(&user)
+
 	user2 := model.User{}
 	err := model.Get(&user2, bson.M{"nickname": "test3"})
 	a.Equal(nil, err)
@@ -96,17 +100,17 @@ func TestSaveSlice(t *testing.T) {
 	initDB()
 	a := assert.New(t)
 
-	user := []*model.User{
-		&model.User{
+	user := []model.User{
+		model.User{
 			Nickname: "test4",
 		},
-		&model.User{
+		model.User{
 			Nickname: "test4",
 		},
 	}
 	err := model.Save(&user)
 	a.Equal(nil, err)
-	user2 := []*model.User{}
+	user2 := []model.User{}
 	model.Get(&user2, bson.M{"nickname": "test4"})
 	a.Equal(2, len(user2))
 	a.Equal("test4", user[0].Nickname)

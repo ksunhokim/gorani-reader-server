@@ -6,9 +6,16 @@ import (
 )
 
 func MigrateIndex() {
-	index := mgo.Index{
-		Key:    []string{"name"},
-		Unique: true,
-	}
-	dbs.MDB.Collection("wordbooks").Collection().EnsureIndex(index)
+	dbs.MDB.Collection("wordbooks").Collection().EnsureIndex(
+		mgo.Index{
+			Key:    []string{"name", "userid"},
+			Unique: true,
+		},
+	)
+	dbs.MDB.Collection("users").Collection().EnsureIndex(
+		mgo.Index{
+			Key:    []string{"authprovider", "authid"},
+			Unique: true,
+		},
+	)
 }
