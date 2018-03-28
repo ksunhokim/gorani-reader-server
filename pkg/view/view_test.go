@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"testing"
 
 	"github.com/markbates/goth"
 	"github.com/sunho/engbreaker/pkg/auth"
@@ -11,12 +12,20 @@ import (
 	"github.com/sunho/engbreaker/pkg/dbs"
 	"github.com/sunho/engbreaker/pkg/model"
 	"github.com/sunho/engbreaker/pkg/router"
+	httpexpect "gopkg.in/gavv/httpexpect.v1"
 )
 
 func initWordDB() {
 	os.Setenv("MONGO_DB", "wordtest") // should preparej
 	config.Debug = true
 	dbs.Init()
+}
+
+func initServer(t *testing.T) (*httptest.Server, *httpexpect.Expect) {
+	handler := router.New()
+	server := httptest.NewServer(handler)
+	e := httpexpect.New(t, server.URL)
+	return server, e
 }
 
 func initDB() string {

@@ -9,9 +9,7 @@ import (
 
 func ListWordbooks(c *gin.Context) {
 	user := middlewares.User(c)
-	c.JSON(200, gin.H{
-		"wordbooks": user.Wordbooks,
-	})
+	c.JSON(200, user.Wordbooks)
 }
 
 func CreateWordBook(c *gin.Context) {
