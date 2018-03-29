@@ -1,3 +1,9 @@
 [submodule "backend/src/cpp_redis"]
 	path = backend/src/cpp_redis
 	url = https://github.com/Cylix/cpp_redis
+[submodule "backend/src/SimpleAmqpClient"]
+	path = backend/src/SimpleAmqpClient
+	url = https://github.com/alanxz/SimpleAmqpClient
+[submodule "backend/src/rabbitmq-c"]
+	path = backend/src/rabbitmq-c
+	url = https://github.com/alanxz/rabbitmq-c
