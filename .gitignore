@@ -1,9 +1,12 @@
 .vscode
 *.log*
-public/.DS_STORE
 public/node_modules
 public/.module-cache
 public/dist
 public/.awcache
 pkg/cmd/cmd
 pkg/cmd/cmd.exe
+.DS_Store
+*.swp
+backend/build
+scripts/epub/analyze/*.epub
