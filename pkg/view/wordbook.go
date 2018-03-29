@@ -26,6 +26,7 @@ func CreateWordBook(c *gin.Context) {
 		c.AbortWithError(400, err)
 		return
 	}
+
 	wordbooks := []string{name}
 	user.Wordbooks = append(wordbooks, user.Wordbooks...)
 	model.Save(&user)
@@ -36,6 +37,7 @@ func GetWordBook(c *gin.Context) {
 	name := c.Param("name")
 	book := model.Wordbook{}
 	user := middlewares.User(c)
+
 	err := model.Get(&book, bson.M{
 		"userid": user.GetId(),
 		"name":   name,

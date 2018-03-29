@@ -1,45 +1,17 @@
 package auth
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"math/rand"
 	"net/url"
 	"time"
 
 	"github.com/markbates/goth"
-	"github.com/sirupsen/logrus"
 	"github.com/sunho/engbreaker/pkg/dbs"
 )
 
-var random *rand.Rand
-
-func init() {
-	random = rand.New(rand.NewSource(time.Now().UnixNano()))
-}
-
-func state() string {
-	nonceBytes := make([]byte, 64)
-	for i := 0; i < 64; i++ {
-		nonceBytes[i] = byte(random.Int63() % 256)
-	}
-	return base64.URLEncoding.EncodeToString(nonceBytes)
-}
-
-func checkState(s string) bool {
-	b, err := dbs.RDB.Exists("authstate:" + s).Result()
-	if err != nil {
-		logrus.Error(err)
-	}
-	return b == 1
-}
-
 func generateAuthSession(provider goth.Provider) (goth.Session, error) {
-	st := state()
-	for checkState(st) {
-		st = state()
-	}
+	st := dbs.GenerateRedisNonce("authstate:")
 
 	s, err := provider.BeginAuth(st)
 	if err != nil {
