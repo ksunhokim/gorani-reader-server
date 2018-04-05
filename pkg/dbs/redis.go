@@ -4,7 +4,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/sirupsen/logrus"
 	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/dbs"
+	"github.com/sunho/engbreaker/pkg/util"
 )
 
 var RDB redis.UniversalClient
@@ -25,8 +25,8 @@ func initRedis() {
 }
 
 func GenerateRedisNonce(identifier string) string {
-	s := Nonce()
-	b, err := dbs.RDB.Exists(identifier + s).Result()
+	s := util.Nonce()
+	b, err := RDB.Exists(identifier + s).Result()
 	if err != nil {
 		logrus.Error(err)
 	}

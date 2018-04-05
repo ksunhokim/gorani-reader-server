@@ -10,3 +10,4 @@ pkg/cmd/cmd.exe
 *.swp
 backend/build
 scripts/epub/analyze/*.epub
+node_modules

@@ -2,9 +2,9 @@ package view
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sunho/engbreaker/pkg/dbs"
 	"github.com/sunho/engbreaker/pkg/model"
 	"github.com/sunho/engbreaker/pkg/router/middlewares"
-	"gopkg.in/mgo.v2/bson"
 )
 
 func ListWordbooks(c *gin.Context) {
@@ -12,7 +12,7 @@ func ListWordbooks(c *gin.Context) {
 	c.JSON(200, user.Wordbooks)
 }
 
-func CreateWordBook(c *gin.Context) {
+func CreateWordbook(c *gin.Context) {
 	name := c.Param("name")
 	user := middlewares.User(c)
 	book := model.Wordbook{
@@ -27,30 +27,113 @@ func CreateWordBook(c *gin.Context) {
 		return
 	}
 
-	wordbooks := []string{name}
-	user.Wordbooks = append(wordbooks, user.Wordbooks...)
+	user.AddWordbook(name)
 	model.Save(&user)
 	c.Status(201)
 }
 
-func GetWordBook(c *gin.Context) {
-	name := c.Param("name")
-	book := model.Wordbook{}
-	user := middlewares.User(c)
+type entryWithDef struct {
+	model.WordbookEntry
+	DefinitionText string `json:"definition_text"`
+}
 
-	err := model.Get(&book, bson.M{
-		"userid": user.GetId(),
-		"name":   name,
+func GetWordbook(c *gin.Context) {
+	name := c.Param("name")
+	user := middlewares.User(c)
+	book, err := user.GetWordbook(name)
+	if err != nil {
+		c.AbortWithError(404, err)
+		return
+	}
+	entries := []entryWithDef{}
+	for _, entry := range book.Entries {
+		word, err := model.GetWord(entry.Word)
+		if err != nil {
+			continue
+		}
+		entries = append(entries, entryWithDef{
+			WordbookEntry:  entry,
+			DefinitionText: word.Definitions[entry.Definition].Definition,
+		})
+	}
+	c.JSON(200, gin.H{
+		"name":     book.Name,
+		"entries":  entries,
+		"created":  book.GetCreated(),
+		"modified": book.GetModified(),
 	})
+}
+
+func AddEntryToWordbook(c *gin.Context) {
+	name := c.Param("name")
+	user := middlewares.User(c)
+	book, err := user.GetWordbook(name)
 	if err != nil {
 		c.AbortWithError(404, err)
 		return
 	}
 
-	c.JSON(200, gin.H{
-		"name":     book.Name,
-		"entries":  book.Entries,
-		"created":  book.GetCreated(),
-		"modified": book.GetModified(),
-	})
+	req := []model.WordbookEntry{}
+	err = c.BindJSON(&req)
+	if err != nil {
+		c.AbortWithError(400, err)
+		return
+	}
+
+	for _, entry := range req {
+		if !book.ValidateWord(entry.WordRef) {
+			c.AbortWithStatus(400)
+			return
+		}
+	}
+
+	book.Entries = append(req, book.Entries...)
+	model.Save(&book)
+	c.Status(201)
+}
+
+func PutEntryToWordbook(c *gin.Context) {
+	name := c.Param("name")
+	user := middlewares.User(c)
+	book, err := user.GetWordbook(name)
+	if err != nil {
+		c.AbortWithError(404, err)
+		return
+	}
+
+	req := []model.WordbookEntry{}
+	err = c.BindJSON(&req)
+	if err != nil {
+		c.AbortWithError(400, err)
+		return
+	}
+
+	for _, entry := range req {
+		if !model.ValidateWord(entry.WordRef) {
+			c.AbortWithStatus(400)
+			return
+		}
+	}
+
+	book.Entries = req
+	model.Save(&book)
+	c.Status(200)
+}
+
+func DeleteWordbook(c *gin.Context) {
+	name := c.Param("name")
+	user := middlewares.User(c)
+	book, err := user.GetWordbook(name)
+	if err != nil {
+		c.AbortWithError(404, err)
+		return
+	}
+	err = dbs.MDB.Collection("wordbooks").DeleteDocument(&book)
+	if err != nil {
+		c.AbortWithError(500, err)
+		return
+	}
+	user.DeleteWordbook(name)
+	model.Save(&user)
+	c.Status(200)
 }

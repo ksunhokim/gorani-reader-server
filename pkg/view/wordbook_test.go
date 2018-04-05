@@ -1,13 +1,9 @@
 package view_test
 
 import (
-	"net/http"
-	"strings"
 	"testing"
 
-	"github.com/antonholmquist/jason"
 	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestWithoutUser(t *testing.T) {
@@ -77,6 +73,7 @@ func TestGetWordBook(t *testing.T) {
 		Contains("name", "entries", "created", "modified")
 	obj.Value("name").String().Equal("test")
 	obj.Value("entries").Array().First().Object().Value("star").Boolean().Equal(true)
+	obj.Value("entries").Array().First().Object().Value("definition_text").String().Equal("hello")
 
 	e.GET("/wordbooks/test2").
 		WithHeader("Authorization", token).
@@ -166,58 +163,61 @@ func TestAddEntryWordBook(t *testing.T) {
 		Expect().
 		Status(400)
 
-	obj := e.GET("/wordbooks/test/words").
+	obj := e.GET("/wordbooks/test").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(200).
 		JSON().Object()
 	obj.Value("entries").Array().Length().Equal(2)
-
 }
 
 func TestDeleteWordBook(t *testing.T) {
 	token := initDB()
-	a := assert.New(t)
+	server, e := initServer(t)
+	defer server.Close()
 
-	req, _ := http.NewRequest("DELETE", "/wordbooks/test", nil)
-	w := testEndpoint(token, req)
-	a.Equal(200, w.Code)
-	w = testEndpoint(token, req)
-	a.Equal(400, w.Code)
+	e.DELETE("/wordbooks/test").
+		WithHeader("Authorization", token).
+		Expect().
+		Status(200)
 
-	req, _ = http.NewRequest("GET", "/wordbooks/test", nil)
-	w = testEndpoint(token, req)
-	a.Equal(404, w.Code)
+	e.DELETE("/wordbooks/test").
+		WithHeader("Authorization", token).
+		Expect().
+		Status(404)
 
-	req, _ = http.NewRequest("GET", "/wordbooks", nil)
-	w = testEndpoint(token, req)
-	obj, _ := jason.NewObjectFromReader(w.Body)
-	entries, _ := obj.GetObjectArray("wordbooks")
+	e.GET("/wordbooks/test").
+		WithHeader("Authorization", token).
+		Expect().
+		Status(404)
 
-	a.Equal(200, w.Code)
-	a.Equal(0, len(entries))
+	obj := e.GET("/wordbooks").
+		WithHeader("Authorization", token).
+		Expect().
+		Status(200).
+		JSON().Array()
+	obj.Length().Equal(0)
 }
 
 func TestPutEntryWordBook(t *testing.T) {
 	token := initDB()
-	a := assert.New(t)
+	server, e := initServer(t)
+	defer server.Close()
 
-	req, _ := http.NewRequest("PUT", "/wordbooks/test/words", strings.NewReader(`{"words":[{"word":"test","definition":1,"book":"test"},{"word":"test","definition":0,"book":"test"}]}`))
-	w := testEndpoint(token, req)
-	a.Equal(200, w.Code)
-
-	req, _ = http.NewRequest("GET", "/wordbooks/test", nil)
-	w = testEndpoint(token, req)
-	obj, _ := jason.NewObjectFromReader(w.Body)
-	entries, _ := obj.GetObjectArray("entries")
-	defOne, _ := entries[0].GetInt64("definition")
-	defTwo, _ := entries[1].GetInt64("definition")
-
-	a.Equal(200, w.Code)
-	a.Equal(1, defOne)
-	a.Equal(0, defTwo)
-
-	req, _ = http.NewRequest("PUT", "/wordbooks/test/words", strings.NewReader(`[{"word":"test","definition":10,"book":"test"},{"word":"test","definition":0,"book":"test"}]`))
-	w = testEndpoint(token, req)
-	a.Equal(400, w.Code)
+	e.PUT("/wordbooks/test/words").
+		WithHeader("Authorization", token).
+		WithJSON([]gin.H{
+			gin.H{
+				"word":       "test",
+				"definition": 0,
+				"book":       "test",
+			},
+			gin.H{
+				"word":       "test",
+				"definition": 1,
+				"book":       "test",
+			},
+		}).
+		Expect().
+		Status(200)
 }

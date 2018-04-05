@@ -17,8 +17,6 @@ import (
 
 func initWordDB() {
 	os.Setenv("MONGO_DB", "wordtest") // should preparej
-	config.Debug = true
-	dbs.Init()
 }
 
 func initServer(t *testing.T) (*httptest.Server, *httpexpect.Expect) {
@@ -88,10 +86,12 @@ func initDB() string {
 		Name:   "test",
 		Entries: []model.WordbookEntry{
 			model.WordbookEntry{
-				Word:       "test",
-				Definition: 0,
-				Book:       "test",
-				Star:       true,
+				WordRef: model.WordRef{
+					Word:       "test",
+					Definition: 0,
+				},
+				Book: "test",
+				Star: true,
 			},
 		},
 	}
