@@ -15,6 +15,5 @@ func New() *gin.Engine {
 	r.POST("/wordbooks/:name/words", view.AddEntryToWordbook)
 	r.PUT("/wordbooks/:name/words", view.PutEntryToWordbook)
 	r.DELETE("/wordbooks/:name", view.DeleteWordbook)
-	r.POST("/upload", view.Upload)
 	return r
 }

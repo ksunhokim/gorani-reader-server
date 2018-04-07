@@ -27,6 +27,7 @@ func (user *User) DeleteWordbook(wordbook string) {
 		}
 	}
 }
+
 func (user *User) AddWordbook(wordbook string) {
 	user.Wordbooks = append([]string{wordbook}, user.Wordbooks...)
 }

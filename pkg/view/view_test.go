@@ -96,6 +96,49 @@ func initDB() string {
 		},
 	}
 	model.Save(&book)
+	chapter := model.ChapterContent{
+		Content: "<div>호이</div>",
+	}
+	model.Save(&chapter)
+	book2 := model.Book{
+		Title:     "test",
+		Picture:   "test.png",
+		View:      10,
+		Completed: 1,
+		Chapters: []model.Chapter{
+			model.Chapter{
+				Title:     "hoi!호이",
+				ContentID: chapter.Id,
+			},
+		},
+	}
+	model.Save(&book2)
+	book3 := []model.Book{
+		model.Book{
+			Title:     "test2",
+			View:      5,
+			Completed: 3,
+		},
+		model.Book{
+			Title:     "test0",
+			View:      4,
+			Completed: 3,
+		},
+		model.Book{
+			Title:     "테스트",
+			Author:    "호잇",
+			View:      3,
+			Completed: 3,
+		},
+		model.Book{
+			Title:     "테스트2",
+			Author:    "호잇",
+			View:      2,
+			Completed: 3,
+		},
+	}
+	model.Save(&book3)
+
 	return token
 }
 

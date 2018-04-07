@@ -32,6 +32,7 @@ func GetWord(word string) (Word, error) {
 	})
 	return word_, err
 }
+
 func ValidateWord(ref WordRef) bool {
 	word, err := GetWord(ref.Word)
 	if err != nil {
