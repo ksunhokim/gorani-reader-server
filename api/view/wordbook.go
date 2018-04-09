@@ -2,9 +2,9 @@ package view
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sunho/engbreaker/api/model"
+	"github.com/sunho/engbreaker/api/router/middlewares"
 	"github.com/sunho/engbreaker/pkg/dbs"
-	"github.com/sunho/engbreaker/pkg/model"
-	"github.com/sunho/engbreaker/pkg/router/middlewares"
 )
 
 func ListWordbooks(c *gin.Context) {
@@ -17,7 +17,6 @@ func CreateWordbook(c *gin.Context) {
 	user := middlewares.User(c)
 	book := model.Wordbook{
 		Name:    name,
-		UserID:  user.GetId(),
 		Entries: []model.WordbookEntry{},
 	}
 
@@ -27,7 +26,6 @@ func CreateWordbook(c *gin.Context) {
 		return
 	}
 
-	user.AddWordbook(name)
 	model.Save(&user)
 	c.Status(201)
 }
@@ -133,7 +131,6 @@ func DeleteWordbook(c *gin.Context) {
 		c.AbortWithError(500, err)
 		return
 	}
-	user.DeleteWordbook(name)
 	model.Save(&user)
 	c.Status(200)
 }

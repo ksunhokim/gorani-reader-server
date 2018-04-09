@@ -8,11 +8,12 @@ import (
 
 	"github.com/markbates/goth"
 	"github.com/sunho/engbreaker/api/auth"
+	"github.com/sunho/engbreaker/api/model"
+	"github.com/sunho/engbreaker/api/router"
 	"github.com/sunho/engbreaker/pkg/config"
 	"github.com/sunho/engbreaker/pkg/dbs"
-	"github.com/sunho/engbreaker/pkg/model"
-	"github.com/sunho/engbreaker/pkg/router"
 	httpexpect "gopkg.in/gavv/httpexpect.v1"
+	"gopkg.in/mgo.v2/bson"
 )
 
 func initWordDB() {
@@ -68,9 +69,7 @@ func initDB() string {
 		},
 	)
 	user, _ := auth.ParseToken(token)
-	model.Save(&user)
 	unkown := model.Unkown{
-		UserID: user.GetId(),
 		Words: []model.UnkownWord{
 			model.UnkownWord{
 				Word:       "test",
@@ -80,9 +79,9 @@ func initDB() string {
 		},
 	}
 	model.Save(&unkown)
+	user.Unkown = unkown.GetId()
 	book := model.Wordbook{
-		UserID: user.GetId(),
-		Name:   "test",
+		Name: "test",
 		Entries: []model.WordbookEntry{
 			model.WordbookEntry{
 				WordRef: model.WordRef{
@@ -95,6 +94,7 @@ func initDB() string {
 		},
 	}
 	model.Save(&book)
+	user.Wordbooks = []bson.ObjectId{book.GetId()}
 	chapter := model.ChapterContent{
 		Content: "<div>호이</div>",
 	}
@@ -113,7 +113,8 @@ func initDB() string {
 		},
 	}
 	model.Save(&book2)
-
+	user.Books = []bson.ObjectId{book2.GetId()}
+	model.Save(&user)
 	return token
 }
 
