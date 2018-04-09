@@ -32,7 +32,8 @@ func TestAddWordBook(t *testing.T) {
 		JSON().Array()
 
 	obj.Length().Equal(1)
-	obj.First().String().Equal("test")
+	obj.First().Object().Value("name").String().Equal("test")
+	obj.First().Object().Value("entries").Number().Equal(1)
 }
 
 func TestPostWordBook(t *testing.T) {
@@ -56,7 +57,8 @@ func TestPostWordBook(t *testing.T) {
 		Status(200).
 		JSON().Array()
 	obj.Length().Equal(2)
-	obj.First().String().Equal("asd")
+	obj.First().Object().Value("name").String().Equal("asd")
+	obj.First().Object().Value("entries").Number().Equal(1)
 }
 
 func TestGetWordBook(t *testing.T) {

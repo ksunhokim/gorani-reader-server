@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/markbates/goth"
-	"github.com/sunho/engbreaker/pkg/auth"
+	"github.com/sunho/engbreaker/api/auth"
 	"github.com/sunho/engbreaker/pkg/config"
 	"github.com/sunho/engbreaker/pkg/dbs"
 	"github.com/sunho/engbreaker/pkg/model"
@@ -68,7 +68,6 @@ func initDB() string {
 		},
 	)
 	user, _ := auth.ParseToken(token)
-	user.Wordbooks = []string{"test"}
 	model.Save(&user)
 	unkown := model.Unkown{
 		UserID: user.GetId(),
@@ -101,6 +100,7 @@ func initDB() string {
 	}
 	model.Save(&chapter)
 	book2 := model.Book{
+		UserID:    user.GetId(),
 		Title:     "test",
 		Picture:   "test.png",
 		View:      10,
@@ -113,31 +113,6 @@ func initDB() string {
 		},
 	}
 	model.Save(&book2)
-	book3 := []model.Book{
-		model.Book{
-			Title:     "test2",
-			View:      5,
-			Completed: 3,
-		},
-		model.Book{
-			Title:     "test0",
-			View:      4,
-			Completed: 3,
-		},
-		model.Book{
-			Title:     "테스트",
-			Author:    "호잇",
-			View:      3,
-			Completed: 3,
-		},
-		model.Book{
-			Title:     "테스트2",
-			Author:    "호잇",
-			View:      2,
-			Completed: 3,
-		},
-	}
-	model.Save(&book3)
 
 	return token
 }
