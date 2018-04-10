@@ -1,7 +1,6 @@
 package view_test
 
 import (
-	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
@@ -32,7 +31,6 @@ func initDB() string {
 	config.Debug = true
 	dbs.Init()
 	dbs.MDB.Session.DB("viewtest").DropDatabase()
-	model.MigrateIndex()
 	word := model.Word{
 		Word:          "test",
 		Pronunciation: "test",
@@ -116,12 +114,4 @@ func initDB() string {
 	user.Books = []bson.ObjectId{book2.GetId()}
 	model.Save(&user)
 	return token
-}
-
-func testEndpoint(token string, req *http.Request) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	r := router.New()
-	req.Header.Add("Authorization", token)
-	r.ServeHTTP(w, req)
-	return w
 }

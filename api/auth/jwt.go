@@ -9,7 +9,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/sunho/engbreaker/api/model"
 	"github.com/sunho/engbreaker/pkg/config"
-	"gopkg.in/mgo.v2/bson"
 )
 
 var jwtSecret []byte
@@ -25,24 +24,23 @@ func CreateToken(user goth.User) string {
 		"provider": user.Provider,
 	})
 	tokenstring, _ := token.SignedString(jwtSecret)
+
 	return tokenstring
 }
 
 func GetTokenOrRegister(user goth.User) string {
-	nuser := model.User{}
-	err := model.Get(&nuser, bson.M{"authid": user.UserID, "authprovider": user.Provider})
+	user_, err := model.GetUser(user.Provider, user.UserID)
 	if err == nil {
 		return CreateToken(user)
 	}
 
-	nuser = model.User{
-		AuthProvider: user.Provider,
-		AuthID:       user.UserID,
+	user_ = model.User{
 		Nickname:     user.NickName,
 		Email:        user.Email,
+		AuthProvider: user.Provider,
+		AuthID:       user.UserID,
 	}
-	err = model.Save(&nuser)
-
+	_, err = model.CreateUser(user_)
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -70,18 +68,17 @@ func ParseToken(tokenString string) (model.User, error) {
 		return model.User{}, fmt.Errorf("not valid token")
 	}
 
-	id, ok := claims["id"].(string)
-	if !ok {
-		return model.User{}, fmt.Errorf("not valid token")
-	}
-
 	provider, ok := claims["provider"].(string)
 	if !ok {
 		return model.User{}, fmt.Errorf("not valid token")
 	}
 
-	user := model.User{}
-	err = model.Get(&user, bson.M{"authid": id, "authprovider": provider})
+	id, ok := claims["id"].(string)
+	if !ok {
+		return model.User{}, fmt.Errorf("not valid token")
+	}
+
+	user, err := model.GetUser(provider, id)
 	if err != nil {
 		return model.User{}, err
 	}

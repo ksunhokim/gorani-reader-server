@@ -1,16 +1,15 @@
 package model
 
 import (
-	"github.com/go-bongo/bongo"
+	"github.com/sunho/engbreaker/pkg/dbs"
 	"gopkg.in/mgo.v2/bson"
 )
 
 type (
 	Word struct {
-		bongo.DocumentBase `bson:",inline" json"-"`
-		Word               string       `json:"word"`
-		Pronunciation      string       `json:"pronunciation"`
-		Definitions        []Definition `json:"definitions"`
+		Id            string       `json:"word"`
+		Pronunciation string       `json:"pronunciation"`
+		Definitions   []Definition `json:"definitions"`
 	}
 
 	Definition struct {
@@ -26,10 +25,14 @@ type (
 )
 
 func GetWord(word string) (Word, error) {
+	sess := dbs.MDB.Copy()
+	defer sess.Close()
+
 	word_ := Word{}
-	err := Get(&word_, bson.M{
-		"word": word,
-	})
+	err := sess.DB("").C("words").Find(bson.M{
+		"_id": word,
+	}).One(&word_)
+
 	return word_, err
 }
 
@@ -41,5 +44,6 @@ func ValidateWord(ref WordRef) bool {
 	if uint(len(word.Definitions)) <= ref.Definition {
 		return false
 	}
+
 	return true
 }

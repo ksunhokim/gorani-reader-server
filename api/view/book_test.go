@@ -40,6 +40,7 @@ func TestFetchBookContent(t *testing.T) {
 	defer server.Close()
 
 	obj := e.GET("/books/test/chpaters/0").
+		WithHeader("Authorization", token).
 		Expect().
 		Status(200).
 		JSON().

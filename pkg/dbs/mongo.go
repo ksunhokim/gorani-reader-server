@@ -2,21 +2,22 @@ package dbs
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/sunho/bongo"
 	"github.com/sunho/engbreaker/pkg/config"
+	mgo "gopkg.in/mgo.v2"
 )
 
-var MDB *bongo.Connection
+var MDB *mgo.Session
 
 func initMongo() {
 	addr := config.GetString("MONGO_ADDR", "localhost")
 	db := config.GetString("MONGO_DB", "bongotest")
-	tdb, err := bongo.Connect(&bongo.Config{
-		ConnectionString: addr,
-		Database:         db,
-	})
+	info := &mgo.DialInfo{
+		Addrs:    []string{addr},
+		Database: db,
+	}
+	sess, err := mgo.DialWithInfo(info)
 	if err != nil {
 		logrus.Panic(err)
 	}
-	MDB = tdb
+	MDB = sess
 }

@@ -6,14 +6,12 @@ import (
 )
 
 type Book struct {
-	bongo.DocumentBase `bson:",inline"`
-	UserID             bson.ObjectId `json:"-"`
-	Title              string        `json:"title"`
-	Picture            string        `json:"picture"`
-	Author             string        `json:"author"`
-	Chapters           []Chapter     `json:"chapters"`
-	View               uint          `json:"view"`
-	Completed          uint          `json:"completed"`
+	Title     string    `json:"title"`
+	Picture   string    `json:"picture"`
+	Author    string    `json:"author"`
+	Chapters  []Chapter `json:"chapters"`
+	View      uint      `json:"view"`
+	Completed uint      `json:"completed"`
 }
 
 type Chapter struct {

@@ -6,7 +6,6 @@ import (
 
 func TestWordGet(t *testing.T) {
 	initDB()
-
 }
 
 func TestWordSearch(t *testing.T) {

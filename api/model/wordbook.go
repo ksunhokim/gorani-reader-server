@@ -1,14 +1,22 @@
 package model
 
 import (
-	"github.com/go-bongo/bongo"
+	"fmt"
+	"time"
+
+	"github.com/sunho/engbreaker/pkg/dbs"
+	"github.com/sunho/engbreaker/pkg/util"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
 type (
 	Wordbook struct {
-		bongo.DocumentBase `bson:",inline" json:"-"`
-		Name               string          `json:"name"`
-		Entries            []WordbookEntry `json:"entries"`
+		UpdatedAt *time.Time      `bson:"updated_at"`
+		UserId    bson.ObjectId   `bson:"user_id"`
+		Index     int             `json:"index" bson:"index"`
+		Name      string          `json:"name" bson:"name"`
+		Entries   []WordbookEntry `json:"entries" bson:"entries"`
 	}
 
 	WordbookEntry struct {
@@ -24,15 +32,28 @@ type (
 	}
 )
 
-// may bottleneck
-func (book *Wordbook) ValidateWord(ref WordRef) bool {
-	if !ValidateWord(ref) {
-		return false
+func (book *Wordbook) PutEntries(entries []WordbookEntry) error {
+	if !util.IsDistinctSlice(entries) {
+		return fmt.Errorf("No distinct entries")
 	}
-	for _, entry := range book.Entries {
-		if entry.Word == ref.Word && entry.Definition == ref.Definition {
-			return false
+	for _, entry := range entries {
+		if !ValidateWord(entry.WordRef) {
+			return fmt.Errorf("No such word")
 		}
 	}
-	return true
+
+	sess := dbs.MDB.Copy()
+	defer sess.Close()
+	err := sess.DB("").C("wordbooks").Update(
+		bson.M{
+			"user_id": book.UserId,
+			"index":   book.Index,
+		},
+		bson.M{
+			"$set": bson.M{
+				"entries": entries,
+			},
+		})
+
+	return err
 }
