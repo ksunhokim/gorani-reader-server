@@ -18,5 +18,5 @@ func IsDistinctSlice(slice interface{}) bool {
 		}
 		return true
 	}
-	return false
+	panic("This is not a slice")
 }

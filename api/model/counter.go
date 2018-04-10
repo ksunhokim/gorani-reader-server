@@ -10,14 +10,15 @@ import (
 )
 
 type Counter struct {
-	Name  string
-	Value int
+	Name  string `bson:"name"`
+	Value int    `bson:"value"`
 }
 
 func NextSeq(name string) int {
 	sess := dbs.MDB.Copy()
 	defer sess.Close()
 
+	// increase or insert
 	change := mgo.Change{
 		Upsert: true,
 		Update: bson.M{
@@ -25,15 +26,18 @@ func NextSeq(name string) int {
 				"value": 1,
 			},
 		}}
-	result := Counter{}
+
+	counter := Counter{}
 	_, err := sess.DB("").C("counters").Find(
 		bson.M{
 			"name": name,
-		}).Apply(change, &result)
+		}).Apply(change, &counter)
 
 	if err != nil {
+		// should not occur
 		logrus.Error("Model counter error:", name, "   ", err)
 		return rand.Intn(5000000)
 	}
-	return result.Value
+
+	return counter.Value
 }

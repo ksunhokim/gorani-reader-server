@@ -7,7 +7,7 @@ import (
 )
 
 func User(c *gin.Context) model.User {
-	return c.MustGet("user").(model.User) //ㅁㄴㅇㄹ
+	return c.MustGet("user").(model.User)
 }
 
 func parseToken(c *gin.Context) string {

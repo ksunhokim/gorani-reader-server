@@ -29,7 +29,7 @@ func generateAuthSession(provider goth.Provider) (goth.Session, error) {
 
 func GetAuthURL(provider string) (string, error) {
 	if provider == "" {
-		return "", fmt.Errorf("provider is empty")
+		return "", fmt.Errorf("Provider is empty")
 	}
 
 	p, err := goth.GetProvider(provider)
@@ -52,7 +52,7 @@ func GetAuthURL(provider string) (string, error) {
 
 func CompleteAuth(provider string, url *url.URL) (goth.User, error) {
 	if provider == "" {
-		return goth.User{}, fmt.Errorf("provider is empty")
+		return goth.User{}, fmt.Errorf("Provider is empty")
 	}
 
 	p, err := goth.GetProvider(provider)

@@ -22,18 +22,23 @@ type (
 		First  string `json:"first"`
 		Second string `json:"second"`
 	}
+
+	WordRef struct {
+		Word       string `json:"word"`
+		Definition uint   `json:"definition"`
+	}
 )
 
 func GetWord(word string) (Word, error) {
 	sess := dbs.MDB.Copy()
 	defer sess.Close()
 
-	word_ := Word{}
+	out := Word{}
 	err := sess.DB("").C("words").Find(bson.M{
 		"word": word,
-	}).One(&word_)
+	}).One(&out)
 
-	return word_, err
+	return out, err
 }
 
 func ValidateWord(ref WordRef) bool {
@@ -44,6 +49,5 @@ func ValidateWord(ref WordRef) bool {
 	if uint(len(word.Definitions)) <= ref.Definition {
 		return false
 	}
-
 	return true
 }

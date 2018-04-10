@@ -60,22 +60,22 @@ func ParseToken(tokenString string) (model.User, error) {
 		return model.User{}, err
 	}
 	if !token.Valid {
-		return model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("Not valid token")
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("Not valid token")
 	}
 
 	provider, ok := claims["provider"].(string)
 	if !ok {
-		return model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("Not valid token")
 	}
 
 	id, ok := claims["id"].(string)
 	if !ok {
-		return model.User{}, fmt.Errorf("not valid token")
+		return model.User{}, fmt.Errorf("Not valid token")
 	}
 
 	user, err := model.GetUser(provider, id)

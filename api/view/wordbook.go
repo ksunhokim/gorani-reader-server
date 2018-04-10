@@ -16,8 +16,7 @@ type wordbookListItem struct {
 }
 
 func ListWordbooks(c *gin.Context) {
-	page_ := c.Query("p")
-	page, _ := strconv.Atoi(page_)
+	page, _ := strconv.Atoi(c.Query("p"))
 
 	user := middlewares.User(c)
 	wordbooks := user.GetWordbooks(page)
@@ -57,8 +56,7 @@ type entryWithDef struct {
 }
 
 func GetWordbook(c *gin.Context) {
-	index_ := c.Param("index")
-	index, _ := strconv.Atoi(index_)
+	index, _ := strconv.Atoi(c.Param("index"))
 
 	user := middlewares.User(c)
 	wordbook, err := user.GetWordbook(index)
@@ -114,8 +112,7 @@ func PutEntriesOfWordbook(c *gin.Context) {
 }
 
 func DeleteWordbook(c *gin.Context) {
-	index_ := c.Param("index")
-	index, _ := strconv.Atoi(index_)
+	index, _ := strconv.Atoi(c.Param("index"))
 
 	user := middlewares.User(c)
 	err := user.DeleteWordbook(index)

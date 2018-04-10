@@ -25,25 +25,28 @@ type (
 		Sentence string `json:"sentence"`
 		Book     string `json:"book"`
 	}
-
-	WordRef struct {
-		Word       string `json:"word"`
-		Definition uint   `json:"definition"`
-	}
 )
 
-func (book *Wordbook) PutEntries(entries []WordbookEntry) error {
+func vailidateNewEntires(entries []WordbookEntry) bool {
 	if !util.IsDistinctSlice(entries) {
-		return fmt.Errorf("No distinct entries")
+		return false
 	}
 	for _, entry := range entries {
 		if !ValidateWord(entry.WordRef) {
-			return fmt.Errorf("No such word")
+			return false
 		}
+	}
+	return true
+}
+
+func (book *Wordbook) PutEntries(entries []WordbookEntry) error {
+	if !vailidateNewEntires(entries) {
+		return fmt.Errorf("Invalid form")
 	}
 
 	sess := dbs.MDB.Copy()
 	defer sess.Close()
+
 	err := sess.DB("").C("wordbooks").Update(
 		bson.M{
 			"user_id": book.UserId,
