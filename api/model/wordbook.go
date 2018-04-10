@@ -14,9 +14,9 @@ type (
 	Wordbook struct {
 		UpdatedAt *time.Time      `bson:"updated_at"`
 		UserId    bson.ObjectId   `bson:"user_id"`
-		Index     int             `json:"index" bson:"index"`
-		Name      string          `json:"name" bson:"name"`
-		Entries   []WordbookEntry `json:"entries" bson:"entries"`
+		Index     int             `bson:"index"`
+		Name      string          `bson:"name"`
+		Entries   []WordbookEntry `bson:"entries"`
 	}
 
 	WordbookEntry struct {

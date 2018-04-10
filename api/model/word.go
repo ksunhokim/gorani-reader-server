@@ -7,7 +7,7 @@ import (
 
 type (
 	Word struct {
-		Id            string       `json:"word"`
+		Word          string       `json:"word" bson:"word,omitempty"`
 		Pronunciation string       `json:"pronunciation"`
 		Definitions   []Definition `json:"definitions"`
 	}
@@ -30,7 +30,7 @@ func GetWord(word string) (Word, error) {
 
 	word_ := Word{}
 	err := sess.DB("").C("words").Find(bson.M{
-		"_id": word,
+		"word": word,
 	}).One(&word_)
 
 	return word_, err

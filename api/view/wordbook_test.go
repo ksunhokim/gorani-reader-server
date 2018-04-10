@@ -49,16 +49,16 @@ func TestPostWordBook(t *testing.T) {
 	e.POST("/wordbooks/asd").
 		WithHeader("Authorization", token).
 		Expect().
-		Status(400)
+		Status(201)
 
 	obj := e.GET("/wordbooks").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(200).
 		JSON().Array()
-	obj.Length().Equal(2)
-	obj.First().Object().Value("name").String().Equal("asd")
-	obj.First().Object().Value("entries").Number().Equal(1)
+	obj.Length().Equal(3)
+	obj.Element(1).Object().Value("name").String().Equal("asd")
+	obj.Element(1).Object().Value("entries").Number().Equal(0)
 }
 
 func TestGetWordBook(t *testing.T) {
@@ -66,18 +66,18 @@ func TestGetWordBook(t *testing.T) {
 	server, e := initServer(t)
 	defer server.Close()
 
-	obj := e.GET("/wordbooks/test").
+	obj := e.GET("/wordbooks/0").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(200).
 		JSON().Object()
 	obj.Keys().NotContains("_id", "_created", "_modified").
-		Contains("name", "entries", "created", "modified")
+		Contains("name", "entries", "updated_at")
 	obj.Value("name").String().Equal("test")
 	obj.Value("entries").Array().First().Object().Value("star").Boolean().Equal(true)
 	obj.Value("entries").Array().First().Object().Value("definition_text").String().Equal("hello")
 
-	e.GET("/wordbooks/test2").
+	e.GET("/wordbooks/1").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(404)
@@ -178,27 +178,25 @@ func TestDeleteWordBook(t *testing.T) {
 	server, e := initServer(t)
 	defer server.Close()
 
-	e.DELETE("/wordbooks/test").
+	e.DELETE("/wordbooks/0").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(200)
 
-	e.DELETE("/wordbooks/test").
+	e.DELETE("/wordbooks/0").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(404)
 
-	e.GET("/wordbooks/test").
+	e.GET("/wordbooks/0").
 		WithHeader("Authorization", token).
 		Expect().
 		Status(404)
 
-	obj := e.GET("/wordbooks").
+	e.GET("/wordbooks?p=0").
 		WithHeader("Authorization", token).
 		Expect().
-		Status(200).
-		JSON().Array()
-	obj.Length().Equal(0)
+		Status(404)
 }
 
 func TestPutEntryWordBook(t *testing.T) {

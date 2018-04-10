@@ -11,9 +11,8 @@ func New() *gin.Engine {
 	r.Use(middlewares.Auth())
 	r.GET("/wordbooks", view.ListWordbooks)
 	r.POST("/wordbooks/:name", view.CreateWordbook)
-	r.GET("/wordbooks/:name", view.GetWordbook)
-	r.POST("/wordbooks/:name/words", view.AddEntryToWordbook)
-	r.PUT("/wordbooks/:name/words", view.PutEntryToWordbook)
-	r.DELETE("/wordbooks/:name", view.DeleteWordbook)
+	r.GET("/wordbooks/:index", view.GetWordbook)
+	r.PUT("/wordbooks/:index/words", view.PutEntriesOfWordbook)
+	r.DELETE("/wordbooks/:index", view.DeleteWordbook)
 	return r
 }

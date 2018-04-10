@@ -9,5 +9,4 @@ func TestWordGet(t *testing.T) {
 }
 
 func TestWordSearch(t *testing.T) {
-	initWordDB()
 }

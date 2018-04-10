@@ -2,16 +2,40 @@ package view
 
 import (
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sunho/engbreaker/api/model"
 	"github.com/sunho/engbreaker/api/router/middlewares"
-	"github.com/sunho/engbreaker/pkg/dbs"
 )
 
+type wordbookListItem struct {
+	Name      string     `json:"name"`
+	Entries   int        `json:"entries"`
+	UpdatedAt *time.Time `json:"updated_at"`
+}
+
 func ListWordbooks(c *gin.Context) {
+	page_ := c.Query("p")
+	page, _ := strconv.Atoi(page_)
+
 	user := middlewares.User(c)
-	c.JSON(200, user.Wordbooks)
+	wordbooks := user.GetWordbooks(page)
+	if len(wordbooks) == 0 {
+		c.AbortWithStatus(404)
+		return
+	}
+
+	out := []wordbookListItem{}
+	for _, wordbook := range wordbooks {
+		out = append(out, wordbookListItem{
+			Name:      wordbook.Name,
+			Entries:   len(wordbook.Entries),
+			UpdatedAt: wordbook.UpdatedAt,
+		})
+	}
+
+	c.JSON(200, out)
 }
 
 func CreateWordbook(c *gin.Context) {
@@ -56,18 +80,18 @@ func GetWordbook(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"name":     wordbook.Name,
-		"entries":  entries,
-		"modified": wordbook.UpdatedAt,
+		"name":       wordbook.Name,
+		"entries":    entries,
+		"updated_at": wordbook.UpdatedAt,
 	})
 }
 
-func PutEntryToWordbook(c *gin.Context) {
+func PutEntriesOfWordbook(c *gin.Context) {
 	index_ := c.Param("index")
 	index, _ := strconv.Atoi(index_)
 
 	user := middlewares.User(c)
-	book, err := user.GetWordbook(index)
+	wordbook, err := user.GetWordbook(index)
 	if err != nil {
 		c.AbortWithError(404, err)
 		return
@@ -80,31 +104,25 @@ func PutEntryToWordbook(c *gin.Context) {
 		return
 	}
 
-	for _, entry := range req {
-		if !model.ValidateWord(entry.WordRef) {
-			c.AbortWithStatus(400)
-			return
-		}
+	err = wordbook.PutEntries(req)
+	if err != nil {
+		c.AbortWithError(400, err)
+		return
 	}
 
-	book.Entries = req
-	model.Save(&book)
 	c.Status(200)
 }
 
 func DeleteWordbook(c *gin.Context) {
-	name := c.Param("name")
+	index_ := c.Param("index")
+	index, _ := strconv.Atoi(index_)
+
 	user := middlewares.User(c)
-	book, err := user.GetWordbook(name)
+	err := user.DeleteWordbook(index)
 	if err != nil {
 		c.AbortWithError(404, err)
 		return
 	}
-	err = dbs.MDB.Collection("wordbooks").DeleteDocument(&book)
-	if err != nil {
-		c.AbortWithError(500, err)
-		return
-	}
-	model.Save(&user)
+
 	c.Status(200)
 }

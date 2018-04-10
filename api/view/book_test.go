@@ -35,7 +35,7 @@ func TestFetchBook(t *testing.T) {
 		Status(404)
 }
 func TestFetchBookContent(t *testing.T) {
-	initDB()
+	token := initDB()
 	server, e := initServer(t)
 	defer server.Close()
 
