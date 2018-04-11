@@ -12,8 +12,6 @@ type ConfigImpl interface {
 
 var Impl ConfigImpl = EnvImpl{}
 
-const DBName = "engbreaker"
-
 var Debug = true
 
 func GetString(name string, initial string) string {

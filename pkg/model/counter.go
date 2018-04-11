@@ -20,7 +20,8 @@ func NextSeq(name string) int {
 
 	// increase or insert
 	change := mgo.Change{
-		Upsert: true,
+		ReturnNew: true,
+		Upsert:    true,
 		Update: bson.M{
 			"$inc": bson.M{
 				"value": 1,

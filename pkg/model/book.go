@@ -1,7 +1,6 @@
 package model
 
 import (
-	"github.com/go-bongo/bongo"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -20,6 +19,5 @@ type Chapter struct {
 }
 
 type ChapterContent struct {
-	bongo.DocumentBase `bson:",inline"`
-	Content            string
+	Content string
 }

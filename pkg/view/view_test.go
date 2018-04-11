@@ -4,13 +4,14 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/markbates/goth"
-	"github.com/sunho/engbreaker/api/auth"
-	"github.com/sunho/engbreaker/api/model"
-	"github.com/sunho/engbreaker/api/router"
+	"github.com/sunho/engbreaker/pkg/auth"
 	"github.com/sunho/engbreaker/pkg/config"
 	"github.com/sunho/engbreaker/pkg/dbs"
+	"github.com/sunho/engbreaker/pkg/model"
+	"github.com/sunho/engbreaker/pkg/router"
 	httpexpect "gopkg.in/gavv/httpexpect.v1"
 )
 
@@ -63,8 +64,9 @@ func initDB() string {
 	)
 	user, _ := auth.ParseToken(token)
 	dbs.MDB.DB("").C("wordbooks").Insert(model.Wordbook{
-		UserId: user.Id,
-		Name:   "test",
+		UpdatedAt: time.Now(),
+		UserId:    user.Id,
+		Name:      "test",
 		Entries: []model.WordbookEntry{
 			model.WordbookEntry{
 				WordRef: model.WordRef{

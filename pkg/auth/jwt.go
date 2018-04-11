@@ -7,8 +7,8 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/markbates/goth"
 	"github.com/sirupsen/logrus"
-	"github.com/sunho/engbreaker/api/model"
 	"github.com/sunho/engbreaker/pkg/config"
+	"github.com/sunho/engbreaker/pkg/model"
 )
 
 var jwtSecret []byte

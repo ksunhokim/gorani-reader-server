@@ -12,7 +12,7 @@ import (
 
 type (
 	Wordbook struct {
-		UpdatedAt *time.Time      `bson:"updated_at"`
+		UpdatedAt time.Time       `bson:"updated_at"`
 		UserId    bson.ObjectId   `bson:"user_id"`
 		Index     int             `bson:"index"`
 		Name      string          `bson:"name"`
@@ -54,7 +54,8 @@ func (book *Wordbook) PutEntries(entries []WordbookEntry) error {
 		},
 		bson.M{
 			"$set": bson.M{
-				"entries": entries,
+				"entries":    entries,
+				"updated_at": time.Now(),
 			},
 		})
 

@@ -5,14 +5,15 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sunho/engbreaker/api/model"
-	"github.com/sunho/engbreaker/api/router/middlewares"
+	"github.com/sunho/engbreaker/pkg/model"
+	"github.com/sunho/engbreaker/pkg/router/middlewares"
 )
 
 type wordbookListItem struct {
-	Name      string     `json:"name"`
-	Entries   int        `json:"entries"`
-	UpdatedAt *time.Time `json:"updated_at"`
+	Index     int       `json:"id"`
+	Name      string    `json:"name"`
+	Entries   int       `json:"entries"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func ListWordbooks(c *gin.Context) {
@@ -28,6 +29,7 @@ func ListWordbooks(c *gin.Context) {
 	out := []wordbookListItem{}
 	for _, wordbook := range wordbooks {
 		out = append(out, wordbookListItem{
+			Index:     wordbook.Index,
 			Name:      wordbook.Name,
 			Entries:   len(wordbook.Entries),
 			UpdatedAt: wordbook.UpdatedAt,
@@ -85,8 +87,7 @@ func GetWordbook(c *gin.Context) {
 }
 
 func PutEntriesOfWordbook(c *gin.Context) {
-	index_ := c.Param("index")
-	index, _ := strconv.Atoi(index_)
+	index, _ := strconv.Atoi(c.Param("index"))
 
 	user := middlewares.User(c)
 	wordbook, err := user.GetWordbook(index)
