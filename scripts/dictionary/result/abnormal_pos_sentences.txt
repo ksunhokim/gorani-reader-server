@@ -1,0 +1,708 @@
+h.dic
+ vt, v, auxil, HAVEd의 1, 2인칭 단수, 복수 현재
+
+ in, 에에, 저어(하다)(더듬을 때), 저라(하다), (말, 소를 왼쪽으로 돌릴때)
+
+ x, heir, heraldic, heraldry
+
+ x, histology, historian, historical, history
+
+ x, hectoliter, heilig(=holy)
+
+ x, hon, Hono(u)r, Hono(u)rable, Honorary
+
+ dn, 수연통
+
+ n, horologe, horology
+
+ n, sing, pl, 난센스, 허튼 소리
+
+ x, hydraulics, hydrostatics
+
+ x, hypothesis, hypothetical
+
+i.dic
+ x, I will, I shall의 단축
+
+ x, index word, inside width, Isle of Weight, isotopic weight
+
+ x, in charge, in command
+
+ n, intro, 남자 이름, 슬프도다(영광은 사라졌구나 하는 탄식)
+
+ idem, dem, 
+
+ idem, dem, 
+
+ vt, vi, f, n, 관념화 하다, 생각하다 , 상상하다, 관념적 대상
+
+ x, q, 바꿔말하면
+
+ pref, (b, m, p 앞에 올때의 변형)
+
+ pref, (b, m, p앞에 올때의 변형
+
+ x, imitation, imitative
+
+ x, impersonal, imperative, imperfect, imperial, implement, import(ed), importer, impression, imprimatur, imprint
+
+ x, inclosure, includ.including, inclusive, income, incorporated, increase
+
+ x, inclosure, including, inclusive(ly)
+
+ incorporated, 
+
+ x, increased, increasing
+
+ x, indicating, indicative, indicator
+
+ x, infantry, inferiorinfinitive, infirmary, information
+
+ x, inches, inscribed, inspector, insulted, insulation, insulator, insulted, insurance
+
+ x, inspected, inspector
+
+ x, instant, instrument, instrumental
+
+ x, interest, interior, interjection, internal, international, interpreter, intransitive, interim
+
+ intransitive, 
+
+ x, invented, inventor, invoice
+
+ x, I owe you, 차용 증서
+
+ x, island, isle
+
+ x, islands, isles
+
+ x, israel, Israeli
+
+ x, (구)it is, it has의단축형
+
+k.dic
+ x, karat, kilogrm(me)(s), konstant, kopeck(s)
+
+ b, 뻐꾸기(인도, 오스트레일리아산)
+
+j.dic
+n.dic
+ x, nephew, net, neuter, new, night, nominative, note, noun, number
+
+ x, north, northern
+
+ x, name, navigation, navigator, navy, neutron, new, noon, (화)normal
+
+ x, New church, North Carolina
+
+ x, no date, no delivery, not dated
+
+ x, nanometer, nautical mile(s), nonmetallic, noun masculine
+
+ x, no protest, notary public
+
+ x, non satis, not specified
+
+ x, national, native, natural
+
+ x, naval, navigable, navigation, navy
+
+ x, navigation, navigator
+
+ x, neuter, neutral
+
+ c, 신규발행 채권
+
+ x, north, northern
+
+ x, nominal, nominative
+
+y.dic
+x.dic
+o.dic
+m.dic
+ came, be)
+
+ n, (pl, men, at, arms) 중세의 병사
+
+ n, sing, & pl, (코르시카의) 악한, (M, ) 마키 (2차 대전때 반독 유격대(원))
+
+ m, a, 마리나라(토마토, 마늘, 향신료로 만든 이탈리아 소스), 마리나라를 친
+
+ m, vt, (성 둘레에)해자(를 두르다)
+
+ , museun, music, musician
+
+z.dic
+l.dic
+ m, 차지인
+
+ x, last in, last out
+
+ b, 로욜라(1491-1556)(스페인의 성직자, 예수회(Society of Jesus)의 창설자)
+
+a.dic
+ indef, 
+
+ n, pt, 연대기, 연보, 연감, (학회 따위의)기록, 역사
+
+ n, pt, 식인종
+
+ n, pt, 공무서보관소, 공문서, 고기록
+
+ x, authentic, author, authority, authorized
+
+v.dic
+w.dic
+ =WANT to, 
+
+ n, pi, (미)눈물, ~울다
+
+ ad, n, rel, pron, 무엇으로, 그것으로, ...하기 위한
+
+ 퍄, tjenfek, rmqglrkek
+
+b.dic
+ n, vi, ti, 떠듬거리는 말, 허튼소리, 수다, 지껄여 누설하다
+
+ x, baggagetag, 수화물 일시 보관소
+
+ xprep, =except..., 이 없으면 ...을 제외하고는
+
+ xprep, ...을 제외하고, 이외에
+
+ xconj, ad, 왜냐하면, 이므로, 하므로, 라는 이유로는 , 라고해서- ...때문에
+
+ xprep, ad, conj, 쪽에-(쪽)에, 이전에- ...보다 이전에
+
+ n, sing, pl, 풀무, (사진기의)주름상자, 폐
+
+ xbent, vi, n, 구부리다, 당기다, 굴복시키다, 기울이다, 주시하다-굽다, 굽히다, 굴복하다, 힘을 쏟다-굽이, 굴곡(부), 경향, 결삭
+
+ xprep, 곁에, 비교하여, 떨어져서, 벗어나서
+
+ xprep, ad, (두 물건의)사이에, 중간으로, 사이를
+
+ xprep, ad, 중간에, 이도저도 아니게
+
+ xprep, ad, n, 저쪽편에, 넘어서, 이치지 않는-저쪽에, 외에-저편(의 것), 내세(the back lf~ 세계의 끝)
+
+ x, biographer, biographical, biography
+
+u.dic
+t.dic
+ b, 3동선
+
+ x, czar, czarevitch
+
+c.dic
+ x, cedi, colon(colons)
+
+ x, candle, carat, carton, case, catcher, caught, cent, center, centigrade, century, chapter, child, circa, circum(L=about), city, cloudy, commander, cost, cubic, current
+
+ x, cost, freight and insurance
+
+ cast iron, certificate of insurance, Channel Islands, Chief  Inspect or, Chief Instructor, Commonwealth Institute, Communist International, corporate identity, corporate identification 기업 인식, cost and insurance, (Imperial Order of the)Crown of India
+
+ x, cost, insurance & freight 운임 보험료 포함 가격
+
+ x, carload, civil law
+
+ n, v t, vi, 자투리 천(재단사가 슬쩍 떼어 먹는 천), (자투리를)훔치다
+
+ x, calendar, caliber, calory
+
+ x, cannon, canto
+
+ x, canceled, candellation
+
+ auxil, v, =YOU CAN
+
+ x, canton, cantonment
+
+ x, capacity, capital, capitalize, capsule(of heroin), captain
+
+ x, cavalier, cavalry
+
+ x, columbium, cumulonimbus
+
+ x, chemical, biological and radiological warfare 화생방전
+
+ x, central, century
+
+ x, centered, centigrade, centimetr, central, century, centum
+
+ x, chain, champion, chaplain, chapter, check, chief, chile, children, church
+
+ x, chapel, chaplain, chapter
+
+ x, chemical, chemist, chemistry
+
+ x, change, charge
+
+ x, changed, charged
+
+ x, chronicle, chronological(ly), chronology
+
+ vn, a, 짧고 뭉툭한 나무 토막, (양다리 고기의)굵직한 쪽, 머리, 대가리, 바보, 멍청이, 잘속는 사람, 봉, chumpish
+
+ x, cirrus, curie(s)
+
+ x, customs, immigration and quarantine
+
+ x, circuit, circulation, circumference, circus
+
+ x, citation, cited, citizen, citrate
+
+ x, civic, civil, civilian
+
+ x, cask, check, cock
+
+ x, centiliter, claim, class, classification, clause, clearance, clergyman, clerk, cloth
+
+ x, cleared, colored
+
+ x, clerk, clock
+
+ x, collected, collector, college, colonel, colony, colored, column, counsel
+
+ x, colleague, collect, collection, collective, collector, college, colloquial
+
+ x, comedy, comic, comma, commerce, commercial, commission(er), committee, common(ly), communication, communist, community
+
+ x, commander, commerce, commission, committee, commonwealth
+
+ x, commander, commissioner
+
+ comparative, comparison, compilation, compiled, composer, composition, compositor, compound
+
+ x, complement, complete(d)
+
+ x, 중문(절을 and, but등 등위 접속사로 이은 문장)
+
+ x, conclusion, contra, conversation, concerto
+
+ x, consonant, constable, constitution, consul
+
+ x, constable, constant, constitution(al)
+
+ x, containing, content(s), continent, continental, continue(d), contract, control
+
+ x, contained, continued
+
+ xa, ad, 다툴수 있는, 논쟁할 수 있는, -bly
+
+ x, copper, copyright(ed), Cop., Copt., Coptic
+
+ n, -va, 코파이버 발삼(=~balsam(resin)), (남미산 식물에서 뽑은 약용의 나무진)
+
+ x, correct, correlation
+
+ x, corner, cornet, coroner, correct(ed), correction, correlative, correspondence, correspondent, correstonding(ly), Cor., Corinthians, Coriolanus, Corsica
+
+ x, corporal, corporation
+
+ x, companies, counties
+
+ x, compare, coupon
+
+ x, credit, creditor, crown
+
+ x, crescendo, crescent
+
+ x, caton, cotangent
+
+ x, currency, current
+
+ x, capacity, currency
+
+ x, cyclopedia, cyclopedic
+
+ x, cylinder, cylindrical
+
+p.dic
+ x, per cent, post(al) card, post cibum, price(s) current
+
+ x, per diem, potential difference
+
+ x, per diem, Police Department, Procurement Demand물자 조달 요청
+
+ x, philosophy, politics and economics
+
+ x, per cent, petty cash, price(s) current
+
+ adv, 역설적으로(말하면), 역설적이지만
+
+ patented, 
+
+ x, piece, price(s)
+
+ x, pedal, pedestal, pedestrian
+
+ x, peninsula, penitent, penitentiary
+
+ x, period, person
+
+ x, perfect, perforated, performance
+
+ x, philology, philosopher, philosophical, phiosophy
+
+ x, physical, physician, physicist, physics, physiology
+
+ n, tlgkr, tlfhs
+
+ pontoon, 
+
+ x, position, positive, possession, possessive
+
+ x, possession, possessive, possible, possibly
+
+ as, 찌무룩한
+
+ x, pages, past participle, postpaid, privately printed
+
+ x, postpaid, prepaid
+
+ x, payroll, prize ring
+
+ x, pair, per, power, present, price, priest, prince, printer, pronoun
+
+ x, pair, per, power, present, price, priest, prince, printer, pronoun
+
+ x, preceding, preceded
+
+ predicate, predicativex, 
+
+ x, preface, preferred, prefix
+
+ x, present, president
+
+ x, principal, principle
+
+ x, promenade, promontory
+
+ x, pronominal, pronoun, pronounced, pronunciation
+
+ ints, (축배들 때의)축하 합니다
+
+g.dic
+ n, ground, to, air pilotless aircraft, 무선 유도 비행기
+
+ n, ground, to, air pilotless aircraft, 무선 유도 비행기
+
+ n, gazette, gazetteer
+
+ x, good, guard
+
+ n, genie, genius의 복수
+
+ x, gerund, gerundial, gerundive
+
+ z, 값싸고 번지르르한
+
+ x, glass, gloss
+
+  z, 미국 Minnesota wndml thrcld
+
+ x, glass tube, grand touring
+
+f.dic
+ n, farthing, fathom, feet, female, feminine, filly, folio, following, foot, foul(s), franc(s), frequency, from, function
+
+ n, fahrenheit, farad, fathom, february, fellow, fighter, france, french, friday
+
+ x, facsimile, factor, factory
+
+ x, familiar, family, famous
+
+ n, vt, ti, 축제, 축연, 대접, 즐거움, 잔치를 베풀다, 대접을 받다, 즐기(게 하)다
+
+ x, federal, federated, federation
+
+ x, female, feminine
+
+ x, folios, (and the) following (pages), and what follows
+
+ n, fluid, field
+
+ x, finem, finance, financial, finished
+
+ x, floor, florin, flourished, fluid, floruit
+
+q.dic
+s.dic
+ x, soprano, alto, tenor, base
+
+ avt, vi 누르스름한, 혈색이 나쁜, 창백하게 하다(되다)
+
+ b, 하기)
+
+ n, 600 b, c, 경의 그리스 여류 시인
+
+ n, 600 b, c, 경의 그리스 여류 시인
+
+ x, stibium, sb, ...s, b, , stolen base(s)
+
+ x, scandium, scienc, Scotch, Scots, Scottish, scale, scene, science, screw, scilicet
+
+ avt, n, 봉사, 공헌, 근무, 유용, 조력, 직무, 군무, 부분, 고용살이, 예배식, 시중, 서비스, 식기, 기차편, 운행, 시설, 사업, 감는 밧줄, ...의 마음대로, 임의로, (가스, 수도등을)공급하다
+
+ n, sheaf, sheave의 복수
+
+ av, shall의 과거, ...일 것이다, If I ~ fail 만일 실패한다면, If he should do it, I ~ be angry, 만약 그가 그런 일을 한다면 나는 성낼걸세, 당연히 , ... 해야 한다(You ~do it at once)
+
+ silicon, 
+
+ nad, a, 옆길, 옆에, 옆으로 향한
+
+ yes, ~.그렇고 말고요/no, ~.(절대로) 그렇지 않습니다, 전혀 아닙니다
+
+ m, (혼자 젓는)작은 배
+
+ avt, 취하지(술 마시지)않은, 맑은 정신의, 진지한, 냉정한, 분별 있는, 과장 없는, (빛깔이)수수한, 술이 깨다, 마음을 가라앉히다, 마음이 가라앉다
+
+ x, solicitor, Solomon
+
+ nad, 남, 남부(지방), 남부 제주, 남쪽, 남쪽에서의, 남(쪽)으로
+
+ m, 삽질, 힘드는 기초 공작
+
+ avt, n, vi, 정사각형, (사각)광장, (시가의)한 구획, T 자, 곱자, 평방, 제곱, 방진, 정사각형(네모)의, 모난, 수평의, 튼튼한, 정직한, 꼼꼼한, 공평한, 평방의, (식사따위)충분한, 정사각형(직각, 수평)으로 하다, (대차 관계를)시키다
+
+ strontium, 
+
+ avt, n, (건초, 밀짚 따위의)더미, 낟가리, 걸어총, 다량, 많음, 조립 굴뚝, (기차, 기선의)굴뚝, 서가, 낟가리를 쌥a, 걸어총하다, (착륙 대기 비행기를)고도차를두어 대기시키다, (카드)부정한 수로 카드를 치다
+
+ avt, vi, (음식물이)신선치 않은, (빵이)굳어진, (술이)김빠진, 케케묵은, 시시한, (연습으로)피곤한, stale하게 하다(해지다)
+
+ n, 여자 stward, (기선, 여객기 따위의)여자 안내원, 스튜어디스
+
+ b, 스토리보드(텔레비전)영화의 주요 장면을 간단히 그린 일련의 그림을 붙인 패널)
+
+ streamer, strait, string(s), 
+
+ x, subject, subjective(ly), sybjunctive
+
+ apron, 그러한사람(물건)
+
+ a, 충분한(to do, for)
+
+ npred, a, 용의자, 의심스러운
+
+d.dic
+ x, do, it, yourself
+
+ x, do, it, yourself
+
+ vy, vi, n, =damn
+
+ x, dedicated, dedication
+
+ x, defective, defendane, deferred, definite, definition
+
+ x, degree, degrees
+
+ x, delegate, delete
+
+ x, departed, department, departs, departure, dependency, deponent, deposed, (은행)deposit, depot, deputy
+
+ x, department, deputy
+
+ x, derivation, derivative, derived
+
+ x, derivation, derivative, derived
+
+ v, s, 사람이 살지 않는, 황폐한, 버림받은
+
+ a, d, 상세하게
+
+ x, defendant, draft
+
+ x, diagonal, diagram
+
+ x, dialect, dialectic, dialog
+
+ x, dictated, dictator, dictionary
+
+ x, difference, different, differential
+
+ x, dimension, diminuendo, diminutive
+
+ x, diminuendo, diminutive
+
+ x, diocesan, diocese
+
+ x, diplomacy, diplomat, diplomatic
+
+ x, discharge, disciple, discipline, discount, distance, distant, distribute
+
+ x, discount, discover, discoverer
+
+ x, distant, distinguish, district
+
+ x, distribute, distribution, distributor
+
+ x, divergence, diversion, divide, dividend, divine, divinity, division, divisor, divorced
+
+ x, dark, deck, dock
+
+ x, dark, deck, dock
+
+ x, decameter, decimeter
+
+ x, domian, domestic, dominion
+
+ x, department, deponent
+
+ x, debit, debtor, drachm(s), dram(s), drawer
+
+ x, dramatic, dramatist
+
+e.dic
+ x, ecological, ecology
+
+ x, edited, edition, editor, educater
+
+ x, edited, edition, deitor
+
+ x, educated, education, educational
+
+ x, eye, ear, nose and throat
+
+ x, eye, ear, nose and throat
+
+ x, elected, elevation
+
+ x, elliptical, elliptically
+
+ x, engine, engineer(ing), engraved, engraver, engraving
+
+ x, engineer, engineering
+
+ x, engineer, engineering, engraved, engraver, engraving
+
+ x, enlisted, enlarge(d)
+
+ x, ear, nose, and throat이비인후(과)
+
+ x, ear, nose, and throat이비인후(과)
+
+ prdf, =EP, ephemeral
+
+ x, epilepsy, epileptic, epilog(ue)
+
+ x, equal, equation, equivalent
+
+ x, ethical, ethics
+
+ x, euphemism, duphemistic(ally)
+
+ x, excellent, except(ed), exception
+
+ x, exchange, exchequer
+
+ x, executive, executor
+
+ x, examples, expenses
+
+ x, extension, external(ly), extinct, extra, exteract
+
+ x, examples, executrix
+
+r.dic
+ x, rabbi, radical, radius, ratio, restricted 준 성인용, roentgen(s), rook
+
+ x, resistance, royal, ruble
+
+ x, railroad, railway, rare, received, recipe, residence, retired, right, river, road, rod, royal, run(s), rupee
+
+ x, radian, radiator, radical, radio, radius, radix
+
+ v t, vi, n, (편물.망등을)풀다, (얽힌 사건등을)밝히다, 해명하다, (실.머리카락등을)얽히게 하다, (문제등을)혼란(착잡)하게 하다, 풀리다, 풀어지다, (곤란이)해소되다, 풀린 끝(새끼.직물등의), (털실등의)얽힘, 혼란, 착잡(complication), ~(l)er
+
+ n, vt, v i, 혹평, 비난, 조소, 놀리다, 조롱하다, 비웃다, 짓궂게 굴다, 괴롭히다
+
+ x, receipt, Recruit
+
+ x, rendered, road, rod(s), round
+
+ x, rendered, road
+
+ x, reference, regarding, rupee(s)
+
+ x, receipt, received, receptacle, recipe, record(er), recorded, recording
+
+ x, reciprocal, reciprocity
+
+ x, receipt, rectangle, rectangular, rectified, rector, rectory
+
+ a d, 비틀거리며, 갈짓자 걸음으로, 비틀비틀, 어지러워, 동요하여
+
+ x, referee, reference, referred, reformation, reformed, reformer, refund
+
+ x, reflection, reflective, reflex(ive)
+
+ x, regent, regiment, region, register(ed), registrar, registry, regular(ly)
+
+ x, regent, regiment
+
+ v t, 새 집을 지어주다, 새 집에 살게 하다(헌 집을 헐거나 하여)
+
+ x, relation, relative(ly), religion, religious
+
+ v t, n, (계획.습관등을)그만두다, 버리다, 포기하다, (소유물.권리등을)양도(기권)하다, ..을 쥔 손을 늦추다, 손을 놓다, (고국 등을)떠나다, ~ment
+
+ x, remark, remittance
+
+ a, n, a d, (열병등이)더했다 덜했다 하는, 이장성의, 이장열, ~ly
+
+ x, repair, repeat, report(ed), reporter, representative, reprint, republic
+
+ vt , v i, n, ad, 후회하다, 뉘우치다, 회개하다, 유감으로 생각하다, ~er, ~ingl y
+
+ x, receipt, report
+
+ a, a d, 비위에 맞지 않는, 아주 싫은, 불유쾌한, 증오하는, 모순된, 일치(조화)하지 않는, 반항(반대)하는, 반감을 가진, 적의를 품은(hostile), ~ly
+
+ x, research, reserve(d), residence, resides, resigned, resistance, resolution
+
+ x, retain, retired, returned
+
+ x, retained, retired, returned
+
+ x, revenue, reverse(d), review(ed), revise(d), revision, revolution, revolving
+
+ n, vt, v i, 전기적으로 부가된 잔향, 잔향(부가)장치, REVERBERATE
+
+ v t, 바꾸어 말하다, ...의 말투를 바꾸다, 되풀이 하다(repeat)
+
+ x, refunding, rinforzando
+
+ x, red, green, blue(컬러 TV화상의 3원색)
+
+ x, red, green, blue(컬러 TV화상의 3원색)
+
+ x, Rh factor, rhodium
+
+ x, rhetoric, rhetorical
+
+ x, ream, room
+
+ x, reams, rooms
+
+ x, recto, roan, rood
+
+ a, a d, n, 건달의, 악한의, 나쁜 짓을 하는, 까부는, 익살맞은, ~ly, ~ness
+
+ x, rotating, rotation
+
+ xvt, a, (dried)(세탁한 의복등을)다리지 않고 말리다, 세탁하여 말렸으나 다리지 아니한
+
+ x, rubber, ruble(s)
+
+ x, rewind, r.w.d rear-wheel drive
+
+ x, take, tens of rupees, ry.Ry.railway
+
+ xn, 호밀, 호밀의 씨(알)(북유럽에서 빵의 원료, 영국에서 마초로 씀), 호밀 흑빵, =RYE WHISKY
+
