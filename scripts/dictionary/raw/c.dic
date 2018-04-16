@@ -705,7 +705,6 @@ campo : n, (남미의)대초원
 camporee : n, (보이스카우트의)지방대회
 campout : n, 캠프생활, 야영
 campsite : n, 야영지, 캠프장
-campstool[k4mpst`u:l, =CAMP CHAIR
 campus : n, a, 교정, 구내, 켐퍼스(대학등의), 학원, (대학의)분교, 학원(교정에서의, 대학의
 campus butcher : x, 여학생에게 친절한 남학생, 여학생을 잘 녹이는 남학생
 campus police : x, 대학(캠퍼스)의 경비원(경비본부)
@@ -1727,7 +1726,9 @@ catabolism : n, 이화(분해)작용
 catabolite : n, 이화 생성물
 catabolize : vt, vi, 이화하다, 대사 작용으로 분해하다
 catachresis : n, (말의)오용, 비유의 남용
-catachrestic, -tical[k`4t5kr'estik(5l)(용어)비유가 잘못된, 부자연스러운, -tically
+catachrestic : (용어)비유가 잘못된, 부자연스러운
+catachrestically: (용어)비유가 잘못되게, 부자연스럽게
+catachrestical : (용어)비유가 잘못된, 부자연스러운
 cataclasm : n, 파열, 분열
 cataclinal : a, 지층 경사 방향으로 하강하는
 cataclysm : n, =CATACLYSMIC
@@ -1884,7 +1885,8 @@ catmint : n, =CATNIP
 catnap : n, vi, 선잠(doze), 선잠자다
 catnip : n, 개박하
 Cato : n, 카토(로마의 장군.정치가, 그의 증손다, 정치가.철학자)
-catoprtic, -trical[k5t'1ptrik(5l)거울의, 반사의
+catoprtic : 거울의, 반사의
+catoprtical : 거울의, 반사의
 catoptrics : n, 반사 광학
 cat rig : x, CATBOAT용 범장
 Cats-kill Mountains : n, 미국 New York주 동부의 산맥
@@ -1936,7 +1938,7 @@ caudate, -dated : a, 꼬리가 있는, 꼬리 모양의 부속 기관을 가진
 caudillo : n, (스페인.라틴아메리카의)군사 독재자
 caudle : n, 죽에 달걀.향신료를 넣은 따뜻한 자양 유동식(산부.환자용)
 caught : v, CATCH의 과거.과거분사
-caul[k2:l)대망막(태아가 종종 머리에 뒤집어 쓰고 나오는 엷은 막)
+caul : 대망막(태아가 종종 머리에 뒤집어 쓰고 나오는 엷은 막)
 cauldron : n, =CALDRON
 caulescent : a, 땅위 줄기가 있는
 caulicolous : a, 줄기에 자라는(버섯 등)
@@ -2087,8 +2089,9 @@ cele : x, (연결형)tumor의 뜻, =-COELE
 celeb : n, 명사(celebrity)
 Celebes : n, 셀레베스(인도네시아 공화국의 한 섬)
 celebrant : n, 사제, 집전자(미사.성찬식의), 축하자
-celebrate : vt, vi, a, (식을 올려 ...을)축하하다, (의식.축전을)거행하다, 세상에 알리다, 공표하다, (승리.용사.공훈 등을)찬양하다, 찬미하다(extol), 기념일을 축하하다, 식을 올려 기념하다, 축제 기분에 젖다, 유쾌하게 마시고 놀다, -bratory(-br5t`2:ri)vt, vi, a, 
+celebrate : vt, vi, a, (식을 올려 ...을)축하하다, (의식.축전을)거행하다, 세상에 알리다, 공표하다, (승리.용사.공훈 등을)찬양하다, 찬미하다(extol), 기념일을 축하하다, 식을 올려 기념하다, 축제 기분에 젖다, 유쾌하게 마시고 놀다
 celebrated : a, 유명한, 저명한
+celebratory : 축하하는
 celebration : n, 축하, 축전, 의식, 성찬식(의 집행), 찬양
 celebrator : n, 축하자
 celebrity : n, 명성, 명사
@@ -2664,7 +2667,7 @@ chapbook : n, 싸구려 책(옛날 행상인)이 팔고 다닌 소설.속요등�
 chape : n, (칼집의)끝에 씌운쇠, 혁대 버클의 물림쇠
 chapeau : n, 모자, (특히)군모
 chapeau bras : n, 접을수 있는 삼각모
-chapel[t9'4p5l)예배당, 채플(학교.병원.군.교도소.선박등의), 부속 예배당, 교회당, 예배(학교의 채플에서 하는), 성가대, 악대, 인쇄소, 인쇄공 조합
+chapel : 예배당, 채플(학교.병원.군.교도소.선박등의), 부속 예배당, 교회당, 예배(학교의 채플에서 하는), 성가대, 악대, 인쇄소, 인쇄공 조합
 chapel goer : x, 비국교도, 채플예배에 잘 가는 사람
 chapel royal : x, 왕궁 부속 예배당
 chapelry : n, 예배당 관할구
@@ -3333,7 +3336,6 @@ chiseler : n, 조각가, 속이는 사람, 사기꾼
 chit : n, vi, 아기, 유아, 어린 짐승, 건방진 계집아이, (음식의 소액의)전표(손님이 서명함), 인물증명서, 짧은 편지, 메모, 싹, 싹을 내다, 싹이트다
 chitchat : n, vi, 잡담, 한담, 세상 공론, 잡담(한담)하다
 chitin : n, a, 키틴질, 각소(곤충.게 등의 껍질을 형성하는 성분)n, ~ous 키틴질의
-chitlin circuit[t9itl5ns'5~rkit, 흑인 극장(나이트 클럽)
 chitlings : n, =CHITTERLINGS
 chiton : n, 속옷의 일종, 딱지 조개류의 조개
 chit system : x, 전표 지불제
@@ -3418,8 +3420,8 @@ choker : n, 숨막히게 하는 것(사람), 높은 칼라, (목을 꼭 죄는) 
 choking : a, ad, n, 숨막히는, (감동으로)목메는 듯한, 색류의, 숨막힘, ~ly
 choking coil : x, =CHOKE COIL
 chol- : x, (연결형)담즙의 뜻(모음에서는 chol)
-cholangiographic[k5l`4n
-cholangiography : 담관 조영(촬영)법, 
+cholangiographic : 담관 조영(촬영)법의
+cholangiography :  담관 조영(촬영)법
 cholecyst : n, 담낭
 cholecystectom : n, 담낭 절제(술)
 cholecystostomy : n, 담낭조루술(담석제거를 위한)
@@ -4911,7 +4913,7 @@ coach-office : n, 역마차 매표소
 coach box : x, 마부석
 coachbuilding : n, 자동차 차체 제조업
 coach dog : x, 마차견, =DALMATIAN
-coachee[kout9i:, 코치(지도)를 받는 사람
+coachee : 코치(지도)를 받는 사람
 coacher : n, =COACH
 coach fellow : x, (같은 마차를 끄는)말들, 동료
 coachful : n, 마차 한 짐(의양)
@@ -7644,9 +7646,9 @@ cooper : n, vt, 통장이, 술장수, 혼합 흑맥주, 통장이 노릇을 하�
 Cooper : n, 쿠퍼 James Fenimore~(1789-1851)(미국의 소설가)
 cooperage : n, 통장이 일, 통장이의 품삯, 통장이의 제품(일터)
 cooperant : n, (프랑스의)개발도상국 원조계획 참가자
-cooperate, coop- : vi, 협력하다, 협동하다, (사정등이) 서로 돕다
-cooperation, coop-[kou1p5r'ei95n, 협력, 협동, 협조성, 원조, (생산.판매등의)협업, 협동조합, 협동작용
-cooperative, coop- : a, 협력적인, 협조적인, 협동의, 조합의, 소비조합의, 협동조합(의 매점), 협동 주택(거주자가 건물을 공유.관리 운영함) ~ly
+cooperate : vi, 협력하다, 협동하다, (사정등이) 서로 돕다
+cooperation : 협력, 협동, 협조성, 원조, (생산.판매등의)협업, 협동조합, 협동작용
+cooperative : a, 협력적인, 협조적인, 협동의, 조합의, 소비조합의, 협동조합(의 매점), 협동 주택(거주자가 건물을 공유.관리 운영함) ~ly
 cooperative apartment : x, 조합식 아파트(건물 전체를 소유하는 조합(회사)의 주주가 입주함)
 cooperative society : x, 협동조합(소비자.생산자등의)
 cooperative store : x, 협동 조합의 매점
@@ -7802,7 +7804,7 @@ coram : x, ...의 면전에서(in the presence of)의 뜻
 coram judice : ad, 재판관 에서
 coram populo : ad, 대중 에서, 공공연하게
 coranglais : n, 잉글리시 호른(English horm)(목관악기의 일종)
-corban : n, 봉납물(마가복음7:11)
+corban : n, 봉납물(마가복음7 11)
 corbeil : n, (조각한)꽃바구니 장식
 corbel : n, vt, 무게를 받치는 벽의 돌출부, (벽에 달아 붙인)받침대, 까치발, 초엽, 받침장치를 하다, 받침대로 받치다
 corbeling : n, 내물림 구조, 내물림을 붙임
@@ -9151,7 +9153,7 @@ criminal court : x, 형사 법원
 Criminal Investigation Department : x, (런던 시경의)형사부
 criminalistics : n, 범죄 과학, (범인)수사학
 criminality : n, 범죄(행위), 범죄성, 유죄
-criminalization[법률로 금하기, 유죄로 하기
+criminalization : 법률로 금하기, 유죄로 하기
 criminalize : vt, ...을 법률로 금하다, (사람.행위를)유죄로 하다
 criminal law : x, 형법
 criminal lawyer : x, 형사 전문 변호사
@@ -10144,7 +10146,8 @@ cybeneticist : n, , -netician()인공 두뇌 학자
 cyberculture : CYBENATION에 의한 사회(문화), cybercultural
 cybernate : vt, a, (공정을 컴퓨터로 자동 조절하다, 인공 두뇌화하다, -na ted()
 cybernation : n, 컴퓨터에 의한 자동제어
-cybernetic, -ical[s`aib5~rn'etik(5l)인공두뇌학의, -ically
+cybernetic : 인공두뇌학의 
+cybernetical : 인공두뇌학의
 cybernetics : n, 인공두뇌학
 cyberphobia : n, 컴퓨터공포(증)
 cybersport : x, 전자게임

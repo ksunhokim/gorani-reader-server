@@ -978,7 +978,7 @@ parson : n, 교구 목사, 목사관
 parson's nose : x, 닭의 볼기살
 parsonage : n, 사제관, 성직록
 parsoness : a, 사제의, 사제다운
-parsons table[종종 퍼슨스 테이블(다리가 면판의 네 귀에 붙은 것
+parsons table : 종종 퍼슨스 테이블(다리가 면판의 네 귀에 붙은 것)
 part : n, 부분, 일부, 부, 편, 할당된 것, 역할, 한쪽 편, 자질
 partake : vi, 참여하다, 한 몫 끼다, 같이 하다, 얼마큼 먹다, 기미가 있다
 partaker : n, 분담자, 관여자, 관계자, 함께 하는 사람
@@ -1481,7 +1481,7 @@ Paxatomica : x, 핵무기의 균형 위에서 유지되는 평화
 PaxBritannica : n, 영국의 지배에 의한 평하
 PaxRomana : n, 로마의 지배에 의한 평화
 Pax RussoAmericana : n, 소련과 미국의 세력 균형으로 유지되는 평화
-PaxSovietica[소련이 힘에 의해 유지되는 평화
+PaxSovietica : 소련이 힘에 의해 유지되는 평화
 pay : vt, 치르다, 지불하다, 변제하다, 이익을 주다, 대음하다, 주다
 payable : a, 지불할 수 있는, 지불해야 할, 수지가 맞는, 돌벌이가 될 만한
 payably : ad, 유리하게
@@ -1495,7 +1495,7 @@ payasyougo plan : x, 현금 지불주의
 payback : a, 환불(의), 대충(의), 원금 회수9의)
 pay bed : x, 유료 침대(병원의)
 pay Board : x, 임금 사정 위원회
-paybox : 매표소:n, 
+paybox : 매표소
 paybyphone : n, 전화 대체(의)
 paycable : x, 유선 유료 텔레비전 방송
 payckeck : n, 급료(지불수표)
@@ -1700,7 +1700,7 @@ pectase : n, 펙타이제
 pectible : a, 완전히 할 수 있는, 완전해질 수 있는
 pectic : a, 펙틴의
 pectin : n, 펙틴, 교소
-pectinate[p'ekt5n`eit빗(살) 모양의
+pectinate : 빗(살) 모양의
 pectination : n, 빗(살)모양의 구조, 빗질
 pectoral : a, 가슴의
 pectoral fin : x, 가슴지느러미
@@ -2035,7 +2035,7 @@ pentadecapeptide : n, 펜타데카펩티드
 pentadectyl : a, 손(발)가락이 5개 있는
 pentagon : n, 5각형, 5변형, 5능보, 미국 국방성
 pentagonal : a, 5변(각)형의
-pentagonese[p'ent5g1n'i:z, 군사 특수 용어, 미국 관청 용어
+pentagonese : 군사 특수 용어, 미국 관청 용어
 pentagonoid : n, 별 모양, 5각형
 pentahedral : a, 5면(체)의
 pentahedron : n, 5면체
@@ -2784,7 +2784,7 @@ phalanges : n, phalanx의 복수
 phalangist : n, (레바논의)팔랑헤당 당원, 기독교 우파
 phalanstery : n, 사회주의적 생활 공동체
 phalanx : n, 방진, 밀집대, 결사, 지골
-phalarope[f'4l5r`oup, 깝작도요무리
+phalarope : 깝작도요무리
 phallic : a, 남근 숭배의, 음경의, 남근을 상징하는
 phallical : a, 
 phallism : n, 남근 숭배
@@ -2909,7 +2909,7 @@ philanthropic : a, 박애의
 philanthropical : a, 
 philanthropism : n, 박애주의, 인애
 philanthropist : n, 박애주의자
-philanthropize[fil5n8r'1p`aiz, 자선을 베풀다, 자선 사업에 종사하다
+philanthropize : 자선을 베풀다, 자선 사업에 종사하다
 philanthropoid : n, 자선 단체의 임원
 philanthropy : n, 박애
 philatelic : a, 우표를 수집하는, 우표 연구의
@@ -4556,7 +4556,7 @@ portrait : n, 초상, 인물 사진, 묘사
 portraiture : n, 초상화, 묘사
 portray : vt, , , 의 그림을 그리다, 묘사하다, 표현하다
 portrayal : n, 묘사, 초상
-portreeve[p'25rti:v시장, 시청관리
+portreeve : 시장, 시청관리
 portress : n, 여자 문지기, 여자 청소부
 Port Said : n, 포트사이드
 portside : n, a, 좌현, 좌측의(으로), 왼손잡이의

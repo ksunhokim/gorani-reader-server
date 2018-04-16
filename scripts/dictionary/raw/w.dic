@@ -83,7 +83,7 @@ waist belt : x, 벨트, 밴드
 waistcloth : n, 허리 두르개
 waistcoat : n, 조끼
 waistdeep : a, ad, 깊이가 허리까지 차는(차게)
-waistdown : a, 하반신의:her ~ paralysis 그녀의 하반신 마비
+waistdown : a, 하반신의
 waisted : a, 허리 모양의;(복합어를 이루어)...한 허리의(를 가진)
 waister : n, (포경선 등의)중앙 상갑판원(신출내기나 병자)
 waisthigh : a, 허리 높이의
@@ -117,7 +117,7 @@ waken : vt, 깨우다, 일으키다, (정신적으로)눈뜨게 하다, 분기�
 waken : vi, 잠이 깨다, 일어나다, 깨닫다
 wakening : n, 잠에서 깸
 wakerobin : n, =TRILLIUM, =JACK-IN-THE-PULPIT
-wakeup : n, 형기의 마지막날;(오스)조심스런(현명한)사람:be a ~ to...에 조심하고 있다
+wakeup : n, 형기의 마지막날;(오스)조심스런(현명한)사람
 wakey : int, (종종 ~, ~로)(영)일어나, 기상
 waking : a, 깨어 있는, 일어나 있는 in one's ~ hours 깨어 있는 시간에 ~ dream 백일몽, 몽상
 Waldenses : n, pl, 발도파(프랑스 사람 Peter Waldo가 1170년경에 시작한 기독교의 일파)
@@ -278,8 +278,7 @@ warehouse : n, 창고, 도매상, 큰 상점
 warehouse : vt, 창고에 넣다(저장하다)
 wareroom : n, 상품 전시실
 warfare : n, 전쟁, 교전(상태)
-warfighting : n, 전쟁, 교전 상태, 전쟁 행위, 전투;~핵(게릴라)전, 투쟁, 싸움: class ~ 계급 투쟁/economic ~ 경제 전쟁
-warfighting : n, 미사일 전쟁;(일반적으로)전투
+warfighting : n, 전쟁, 교전 상태, 전쟁 행위, 전투;~핵(게릴라)전, 투쟁, 싸움, 미사일 전쟁
 war game : 군인 장기, 도상 작전 연습, 
 wargame : vt, vi, 도상 작전을 하다;군사 연습을 하다
 wargasm : n, (미)전면 전쟁의 돌발, 전면 전쟁으로 발전할 위기(위험)
@@ -304,7 +303,7 @@ warming : n, 따뜻하게 함, 따뜻해짐, 가온, 채찍질, 구타
 warming pan : x, 긴 손잡이가 달린 난상기
 warmingup : n, 워밍업, 준비 운동
 warmish : a, 좀 따스한
-warmly : ad, 따뜻하게: ~clothed 따뜻하게 옷을 입고, 열심히, 열렬히;흥분하여;충심으로, 따뜻이:thank~ 심심한 사의를 표하다
+warmly : ad, 따뜻하게, 열심히, 열렬히;흥분하여;충심으로, 따뜻이
 warmonger : n, 전쟁, 도발자, 주전론자
 warmth : n, (기온, 마음, 색 따위의)따뜻함, 열심, 흥분, 화, 온정
 warn : vt, 경고하다, 경고하여 ...시키다, 훈계하다, 예고(통고)하다
@@ -407,7 +406,7 @@ waste : vi, 소모하다, 헛되이(낭비)되다, 쇠약해지다
 waste : n, 황무비, 황량한 전망, 낭비, 쇠약, 폐물, 찌꺼기, go (run) to ~ 헛되이 되다, 낭비되다
 wastebasket : n, 휴지통
 waste cocoon : x, 지스러기 고치
-wasted : a, 황폐한, 쇠약한;소용이 없는, 헛된(노력):병으로 쇠약한 아이, (미)살해된;(정신적.육체적으로)지친;마약(알코올)에 취한, 마약 중독의;(미)무일푼의
+wasted : a, 황폐한, 쇠약한;소용이 없는, (미)살해된;(정신적.육체적으로)지친;마약(알코올)에 취한, 마약 중독의;(미)무일푼의
 wasteful : a, 낭비하는, 불경제의
 waste heat : x, 여열
 waste land : x, 황무지
@@ -675,7 +674,7 @@ wear : n, 착용, 옷, 입어낡음, 닳아 해짐, 지탱함, be in ~ (옷이) 
 wearability : n, (의복의)내구성, (의복의)입기 편함
 wearable : a, 착용(사용)할 수 있는(에 적합한);착용(사용)에 견디는, 오래가는
 wearer : n, 착용자, 휴대자, 사용자, 소모시키는 것
-wearied : a, 피곤한;싫증난;따분한:a~brain피곤한 머리
+wearied : a, 피곤한;싫증난;따분한
 weariful : a, 피곤하게 하는;피곤한, 싫증나게 하는, 따분한;안달나는
 weariless : a, 피곤을 모르는, 지칠 줄 모르는
 wearily : ad, 지쳐서;싫증이 나서, 질려서 물려서
@@ -947,8 +946,7 @@ Wells : n, , Herbert Georhe(1866-1946)영국의 소설가
 wellseeming : a, 좋아 보이는
 well sinker : x, 우물 파는 사람
 wellspring : n, 수원, (무궁무진한) 원천
-wellstacked : a, (여성의 몸집이)풍만한, 탄력이 있는
-wellstocked[w'elst'1kt/-'2-(상품, 장서 등이) 풍부한
+wellstacked : a, (여성의 몸집이)풍만한, 탄력이 있는, (상품, 장서 등이) 풍부한
 well sweep : x, 방아두레박
 welltaken : a, 근거가 확실한, 정당한
 wellthoughtof : a, (사람이)평판이 좋은, 존경받는
@@ -1451,7 +1449,7 @@ wideband : a, 광대역의(앰프 등)
 widebody : a, 동체의 폭이 넓은(여객기등)
 widefield : a, 시야가 넓은(망원경 등
 widely : ad, 넓게, 널따랗게, 광범위하게
-widemouthed : a, 입이 큰, 아가리가 넓은:놀라서 입이 딱 벌린
+widemouthed : a, 입이 큰, 아가리가 넓은, 놀라서 입이 딱 벌린
 widen : vt, vi, 넓히다, 넓어지다
 wideset : a, 떨어져 있는, (눈과 눈의)사이가 떨어진
 widespread : a, 널리 퍼진(미친), 일반적인, 만연한

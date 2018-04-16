@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -12,14 +13,29 @@ import (
 	"sync"
 	"time"
 
-	"github.com/jmoiron/sqlx"
-
 	"github.com/PuerkitoBio/goquery"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 var list = []string{}
-var db *sqlx.DB
+var seen = make(map[string]bool)
+var dict = make(map[string]Word)
+
+type Example struct {
+	First  string `json:"first"`
+	Second string `json:"second"`
+}
+
+type Def struct {
+	Pos      string    `json:"pos"`
+	Def      string    `json:"def"`
+	Examples []Example `json:"examples"`
+}
+
+type Word struct {
+	Word string `json:"word"`
+	Pron string `json:"pron"`
+	Defs []Def  `json:"defs"`
+}
 
 func getBody(url string) io.ReadCloser {
 	client := &http.Client{}
@@ -38,32 +54,35 @@ func getBody(url string) io.ReadCloser {
 }
 
 func getDefinition(word string, url string, primary bool, source string) {
-	log.Println("definition:", url)
-	body := getBody(url)
-	if body == nil {
+
+	if _, ok := seen[source]; ok {
 		return
 	}
+
+	body := getBody(url)
+	if body == nil {
+		time.Sleep(1000)
+		getDefinition(word, url, primary, source)
+		return
+	}
+
 	doc, err := goquery.NewDocumentFromReader(body)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
-	typ := "word"
-	if primary {
-		typ = "primary"
-	} else if strings.Contains(url, "idiomId") {
-		typ = "idiom"
-	} else {
-		typ = "word"
+
+	seen[source] = true
+	log.Println("definition:", url)
+	log.Println("source:", source)
+	if _, ok := dict[word]; !ok {
+		dict[word] = Word{
+			Word: word,
+			Pron: "",
+			Defs: []Def{},
+		}
 	}
-	pron := doc.Find(".word_view .pron .fy .first .fnt_e16").First().Text()
-	re, err := db.Exec("INSERT INTO words(word, pron, source, type) VALUES (?,?,?,?)",
-		word, pron, source, typ)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	wordID, _ := re.LastInsertId()
+
 	doc.Find(".box_wrap1").Each(func(i int, s *goquery.Selection) {
 		part := s.Find("h3 .fnt_syn").First().Text()
 		s.Find("dl dt").Each(func(i int, ss *goquery.Selection) {
@@ -72,13 +91,11 @@ func getDefinition(word string, url string, primary bool, source string) {
 			re_inside_whtsp := regexp.MustCompile(`[\s\p{Zs}]{2,}`)
 			final := re_leadclose_whtsp.ReplaceAllString(input, "")
 			final = re_inside_whtsp.ReplaceAllString(final, " ")
-			re, err = db.Exec("INSERT INTO defs(def, part, word_id) VALUES (?,?,?)",
-				final, part, wordID)
-			if err != nil {
-				log.Println(err)
-				return
+			def := Def{
+				Pos:      part,
+				Def:      final,
+				Examples: []Example{},
 			}
-			defID, _ := re.LastInsertId()
 			ss.NextUntil("dt").Each(func(i int, sss *goquery.Selection) {
 				eng := ""
 				kor := ""
@@ -89,19 +106,25 @@ func getDefinition(word string, url string, primary bool, source string) {
 						kor = ssss.Text()
 					}
 				})
-				db.Exec("INSERT INTO examples(kor, eng, def_id) VALUES (?,?,?)",
-					kor, eng, defID)
+				def.Examples = append(def.Examples, Example{First: eng, Second: kor})
 			})
+			wo := dict[word]
+			wo.Defs = append(wo.Defs, def)
+			dict[word] = wo
 		})
 	})
 }
 
 func getQuery(word string) {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println("recovered from:", r)
+			time.Sleep(1000)
+			getQuery(word)
+		}
+	}()
 	log.Println("fetch:", word)
 	body := getBody("http://endic.naver.com/search.nhn?sLn=kr&query=" + word)
-	if body == nil {
-		return
-	}
 	log.Println("query:", word)
 	doc, err := goquery.NewDocumentFromReader(body)
 	if err != nil {
@@ -113,35 +136,32 @@ func getQuery(word string) {
 		if sect == "단어/숙어" {
 			s.Find(".list_e2 dt span a").Each(func(i int, s *goquery.Selection) {
 				href, _ := s.Attr("href")
-				pat := regexp.MustCompile("(entryId=([^&]+))|(idiomId=([^&]+))")
+				pat := regexp.MustCompile("entryId=([^&]+)")
 				res := pat.FindAllStringSubmatch(href, -1)
 				if len(res) == 1 {
-					if s.Text() == word {
-						getDefinition(s.Text(), "http://endic.naver.com"+href, true, res[0][0])
-					} else {
-						getDefinition(s.Text(), "http://endic.naver.com"+href, false, res[0][0])
+					if strings.ToLower(s.Text()) == strings.ToLower(word) {
+						getDefinition(strings.ToLower(s.Text()), "http://endic.naver.com"+href, true, res[0][0])
+						return
 					}
 				}
-
 			})
 		}
 	})
 }
+
+var wg sync.WaitGroup
 
 func worker(input chan int) {
 	for index := range input {
 		word := list[index]
 		log.Println(index, "/", len(list), ":", word)
 		getQuery(word)
+		time.Sleep(200)
 	}
+	wg.Done()
 }
 
 func main() {
-	tdb, err := sqlx.Open("mysql", os.Getenv("MYSQL_URL"))
-	if err != nil {
-		panic(err)
-	}
-	db = tdb
 	txt, err := ioutil.ReadFile("words.txt")
 	if err != nil {
 		fmt.Println(err)
@@ -158,9 +178,9 @@ func main() {
 	list = strings.Split(string(txt), "=")
 	list = list[:len(list)-1]
 	log.Printf("%d entries inputed\n", len(list))
-	var wg sync.WaitGroup
+
 	input := make(chan int, 1000)
-	for i := 0; i < 500; i++ {
+	for i := 0; i < 10; i++ {
 		go worker(input)
 		wg.Add(1)
 	}
@@ -170,8 +190,10 @@ func main() {
 	}
 	close(input)
 	log.Println("done")
-	wg.Done()
+	wg.Wait()
+	json, _ := json.Marshal(dict)
+	err = ioutil.WriteFile("output.json", json, 0644)
+	log.Println(err)
 	log.Println(time.Now().Sub(t).Minutes(), " minutes")
-	time.Sleep(time.Second * 60)
 	log.Println("exiting")
 }
