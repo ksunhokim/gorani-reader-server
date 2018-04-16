@@ -17,7 +17,9 @@ import (
 )
 
 var list = []string{}
+var mu = &sync.Mutex{}
 var seen = make(map[string]bool)
+var send = make(chan Word)
 var dict = make(map[string]Word)
 
 type Example struct {
@@ -54,10 +56,13 @@ func getBody(url string) io.ReadCloser {
 }
 
 func getDefinition(word string, url string, primary bool, source string) {
-
+	mu.Lock()
 	if _, ok := seen[source]; ok {
+		mu.Unlock()
 		return
 	}
+	seen[source] = true
+	mu.Unlock()
 
 	body := getBody(url)
 	if body == nil {
@@ -72,15 +77,12 @@ func getDefinition(word string, url string, primary bool, source string) {
 		return
 	}
 
-	seen[source] = true
 	log.Println("definition:", url)
 	log.Println("source:", source)
-	if _, ok := dict[word]; !ok {
-		dict[word] = Word{
-			Word: word,
-			Pron: "",
-			Defs: []Def{},
-		}
+	wor := Word{
+		Word: word,
+		Pron: "",
+		Defs: []Def{},
 	}
 
 	doc.Find(".box_wrap1").Each(func(i int, s *goquery.Selection) {
@@ -108,24 +110,20 @@ func getDefinition(word string, url string, primary bool, source string) {
 				})
 				def.Examples = append(def.Examples, Example{First: eng, Second: kor})
 			})
-			wo := dict[word]
-			wo.Defs = append(wo.Defs, def)
-			dict[word] = wo
+			wor.Defs = append(wor.Defs, def)
 		})
 	})
+	send <- wor
 }
 
 func getQuery(word string) {
-	defer func() {
-		if r := recover(); r != nil {
-			log.Println("recovered from:", r)
-			time.Sleep(1000)
-			getQuery(word)
-		}
-	}()
 	log.Println("fetch:", word)
 	body := getBody("http://endic.naver.com/search.nhn?sLn=kr&query=" + word)
 	log.Println("query:", word)
+	if body == nil {
+		time.Sleep(1000)
+		getQuery(word)
+	}
 	doc, err := goquery.NewDocumentFromReader(body)
 	if err != nil {
 		log.Println(err.Error())
@@ -141,7 +139,6 @@ func getQuery(word string) {
 				if len(res) == 1 {
 					if strings.ToLower(s.Text()) == strings.ToLower(word) {
 						getDefinition(strings.ToLower(s.Text()), "http://endic.naver.com"+href, true, res[0][0])
-						return
 					}
 				}
 			})
@@ -159,6 +156,24 @@ func worker(input chan int) {
 		time.Sleep(200)
 	}
 	wg.Done()
+}
+
+var quit = make(chan bool)
+func worker2() {
+	for {
+		select {
+		case item :=  <-send:
+			if _, ok := dict[item.Word]; !ok {
+				dict[item.Word] = item
+			} else {
+				word := dict[item.Word]
+				word.Defs = append(word.Defs, item.Defs...)
+				dict[item.Word] = word
+			}
+		case <-quit:
+			return
+		}
+	}
 }
 
 func main() {
@@ -180,10 +195,11 @@ func main() {
 	log.Printf("%d entries inputed\n", len(list))
 
 	input := make(chan int, 1000)
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 20; i++ {
 		go worker(input)
 		wg.Add(1)
 	}
+	go worker2()
 
 	for index, _ := range list {
 		input <- index
@@ -191,6 +207,8 @@ func main() {
 	close(input)
 	log.Println("done")
 	wg.Wait()
+	time.Sleep(1000)
+	quit <- true
 	json, _ := json.Marshal(dict)
 	err = ioutil.WriteFile("output.json", json, 0644)
 	log.Println(err)
