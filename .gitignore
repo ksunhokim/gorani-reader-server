@@ -11,3 +11,4 @@ pkg/cmd/cmd.exe
 backend/build
 scripts/epub/analyze/*.epub
 node_modules
+*.json
