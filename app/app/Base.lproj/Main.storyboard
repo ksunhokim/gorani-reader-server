@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DM8-Ro-WtI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--단어장-->
+        <scene sceneID="RON-Ks-v5d">
+            <objects>
+                <viewController id="pKs-bp-afK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iIE-HM-IWE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8JV-Ly-nA4"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="단어장" id="raj-Tb-FcF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1cq-sj-k8N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-882" y="-275"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="8lI-HF-rYE">
+            <objects>
+                <tableViewController id="bUs-sp-NMw" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8wq-g7-cmz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VyD-q9-bUZ">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VyD-q9-bUZ" id="KOo-m5-nD6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bUs-sp-NMw" id="xfD-5R-qEI"/>
+                            <outlet property="delegate" destination="bUs-sp-NMw" id="gqL-IP-xjv"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="xhJ-Y4-kkV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zLY-dD-Xyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="-1932"/>
+        </scene>
+        <!--책-->
+        <scene sceneID="23b-Yw-jAZ">
+            <objects>
+                <navigationController id="QkS-Jb-Tlh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="책" id="t7E-as-jow"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bqg-ma-bgb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bUs-sp-NMw" kind="relationship" relationship="rootViewController" id="szu-DK-bce"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xIq-FF-OV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82" y="-1931"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SrK-8M-Yrd">
+            <objects>
+                <tabBarController id="DM8-Ro-WtI" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rMr-1y-TAR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="QkS-Jb-Tlh" kind="relationship" relationship="viewControllers" id="sNE-Wn-dkA"/>
+                        <segue destination="pKs-bp-afK" kind="relationship" relationship="viewControllers" id="YYV-oy-2Fe"/>
+                        <segue destination="dBZ-GL-ZZ3" kind="relationship" relationship="viewControllers" id="r44-O5-09Z"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ms-AA-hUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-881" y="-1158"/>
+        </scene>
+        <!--모르는 단어-->
+        <scene sceneID="V4X-t4-zYk">
+            <objects>
+                <viewController id="dBZ-GL-ZZ3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uUC-HN-PfV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Z8J-ss-wO8"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="모르는 단어" id="KKV-Y8-sSp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LOC-FL-Wy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="118" y="-1158"/>
+        </scene>
+    </scenes>
+</document>
