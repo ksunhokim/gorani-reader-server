@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
 		C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD9208C899F002765D6 /* ViewController.swift */; };
 		C74CEFDD208C899F002765D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFDB208C899F002765D6 /* Main.storyboard */; };
 		C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFDE208C899F002765D6 /* app.xcdatamodeld */; };
 		C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFE1208C89A1002765D6 /* Assets.xcassets */; };
 		C74CEFE5208C89A1002765D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */; };
+		C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */; };
+		C751A8FA209298A200E7B04E /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751A8F9209298A200E7B04E /* WordsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74CEFD7208C899F002765D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C74CEFD9208C899F002765D6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +41,8 @@
 		C74CEFE1208C89A1002765D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C74CEFE4208C89A1002765D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C74CEFE6208C89A1002765D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7C57B23208E97F700C992CF /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
+		C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookDetailViewController.swift; sourceTree = "<group>"; };
+		C751A8F9209298A200E7B04E /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7403AE72091767D00099119 /* Wordbook */ = {
+			isa = PBXGroup;
+			children = (
+				C7403AEA209176D800099119 /* WordbookMainViewController.swift */,
+				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
+				C751A8F9209298A200E7B04E /* WordsTableViewController.swift */,
+			);
+			path = Wordbook;
+			sourceTree = "<group>";
+		};
 		C74CEFCB208C899F002765D6 = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +85,7 @@
 		C74CEFD6208C899F002765D6 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				C7C57B23208E97F700C992CF /* app.entitlements */,
+				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
 				C74CEFD9208C899F002765D6 /* ViewController.swift */,
 				C74CEFDB208C899F002765D6 /* Main.storyboard */,
@@ -117,7 +132,7 @@
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -159,9 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
+				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
 				C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
+				C751A8FA209298A200E7B04E /* WordsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +324,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
@@ -326,7 +343,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
