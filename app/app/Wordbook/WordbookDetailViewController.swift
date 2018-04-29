@@ -15,17 +15,24 @@ class WordbookDetailViewController: UIViewController {
     @IBOutlet weak var flashcardButton: UIButton!
     @IBOutlet weak var sentenceButton: UIButton!
     @IBOutlet weak var speakButton: UIButton!
-
-    var item: Wordbook!
+    @IBOutlet weak var wordsTable: UITableView!
+    
+    var wordbook: Wordbook!
+    
+    private var wordsTableDelegate: WordsTableViewDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.wordsTableDelegate = WordsTableViewDelegate(words: self.wordbook.words)
+        self.wordsTableDelegate.maximumItem = 1
+        self.wordsTable.dataSource = self.wordsTableDelegate
+        self.wordsTable.delegate = self.wordsTableDelegate
         self.layout()
     }
     
     func layout() {
-        self.navigationItem.title = self.item.name
+        self.navigationItem.title = self.wordbook.name
         roundView(self.bookImage)
         roundView(self.memorizeButton)
         roundView(self.flashcardButton)
@@ -39,6 +46,7 @@ class WordbookDetailViewController: UIViewController {
         let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
         })
+        
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
         })
@@ -54,5 +62,12 @@ class WordbookDetailViewController: UIViewController {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is WordsViewController
+        {
+            let vc = segue.destination as? WordsViewController
+            vc?.words = self.wordbook.words
+        }
+    }
 }

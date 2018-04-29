@@ -12,8 +12,11 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet var tableView: UITableView!
     
-    var items: [Wordbook] = [
-        Wordbook(name: "asdf", words: [],
+    var wordbooks: [Wordbook] = [
+        Wordbook(name: "asdf", words: [
+            Word(word:"hello", definition: "hoi", pronunciation: "hoi", correct: 10, sourceBook: "hoi", sourceSentence: "hoi", addedDate: Date(), seenDate: Date()),
+            Word(word:"hello2", definition: "hoi", pronunciation: "hoi", correct: -10, sourceBook: "hoi", sourceSentence: "hoi", addedDate: Date(), seenDate: Date())
+            ],
                  addedDate: Date(), seenDate: Date(),
                  new: true
         ),
@@ -33,7 +36,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return self.wordbooks.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -43,7 +46,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordbookMainCell") as! WordbookMainCell
         
-        let item = self.items[indexPath.row]
+        let item = self.wordbooks[indexPath.row]
         cell.textLabel!.text = item.name
         cell.detailTextLabel!.text = String(item.words.count)
         
@@ -62,8 +65,8 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         {
             let vc = segue.destination as? WordbookDetailViewController
             let row = self.tableView.indexPathForSelectedRow!.row
-            let item = self.items[row]
-            vc?.item = item
+            let item = self.wordbooks[row]
+            vc?.wordbook = item
         }
     }
 }
