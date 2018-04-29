@@ -16,6 +16,10 @@
 		C74CEFE5208C89A1002765D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */; };
 		C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */; };
 		C751A8FA209298A200E7B04E /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751A8F9209298A200E7B04E /* WordsTableViewController.swift */; };
+		C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4020956A3B00CE3D17 /* Wordbook.swift */; };
+		C7905B4320956A7C00CE3D17 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4220956A7C00CE3D17 /* Word.swift */; };
+		C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */; };
+		C7905B472095759C00CE3D17 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +47,10 @@
 		C74CEFE6208C89A1002765D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookDetailViewController.swift; sourceTree = "<group>"; };
 		C751A8F9209298A200E7B04E /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
+		C7905B4020956A3B00CE3D17 /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
+		C7905B4220956A7C00CE3D17 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainCell.swift; sourceTree = "<group>"; };
+		C7905B462095759C00CE3D17 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,9 @@
 				C7403AEA209176D800099119 /* WordbookMainViewController.swift */,
 				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
 				C751A8F9209298A200E7B04E /* WordsTableViewController.swift */,
+				C7905B4020956A3B00CE3D17 /* Wordbook.swift */,
+				C7905B4220956A7C00CE3D17 /* Word.swift */,
+				C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */,
 			);
 			path = Wordbook;
 			sourceTree = "<group>";
@@ -93,6 +104,7 @@
 				C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */,
 				C74CEFE6208C89A1002765D6 /* Info.plist */,
 				C74CEFDE208C899F002765D6 /* app.xcdatamodeld */,
+				C7905B462095759C00CE3D17 /* Util.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -174,10 +186,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
+				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
 				C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */,
+				C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
+				C7905B472095759C00CE3D17 /* Util.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
 				C751A8FA209298A200E7B04E /* WordsTableViewController.swift in Sources */,
 			);
