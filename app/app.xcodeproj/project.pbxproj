@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C739E63120969DA600046002 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E63020969DA600046002 /* Helper.swift */; };
+		C739E6342096AD4D00046002 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E6332096AD4D00046002 /* TabBarController.swift */; };
 		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
 		C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD9208C899F002765D6 /* ViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C739E63020969DA600046002 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C739E6332096AD4D00046002 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74CEFD7208C899F002765D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C739E6322096AD1C00046002 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				C739E6332096AD4D00046002 /* TabBarController.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		C7403AE72091767D00099119 /* Wordbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +111,7 @@
 		C74CEFD6208C899F002765D6 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				C739E6322096AD1C00046002 /* Global */,
 				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
 				C74CEFD9208C899F002765D6 /* ViewController.swift */,
@@ -108,6 +121,7 @@
 				C74CEFE6208C89A1002765D6 /* Info.plist */,
 				C74CEFDE208C899F002765D6 /* app.xcdatamodeld */,
 				C7905B462095759C00CE3D17 /* Util.swift */,
+				C739E63020969DA600046002 /* Helper.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -190,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */,
+				C739E6342096AD4D00046002 /* TabBarController.swift in Sources */,
 				C7F7C137209652A700DDD750 /* WordsViewController.swift in Sources */,
 				C7F7C1392096639000DDD750 /* WordsTableViewDelegate.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
@@ -200,6 +215,7 @@
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				C7905B472095759C00CE3D17 /* Util.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
+				C739E63120969DA600046002 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

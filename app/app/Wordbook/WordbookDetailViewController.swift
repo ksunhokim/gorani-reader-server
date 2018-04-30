@@ -10,13 +10,12 @@ import UIKit
 
 class WordbookDetailViewController: UIViewController {
 
-    @IBOutlet weak var bookImage: UIImageView!
     @IBOutlet weak var memorizeButton: UIButton!
     @IBOutlet weak var flashcardButton: UIButton!
     @IBOutlet weak var sentenceButton: UIButton!
     @IBOutlet weak var speakButton: UIButton!
     @IBOutlet weak var wordsTable: UITableView!
-    
+
     var wordbook: Wordbook!
     
     private var wordsTableDelegate: WordsTableViewDelegate!
@@ -25,15 +24,14 @@ class WordbookDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.wordsTableDelegate = WordsTableViewDelegate(words: self.wordbook.words)
-        self.wordsTableDelegate.maximumItem = 1
         self.wordsTable.dataSource = self.wordsTableDelegate
         self.wordsTable.delegate = self.wordsTableDelegate
         self.layout()
     }
     
     func layout() {
+        self.wordsTableDelegate.maximumItem = 1
         self.navigationItem.title = self.wordbook.name
-        roundView(self.bookImage)
         roundView(self.memorizeButton)
         roundView(self.flashcardButton)
         roundView(self.speakButton)

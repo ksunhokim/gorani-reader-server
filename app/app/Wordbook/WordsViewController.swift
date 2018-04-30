@@ -15,6 +15,13 @@ class WordsViewController: UIViewController {
 
     private var wordsTableDelegate: WordsTableViewDelegate!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tabBarController = self.tabBarController as! TabBarController
+        tabBarController.asdf()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
