@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C05740B5CBD7CF0C0955FD19 /* Pods_copyEpub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */; };
 		C739E63120969DA600046002 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E63020969DA600046002 /* Helper.swift */; };
 		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 		C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */; };
 		C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E91209905900093CC02 /* BookMainViewController.swift */; };
 		C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C63E9520990ED40093CC02 /* Main.storyboard */; };
+		E5F0D19706FA1080CA1FC77A /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D482994C070729A16D76DEEE /* Pods_app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
+		562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-copyEpub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-copyEpub/Pods-copyEpub.debug.xcconfig"; sourceTree = "<group>"; };
+		777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_copyEpub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
 		C739E63020969DA600046002 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +81,8 @@
 		C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		C7C63E91209905900093CC02 /* BookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMainViewController.swift; sourceTree = "<group>"; };
 		C7C63E9520990ED40093CC02 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D482994C070729A16D76DEEE /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-copyEpub.release.xcconfig"; path = "Pods/Target Support Files/Pods-copyEpub/Pods-copyEpub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5F0D19706FA1080CA1FC77A /* Pods_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +98,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05740B5CBD7CF0C0955FD19 /* Pods_copyEpub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		702F24C22323D91C0487792D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D482994C070729A16D76DEEE /* Pods_app.framework */,
+				777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C7403AE72091767D00099119 /* Wordbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +132,8 @@
 				C74CEFD6208C899F002765D6 /* app */,
 				C7C1E37820981A1700C909D7 /* copyEpub */,
 				C74CEFD5208C899F002765D6 /* Products */,
+				CB113D248F93AC35DBB00AAD /* Pods */,
+				702F24C22323D91C0487792D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +193,17 @@
 			path = copyEpub;
 			sourceTree = "<group>";
 		};
+		CB113D248F93AC35DBB00AAD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */,
+				1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */,
+				562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */,
+				DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,10 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C74CEFE9208C89A1002765D6 /* Build configuration list for PBXNativeTarget "app" */;
 			buildPhases = (
+				A3E1273C8700519D0394773B /* [CP] Check Pods Manifest.lock */,
 				C74CEFD0208C899F002765D6 /* Sources */,
 				C74CEFD1208C899F002765D6 /* Frameworks */,
 				C74CEFD2208C899F002765D6 /* Resources */,
 				C7C57B22208E96D300C992CF /* Embed App Extensions */,
+				EB43EED518DB1928C9BDE377 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,6 +232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7C1E38220981A1700C909D7 /* Build configuration list for PBXNativeTarget "copyEpub" */;
 			buildPhases = (
+				40C7CE27BD0A917917254163 /* [CP] Check Pods Manifest.lock */,
 				C7C1E37320981A1700C909D7 /* Sources */,
 				C7C1E37420981A1700C909D7 /* Frameworks */,
 				C7C1E37520981A1700C909D7 /* Resources */,
@@ -278,6 +313,79 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40C7CE27BD0A917917254163 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-copyEpub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3E1273C8700519D0394773B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB43EED518DB1928C9BDE377 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-app/Pods-app-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
+				"${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+				"${BUILT_PRODUCTS_DIR}/ZFDragableModalTransition/ZFDragableModalTransition.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FolioReaderKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQWebViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MenuItemKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFDragableModalTransition.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-app/Pods-app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C74CEFD0208C899F002765D6 /* Sources */ = {
@@ -453,6 +561,7 @@
 		};
 		C74CEFEA208C89A1002765D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -460,11 +569,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = sunho.app;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,6 +579,7 @@
 		};
 		C74CEFEB208C89A1002765D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -480,11 +587,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = sunho.app;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,16 +597,13 @@
 		};
 		C7C1E38320981A1700C909D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = copyEpub/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -513,16 +614,13 @@
 		};
 		C7C1E38420981A1700C909D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = copyEpub/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

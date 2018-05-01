@@ -1,0 +1,4 @@
+[submodule "app/FolioReaderKit"]
+	path = app/FolioReaderKit
+	url = https://github.com/sunho/FolioReaderKit
+	branch = master

@@ -13,6 +13,7 @@ import MobileCoreServices
 class ShareViewController: UIViewController {
     @IBOutlet weak var okayButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
