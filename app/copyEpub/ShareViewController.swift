@@ -8,47 +8,38 @@
 
 import UIKit
 import Social
-
-@objc(EntryViewController)
-class EntryViewController : UINavigationController {
-    
-    init() {
-        super.init(rootViewController: ShareViewController())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-}
+import MobileCoreServices
 
 class ShareViewController: UIViewController {
-    
+    @IBOutlet weak var okayButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
-        self.navigationItem.title = "Share this"
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: "cancelButtonTapped:")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: "saveButtonTapped:")
+        self.okayButton.layer.cornerRadius = 10
+        self.okayButton.clipsToBounds = true
     }
     
-    func saveButtonTapped(sender: UIBarButtonItem) {
-        self.hideExtensionWithCompletionHandler { (Bool) -> Void in
-            self.extensionContext!.completeRequest(returningItems: nil, completionHandler: nil)
-        }
+
+    @IBAction func okButtonTouch(_ sender: Any) {
+        self.extensionContext!.completeRequest(returningItems: nil, completionHandler: nil)
     }
     
-    func cancelButtonTapped(sender: UIBarButtonItem) {
-        self.hideExtensionWithCompletionHandler{ (Bool) -> Void in
+    @IBAction func noButtonTouch(_ sender: Any) {
+        hideExtensionWithCompletionHandler(completion: { (Bool) in
             self.extensionContext!.cancelRequest(withError: NSError())
-        }
+        })
     }
     
-    func hideExtensionWithCompletionHandler(completion:(Bool) -> Void) {
+    func hideExtensionWithCompletionHandler(completion: @escaping (Bool) -> Void) {
+        CATransaction.begin()
+        let timing = CAMediaTimingFunction(controlPoints: 0.23, 1, 0.32, 1)
+        CATransaction.setAnimationTimingFunction(timing)
+        UIView.animate(
+            withDuration: 0.5,
+            animations: { () -> Void in
+                self.navigationController!.view.transform = CGAffineTransform(translationX: 0, y: self.navigationController!.view.frame.size.height)
+        },completion: completion)
+        CATransaction.commit()
     }
 }

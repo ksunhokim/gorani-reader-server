@@ -21,8 +21,10 @@
 		C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */; };
 		C7905B472095759C00CE3D17 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* Util.swift */; };
 		C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C1E37920981A1700C909D7 /* ShareViewController.swift */; };
-		C7C1E37D20981A1700C909D7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */; };
 		C7C1E38120981A1700C909D7 /* copyEpub.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C7C1E37720981A1700C909D7 /* copyEpub.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */; };
+		C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E91209905900093CC02 /* BookMainViewController.swift */; };
+		C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C63E9520990ED40093CC02 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,9 +70,11 @@
 		C7C1E3262098058500C909D7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		C7C1E37720981A1700C909D7 /* copyEpub.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = copyEpub.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C1E37920981A1700C909D7 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
-		C7C1E37C20981A1700C909D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		C7C1E37E20981A1700C909D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7C1E38520981A4900C909D7 /* copyEpub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = copyEpub.entitlements; sourceTree = "<group>"; };
+		C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		C7C63E91209905900093CC02 /* BookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMainViewController.swift; sourceTree = "<group>"; };
+		C7C63E9520990ED40093CC02 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 		C7C1E2FF2098016D00C909D7 /* Book */ = {
 			isa = PBXGroup;
 			children = (
+				C7C63E91209905900093CC02 /* BookMainViewController.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -159,9 +164,10 @@
 			isa = PBXGroup;
 			children = (
 				C7C1E38520981A4900C909D7 /* copyEpub.entitlements */,
+				C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */,
 				C7C1E37920981A1700C909D7 /* ShareViewController.swift */,
-				C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */,
 				C7C1E37E20981A1700C909D7 /* Info.plist */,
+				C7C63E9520990ED40093CC02 /* Main.storyboard */,
 			);
 			path = copyEpub;
 			sourceTree = "<group>";
@@ -267,7 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7C1E37D20981A1700C909D7 /* MainInterface.storyboard in Resources */,
+				C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */,
+				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
@@ -296,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */,
+				C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,14 +332,6 @@
 				C74CEFE4208C89A1002765D6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C7C1E37C20981A1700C909D7 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
