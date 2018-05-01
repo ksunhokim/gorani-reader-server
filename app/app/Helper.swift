@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    public static var colorBlue: CGColor {
-        return UIColor(red: 0, green: 122/255, blue: 1, alpha: 1).cgColor
+    public static var colorBlue: UIColor {
+        return UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
     }
 }

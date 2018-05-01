@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C739E63120969DA600046002 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E63020969DA600046002 /* Helper.swift */; };
-		C739E6342096AD4D00046002 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E6332096AD4D00046002 /* TabBarController.swift */; };
 		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
 		C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD9208C899F002765D6 /* ViewController.swift */; };
@@ -21,9 +20,20 @@
 		C7905B4320956A7C00CE3D17 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4220956A7C00CE3D17 /* Word.swift */; };
 		C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */; };
 		C7905B472095759C00CE3D17 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* Util.swift */; };
-		C7F7C137209652A700DDD750 /* WordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7C136209652A700DDD750 /* WordsViewController.swift */; };
-		C7F7C1392096639000DDD750 /* WordsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7C1382096639000DDD750 /* WordsTableViewDelegate.swift */; };
+		C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C1E37920981A1700C909D7 /* ShareViewController.swift */; };
+		C7C1E37D20981A1700C909D7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */; };
+		C7C1E38120981A1700C909D7 /* copyEpub.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C7C1E37720981A1700C909D7 /* copyEpub.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7C1E37F20981A1700C909D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C74CEFCC208C899F002765D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7C1E37620981A1700C909D7;
+			remoteInfo = copyEpub;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C7C57B22208E96D300C992CF /* Embed App Extensions */ = {
@@ -32,6 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				C7C1E38120981A1700C909D7 /* copyEpub.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		C739E63020969DA600046002 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		C739E6332096AD4D00046002 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74CEFD7208C899F002765D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +65,12 @@
 		C7905B4220956A7C00CE3D17 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainCell.swift; sourceTree = "<group>"; };
 		C7905B462095759C00CE3D17 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		C7F7C136209652A700DDD750 /* WordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewController.swift; sourceTree = "<group>"; };
-		C7F7C1382096639000DDD750 /* WordsTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewDelegate.swift; sourceTree = "<group>"; };
+		C7C1E3262098058500C909D7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
+		C7C1E37720981A1700C909D7 /* copyEpub.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = copyEpub.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7C1E37920981A1700C909D7 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		C7C1E37C20981A1700C909D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		C7C1E37E20981A1700C909D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7C1E38520981A4900C909D7 /* copyEpub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = copyEpub.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,17 +81,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7C1E37420981A1700C909D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C739E6322096AD1C00046002 /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				C739E6332096AD4D00046002 /* TabBarController.swift */,
-			);
-			path = Global;
-			sourceTree = "<group>";
-		};
 		C7403AE72091767D00099119 /* Wordbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +99,6 @@
 				C7905B4020956A3B00CE3D17 /* Wordbook.swift */,
 				C7905B4220956A7C00CE3D17 /* Word.swift */,
 				C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */,
-				C7F7C136209652A700DDD750 /* WordsViewController.swift */,
-				C7F7C1382096639000DDD750 /* WordsTableViewDelegate.swift */,
 			);
 			path = Wordbook;
 			sourceTree = "<group>";
@@ -96,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				C74CEFD6208C899F002765D6 /* app */,
+				C7C1E37820981A1700C909D7 /* copyEpub */,
 				C74CEFD5208C899F002765D6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				C74CEFD4208C899F002765D6 /* app.app */,
+				C7C1E37720981A1700C909D7 /* copyEpub.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,7 +124,9 @@
 		C74CEFD6208C899F002765D6 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				C739E6322096AD1C00046002 /* Global */,
+				C7C1E3262098058500C909D7 /* app.entitlements */,
+				C7C1E2FF2098016D00C909D7 /* Book */,
+				C7C1E2FE2097B2C500C909D7 /* UI */,
 				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
 				C74CEFD9208C899F002765D6 /* ViewController.swift */,
@@ -120,10 +135,35 @@
 				C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */,
 				C74CEFE6208C89A1002765D6 /* Info.plist */,
 				C74CEFDE208C899F002765D6 /* app.xcdatamodeld */,
-				C7905B462095759C00CE3D17 /* Util.swift */,
 				C739E63020969DA600046002 /* Helper.swift */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		C7C1E2FE2097B2C500C909D7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C7905B462095759C00CE3D17 /* Util.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C7C1E2FF2098016D00C909D7 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		C7C1E37820981A1700C909D7 /* copyEpub */ = {
+			isa = PBXGroup;
+			children = (
+				C7C1E38520981A4900C909D7 /* copyEpub.entitlements */,
+				C7C1E37920981A1700C909D7 /* ShareViewController.swift */,
+				C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */,
+				C7C1E37E20981A1700C909D7 /* Info.plist */,
+			);
+			path = copyEpub;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,11 +181,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				C7C1E38020981A1700C909D7 /* PBXTargetDependency */,
 			);
 			name = app;
 			productName = app;
 			productReference = C74CEFD4208C899F002765D6 /* app.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C7C1E37620981A1700C909D7 /* copyEpub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7C1E38220981A1700C909D7 /* Build configuration list for PBXNativeTarget "copyEpub" */;
+			buildPhases = (
+				C7C1E37320981A1700C909D7 /* Sources */,
+				C7C1E37420981A1700C909D7 /* Frameworks */,
+				C7C1E37520981A1700C909D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = copyEpub;
+			productName = copyEpub;
+			productReference = C7C1E37720981A1700C909D7 /* copyEpub.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -161,7 +219,15 @@
 						CreatedOnToolsVersion = 9.3;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
+							};
+						};
+					};
+					C7C1E37620981A1700C909D7 = {
+						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
 							};
 						};
 					};
@@ -181,6 +247,7 @@
 			projectRoot = "";
 			targets = (
 				C74CEFD3208C899F002765D6 /* app */,
+				C7C1E37620981A1700C909D7 /* copyEpub */,
 			);
 		};
 /* End PBXProject section */
@@ -196,6 +263,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7C1E37520981A1700C909D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7C1E37D20981A1700C909D7 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -204,9 +279,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */,
-				C739E6342096AD4D00046002 /* TabBarController.swift in Sources */,
-				C7F7C137209652A700DDD750 /* WordsViewController.swift in Sources */,
-				C7F7C1392096639000DDD750 /* WordsTableViewDelegate.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
@@ -219,7 +291,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7C1E37320981A1700C909D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7C1E38020981A1700C909D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7C1E37620981A1700C909D7 /* copyEpub */;
+			targetProxy = C7C1E37F20981A1700C909D7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C74CEFDB208C899F002765D6 /* Main.storyboard */ = {
@@ -236,6 +324,14 @@
 				C74CEFE4208C89A1002765D6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C7C1E37B20981A1700C909D7 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7C1E37C20981A1700C909D7 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -360,6 +456,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
@@ -379,6 +476,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = app/Info.plist;
@@ -388,6 +486,46 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sunho.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C7C1E38320981A1700C909D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				INFOPLIST_FILE = copyEpub/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C7C1E38420981A1700C909D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				INFOPLIST_FILE = copyEpub/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -410,6 +548,15 @@
 			buildConfigurations = (
 				C74CEFEA208C89A1002765D6 /* Debug */,
 				C74CEFEB208C89A1002765D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7C1E38220981A1700C909D7 /* Build configuration list for PBXNativeTarget "copyEpub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7C1E38320981A1700C909D7 /* Debug */,
+				C7C1E38420981A1700C909D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

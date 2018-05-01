@@ -8,64 +8,101 @@
 
 import UIKit
 
-class WordbookDetailViewController: UIViewController {
+class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var memorizeButton: UIButton!
     @IBOutlet weak var flashcardButton: UIButton!
     @IBOutlet weak var sentenceButton: UIButton!
     @IBOutlet weak var speakButton: UIButton!
     @IBOutlet weak var wordsTable: UITableView!
-
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var headerView: UIView!
+    
     var wordbook: Wordbook!
     
-    private var wordsTableDelegate: WordsTableViewDelegate!
+    private var headerY: CGFloat!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let view = UIView()
+        let label = UILabel()
+        label.text = self.wordbook.name
+        label.sizeToFit()
+        label.alpha = 0
+        view.addSubview(label)
+        view.frame = label.frame
+        
+        self.navigationItem.titleView = view
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.wordsTableDelegate = WordsTableViewDelegate(words: self.wordbook.words)
-        self.wordsTable.dataSource = self.wordsTableDelegate
-        self.wordsTable.delegate = self.wordsTableDelegate
+        self.wordsTable.dataSource = self
+        self.wordsTable.delegate = self
+        
+
+        self.titleLabel.text = self.wordbook.name
+
         self.layout()
     }
     
     func layout() {
-        self.wordsTableDelegate.maximumItem = 1
-        self.navigationItem.title = self.wordbook.name
+        self.headerY = self.headerView.frame.minY
+        self.wordsTable.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
         roundView(self.memorizeButton)
         roundView(self.flashcardButton)
         roundView(self.speakButton)
         roundView(self.sentenceButton)
     }
-
-    @IBAction func openActionSheet(_ sender: Any) {
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+    
+    // header location
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let frame = self.headerView.frame
+        let y = scrollView.contentOffset.y + frame.height
+        self.headerView.frame = CGRect(x: frame.minX, y: self.headerY - y, width: frame.width, height: frame.height)
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-
-        optionMenu.addAction(deleteAction)
-        optionMenu.addAction(saveAction)
-        optionMenu.addAction(cancelAction)
-        
-        self.present(optionMenu, animated: true, completion: nil)
+        if let titleView = self.navigationItem.titleView {
+            let textView = titleView.subviews[0]
+            if y > titleLabel.frame.minY + titleLabel.frame.height {
+                UIView.animate(withDuration: 0.2, animations: {
+                    textView.alpha = 1
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    textView.alpha = 0
+                }, completion: nil)
+            }
+        }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.destination is WordsViewController
-        {
-            let vc = segue.destination as? WordsViewController
-            vc?.words = self.wordbook.words
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.wordbook.words.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordsTableCell")
+        let item = self.wordbook.words[indexPath.row]
+        
+        cell!.textLabel!.text = item.word
+        
+        let correct = item.correct
+        if correct > 0 {
+            cell!.detailTextLabel!.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255)
+            cell!.detailTextLabel!.text = "+\(correct)"
+        } else if correct < 0 {
+            cell!.detailTextLabel!.textColor = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
+            cell!.detailTextLabel!.text = String(correct)
         }
+        
+        return cell!
     }
 }
