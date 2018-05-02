@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C05740B5CBD7CF0C0955FD19 /* Pods_copyEpub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */; };
 		C739E63120969DA600046002 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E63020969DA600046002 /* Helper.swift */; };
 		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
@@ -26,7 +25,28 @@
 		C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */; };
 		C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E91209905900093CC02 /* BookMainViewController.swift */; };
 		C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C63E9520990ED40093CC02 /* Main.storyboard */; };
-		E5F0D19706FA1080CA1FC77A /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D482994C070729A16D76DEEE /* Pods_app.framework */; };
+		C7C63EBF20994F750093CC02 /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
+		C7C63EDF20995EA50093CC02 /* FolioReaderKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F0020995EC70093CC02 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EF820995EC70093CC02 /* ZipArchive.framework */; };
+		C7C63F0120995EC70093CC02 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EF920995EC70093CC02 /* RealmSwift.framework */; };
+		C7C63F0320995EC70093CC02 /* JSQWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; };
+		C7C63F0620995EC70093CC02 /* MenuItemKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; };
+		C7C63F2020995EFC0093CC02 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFD20995EC70093CC02 /* AEXML.framework */; };
+		C7C63F2120995EFC0093CC02 /* AEXML.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFD20995EC70093CC02 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2220995EFC0093CC02 /* FontBlaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFA20995EC70093CC02 /* FontBlaster.framework */; };
+		C7C63F2320995EFC0093CC02 /* FontBlaster.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFA20995EC70093CC02 /* FontBlaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2420995EFC0093CC02 /* JSQWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; };
+		C7C63F2520995EFC0093CC02 /* JSQWebViewController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2620995EFC0093CC02 /* MenuItemKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; };
+		C7C63F2720995EFC0093CC02 /* MenuItemKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2820995EFC0093CC02 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFF20995EC70093CC02 /* Realm.framework */; };
+		C7C63F2920995EFC0093CC02 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFF20995EC70093CC02 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2B20995EFC0093CC02 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EF920995EC70093CC02 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2C20995EFC0093CC02 /* ZFDragableModalTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFC20995EC70093CC02 /* ZFDragableModalTransition.framework */; };
+		C7C63F2D20995EFC0093CC02 /* ZFDragableModalTransition.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFC20995EC70093CC02 /* ZFDragableModalTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F2E20995EFC0093CC02 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EF820995EC70093CC02 /* ZipArchive.framework */; };
+		C7C63F2F20995EFC0093CC02 /* ZipArchive.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EF820995EC70093CC02 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7C63F3020995F3E0093CC02 /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +56,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = C7C1E37620981A1700C909D7;
 			remoteInfo = copyEpub;
+		};
+		C7C63EAE209946A50093CC02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B0D6990B1D035FA2003B4CCD;
+			remoteInfo = FolioReaderKit;
+		};
+		C7C63EB0209946A50093CC02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B0D699151D035FA2003B4CCD;
+			remoteInfo = FolioReaderKitTests;
+		};
+		C7C63EC820995C6C0093CC02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B0D6990A1D035FA2003B4CCD;
+			remoteInfo = FolioReaderKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -51,13 +92,37 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7C63EC120995B000093CC02 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7C63EC420995B230093CC02 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C7C63F2F20995EFC0093CC02 /* ZipArchive.framework in CopyFiles */,
+				C7C63F2920995EFC0093CC02 /* Realm.framework in CopyFiles */,
+				C7C63F2D20995EFC0093CC02 /* ZFDragableModalTransition.framework in CopyFiles */,
+				C7C63F2720995EFC0093CC02 /* MenuItemKit.framework in CopyFiles */,
+				C7C63F2B20995EFC0093CC02 /* RealmSwift.framework in CopyFiles */,
+				C7C63F2120995EFC0093CC02 /* AEXML.framework in CopyFiles */,
+				C7C63F2520995EFC0093CC02 /* JSQWebViewController.framework in CopyFiles */,
+				C7C63EDF20995EA50093CC02 /* FolioReaderKit.framework in CopyFiles */,
+				C7C63F2320995EFC0093CC02 /* FontBlaster.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
-		562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-copyEpub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-copyEpub/Pods-copyEpub.debug.xcconfig"; sourceTree = "<group>"; };
-		777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_copyEpub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
 		C739E63020969DA600046002 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +146,15 @@
 		C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		C7C63E91209905900093CC02 /* BookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMainViewController.swift; sourceTree = "<group>"; };
 		C7C63E9520990ED40093CC02 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		D482994C070729A16D76DEEE /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-copyEpub.release.xcconfig"; path = "Pods/Target Support Files/Pods-copyEpub/Pods-copyEpub.release.xcconfig"; sourceTree = "<group>"; };
+		C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FolioReaderKit.xcodeproj; path = FolioReaderKit/FolioReaderKit.xcodeproj; sourceTree = "<group>"; };
+		C7C63EF820995EC70093CC02 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = FolioReaderKit/Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
+		C7C63EF920995EC70093CC02 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = FolioReaderKit/Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		C7C63EFA20995EC70093CC02 /* FontBlaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontBlaster.framework; path = FolioReaderKit/Carthage/Build/iOS/FontBlaster.framework; sourceTree = "<group>"; };
+		C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQWebViewController.framework; path = FolioReaderKit/Carthage/Build/iOS/JSQWebViewController.framework; sourceTree = "<group>"; };
+		C7C63EFC20995EC70093CC02 /* ZFDragableModalTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZFDragableModalTransition.framework; path = FolioReaderKit/Carthage/Build/iOS/ZFDragableModalTransition.framework; sourceTree = "<group>"; };
+		C7C63EFD20995EC70093CC02 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = FolioReaderKit/Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
+		C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MenuItemKit.framework; path = FolioReaderKit/Carthage/Build/iOS/MenuItemKit.framework; sourceTree = "<group>"; };
+		C7C63EFF20995EC70093CC02 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = FolioReaderKit/Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +162,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5F0D19706FA1080CA1FC77A /* Pods_app.framework in Frameworks */,
+				C7C63F2C20995EFC0093CC02 /* ZFDragableModalTransition.framework in Frameworks */,
+				C7C63F2420995EFC0093CC02 /* JSQWebViewController.framework in Frameworks */,
+				C7C63EBF20994F750093CC02 /* FolioReaderKit.framework in Frameworks */,
+				C7C63F2820995EFC0093CC02 /* Realm.framework in Frameworks */,
+				C7C63F0020995EC70093CC02 /* ZipArchive.framework in Frameworks */,
+				C7C63F2020995EFC0093CC02 /* AEXML.framework in Frameworks */,
+				C7C63F0620995EC70093CC02 /* MenuItemKit.framework in Frameworks */,
+				C7C63F2620995EFC0093CC02 /* MenuItemKit.framework in Frameworks */,
+				C7C63F2E20995EFC0093CC02 /* ZipArchive.framework in Frameworks */,
+				C7C63F2220995EFC0093CC02 /* FontBlaster.framework in Frameworks */,
+				C7C63F0320995EC70093CC02 /* JSQWebViewController.framework in Frameworks */,
+				C7C63F0120995EC70093CC02 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C05740B5CBD7CF0C0955FD19 /* Pods_copyEpub.framework in Frameworks */,
+				C7C63F3020995F3E0093CC02 /* FolioReaderKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +191,15 @@
 		702F24C22323D91C0487792D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D482994C070729A16D76DEEE /* Pods_app.framework */,
-				777D6E66C98B2F7850E71D5F /* Pods_copyEpub.framework */,
+				C7C63EFD20995EC70093CC02 /* AEXML.framework */,
+				C7C63EFA20995EC70093CC02 /* FontBlaster.framework */,
+				C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */,
+				C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */,
+				C7C63EFF20995EC70093CC02 /* Realm.framework */,
+				C7C63EF920995EC70093CC02 /* RealmSwift.framework */,
+				C7C63EFC20995EC70093CC02 /* ZFDragableModalTransition.framework */,
+				C7C63EF820995EC70093CC02 /* ZipArchive.framework */,
+				C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,7 +222,6 @@
 				C74CEFD6208C899F002765D6 /* app */,
 				C7C1E37820981A1700C909D7 /* copyEpub */,
 				C74CEFD5208C899F002765D6 /* Products */,
-				CB113D248F93AC35DBB00AAD /* Pods */,
 				702F24C22323D91C0487792D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -193,15 +282,13 @@
 			path = copyEpub;
 			sourceTree = "<group>";
 		};
-		CB113D248F93AC35DBB00AAD /* Pods */ = {
+		C7C63EAA209946A50093CC02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */,
-				1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */,
-				562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */,
-				DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */,
+				C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */,
+				C7C63EB1209946A50093CC02 /* FolioReaderKitTests.xctest */,
 			);
-			name = Pods;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,16 +298,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C74CEFE9208C89A1002765D6 /* Build configuration list for PBXNativeTarget "app" */;
 			buildPhases = (
-				A3E1273C8700519D0394773B /* [CP] Check Pods Manifest.lock */,
 				C74CEFD0208C899F002765D6 /* Sources */,
 				C74CEFD1208C899F002765D6 /* Frameworks */,
 				C74CEFD2208C899F002765D6 /* Resources */,
 				C7C57B22208E96D300C992CF /* Embed App Extensions */,
-				EB43EED518DB1928C9BDE377 /* [CP] Embed Pods Frameworks */,
+				C7C63EC420995B230093CC02 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C7C63EC920995C6C0093CC02 /* PBXTargetDependency */,
 				C7C1E38020981A1700C909D7 /* PBXTargetDependency */,
 			);
 			name = app;
@@ -232,10 +319,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7C1E38220981A1700C909D7 /* Build configuration list for PBXNativeTarget "copyEpub" */;
 			buildPhases = (
-				40C7CE27BD0A917917254163 /* [CP] Check Pods Manifest.lock */,
 				C7C1E37320981A1700C909D7 /* Sources */,
 				C7C1E37420981A1700C909D7 /* Frameworks */,
 				C7C1E37520981A1700C909D7 /* Resources */,
+				C7C63EC120995B000093CC02 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -285,6 +372,12 @@
 			mainGroup = C74CEFCB208C899F002765D6;
 			productRefGroup = C74CEFD5208C899F002765D6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C7C63EAA209946A50093CC02 /* Products */;
+					ProjectRef = C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C74CEFD3208C899F002765D6 /* app */,
@@ -292,6 +385,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FolioReaderKit.framework;
+			remoteRef = C7C63EAE209946A50093CC02 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C7C63EB1209946A50093CC02 /* FolioReaderKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FolioReaderKitTests.xctest;
+			remoteRef = C7C63EB0209946A50093CC02 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C74CEFD2208C899F002765D6 /* Resources */ = {
@@ -313,79 +423,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		40C7CE27BD0A917917254163 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-copyEpub-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A3E1273C8700519D0394773B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-app-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB43EED518DB1928C9BDE377 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-app/Pods-app-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
-				"${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
-				"${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
-				"${BUILT_PRODUCTS_DIR}/ZFDragableModalTransition/ZFDragableModalTransition.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FolioReaderKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQWebViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MenuItemKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFDragableModalTransition.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-app/Pods-app-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C74CEFD0208C899F002765D6 /* Sources */ = {
@@ -422,6 +459,11 @@
 			isa = PBXTargetDependency;
 			target = C7C1E37620981A1700C909D7 /* copyEpub */;
 			targetProxy = C7C1E37F20981A1700C909D7 /* PBXContainerItemProxy */;
+		};
+		C7C63EC920995C6C0093CC02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FolioReaderKit;
+			targetProxy = C7C63EC820995C6C0093CC02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -561,15 +603,21 @@
 		};
 		C74CEFEA208C89A1002765D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A2400C6971D69EB52B106EC /* Pods-app.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FolioReaderKit/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = app/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -579,15 +627,21 @@
 		};
 		C74CEFEB208C89A1002765D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EE8FA5EC2374FA59B1E615F /* Pods-app.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FolioReaderKit/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = app/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -597,14 +651,17 @@
 		};
 		C7C1E38320981A1700C909D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 562A0BF0A2777A2651FC6C5C /* Pods-copyEpub.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = copyEpub/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader.copyEpub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -614,14 +671,17 @@
 		};
 		C7C1E38420981A1700C909D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCA3EA1D5BBAD0CFD260FF1B /* Pods-copyEpub.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = copyEpub/copyEpub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
 				INFOPLIST_FILE = copyEpub/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sunho.app.copyEpub;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader.copyEpub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;

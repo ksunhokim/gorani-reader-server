@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FolioReaderKit
 
 @objc(EntryViewController)
 class EntryViewController: UINavigationController {

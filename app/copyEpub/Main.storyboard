@@ -70,6 +70,7 @@
                     <connections>
                         <outlet property="noButton" destination="E1t-Eu-ER2" id="dCm-qQ-rEn"/>
                         <outlet property="okayButton" destination="LUJ-5h-18H" id="g2f-p9-jvj"/>
+                        <outlet property="titleLabel" destination="qea-aN-Q4d" id="7h8-Zl-0n7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXc-0N-iy6" userLabel="First Responder" sceneMemberID="firstResponder"/>

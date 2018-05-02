@@ -13,11 +13,6 @@ class BookMainViewController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.sunho.app") {
-            let filename = dir.appendingPathComponent("copy3.txt")
-            let text2 = try? String(contentsOf: filename, encoding: .utf8)
-            print(text2)
-        }
     }
 
     override func didReceiveMemoryWarning() {

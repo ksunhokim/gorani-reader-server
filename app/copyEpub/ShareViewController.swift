@@ -13,12 +13,24 @@ import MobileCoreServices
 class ShareViewController: UIViewController {
     @IBOutlet weak var okayButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.okayButton.layer.cornerRadius = 10
         self.okayButton.clipsToBounds = true
+        
+        let content = self.extensionContext!.inputItems[0] as! NSExtensionItem
+        let attachment = content.attachments!.first as! NSItemProvider
+        if attachment.hasItemConformingToTypeIdentifier("public.url") {
+            attachment.loadItem(forTypeIdentifier: "public.url", options: nil,
+                                completionHandler: {
+                                    (coding:NSSecureCoding?, error:Error!) in
+                                    let url = coding as? NSURL
+                                    self.titleLabel.text = url?.absoluteString
+            })
+        }
     }
     
 
