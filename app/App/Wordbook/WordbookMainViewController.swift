@@ -9,7 +9,6 @@
 import UIKit
 
 class WordbookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     @IBOutlet var tableView: UITableView!
     
     var wordbooks: [Wordbook] = [
@@ -44,7 +43,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordbookMainCell") as! WordbookMainCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordbooksTableCell") as! WordbooksTableCell
         
         let item = self.wordbooks[indexPath.row]
         cell.textLabel!.text = item.name
@@ -64,6 +63,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         if segue.destination is WordbookDetailViewController
         {
             let vc = segue.destination as? WordbookDetailViewController
+            
             let row = self.tableView.indexPathForSelectedRow!.row
             let item = self.wordbooks[row]
             vc?.wordbook = item

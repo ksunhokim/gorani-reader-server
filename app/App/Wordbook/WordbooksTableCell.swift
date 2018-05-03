@@ -8,6 +8,6 @@
 
 import UIKit
 
-class WordbookMainCell: UITableViewCell {
+class WordbooksTableCell: UITableViewCell {
     @IBOutlet weak var badge: UIImageView!
 }

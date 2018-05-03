@@ -10,7 +10,6 @@
 		C739E63120969DA600046002 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739E63020969DA600046002 /* Helper.swift */; };
 		C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7403AEA209176D800099119 /* WordbookMainViewController.swift */; };
 		C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD7208C899F002765D6 /* AppDelegate.swift */; };
-		C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFD9208C899F002765D6 /* ViewController.swift */; };
 		C74CEFDD208C899F002765D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFDB208C899F002765D6 /* Main.storyboard */; };
 		C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C74CEFDE208C899F002765D6 /* app.xcdatamodeld */; };
 		C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74CEFE1208C89A1002765D6 /* Assets.xcassets */; };
@@ -27,9 +26,10 @@
 		C78217A8209BB3D900C19E2F /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78217A3209BB3D900C19E2F /* UIUtill.swift */; };
 		C78217B8209BB9FD00C19E2F /* EpubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78217B7209BB9FD00C19E2F /* EpubTest.swift */; };
 		C78217BD209BC1F300C19E2F /* alice.epub in Resources */ = {isa = PBXBuildFile; fileRef = C78217BC209BC1F300C19E2F /* alice.epub */; };
+		C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78217C0209BCAA900C19E2F /* BooksTableCell.swift */; };
 		C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4020956A3B00CE3D17 /* Wordbook.swift */; };
 		C7905B4320956A7C00CE3D17 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4220956A7C00CE3D17 /* Word.swift */; };
-		C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */; };
+		C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */; };
 		C7905B472095759C00CE3D17 /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* UIUtill.swift */; };
 		C7A97415209A5F0C00A41D02 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97414209A5F0C00A41D02 /* Spinner.swift */; };
 		C7A97417209A8FD700A41D02 /* ManagedEpubURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */; };
@@ -146,7 +146,6 @@
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
 		C74CEFD4208C899F002765D6 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74CEFD7208C899F002765D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C74CEFD9208C899F002765D6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C74CEFDC208C899F002765D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C74CEFDF208C899F002765D6 /* app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = app.xcdatamodel; sourceTree = "<group>"; };
 		C74CEFE1208C89A1002765D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,9 +162,10 @@
 		C78217B1209BB9A700C19E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C78217B7209BB9FD00C19E2F /* EpubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpubTest.swift; sourceTree = "<group>"; };
 		C78217BC209BC1F300C19E2F /* alice.epub */ = {isa = PBXFileReference; lastKnownFileType = file; path = alice.epub; sourceTree = "<group>"; };
+		C78217C0209BCAA900C19E2F /* BooksTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksTableCell.swift; sourceTree = "<group>"; };
 		C7905B4020956A3B00CE3D17 /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
 		C7905B4220956A7C00CE3D17 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainCell.swift; sourceTree = "<group>"; };
+		C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbooksTableCell.swift; sourceTree = "<group>"; };
 		C7905B462095759C00CE3D17 /* UIUtill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtill.swift; sourceTree = "<group>"; };
 		C7A97411209A4F8C00A41D02 /* Ease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ease.swift; sourceTree = "<group>"; };
 		C7A97414209A5F0C00A41D02 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
 				C7905B4020956A3B00CE3D17 /* Wordbook.swift */,
 				C7905B4220956A7C00CE3D17 /* Word.swift */,
-				C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */,
+				C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */,
 			);
 			path = Wordbook;
 			sourceTree = "<group>";
@@ -288,7 +288,6 @@
 				C7C1E2FF2098016D00C909D7 /* Book */,
 				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
-				C74CEFD9208C899F002765D6 /* ViewController.swift */,
 				C74CEFDB208C899F002765D6 /* Main.storyboard */,
 				C74CEFE1208C89A1002765D6 /* Assets.xcassets */,
 				C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */,
@@ -370,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				C7C63E91209905900093CC02 /* BookMainViewController.swift */,
+				C78217C0209BCAA900C19E2F /* BooksTableCell.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -567,18 +567,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */,
+				C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */,
 				C7821798209BAD1400C19E2F /* Epub.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				C782178E209BAAFB00C19E2F /* Ease.swift in Sources */,
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
-				C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */,
 				C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				C782178F209BAAFB00C19E2F /* FileUtill.swift in Sources */,
 				C7905B472095759C00CE3D17 /* UIUtill.swift in Sources */,
+				C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
 				C739E63120969DA600046002 /* Helper.swift in Sources */,
 			);

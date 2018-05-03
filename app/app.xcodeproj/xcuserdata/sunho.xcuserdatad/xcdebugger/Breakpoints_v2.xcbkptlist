@@ -9,12 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "app/Wordbook/WordbookDetailViewController.swift"
-            timestampString = "546839809.470103"
+            filePath = "App/Wordbook/WordbookDetailViewController.swift"
+            timestampString = "547082370.678758"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "WordbookDetailViewController"
             landmarkType = "3">
             <Locations>

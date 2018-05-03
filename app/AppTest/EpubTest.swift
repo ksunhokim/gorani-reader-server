@@ -25,7 +25,7 @@ class EpubTest: XCTestCase {
     }
     
     func testLoad() {
-        let epub = try! Epub(bookBase: epubPath)
+        let epub = try! Epub(bookBase: self.epubPath)
         XCTAssert(epub.title == "Alice's Adventures in Wonderland")
         XCTAssert(epub.cover == nil)
     }

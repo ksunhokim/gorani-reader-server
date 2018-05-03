@@ -11,16 +11,11 @@ import UIKit
 class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
-    var books: [String]!
+    var books: [Epub]!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tBooks = contentsOfDirectory(path: booksDir.path)
-        if tBooks == nil {
-            try! FileManager.default.createDirectory(atPath: booksDir.path, withIntermediateDirectories: true, attributes: nil)
-            tBooks = contentsOfDirectory(path: booksDir.path)
-        }
-        self.books = tBooks
+        self.books = Epub.getLocalBooks()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -31,12 +26,13 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookMainCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BooksTableCell") as! BooksTableCell
         
         let item = self.books[indexPath.row]
-        cell!.textLabel!.text = item
+        cell.titleLabel.text = item.title
+        cell.coverImage.image = item.cover
         
-        return cell!
+        return cell
     }
     
 

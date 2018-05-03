@@ -9,21 +9,46 @@
 import UIKit
 
 class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var memorizeButton: UIButton!
     @IBOutlet weak var flashcardButton: UIButton!
     @IBOutlet weak var sentenceButton: UIButton!
     @IBOutlet weak var speakButton: UIButton!
-    @IBOutlet weak var wordsTable: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var wordbook: Wordbook!
     
-    private var headerY: CGFloat!
+    private var headerY: CGFloat = 0
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.titleLabel.text = self.wordbook.name
+
+        self.layout()
+    }
+    
+    private func layout() {
+        self.headerY = self.headerView.frame.minY
+        
+        self.tableView.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
+        
+        roundView(self.memorizeButton)
+        roundView(self.flashcardButton)
+        roundView(self.speakButton)
+        roundView(self.sentenceButton)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         let view = UIView()
         let label = UILabel()
         label.text = self.wordbook.name
@@ -33,27 +58,6 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
         view.frame = label.frame
         
         self.navigationItem.titleView = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.wordsTable.dataSource = self
-        self.wordsTable.delegate = self
-        
-
-        self.titleLabel.text = self.wordbook.name
-
-        self.layout()
-    }
-    
-    func layout() {
-        self.headerY = self.headerView.frame.minY
-        self.wordsTable.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
-        roundView(self.memorizeButton)
-        roundView(self.flashcardButton)
-        roundView(self.speakButton)
-        roundView(self.sentenceButton)
     }
     
     // header location
@@ -75,7 +79,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -89,20 +93,23 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordsTableCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordsTableCell")!
+        
         let item = self.wordbook.words[indexPath.row]
-        
-        cell!.textLabel!.text = item.word
-        
+        cell.textLabel!.text = item.word
+        self.configureCellWithCorrect(cell, item)
+
+        return cell
+    }
+    
+    private func configureCellWithCorrect(_ cell: UITableViewCell, _ item: Word) {
         let correct = item.correct
         if correct > 0 {
-            cell!.detailTextLabel!.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255)
-            cell!.detailTextLabel!.text = "+\(correct)"
+            cell.detailTextLabel!.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255)
+            cell.detailTextLabel!.text = "+\(correct)"
         } else if correct < 0 {
-            cell!.detailTextLabel!.textColor = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
-            cell!.detailTextLabel!.text = String(correct)
+            cell.detailTextLabel!.textColor = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
+            cell.detailTextLabel!.text = String(correct)
         }
-        
-        return cell!
     }
 }
