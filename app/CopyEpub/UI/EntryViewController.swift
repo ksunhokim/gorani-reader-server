@@ -34,13 +34,8 @@ class EntryViewController: UINavigationController {
         super.viewWillAppear(animated)
         
         self.view.transform = CGAffineTransform(translationX:0, y: self.view.frame.size.height)
-        
-        CATransaction.begin()
-        let timing = CAMediaTimingFunction(controlPoints: 0.77, 0, 0.175, 1)
-        CATransaction.setAnimationTimingFunction(timing)
-        UIView.animate(withDuration: 0.4,
-                       animations: { () -> Void in self.view.transform = .identity })
-        
-        CATransaction.commit()
+        Ease.begin(.quintOut)
+        UIView.animate(withDuration: 0.5, animations: { self.view.transform = .identity })
+        Ease.end()
     }
 }

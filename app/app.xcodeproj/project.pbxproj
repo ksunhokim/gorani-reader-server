@@ -19,7 +19,15 @@
 		C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4020956A3B00CE3D17 /* Wordbook.swift */; };
 		C7905B4320956A7C00CE3D17 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4220956A7C00CE3D17 /* Word.swift */; };
 		C7905B4520956F0300CE3D17 /* WordbookMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */; };
-		C7905B472095759C00CE3D17 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* Util.swift */; };
+		C7905B472095759C00CE3D17 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B462095759C00CE3D17 /* UI.swift */; };
+		C7A97412209A4F8C00A41D02 /* Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97411209A4F8C00A41D02 /* Ease.swift */; };
+		C7A97415209A5F0C00A41D02 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97414209A5F0C00A41D02 /* Spinner.swift */; };
+		C7A97417209A8FD700A41D02 /* ManagedEpubURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */; };
+		C7A97419209A97E500A41D02 /* Epub.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97418209A97E500A41D02 /* Epub.swift */; };
+		C7A9741E209AA33300A41D02 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A9741D209AA33300A41D02 /* File.swift */; };
+		C7A97420209AA53A00A41D02 /* NewEpub.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A9741F209AA53A00A41D02 /* NewEpub.swift */; };
+		C7A97422209AA65900A41D02 /* ShareError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97421209AA65900A41D02 /* ShareError.swift */; };
+		C7A97427209AB00F00A41D02 /* localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7A97429209AB00F00A41D02 /* localize.strings */; };
 		C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C1E37920981A1700C909D7 /* ShareViewController.swift */; };
 		C7C1E38120981A1700C909D7 /* copyEpub.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C7C1E37720981A1700C909D7 /* copyEpub.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */; };
@@ -27,15 +35,12 @@
 		C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C63E9520990ED40093CC02 /* Main.storyboard */; };
 		C7C63EBF20994F750093CC02 /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
 		C7C63EDF20995EA50093CC02 /* FolioReaderKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7C63F0020995EC70093CC02 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EF820995EC70093CC02 /* ZipArchive.framework */; };
 		C7C63F0120995EC70093CC02 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EF920995EC70093CC02 /* RealmSwift.framework */; };
 		C7C63F0320995EC70093CC02 /* JSQWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; };
-		C7C63F0620995EC70093CC02 /* MenuItemKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; };
 		C7C63F2020995EFC0093CC02 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFD20995EC70093CC02 /* AEXML.framework */; };
 		C7C63F2120995EFC0093CC02 /* AEXML.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFD20995EC70093CC02 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7C63F2220995EFC0093CC02 /* FontBlaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFA20995EC70093CC02 /* FontBlaster.framework */; };
 		C7C63F2320995EFC0093CC02 /* FontBlaster.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFA20995EC70093CC02 /* FontBlaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7C63F2420995EFC0093CC02 /* JSQWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; };
 		C7C63F2520995EFC0093CC02 /* JSQWebViewController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFB20995EC70093CC02 /* JSQWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7C63F2620995EFC0093CC02 /* MenuItemKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; };
 		C7C63F2720995EFC0093CC02 /* MenuItemKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EFE20995EC70093CC02 /* MenuItemKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -137,7 +142,16 @@
 		C7905B4020956A3B00CE3D17 /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
 		C7905B4220956A7C00CE3D17 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		C7905B4420956F0300CE3D17 /* WordbookMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainCell.swift; sourceTree = "<group>"; };
-		C7905B462095759C00CE3D17 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		C7905B462095759C00CE3D17 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		C7A97411209A4F8C00A41D02 /* Ease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ease.swift; sourceTree = "<group>"; };
+		C7A97414209A5F0C00A41D02 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedEpubURL.swift; sourceTree = "<group>"; };
+		C7A97418209A97E500A41D02 /* Epub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Epub.swift; sourceTree = "<group>"; };
+		C7A9741D209AA33300A41D02 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C7A9741F209AA53A00A41D02 /* NewEpub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpub.swift; sourceTree = "<group>"; };
+		C7A97421209AA65900A41D02 /* ShareError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareError.swift; sourceTree = "<group>"; };
+		C7A97428209AB00F00A41D02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localize.strings; sourceTree = "<group>"; };
+		C7A9742A209AB02000A41D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/localize.strings; sourceTree = "<group>"; };
 		C7C1E3262098058500C909D7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		C7C1E37720981A1700C909D7 /* copyEpub.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = copyEpub.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C1E37920981A1700C909D7 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -163,12 +177,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C63F2C20995EFC0093CC02 /* ZFDragableModalTransition.framework in Frameworks */,
-				C7C63F2420995EFC0093CC02 /* JSQWebViewController.framework in Frameworks */,
 				C7C63EBF20994F750093CC02 /* FolioReaderKit.framework in Frameworks */,
 				C7C63F2820995EFC0093CC02 /* Realm.framework in Frameworks */,
-				C7C63F0020995EC70093CC02 /* ZipArchive.framework in Frameworks */,
 				C7C63F2020995EFC0093CC02 /* AEXML.framework in Frameworks */,
-				C7C63F0620995EC70093CC02 /* MenuItemKit.framework in Frameworks */,
 				C7C63F2620995EFC0093CC02 /* MenuItemKit.framework in Frameworks */,
 				C7C63F2E20995EFC0093CC02 /* ZipArchive.framework in Frameworks */,
 				C7C63F2220995EFC0093CC02 /* FontBlaster.framework in Frameworks */,
@@ -219,8 +230,8 @@
 		C74CEFCB208C899F002765D6 = {
 			isa = PBXGroup;
 			children = (
-				C74CEFD6208C899F002765D6 /* app */,
-				C7C1E37820981A1700C909D7 /* copyEpub */,
+				C74CEFD6208C899F002765D6 /* App */,
+				C7C1E37820981A1700C909D7 /* CopyEpub */,
 				C74CEFD5208C899F002765D6 /* Products */,
 				702F24C22323D91C0487792D /* Frameworks */,
 			);
@@ -235,12 +246,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C74CEFD6208C899F002765D6 /* app */ = {
+		C74CEFD6208C899F002765D6 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				C7C1E3262098058500C909D7 /* app.entitlements */,
 				C7C1E2FF2098016D00C909D7 /* Book */,
-				C7C1E2FE2097B2C500C909D7 /* UI */,
+				C7C1E2FE2097B2C500C909D7 /* Utils */,
 				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
 				C74CEFD9208C899F002765D6 /* ViewController.swift */,
@@ -251,15 +262,45 @@
 				C74CEFDE208C899F002765D6 /* app.xcdatamodeld */,
 				C739E63020969DA600046002 /* Helper.swift */,
 			);
-			path = app;
+			path = App;
 			sourceTree = "<group>";
 		};
-		C7C1E2FE2097B2C500C909D7 /* UI */ = {
+		C7A9741A209AA29C00A41D02 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C7905B462095759C00CE3D17 /* Util.swift */,
+				C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */,
+				C7C1E37920981A1700C909D7 /* ShareViewController.swift */,
+				C7A97414209A5F0C00A41D02 /* Spinner.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		C7A9741B209AA2B500A41D02 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */,
+				C7A9741F209AA53A00A41D02 /* NewEpub.swift */,
+				C7A97421209AA65900A41D02 /* ShareError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7A9741C209AA30E00A41D02 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C7A97411209A4F8C00A41D02 /* Ease.swift */,
+				C7A9741D209AA33300A41D02 /* File.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C7C1E2FE2097B2C500C909D7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C7905B462095759C00CE3D17 /* UI.swift */,
+				C7A97418209A97E500A41D02 /* Epub.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C7C1E2FF2098016D00C909D7 /* Book */ = {
@@ -270,16 +311,18 @@
 			path = Book;
 			sourceTree = "<group>";
 		};
-		C7C1E37820981A1700C909D7 /* copyEpub */ = {
+		C7C1E37820981A1700C909D7 /* CopyEpub */ = {
 			isa = PBXGroup;
 			children = (
+				C7A9741C209AA30E00A41D02 /* Utils */,
+				C7A9741B209AA2B500A41D02 /* Models */,
+				C7A9741A209AA29C00A41D02 /* UI */,
 				C7C1E38520981A4900C909D7 /* copyEpub.entitlements */,
-				C7C63E8F2098F7DC0093CC02 /* EntryViewController.swift */,
-				C7C1E37920981A1700C909D7 /* ShareViewController.swift */,
 				C7C1E37E20981A1700C909D7 /* Info.plist */,
 				C7C63E9520990ED40093CC02 /* Main.storyboard */,
+				C7A97429209AB00F00A41D02 /* localize.strings */,
 			);
-			path = copyEpub;
+			path = CopyEpub;
 			sourceTree = "<group>";
 		};
 		C7C63EAA209946A50093CC02 /* Products */ = {
@@ -419,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7C63E9620990ED40093CC02 /* Main.storyboard in Resources */,
+				C7A97427209AB00F00A41D02 /* localize.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,7 +481,8 @@
 				C74CEFDA208C899F002765D6 /* ViewController.swift in Sources */,
 				C7905B4120956A3B00CE3D17 /* Wordbook.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
-				C7905B472095759C00CE3D17 /* Util.swift in Sources */,
+				C7905B472095759C00CE3D17 /* UI.swift in Sources */,
+				C7A97419209A97E500A41D02 /* Epub.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
 				C739E63120969DA600046002 /* Helper.swift in Sources */,
 			);
@@ -447,8 +492,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A97422209AA65900A41D02 /* ShareError.swift in Sources */,
+				C7A97417209A8FD700A41D02 /* ManagedEpubURL.swift in Sources */,
+				C7A9741E209AA33300A41D02 /* File.swift in Sources */,
 				C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */,
+				C7A97412209A4F8C00A41D02 /* Ease.swift in Sources */,
 				C7C63E902098F7DC0093CC02 /* EntryViewController.swift in Sources */,
+				C7A97415209A5F0C00A41D02 /* Spinner.swift in Sources */,
+				C7A97420209AA53A00A41D02 /* NewEpub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +533,15 @@
 				C74CEFE4208C89A1002765D6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C7A97429209AB00F00A41D02 /* localize.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7A97428209AB00F00A41D02 /* en */,
+				C7A9742A209AB02000A41D02 /* Base */,
+			);
+			name = localize.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
