@@ -65,7 +65,7 @@ class ShareViewController: UIViewController {
                 self.spinner.stopAnimating()
                 self.bookURL = epub.tempURL
                 self.coverView.image = epub.cover
-                self.titleLabel.text = epub.name
+                self.titleLabel.text = epub.title
                 self.dialogLabel.text = "이 책을 고라니 리더로 가져오겠습니까?"
                 self.okayButton.isHidden = false
             }

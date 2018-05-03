@@ -1,5 +1,5 @@
 //
-//  Util.swift
+//  Ease.swift
 //  copyEpub
 //
 //  Created by sunho on 2018/05/03.

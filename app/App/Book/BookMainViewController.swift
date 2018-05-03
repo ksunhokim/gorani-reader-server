@@ -15,16 +15,17 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tBooks = contentsOfDirectory(path: sharedBooks.path)
+        var tBooks = contentsOfDirectory(path: booksDir.path)
         if tBooks == nil {
-            try! FileManager.default.createDirectory(atPath: sharedBooks.path, withIntermediateDirectories: true, attributes: nil)
-            tBooks = contentsOfDirectory(path: sharedBooks.path)
+            try! FileManager.default.createDirectory(atPath: booksDir.path, withIntermediateDirectories: true, attributes: nil)
+            tBooks = contentsOfDirectory(path: booksDir.path)
         }
         self.books = tBooks
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.books.count
     }
