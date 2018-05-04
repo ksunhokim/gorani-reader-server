@@ -12,12 +12,14 @@ import MobileCoreServices
 import FolioReaderKit
 
 class ShareViewController: UIViewController {
-    @IBOutlet weak var okayButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dialogLabel: UILabel!
+    
     @IBOutlet weak var bookView: UIView!
     @IBOutlet weak var coverView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var okayButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
 
     var spinner: Spinner!
     var bookURL: ManagedEpubURL!
@@ -35,12 +37,12 @@ class ShareViewController: UIViewController {
         self.handleAttachment()
     }
 
-    func layout() {
+    private func layout() {
         self.okayButton.layer.cornerRadius = 10
         self.okayButton.clipsToBounds = true
     }
     
-    func handleAttachment() {
+    private func handleAttachment() {
         let content = self.extensionContext!.inputItems[0] as! NSExtensionItem
         let attachment = content.attachments!.first as! NSItemProvider
         
@@ -66,7 +68,7 @@ class ShareViewController: UIViewController {
                 self.bookURL = epub.tempURL
                 self.coverView.image = epub.cover
                 self.titleLabel.text = epub.title
-                self.dialogLabel.text = "이 책을 고라니 리더로 가져오겠습니까?"
+                self.dialogLabel.text =  NSLocalizedString("CopyEpubConfirmDialog", comment: "")
                 self.okayButton.isHidden = false
             }
         } catch let err as ShareError {
@@ -92,8 +94,8 @@ class ShareViewController: UIViewController {
     @IBAction func noButtonTouch(_ sender: Any) {
         self.dismiss(success: false)
     }
-    
-    func handleError(_ e: ShareError) {
+
+    private func handleError(_ e: ShareError) {
         dismiss(success: false)
     }
     
@@ -107,7 +109,7 @@ class ShareViewController: UIViewController {
         })
     }
     
-    func hideExtensionWithCompletionHandler(completion: @escaping (Bool) -> Void) {
+    private func hideExtensionWithCompletionHandler(completion: @escaping (Bool) -> Void) {
         Ease.begin(.quintOut)
         let transform = CGAffineTransform(translationX:0, y: self.view.frame.size.height)
         UIView.animate(

@@ -2,8 +2,8 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sunho/engbreaker/pkg/auth"
-	"github.com/sunho/engbreaker/pkg/model"
+	"github.com/sunho/gorani-reader/pkg/auth"
+	"github.com/sunho/gorani-reader/pkg/model"
 )
 
 func User(c *gin.Context) model.User {

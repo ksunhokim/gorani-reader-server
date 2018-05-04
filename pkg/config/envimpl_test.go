@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/engbreaker/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/config"
 )
 
 func TestEnvImplDefault(t *testing.T) {

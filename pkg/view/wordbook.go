@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sunho/engbreaker/pkg/model"
-	"github.com/sunho/engbreaker/pkg/router/middlewares"
+	"github.com/sunho/gorani-reader/pkg/model"
+	"github.com/sunho/gorani-reader/pkg/router/middlewares"
 )
 
 type wordbookListItem struct {

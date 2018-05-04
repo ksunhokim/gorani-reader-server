@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/router"
+	"github.com/sunho/gorani-reader/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/router"
 )
 
 func main() {

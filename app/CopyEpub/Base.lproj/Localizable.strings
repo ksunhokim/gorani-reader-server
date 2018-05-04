@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  app
+
+  Created by sunho on 2018/05/03.
+  Copyright © 2018 sunho. All rights reserved.
+*/
+
+
+"CopyEpubConfirmDialog" = "이 책을 고라니 리더로 가져오겠습니까?";

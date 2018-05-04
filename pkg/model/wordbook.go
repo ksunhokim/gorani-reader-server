@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sunho/engbreaker/pkg/dbs"
-	"github.com/sunho/engbreaker/pkg/util"
+	"github.com/sunho/gorani-reader/pkg/dbs"
+	"github.com/sunho/gorani-reader/pkg/util"
 
 	"gopkg.in/mgo.v2/bson"
 )

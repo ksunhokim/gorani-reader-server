@@ -3,8 +3,8 @@ package model
 import (
 	"time"
 
-	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/dbs"
+	"github.com/sunho/gorani-reader/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/dbs"
 	"gopkg.in/mgo.v2/bson"
 )
 

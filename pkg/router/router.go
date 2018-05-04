@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sunho/engbreaker/pkg/router/middlewares"
-	"github.com/sunho/engbreaker/pkg/view"
+	"github.com/sunho/gorani-reader/pkg/router/middlewares"
+	"github.com/sunho/gorani-reader/pkg/view"
 )
 
 func New() *gin.Engine {

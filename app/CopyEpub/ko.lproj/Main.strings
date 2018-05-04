@@ -1,0 +1,15 @@
+
+/* Class = "UIButton"; normalTitle = "취소"; ObjectID = "E1t-Eu-ER2"; */
+"E1t-Eu-ER2.normalTitle" = "취소";
+
+/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "LUJ-5h-18H"; */
+"LUJ-5h-18H.normalTitle" = "확인";
+
+/* Class = "UILabel"; text = "책의 수준이 어느정도인지 측정중입니다."; ObjectID = "p8p-zT-nmo"; */
+"p8p-zT-nmo.text" = "책의 수준이 어느정도인지 측정중입니다.";
+
+/* Class = "UILabel"; text = "label"; ObjectID = "qea-aN-Q4d"; */
+"qea-aN-Q4d.text" = "label";
+
+/* Class = "UILabel"; text = "책 가져오기"; ObjectID = "tXI-IJ-kNC"; */
+"tXI-IJ-kNC.text" = "책 가져오기";

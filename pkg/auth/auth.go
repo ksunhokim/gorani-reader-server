@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/markbates/goth"
-	"github.com/sunho/engbreaker/pkg/dbs"
+	"github.com/sunho/gorani-reader/pkg/dbs"
 )
 
 func generateAuthSession(provider goth.Provider) (goth.Session, error) {

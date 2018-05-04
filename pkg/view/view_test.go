@@ -7,11 +7,11 @@ import (
 	"time"
 
 	"github.com/markbates/goth"
-	"github.com/sunho/engbreaker/pkg/auth"
-	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/dbs"
-	"github.com/sunho/engbreaker/pkg/model"
-	"github.com/sunho/engbreaker/pkg/router"
+	"github.com/sunho/gorani-reader/pkg/auth"
+	"github.com/sunho/gorani-reader/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/dbs"
+	"github.com/sunho/gorani-reader/pkg/model"
+	"github.com/sunho/gorani-reader/pkg/router"
 	httpexpect "gopkg.in/gavv/httpexpect.v1"
 )
 

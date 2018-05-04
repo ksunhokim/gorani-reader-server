@@ -2,7 +2,7 @@ package dbs
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/sunho/engbreaker/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/config"
 	mgo "gopkg.in/mgo.v2"
 )
 

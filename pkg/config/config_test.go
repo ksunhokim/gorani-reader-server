@@ -6,8 +6,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/util"
+	"github.com/sunho/gorani-reader/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/util"
 )
 
 func init() {

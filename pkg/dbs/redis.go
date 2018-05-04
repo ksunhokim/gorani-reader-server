@@ -3,8 +3,8 @@ package dbs
 import (
 	"github.com/go-redis/redis"
 	"github.com/sirupsen/logrus"
-	"github.com/sunho/engbreaker/pkg/config"
-	"github.com/sunho/engbreaker/pkg/util"
+	"github.com/sunho/gorani-reader/pkg/config"
+	"github.com/sunho/gorani-reader/pkg/util"
 )
 
 var RDB redis.UniversalClient
