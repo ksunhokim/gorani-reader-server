@@ -12,3 +12,5 @@ backend/build
 scripts/epub/analyze/*.epub
 node_modules
 *.json
+._*
+Carthage

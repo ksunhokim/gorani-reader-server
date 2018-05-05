@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:app/FolioReaderKit/FolioReaderKit.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "container:app/app.xcodeproj">
    </FileRef>
 </Workspace>
