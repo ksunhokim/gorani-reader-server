@@ -19,6 +19,7 @@ let booksDir: URL = {
     }
     return url
 }()
+let userDataURL: URL = sharedDir.appendingPathComponent("userData.db")
 
 func contentsOfDirectory(path: String) -> [String]? {
     guard let paths = try? fileManager.contentsOfDirectory(atPath: path) else { return nil}
