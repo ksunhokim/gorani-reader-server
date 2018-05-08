@@ -15,40 +15,34 @@ enum VerbType {
     case complete
     case both
     
-    static func candidates(word: String) -> (String, VerbType)? {
-        if irregularPasts[word] != nil && irregularCompletes[word] != nil {
-            return (irregularPasts[word]!, .both)
+    static func candidates(word: String) -> [(String, VerbType)]{
+        var arr: [(String, VerbType)] = []
+        
+        if let base = irregularPasts[word] {
+            arr.append((base, .past))
         }
         
         if let base = irregularCompletes[word] {
-            return (base, .complete)
-        }
-        
-        if let base = irregularPasts[word] {
-            return (base, .past)
-        }
-        
-        if word.hasPrefix("ed") {
-            return (trimString(word, 2), .both)
-        }
-        
-        if word.hasPrefix("d") {
-            return (trimString(word, 1), .both)
-        }
-        
-        if word.hasPrefix("ing") {
-            return (trimString(word, 3), .present)
-        }
-        
-        if word.hasPrefix("es") {
-            return (trimString(word, 2), .third)
-        }
-        
-        if word.hasPrefix("s") {
-            return (trimString(word, 1), .third)
+            arr.append((base, .complete))
         }
 
-        return nil
+        if word.hasSuffix("ed") {
+            arr.append((trimString(word, 2), .both))
+        } else if word.hasSuffix("d") {
+            arr.append((trimString(word, 1), .both))
+        }
+        
+        if word.hasSuffix("ing") {
+            arr.append((trimString(word, 3), .present))
+        }
+        
+        if word.hasSuffix("es") {
+            arr.append((trimString(word, 2), .third))
+        } else if word.hasSuffix("s") {
+            arr.append((trimString(word, 1), .third))
+        }
+
+        return arr
     }
 }
 

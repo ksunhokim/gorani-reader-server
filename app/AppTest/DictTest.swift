@@ -60,18 +60,18 @@ class DictTest: XCTestCase {
     func testSearchWithVariant() {
         let entries = self.dict.search(word: "went", pos: .verb)
         let entry = entries[0] as! DictEntryRedirect
-        XCTAssert(entry.word == "go")
-        XCTAssert(entry.verbType == .past)
-        
+        XCTAssertEqual(entry.word, "go")
+        XCTAssertEqual(entry.verbType, .past)
+
         let entries2 = self.dict.search(word: "goes", pos: .verb)
         let entry2 = entries2[0] as! DictEntryRedirect
-        XCTAssert(entry2.word == "go")
-        XCTAssert(entry2.verbType == .third)
+        XCTAssertEqual(entry2.word, "go")
+        XCTAssertEqual(entry2.verbType, .third)
 
         let entries3 = self.dict.search(word: "going", pos: .adj)
-        let entry3 = entries[0] as! DictEntryRedirect
-        XCTAssert(entry3.word == "go")
-        XCTAssert(entry3.verbType == .present)
+        let entry3 = entries3[0] as! DictEntryRedirect
+        XCTAssertEqual(entry3.word, "go")
+        XCTAssertEqual(entry3.verbType, .present)
     }
     
     func testMockSearch() {

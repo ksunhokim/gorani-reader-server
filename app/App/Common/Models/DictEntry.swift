@@ -24,6 +24,10 @@ class DictEntry {
 class DictEntryRedirect: DictEntry {
     var verbType: VerbType
     
+    convenience init(entry: DictEntry, type: VerbType) {
+        self.init(id: entry.id, word: entry.word, pron: entry.pron, type: type)
+    }
+    
     init(id: Int, word: String, pron: String, type: VerbType) {
         self.verbType = type
         super.init(id: id, word: word, pron: pron)

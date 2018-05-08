@@ -35,7 +35,7 @@ class Dict {
         self.connection = connection
     }
     
-    func get(word wordstr: String, _ pos: POS? = nil) -> DictEntry? {
+    func get(word wordstr: String, pos: POS? = nil) -> DictEntry? {
         let query = wordsTable.where(word == wordstr)
         do {
             if let entry = try self.connection.pluck(query) {
@@ -79,18 +79,24 @@ class Dict {
         }
     }
 
-    func search(word: String, pos: POS? = nil) -> [DictEntry] {
+    func search(word: String, pos: POS? = nil, type: VerbType? = nil) -> [DictEntry] {
         if word == "" {
             return []
         }
         
         var entries: [DictEntry] = []
-        if let (base, type) = VerbType.candidates(word: word) {
-            if let entry = self.get(word: base, pos) {
-                entries.append(DictEntryRedirect(entry)
+        let candidates = VerbType.candidates(word: word)
+        for candidate in candidates {
+            if let entry = self.get(word: candidate.0, pos: pos) {
+                let entry = DictEntryRedirect(entry: entry, type: candidate.1)
+                if candidate.1 == type {
+                    entries.insert(entry, at: 0)
+                } else {
+                    entries.append(entry)
+                }
             }
         }
-        if let entry = self.get(word: word, pos) {
+        if let entry = self.get(word: word, pos: pos) {
             entries.append(entry)
         }
         

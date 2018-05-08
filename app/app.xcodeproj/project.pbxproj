@@ -159,13 +159,11 @@
 		B19942E120A1B9F5004CF61A /* IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPA.swift; sourceTree = "<group>"; };
 		B19942E520A1BCA4004CF61A /* Regex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Regex.framework; path = Carthage/Build/iOS/Regex.framework; sourceTree = "<group>"; };
 		C7362F08209BE1FE0081B012 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = FolioReaderKit/Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
-		C7362F09209BE1FE0081B012 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = FolioReaderKit/Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		C7362F0A209BE1FE0081B012 /* FontBlaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontBlaster.framework; path = FolioReaderKit/Carthage/Build/iOS/FontBlaster.framework; sourceTree = "<group>"; };
 		C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQWebViewController.framework; path = FolioReaderKit/Carthage/Build/iOS/JSQWebViewController.framework; sourceTree = "<group>"; };
 		C7362F0C209BE1FE0081B012 /* ZFDragableModalTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZFDragableModalTransition.framework; path = FolioReaderKit/Carthage/Build/iOS/ZFDragableModalTransition.framework; sourceTree = "<group>"; };
 		C7362F0D209BE1FE0081B012 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = FolioReaderKit/Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
 		C7362F0E209BE1FE0081B012 /* MenuItemKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MenuItemKit.framework; path = FolioReaderKit/Carthage/Build/iOS/MenuItemKit.framework; sourceTree = "<group>"; };
-		C7362F0F209BE1FE0081B012 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = FolioReaderKit/Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		C7362F21209BE21B0081B012 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		C739E63020969DA600046002 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C7403AEA209176D800099119 /* WordbookMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookMainViewController.swift; sourceTree = "<group>"; };
@@ -242,8 +240,6 @@
 				C7362F0A209BE1FE0081B012 /* FontBlaster.framework */,
 				C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */,
 				C7362F0E209BE1FE0081B012 /* MenuItemKit.framework */,
-				C7362F0F209BE1FE0081B012 /* Realm.framework */,
-				C7362F09209BE1FE0081B012 /* RealmSwift.framework */,
 				C7362F0C209BE1FE0081B012 /* ZFDragableModalTransition.framework */,
 				C7362F08209BE1FE0081B012 /* ZipArchive.framework */,
 				C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */,
