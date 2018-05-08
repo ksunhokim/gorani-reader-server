@@ -9,7 +9,7 @@
 import UIKit
 import FolioReaderKit
 
-class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var books: [Epub]!
@@ -22,6 +22,13 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.folioReader.delegate = self
+    }
+    
+    func presentDictView(bookName: String, page: Int, scroll: CGFloat, sentence: String, word: String, index: Int) {
+        let viewController = DictViewController(word: word, sentence: sentence, index: index)
+        self.folioReader.readerContainer?.present(viewController, animated:  true)
+        print(bookName, page, scroll, sentence, word, index)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

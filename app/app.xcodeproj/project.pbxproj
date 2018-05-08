@@ -27,6 +27,7 @@
 		B19942E220A1B9F5004CF61A /* IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942E120A1B9F5004CF61A /* IPA.swift */; };
 		B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B19942E520A1BCA4004CF61A /* Regex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
+		B19942F320A21262004CF61A /* DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942F220A21262004CF61A /* DictViewController.swift */; };
 		C7362F18209BE2060081B012 /* AEXML.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0D209BE1FE0081B012 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F19209BE2060081B012 /* FontBlaster.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0A209BE1FE0081B012 /* FontBlaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -158,6 +159,7 @@
 		B19942DC20A1B072004CF61A /* dict.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dict.db; sourceTree = "<group>"; };
 		B19942E120A1B9F5004CF61A /* IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPA.swift; sourceTree = "<group>"; };
 		B19942E520A1BCA4004CF61A /* Regex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Regex.framework; path = Carthage/Build/iOS/Regex.framework; sourceTree = "<group>"; };
+		B19942F220A21262004CF61A /* DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewController.swift; sourceTree = "<group>"; };
 		C7362F08209BE1FE0081B012 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = FolioReaderKit/Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
 		C7362F0A209BE1FE0081B012 /* FontBlaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontBlaster.framework; path = FolioReaderKit/Carthage/Build/iOS/FontBlaster.framework; sourceTree = "<group>"; };
 		C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQWebViewController.framework; path = FolioReaderKit/Carthage/Build/iOS/JSQWebViewController.framework; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			children = (
 				C7C63E91209905900093CC02 /* BookMainViewController.swift */,
 				C78217C0209BCAA900C19E2F /* BooksTableCell.swift */,
+				B19942F220A21262004CF61A /* DictViewController.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				C782178F209BAAFB00C19E2F /* FileUtill.swift in Sources */,
 				C7905B472095759C00CE3D17 /* UIUtill.swift in Sources */,
 				C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */,
+				B19942F320A21262004CF61A /* DictViewController.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
 				C739E63120969DA600046002 /* Helper.swift in Sources */,
 			);
