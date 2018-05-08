@@ -11,14 +11,14 @@ import Foundation
 class Wordbook {
     var id: Int
     var name: String
-    var entries: [WordbookEntry]
+    var entries: [WordbookEntry] = []
     
     init(id: Int, name: String) {
         self.id = id
         self.name = name
     }
-}
-
-class WordbookEntry {
     
+    func addEntry(_ entry: WordbookEntry) {
+        
+    }
 }

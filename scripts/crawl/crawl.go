@@ -153,7 +153,6 @@ func worker(input chan int) {
 		word := list[index]
 		log.Println(index, "/", len(list), ":", word)
 		getQuery(word)
-		time.Sleep(200)
 	}
 	wg.Done()
 }

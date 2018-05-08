@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        self.window?.backgroundColor = UIColor.white
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

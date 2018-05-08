@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B137AB7B209F43E2007AF6B9 /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */; };
 		B142EB10209D36F40047D6EA /* Epub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0A209D36F40047D6EA /* Epub.swift */; };
 		B142EB11209D36F40047D6EA /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0C209D36F40047D6EA /* UIUtill.swift */; };
 		B142EB12209D36F40047D6EA /* FileUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0D209D36F40047D6EA /* FileUtill.swift */; };
@@ -18,15 +19,20 @@
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
 		B142EB1E209D65670047D6EA /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1D209D65670047D6EA /* Wordbook.swift */; };
 		B142EB20209D69890047D6EA /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1F209D69890047D6EA /* Verb.swift */; };
+		B19942D220A1A153004CF61A /* DictTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D120A1A153004CF61A /* DictTest.swift */; };
+		B19942D420A1AAFB004CF61A /* DictEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D320A1AAFB004CF61A /* DictEntry.swift */; };
+		B19942D820A1AB1A004CF61A /* POS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D720A1AB1A004CF61A /* POS.swift */; };
+		B19942DD20A1B072004CF61A /* dict.db in Resources */ = {isa = PBXBuildFile; fileRef = B19942DC20A1B072004CF61A /* dict.db */; };
+		B19942E020A1B9A1004CF61A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7362F21209BE21B0081B012 /* SQLite.framework */; };
+		B19942E220A1B9F5004CF61A /* IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942E120A1B9F5004CF61A /* IPA.swift */; };
+		B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B19942E520A1BCA4004CF61A /* Regex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
 		C7362F18209BE2060081B012 /* AEXML.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0D209BE1FE0081B012 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F19209BE2060081B012 /* FontBlaster.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0A209BE1FE0081B012 /* FontBlaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1B209BE2060081B012 /* MenuItemKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0E209BE1FE0081B012 /* MenuItemKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7362F1C209BE2060081B012 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0F209BE1FE0081B012 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7362F1D209BE2060081B012 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F09209BE1FE0081B012 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1E209BE2060081B012 /* ZFDragableModalTransition.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0C209BE1FE0081B012 /* ZFDragableModalTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1F209BE2060081B012 /* ZipArchive.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F08209BE1FE0081B012 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7362F20209BE20C0081B012 /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
 		C7362F22209BE21B0081B012 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7362F21209BE21B0081B012 /* SQLite.framework */; };
 		C7362F23209BE2230081B012 /* SQLite.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F21209BE21B0081B012 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F24209BE2340081B012 /* FolioReaderKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -101,11 +107,10 @@
 				C7362F18209BE2060081B012 /* AEXML.framework in CopyFiles */,
 				C7362F19209BE2060081B012 /* FontBlaster.framework in CopyFiles */,
 				C7362F24209BE2340081B012 /* FolioReaderKit.framework in CopyFiles */,
+				B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */,
 				C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */,
 				C7362F23209BE2230081B012 /* SQLite.framework in CopyFiles */,
 				C7362F1B209BE2060081B012 /* MenuItemKit.framework in CopyFiles */,
-				C7362F1C209BE2060081B012 /* Realm.framework in CopyFiles */,
-				C7362F1D209BE2060081B012 /* RealmSwift.framework in CopyFiles */,
 				C7362F1E209BE2060081B012 /* ZFDragableModalTransition.framework in CopyFiles */,
 				C7362F1F209BE2060081B012 /* ZipArchive.framework in CopyFiles */,
 			);
@@ -135,6 +140,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B142EB0A209D36F40047D6EA /* Epub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Epub.swift; sourceTree = "<group>"; };
 		B142EB0C209D36F40047D6EA /* UIUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtill.swift; sourceTree = "<group>"; };
 		B142EB0D209D36F40047D6EA /* FileUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtill.swift; sourceTree = "<group>"; };
@@ -146,6 +152,12 @@
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
 		B142EB1D209D65670047D6EA /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
 		B142EB1F209D69890047D6EA /* Verb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		B19942D120A1A153004CF61A /* DictTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictTest.swift; sourceTree = "<group>"; };
+		B19942D320A1AAFB004CF61A /* DictEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictEntry.swift; sourceTree = "<group>"; };
+		B19942D720A1AB1A004CF61A /* POS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POS.swift; sourceTree = "<group>"; };
+		B19942DC20A1B072004CF61A /* dict.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dict.db; sourceTree = "<group>"; };
+		B19942E120A1B9F5004CF61A /* IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPA.swift; sourceTree = "<group>"; };
+		B19942E520A1BCA4004CF61A /* Regex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Regex.framework; path = Carthage/Build/iOS/Regex.framework; sourceTree = "<group>"; };
 		C7362F08209BE1FE0081B012 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = FolioReaderKit/Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
 		C7362F09209BE1FE0081B012 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = FolioReaderKit/Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		C7362F0A209BE1FE0081B012 /* FontBlaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontBlaster.framework; path = FolioReaderKit/Carthage/Build/iOS/FontBlaster.framework; sourceTree = "<group>"; };
@@ -198,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7362F22209BE21B0081B012 /* SQLite.framework in Frameworks */,
-				C7362F20209BE20C0081B012 /* FolioReaderKit.framework in Frameworks */,
+				B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19942E020A1B9A1004CF61A /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +236,7 @@
 		702F24C22323D91C0487792D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B19942E520A1BCA4004CF61A /* Regex.framework */,
 				C7362F21209BE21B0081B012 /* SQLite.framework */,
 				C7362F0D209BE1FE0081B012 /* AEXML.framework */,
 				C7362F0A209BE1FE0081B012 /* FontBlaster.framework */,
@@ -245,6 +259,9 @@
 				B142EB17209D387E0047D6EA /* KnownWord.swift */,
 				B142EB19209D3FAC0047D6EA /* UserData.swift */,
 				B142EB1D209D65670047D6EA /* Wordbook.swift */,
+				B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */,
+				B19942D320A1AAFB004CF61A /* DictEntry.swift */,
+				B19942D720A1AB1A004CF61A /* POS.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -257,6 +274,7 @@
 				C739E63020969DA600046002 /* Helper.swift */,
 				C7A97411209A4F8C00A41D02 /* Ease.swift */,
 				B142EB1F209D69890047D6EA /* Verb.swift */,
+				B19942E120A1B9F5004CF61A /* IPA.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -325,7 +343,7 @@
 		C74CEFD6208C899F002765D6 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				C78217BB209BC1CF00C19E2F /* SampleEpub */,
+				C78217BB209BC1CF00C19E2F /* Resources */,
 				C782179B209BB34500C19E2F /* Common */,
 				C7C1E3262098058500C909D7 /* app.entitlements */,
 				C7C1E2FF2098016D00C909D7 /* Book */,
@@ -352,6 +370,7 @@
 		C78217AE209BB9A700C19E2F /* AppTest */ = {
 			isa = PBXGroup;
 			children = (
+				B19942D120A1A153004CF61A /* DictTest.swift */,
 				B142EB1B209D42670047D6EA /* UserDataTest.swift */,
 				C78217B7209BB9FD00C19E2F /* EpubTest.swift */,
 				C78217B1209BB9A700C19E2F /* Info.plist */,
@@ -359,12 +378,13 @@
 			path = AppTest;
 			sourceTree = "<group>";
 		};
-		C78217BB209BC1CF00C19E2F /* SampleEpub */ = {
+		C78217BB209BC1CF00C19E2F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				C78217BC209BC1F300C19E2F /* alice.epub */,
+				B19942DC20A1B072004CF61A /* dict.db */,
 			);
-			path = SampleEpub;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C7A9741A209AA29C00A41D02 /* UI */ = {
@@ -558,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74CEFE5208C89A1002765D6 /* LaunchScreen.storyboard in Resources */,
+				B19942DD20A1B072004CF61A /* dict.db in Resources */,
 				C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */,
 				C78217BD209BC1F300C19E2F /* alice.epub in Resources */,
 				C74CEFDD208C899F002765D6 /* Main.storyboard in Resources */,
@@ -589,15 +610,19 @@
 			files = (
 				C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */,
 				C7821798209BAD1400C19E2F /* Epub.swift in Sources */,
+				B19942E220A1B9F5004CF61A /* IPA.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				B142EB18209D387E0047D6EA /* KnownWord.swift in Sources */,
+				B19942D820A1AB1A004CF61A /* POS.swift in Sources */,
 				B142EB1A209D3FAC0047D6EA /* UserData.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				C782178E209BAAFB00C19E2F /* Ease.swift in Sources */,
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
+				B137AB7B209F43E2007AF6B9 /* WordbookEntry.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
 				B142EB16209D371B0047D6EA /* Dict.swift in Sources */,
 				B142EB1E209D65670047D6EA /* Wordbook.swift in Sources */,
+				B19942D420A1AAFB004CF61A /* DictEntry.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				B142EB20209D69890047D6EA /* Verb.swift in Sources */,
 				C782178F209BAAFB00C19E2F /* FileUtill.swift in Sources */,
@@ -612,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19942D220A1A153004CF61A /* DictTest.swift in Sources */,
 				B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */,
 				C78217B8209BB9FD00C19E2F /* EpubTest.swift in Sources */,
 			);
@@ -809,6 +835,7 @@
 				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FolioReaderKit/Carthage/Build/iOS",
@@ -816,6 +843,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -834,6 +862,7 @@
 				CODE_SIGN_ENTITLEMENTS = app/app.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FolioReaderKit/Carthage/Build/iOS",
@@ -841,6 +870,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -858,6 +888,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = AppTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -878,6 +912,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT3F53Y6WA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = AppTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -85,7 +85,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wordbook.words.count
+        return self.wordbook.entries.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,9 +95,9 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordsTableCell")!
         
-        let item = self.wordbook.words[indexPath.row]
-        cell.textLabel!.text = item.word
-        self.configureCellWithCorrect(cell, item)
+        let item = self.wordbook.entries[indexPath.row]
+//        cell.textLabel!.text = item.word
+//        self.configureCellWithCorrect(cell, item)
 
         return cell
     }

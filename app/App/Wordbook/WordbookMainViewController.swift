@@ -12,17 +12,6 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet var tableView: UITableView!
     
     var wordbooks: [Wordbook] = [
-        Wordbook(name: "asdf", words: [
-            Word(word:"hello", definition: "hoi", pronunciation: "hoi", correct: 10, sourceBook: "hoi", sourceSentence: "hoi", addedDate: Date(), seenDate: Date()),
-            Word(word:"hello2", definition: "hoi", pronunciation: "hoi", correct: -10, sourceBook: "hoi", sourceSentence: "hoi", addedDate: Date(), seenDate: Date())
-            ],
-                 addedDate: Date(), seenDate: Date(),
-                 new: true
-        ),
-        Wordbook(name: "asdf2", words: [],
-                 addedDate: Date(), seenDate: Date(),
-                 new: false
-                 )
     ]
     
     
@@ -47,13 +36,13 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         
         let item = self.wordbooks[indexPath.row]
         cell.textLabel!.text = item.name
-        cell.detailTextLabel!.text = String(item.words.count)
+        cell.detailTextLabel!.text = String(item.entries.count)
         
-        if item.new {
-            cell.badge.image = UIImage(named: "circle")
-        } else {
-            cell.badge.image = UIImage()
-        }
+//        if item.new {
+//            cell.badge.image = UIImage(named: "circle")
+//        } else {
+//            cell.badge.image = UIImage()
+//        }
         
         return cell
     }
