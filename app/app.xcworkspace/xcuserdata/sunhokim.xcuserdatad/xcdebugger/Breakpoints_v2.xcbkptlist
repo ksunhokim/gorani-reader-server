@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppTest/UserDataTest.swift"
-            timestampString = "547483338.811462"
+            timestampString = "547546152.9387209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "App/Common/Models/UserData.swift"
-            timestampString = "547185580.800204"
+            timestampString = "547546152.938768"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -42,13 +42,136 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppTest/DictTest.swift"
-            timestampString = "547499035.708748"
+            timestampString = "547546152.938815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "testSearchWithVariant()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppTest/UserDataTest.swift"
+            timestampString = "547546152.938848"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "UserDataTest"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.__deallocating_deinit"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.726614"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.__allocating_init(invocation: Swift.Optional&lt;__ObjC.NSInvocation&gt;) -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.728066"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.init(invocation: Swift.Optional&lt;__ObjC.NSInvocation&gt;) -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.7295589"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.__allocating_init(selector: ObjectiveC.Selector) -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.7309639"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.init(selector: ObjectiveC.Selector) -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.732332"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.__allocating_init() -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.733713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppTest.UserDataTest.init() -&gt; AppTest.UserDataTest"
+                  moduleName = "AppTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/common/dev/go/src/github.com/sunho/gorani-reader/app/AppTest/UserDataTest.swift"
+                  timestampString = "547544200.7350971"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

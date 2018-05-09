@@ -13,6 +13,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var books: [Epub]!
+    var dict: Dict!
     var folioReader = FolioReader()
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         let item = self.books[indexPath.row]
         let config = FolioReaderConfig()
-        config.tintColor = UIColor(rgba: "#007AFF")
+        config.tintColor = UIUtill.blue
         config.canChangeScrollDirection = false
         config.hideBars = false
         config.scrollDirection = .horizontal

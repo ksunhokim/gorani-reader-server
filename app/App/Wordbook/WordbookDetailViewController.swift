@@ -40,10 +40,10 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         self.tableView.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
         
-        roundView(self.memorizeButton)
-        roundView(self.flashcardButton)
-        roundView(self.speakButton)
-        roundView(self.sentenceButton)
+        UIUtill.roundView(self.memorizeButton)
+        UIUtill.roundView(self.flashcardButton)
+        UIUtill.roundView(self.speakButton)
+        UIUtill.roundView(self.sentenceButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {

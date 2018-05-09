@@ -25,3 +25,8 @@ func contentsOfDirectory(path: String) -> [String]? {
     guard let paths = try? fileManager.contentsOfDirectory(atPath: path) else { return nil}
     return paths.map { content in (path as NSString).appendingPathComponent(content)}
 }
+
+let dictURL: URL = {
+    let path = Bundle.main.path(forResource: "dict", ofType: "db")!
+    return URL(string: path)!
+}()

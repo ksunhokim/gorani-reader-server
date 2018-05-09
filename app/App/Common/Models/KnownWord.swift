@@ -28,7 +28,6 @@ class KnownWord {
         try connection.run(me.delete())
     }
 
-
     static func get(_ connection: Connection, word: String) -> KnownWord? {
         let query = table.where(wordField == word)
         do {

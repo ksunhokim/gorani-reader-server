@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1352AD320A2A423007E132C /* DictCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */; };
+		B1352AD720A2DDA1007E132C /* DictDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD620A2DDA1007E132C /* DictDefinition.swift */; };
+		B1352AD920A2DF36007E132C /* DictExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD820A2DF36007E132C /* DictExample.swift */; };
 		B137AB7B209F43E2007AF6B9 /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */; };
 		B142EB10209D36F40047D6EA /* Epub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0A209D36F40047D6EA /* Epub.swift */; };
 		B142EB11209D36F40047D6EA /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0C209D36F40047D6EA /* UIUtill.swift */; };
@@ -141,6 +144,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1352AD620A2DDA1007E132C /* DictDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictDefinition.swift; sourceTree = "<group>"; };
+		B1352AD820A2DF36007E132C /* DictExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictExample.swift; sourceTree = "<group>"; };
 		B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B142EB0A209D36F40047D6EA /* Epub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Epub.swift; sourceTree = "<group>"; };
 		B142EB0C209D36F40047D6EA /* UIUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtill.swift; sourceTree = "<group>"; };
@@ -254,11 +260,13 @@
 			children = (
 				C7A9741F209AA53A00A41D02 /* Epub.swift */,
 				B142EB15209D371B0047D6EA /* Dict.swift */,
+				B19942D320A1AAFB004CF61A /* DictEntry.swift */,
+				B1352AD620A2DDA1007E132C /* DictDefinition.swift */,
+				B1352AD820A2DF36007E132C /* DictExample.swift */,
 				B142EB17209D387E0047D6EA /* KnownWord.swift */,
 				B142EB19209D3FAC0047D6EA /* UserData.swift */,
 				B142EB1D209D65670047D6EA /* Wordbook.swift */,
 				B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */,
-				B19942D320A1AAFB004CF61A /* DictEntry.swift */,
 				B19942D720A1AB1A004CF61A /* POS.swift */,
 			);
 			path = Models;
@@ -411,6 +419,7 @@
 				C7C63E91209905900093CC02 /* BookMainViewController.swift */,
 				C78217C0209BCAA900C19E2F /* BooksTableCell.swift */,
 				B19942F220A21262004CF61A /* DictViewController.swift */,
+				B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -609,6 +618,8 @@
 			files = (
 				C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */,
 				C7821798209BAD1400C19E2F /* Epub.swift in Sources */,
+				B1352AD920A2DF36007E132C /* DictExample.swift in Sources */,
+				B1352AD320A2A423007E132C /* DictCollectionViewCell.swift in Sources */,
 				B19942E220A1B9F5004CF61A /* IPA.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				B142EB18209D387E0047D6EA /* KnownWord.swift in Sources */,
@@ -619,6 +630,7 @@
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				B137AB7B209F43E2007AF6B9 /* WordbookEntry.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
+				B1352AD720A2DDA1007E132C /* DictDefinition.swift in Sources */,
 				B142EB16209D371B0047D6EA /* Dict.swift in Sources */,
 				B142EB1E209D65670047D6EA /* Wordbook.swift in Sources */,
 				B19942D420A1AAFB004CF61A /* DictEntry.swift in Sources */,

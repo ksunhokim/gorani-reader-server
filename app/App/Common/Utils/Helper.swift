@@ -10,12 +10,6 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    public static var colorBlue: UIColor {
-        return UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
-    }
-}
-
-extension UIColor {
     convenience init(rgba: String) {
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
@@ -63,4 +57,5 @@ extension UIColor {
         }
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
+    
 }

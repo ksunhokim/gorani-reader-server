@@ -15,8 +15,7 @@ class DictTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let path = Bundle.main.path(forResource: "dict", ofType: "db")!
-        self.dict = Dict(connection: try! Connection(path))
+        self.dict = Dict.shared
     }
     
     override func tearDown() {

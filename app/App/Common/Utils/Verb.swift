@@ -26,19 +26,28 @@ enum VerbType {
             arr.append((base, .complete))
         }
 
-        if word.hasSuffix("ed") {
-            arr.append((trimString(word, 2), .both))
-        } else if word.hasSuffix("d") {
-            arr.append((trimString(word, 1), .both))
+        if word.hasSuffix("ied") {
+            arr.append((trimString(word, 3) + "y", .both))
+        } else if word.hasSuffix("ed") {
+            if  word.count >= 4 &&
+                word[word.index(word.endIndex, offsetBy: -3)]
+                == word[word.index(word.endIndex, offsetBy: -4)]{
+                arr.append((trimString(word, 3), .both))
+            } else {
+                arr.append((trimString(word, 2), .both))
+                arr.append((trimString(word, 1), .both))
+            }
         }
-        
+
         if word.hasSuffix("ing") {
             arr.append((trimString(word, 3), .present))
+            arr.append((trimString(word, 3) + "e", .present))
         }
         
         if word.hasSuffix("es") {
             arr.append((trimString(word, 2), .third))
-        } else if word.hasSuffix("s") {
+        }
+        if word.hasSuffix("s") {
             arr.append((trimString(word, 1), .third))
         }
 

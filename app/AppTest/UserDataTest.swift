@@ -20,17 +20,17 @@ class UserDataTest: XCTestCase {
     }
     
     func testKnownWord() {
-        let word = KnownWord.get(userData, word: "142sdf089hyxcsv")
+        let word = UserData.shared.getKnownWord(word: "142sdf089hyxcsv")
         XCTAssert(word == nil)
         
         let word2 = KnownWord(word: "hello")
-        try! word2.add(userData)
+        try! UserData.shared.addKnownWord(word: word2)
         
-        let word3 = KnownWord.get(userData, word: "hello")!
+        let word3 = UserData.shared.getKnownWord(word: "hello")!
         XCTAssert(word3.word == "hello")
         
-        try! word3.delete(userData)
-        let word4 = KnownWord.get(userData, word:"hello")
+        try! UserData.shared.deleteKnownWord(word: word3)
+        let word4 = UserData.shared.getKnownWord(word: "hello")
         XCTAssert(word4 == nil)
     }
 

@@ -38,8 +38,7 @@ class ShareViewController: UIViewController {
     }
 
     private func layout() {
-        self.okayButton.layer.cornerRadius = 10
-        self.okayButton.clipsToBounds = true
+        UIUtill.roundView(self.okayButton)
     }
     
     private func handleAttachment() {
