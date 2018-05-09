@@ -9,46 +9,72 @@
 import Foundation
 
 enum VerbType {
-    case third
     case present
     case past
     case complete
     case both
     
-    static func candidates(word: String) -> [(String, VerbType)]{
-        var arr: [(String, VerbType)] = []
+    
+    static fileprivate func appendPastExceptDuplicate(arr: inout [(String, VerbType?)], element: (String, VerbType?)) {
+        for ele in arr.indices {
+            if element.0 == arr[ele].0 {
+                arr[ele].1 = .both
+                return
+            }
+        }
+        arr.append(element)
+    }
+    
+    static func candidates(word: String) -> [(String, VerbType?)]{
+        let word = word.lowercased()
+        var arr: [(String, VerbType?)] = []
         
+        // these can be same
         if let base = irregularPasts[word] {
-            arr.append((base, .past))
+            appendPastExceptDuplicate(arr: &arr, element: (base, .past))
         }
-        
         if let base = irregularCompletes[word] {
-            arr.append((base, .complete))
+            appendPastExceptDuplicate(arr: &arr, element: (base, .complete))
         }
-
         if word.hasSuffix("ied") {
-            arr.append((trimString(word, 3) + "y", .both))
-        } else if word.hasSuffix("ed") {
+            // cry -> cried
+            appendPastExceptDuplicate(arr: &arr, element: (trimString(word, 3) + "y", .both))
+        }
+        if word.hasSuffix("ed") {
+            // swirl -> swirled
+            appendPastExceptDuplicate(arr: &arr, element: (trimString(word, 2), .both))
+            // produce -> produced
+            appendPastExceptDuplicate(arr: &arr, element: (trimString(word, 1), .both))
             if  word.count >= 4 &&
                 word[word.index(word.endIndex, offsetBy: -3)]
                 == word[word.index(word.endIndex, offsetBy: -4)]{
-                arr.append((trimString(word, 3), .both))
-            } else {
-                arr.append((trimString(word, 2), .both))
-                arr.append((trimString(word, 1), .both))
+                // stop -> stopped
+                appendPastExceptDuplicate(arr: &arr, element: (trimString(word, 3), .both))
             }
         }
 
+        // these are not
+        if word.hasSuffix("ying") {
+            // tie -> tying
+            arr.append((trimString(word, 4) + "ie", .present))
+        }
         if word.hasSuffix("ing") {
+            // go -> going
             arr.append((trimString(word, 3), .present))
-            arr.append((trimString(word, 3) + "e", .present))
+            if  word.count >= 5 &&
+                word[word.index(word.endIndex, offsetBy: -4)]
+                == word[word.index(word.endIndex, offsetBy: -5)]{
+                // get -> getting
+                arr.append((trimString(word, 4), .present))
+            }
         }
         
+        // these includes plural form as well
         if word.hasSuffix("es") {
-            arr.append((trimString(word, 2), .third))
+            arr.append((trimString(word, 2), nil))
         }
         if word.hasSuffix("s") {
-            arr.append((trimString(word, 1), .third))
+            arr.append((trimString(word, 1), nil))
         }
 
         return arr

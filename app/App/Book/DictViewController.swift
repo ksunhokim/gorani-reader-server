@@ -10,8 +10,8 @@ import UIKit
 
 fileprivate let MAXCHAR = 120
 
-class DictViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var collectionView : UICollectionView!
+class DictViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var tableView: UITableView!
     var sentenceLabel: UILabel!
     var cancelButton: UIButton!
     
@@ -62,31 +62,23 @@ class DictViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.sentenceLabel.numberOfLines = 0
         self.view.addSubview(self.sentenceLabel)
         
-        let line = UIView(frame: CGRect(x: 0, y: self.sentenceLabel.frame.height + self.sentenceLabel.frame.origin.y + 20, width: view.frame.width, height: 0.5))
-        line.backgroundColor = UIUtill.gray
+        let line = UIView(frame: CGRect(x: 0, y: self.sentenceLabel.frame.height + self.sentenceLabel.frame.origin.y + 20, width: view.frame.width, height: 0.7))
+        line.backgroundColor = UIUtill.gray1
         self.view.addSubview(line)
+
+        self.tableView = UITableView(frame: CGRect(x: 0, y: line.frame.origin.y + 0.7 , width: view.frame.width, height: view.frame.height - 200))
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.backgroundColor = UIUtill.lightGray1
+        self.tableView.separatorStyle = .none
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 100;
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.register(UINib(nibName: "DictViewTableCell", bundle: nil), forCellReuseIdentifier: "DictViewTableCell")
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        self.view.addSubview(self.tableView)
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
-        layout.itemSize = CGSize(width: view.frame.width - 28, height: view.frame.height - 220)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 28
-        layout.scrollDirection = .horizontal
-        
-        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: line.frame.origin.y + 0.5 , width: view.frame.width, height: view.frame.height - 190), collectionViewLayout: layout)
-        self.collectionView.backgroundColor = UIColor.clear
-        self.collectionView.register(DictCollectionViewCell.self, forCellWithReuseIdentifier: "DictCollectionViewCell")
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.isPagingEnabled = true;
-        self.collectionView.showsHorizontalScrollIndicator = false
-        self.collectionView.backgroundColor = UIUtill.lightGray0
-        self.view.addSubview(self.collectionView)
-        
-        let back = UIView(frame: CGRect(x: 0, y: self.collectionView.frame.height + self.collectionView.frame.origin.y, width: view.frame.width, height: view.frame.height))
-        back.backgroundColor = UIUtill.lightGray0
-        self.view.addSubview(back)
-        
+
         self.cancelButton = UIButton(frame: CGRect(x: 14, y: view.frame.height - 70, width: view.frame.width - 28, height: 50))
         self.cancelButton.backgroundColor = UIUtill.blue
         self.cancelButton.setTitleColor(UIUtill.white, for: .normal)
@@ -96,21 +88,58 @@ class DictViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.view.addSubview(self.cancelButton)
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.entries.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width - 40, height: self.collectionView.frame.height - 40)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.entries[section].defs.count
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DictCollectionViewCell", for: indexPath) as! DictCollectionViewCell
-        let entry = self.entries[indexPath.row]
-        cell.displayContent(entry: entry)
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 8, y: 0, width: self.tableView.bounds.width - 16, height: 50))
+        view.backgroundColor = UIUtill.lightGray0
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.frame.origin.x = 28
+        label.textColor = UIColor.black
+        let entry = self.entries[section]
+        label.text = entry.word
+        label.sizeToFit()
+        label.frame = CGRect(origin: label.frame.origin, size: CGSize(width: label.frame.width, height: 50))
+        view.addSubview(label)
+        
+        let pronButton = UIButton()
+        pronButton.setTitle(entry.pron, for: .normal)
+        pronButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        pronButton.backgroundColor = UIUtill.blue
+        pronButton.setTitleColor(UIUtill.white, for: .normal)
+        pronButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        pronButton.titleLabel?.baselineAdjustment = .alignCenters
+        pronButton.contentVerticalAlignment = .center
+        pronButton.titleLabel?.sizeToFit()
+        pronButton.sizeToFit()
+        pronButton.frame = CGRect(x: pronButton.frame.origin.x + pronButton.frame.width + 20, y: 5, width: pronButton.frame.width, height: 40)
+        view.addSubview(pronButton)
+        return view
+    }
+    
+    fileprivate func getDictEntryColor(entry: DictEntry) -> UIColor {
+        if entry is DictEntryRedirect {
+            return UIUtill.green
+        }
+        return UIUtill.lightGray0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "DictViewTableCell", for: indexPath) as! DictViewTableCell
+        let entry = self.entries[indexPath.section].defs[indexPath.row]
+        cell.backgroundColor = UIColor.clear
+        cell.label.text = entry.def
         return cell
     }
 

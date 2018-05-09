@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1352AD320A2A423007E132C /* DictCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */; };
 		B1352AD720A2DDA1007E132C /* DictDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD620A2DDA1007E132C /* DictDefinition.swift */; };
 		B1352AD920A2DF36007E132C /* DictExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352AD820A2DF36007E132C /* DictExample.swift */; };
+		B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1352ADD20A341DC007E132C /* DictViewTableCell.xib */; };
+		B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352ADF20A34204007E132C /* DictViewTableCell.swift */; };
 		B137AB7B209F43E2007AF6B9 /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */; };
 		B142EB10209D36F40047D6EA /* Epub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0A209D36F40047D6EA /* Epub.swift */; };
 		B142EB11209D36F40047D6EA /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB0C209D36F40047D6EA /* UIUtill.swift */; };
@@ -144,9 +145,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1352AD620A2DDA1007E132C /* DictDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictDefinition.swift; sourceTree = "<group>"; };
 		B1352AD820A2DF36007E132C /* DictExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictExample.swift; sourceTree = "<group>"; };
+		B1352ADD20A341DC007E132C /* DictViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DictViewTableCell.xib; sourceTree = "<group>"; };
+		B1352ADF20A34204007E132C /* DictViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewTableCell.swift; sourceTree = "<group>"; };
 		B137AB7A209F43E2007AF6B9 /* WordbookEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B142EB0A209D36F40047D6EA /* Epub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Epub.swift; sourceTree = "<group>"; };
 		B142EB0C209D36F40047D6EA /* UIUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtill.swift; sourceTree = "<group>"; };
@@ -419,7 +421,8 @@
 				C7C63E91209905900093CC02 /* BookMainViewController.swift */,
 				C78217C0209BCAA900C19E2F /* BooksTableCell.swift */,
 				B19942F220A21262004CF61A /* DictViewController.swift */,
-				B1352AD220A2A423007E132C /* DictCollectionViewCell.swift */,
+				B1352ADD20A341DC007E132C /* DictViewTableCell.xib */,
+				B1352ADF20A34204007E132C /* DictViewTableCell.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74CEFE5208C89A1002765D6 /* LaunchScreen.storyboard in Resources */,
+				B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */,
 				B19942DD20A1B072004CF61A /* dict.db in Resources */,
 				C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */,
 				C78217BD209BC1F300C19E2F /* alice.epub in Resources */,
@@ -619,7 +623,7 @@
 				C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */,
 				C7821798209BAD1400C19E2F /* Epub.swift in Sources */,
 				B1352AD920A2DF36007E132C /* DictExample.swift in Sources */,
-				B1352AD320A2A423007E132C /* DictCollectionViewCell.swift in Sources */,
+				B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */,
 				B19942E220A1B9F5004CF61A /* IPA.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				B142EB18209D387E0047D6EA /* KnownWord.swift in Sources */,

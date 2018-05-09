@@ -10,12 +10,19 @@ import Foundation
 import UIKit
 
 class UIUtill {
+    class var green: UIColor {
+        return UIColor(rgba: "#4CD964")
+    }
     class var black: UIColor {
         return UIColor.black
     }
     
     class var white: UIColor {
         return UIColor.white
+    }
+    
+    class var gray1: UIColor {
+        return UIColor(rgba: "#858787")
     }
     
     class var gray: UIColor {
