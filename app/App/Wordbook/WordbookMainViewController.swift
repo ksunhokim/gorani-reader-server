@@ -32,7 +32,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordbooksTableCell") as! WordbooksTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kWordbooksTableCell) as! WordbooksTableCell
         
         let item = self.wordbooks[indexPath.row]
         cell.textLabel!.text = item.name

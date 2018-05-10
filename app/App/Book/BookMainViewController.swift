@@ -9,12 +9,14 @@
 import UIKit
 import FolioReaderKit
 
-class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate {
+fileprivate let MinActulReadRate = 0.7
+class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate, FolioReaderCenterDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var books: [Epub]!
     var dict: Dict!
     var folioReader = FolioReader()
+    var currentHTML: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,25 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         print(bookName, page, scroll, sentence, word, index)
     }
     
+    fileprivate func calculateKnownWords() {
+        if let html = self.currentHTML {
+            if self.folioReader.readerCenter!.actualReadRate > MinActulReadRate {
+                
+            }
+        }
+    }
+
+    func folioReaderDidClose(_ folioReader: FolioReader) {
+        self.calculateKnownWords()
+        self.currentHTML = nil
+    }
+    
+    func htmlContentForPage(_ page: FolioReaderPage, htmlContent: String) -> String {
+        self.calculateKnownWords()
+        self.currentHTML = htmlContent
+        return htmlContent
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.books.count
     }
@@ -45,6 +66,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         config.hideBars = false
         config.scrollDirection = .horizontal
         self.folioReader.presentReader(parentViewController: self, book: item.book!, config: config)
+        self.folioReader.readerCenter!.delegate = self
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

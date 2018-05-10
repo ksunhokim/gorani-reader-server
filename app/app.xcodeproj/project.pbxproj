@@ -23,6 +23,7 @@
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
 		B142EB1E209D65670047D6EA /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1D209D65670047D6EA /* Wordbook.swift */; };
 		B142EB20209D69890047D6EA /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1F209D69890047D6EA /* Verb.swift */; };
+		B143AF7F20A415D9003341A3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF7E20A415D9003341A3 /* Keys.swift */; };
 		B19942D220A1A153004CF61A /* DictTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D120A1A153004CF61A /* DictTest.swift */; };
 		B19942D420A1AAFB004CF61A /* DictEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D320A1AAFB004CF61A /* DictEntry.swift */; };
 		B19942D820A1AB1A004CF61A /* POS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D720A1AB1A004CF61A /* POS.swift */; };
@@ -161,6 +162,7 @@
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
 		B142EB1D209D65670047D6EA /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
 		B142EB1F209D69890047D6EA /* Verb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		B143AF7E20A415D9003341A3 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		B19942D120A1A153004CF61A /* DictTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictTest.swift; sourceTree = "<group>"; };
 		B19942D320A1AAFB004CF61A /* DictEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictEntry.swift; sourceTree = "<group>"; };
 		B19942D720A1AB1A004CF61A /* POS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POS.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		B142EB04209D34A30047D6EA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B143AF7E20A415D9003341A3 /* Keys.swift */,
 				C7905B462095759C00CE3D17 /* UIUtill.swift */,
 				C7A9741D209AA33300A41D02 /* FileUtill.swift */,
 				C739E63020969DA600046002 /* Helper.swift */,
@@ -627,6 +630,7 @@
 				B19942E220A1B9F5004CF61A /* IPA.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				B142EB18209D387E0047D6EA /* KnownWord.swift in Sources */,
+				B143AF7F20A415D9003341A3 /* Keys.swift in Sources */,
 				B19942D820A1AB1A004CF61A /* POS.swift in Sources */,
 				B142EB1A209D3FAC0047D6EA /* UserData.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,

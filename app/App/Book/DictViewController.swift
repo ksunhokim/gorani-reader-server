@@ -74,7 +74,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 100;
         self.tableView.showsVerticalScrollIndicator = false
-        self.tableView.register(UINib(nibName: "DictViewTableCell", bundle: nil), forCellReuseIdentifier: "DictViewTableCell")
+        self.tableView.register(UINib(nibName: kDictViewTableCell, bundle: nil), forCellReuseIdentifier: kDictViewTableCell)
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         self.view.addSubview(self.tableView)
         
@@ -97,15 +97,21 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 58
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 8, y: 0, width: self.tableView.bounds.width - 16, height: 50))
+        let back2 = UIView()
+        let back = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 40))
+        back.backgroundColor = UIUtill.lightGray1
+        back2.addSubview(back)
+        let view = UIView(frame: CGRect(x: 4, y: 8, width: self.tableView.bounds.width - 8, height: 50))
         view.backgroundColor = UIUtill.lightGray0
+        UIUtill.roundView(view)
+        back.addSubview(view)
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.frame.origin.x = 28
+        label.frame.origin.x = 14
         label.textColor = UIColor.black
         let entry = self.entries[section]
         label.text = entry.word
@@ -113,19 +119,20 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         label.frame = CGRect(origin: label.frame.origin, size: CGSize(width: label.frame.width, height: 50))
         view.addSubview(label)
         
-        let pronButton = UIButton()
-        pronButton.setTitle(entry.pron, for: .normal)
-        pronButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        pronButton.backgroundColor = UIUtill.blue
-        pronButton.setTitleColor(UIUtill.white, for: .normal)
-        pronButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-        pronButton.titleLabel?.baselineAdjustment = .alignCenters
-        pronButton.contentVerticalAlignment = .center
-        pronButton.titleLabel?.sizeToFit()
-        pronButton.sizeToFit()
-        pronButton.frame = CGRect(x: pronButton.frame.origin.x + pronButton.frame.width + 20, y: 5, width: pronButton.frame.width, height: 40)
-        view.addSubview(pronButton)
-        return view
+        let typeButton = UIButton()
+        typeButton.setTitle(entry.pron.ipa, for: .normal)
+        typeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        typeButton.backgroundColor = UIUtill.green
+        typeButton.setTitleColor(UIUtill.white, for: .normal)
+        typeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        typeButton.titleLabel?.baselineAdjustment = .alignCenters
+        typeButton.contentVerticalAlignment = .center
+        typeButton.titleLabel?.sizeToFit()
+        typeButton.sizeToFit()
+        typeButton.frame = CGRect(x: view.frame.width -  typeButton.frame.width - 5, y: 5, width: typeButton.frame.width, height: 40)
+        UIUtill.roundView(typeButton)
+        view.addSubview(typeButton)
+        return back2
     }
     
     fileprivate func getDictEntryColor(entry: DictEntry) -> UIColor {
@@ -136,7 +143,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "DictViewTableCell", for: indexPath) as! DictViewTableCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: kDictViewTableCell, for: indexPath) as! DictViewTableCell
         let entry = self.entries[indexPath.section].defs[indexPath.row]
         cell.backgroundColor = UIColor.clear
         cell.label.text = entry.def

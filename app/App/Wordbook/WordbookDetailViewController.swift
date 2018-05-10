@@ -93,7 +93,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordsTableCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: kWordsTableCell)!
         
         let item = self.wordbook.entries[indexPath.row]
 //        cell.textLabel!.text = item.word

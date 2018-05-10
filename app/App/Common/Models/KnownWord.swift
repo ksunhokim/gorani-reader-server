@@ -18,16 +18,27 @@ class KnownWord {
     init(word: String) {
         self.word = word
     }
+    
 
     func add(_ connection: Connection) throws {
-        try connection.run(table.insert( wordField <- self.word ))
+        do {
+            try connection.run(table.insert( wordField <- self.word ))
+        } catch let Result.error(_, code, _) where code == SQLITE_CONSTRAINT {
+        }
     }
     
     func delete(_ connection: Connection) throws {
         let me = table.where(wordField == self.word)
         try connection.run(me.delete())
     }
+    
+    fileprivate getWordsFromHTML(html: String) -> [String] {
+        
+    }
 
+    static func add(_ connection: Connection, html: String) throws {
+    }
+    
     static func get(_ connection: Connection, word: String) -> KnownWord? {
         let query = table.where(wordField == word)
         do {
