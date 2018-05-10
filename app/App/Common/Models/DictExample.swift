@@ -23,14 +23,16 @@ class DictExample {
         self.second = second
     }
 
-    static func fetch(_ connection: Connection, def: DictDefinition) {
+    class func fetch(_ connection: Connection, def: DictDefinition) {
         let query = examplesTable.where(defIdField == def.id)
-        if let results = try? connection.prepare(query) {
-            for result in results {
-                do {
-                    def.examples.append(DictExample(first: try result.get(firstField), second: try result.get(secondField)))
-                } catch {}
-            }
+        guard let results = try? connection.prepare(query) else {
+            return
+        }
+        
+        for result in results {
+            do {
+                def.examples.append(DictExample(first: try result.get(firstField), second: try result.get(secondField)))
+            } catch {}
         }
     }
 }

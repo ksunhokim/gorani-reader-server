@@ -17,17 +17,17 @@ class ManagedEpubURL {
     }
 
     init(epub: URL) {
-        self.contentURL = booksDir.appendingPathComponent(epub.lastPathComponent)
+        self.contentURL = FileUtill.booksDir.appendingPathComponent(epub.lastPathComponent)
     }
     
     func isNew() -> Bool {
-        return !fileManager.fileExists(atPath: self.contentURL.path)
+        return !FileManager.default.fileExists(atPath: self.contentURL.path)
     }
     
     deinit {
         if !self.keep {
             DispatchQueue.global(qos: .utility).async { [contentURL = self.contentURL] in
-                try? fileManager.removeItem(at: contentURL)
+                try? FileManager.default.removeItem(at: contentURL)
             }
         }
     }

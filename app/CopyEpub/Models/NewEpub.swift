@@ -22,31 +22,34 @@ class NewEpub: Epub {
         self.tempURL = tempURL
         
         super.init()
-        self.book = try FREpubParser().readEpub(epubPath: epub.path, removeEpub: false, unzipPath: booksDir.path)
+        self.book = try FREpubParser().readEpub(epubPath: epub.path, removeEpub: false, unzipPath: FileUtill.booksDir.path)
         try self.parse()
     }
     
-    func calculateKnownWordRate() -> Int {
+
+    func calculateKnownWordRate() -> Double {
         var counts = 0
-        var wordSet = Set<String>()
-        if let resources = self.book?.resources.resources {
-            for (_, resource) in resources{
-                if resource.mediaType == .xhtml {
-                    if let html = try? String(contentsOfFile: resource.fullHref) {
-                        let words = KnownWord.getWordsFromHTML(html: html)
-                        for word in words {
-                                wordSet.insert(word)
-                        }
-                    }
+        var set = Set<String>()
+
+        guard let resources = self.book?.resources.resources else {
+            return 1
+        }
+            
+        for (_, resource) in resources {
+            if resource.mediaType == .xhtml {
+                if let html = try? String(contentsOfFile: resource.fullHref) {
+                    KnownWord.getWordsFromHTML(set: &set, html: html)
                 }
             }
         }
-        for word in wordSet {
+
+        for word in set {
             if UserData.shared.getKnownWord(word: word) != nil {
                 counts += 1
             }
         }
-        return counts
+        
+        return Double(counts) / Double(set.count)
     }
 
 }

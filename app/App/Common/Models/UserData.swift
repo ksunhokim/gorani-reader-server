@@ -14,7 +14,7 @@ fileprivate var userData_: Connection? = nil
 
 var userData: Connection {
     if userData_ == nil {
-        userData_ = try! Connection(userDataURL.path)
+        userData_ = try! Connection(FileUtill.userDataURL.path)
         try! KnownWord.prepare(userData_!)
     }
     
@@ -24,7 +24,7 @@ var userData: Connection {
 class UserData {
     var connection: Connection
     
-    static let shared = try! UserData(url: userDataURL)
+    static let shared = try! UserData(url: FileUtill.userDataURL)
     
     private init(url: URL) throws {
         self.connection = try! Connection(url.path)

@@ -38,12 +38,12 @@ class ShareViewController: UIViewController {
         self.handleAttachment()
     }
 
-    private func layout() {
+    fileprivate func layout() {
         UIUtill.roundView(self.okayButton)
         UIUtill.roundView(self.difficultyLabel)
     }
     
-    private func handleAttachment() {
+    fileprivate func handleAttachment() {
         let content = self.extensionContext!.inputItems[0] as! NSExtensionItem
         let attachment = content.attachments!.first as! NSItemProvider
         
@@ -64,7 +64,7 @@ class ShareViewController: UIViewController {
         }
         do {
             let epub = try NewEpub(epub: url)
-            let rate = epub.calculateKnownWordRate()
+            let difficulty = 1 - epub.calculateKnownWordRate()
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()
                 self.bookURL = epub.tempURL
@@ -72,7 +72,7 @@ class ShareViewController: UIViewController {
                 self.titleLabel.text = epub.title
                 self.dialogLabel.text =  NSLocalizedString("CopyEpubConfirmDialog", comment: "")
                 self.okayButton.isHidden = false
-                self.difficultyLabel.text = "\(rate)"
+                self.difficultyLabel.text = self.getDifficultyString(difficulty)
             }
         } catch let err as ShareError {
             DispatchQueue.main.async {
@@ -88,6 +88,13 @@ class ShareViewController: UIViewController {
         
     }
 
+    fileprivate func getDifficultyString(_ difficulty: Double) -> String {
+        if difficulty > 0.5 {
+            return "이 책은 읽기 상당히 어렵습니다"
+        } else {
+            return "이 책은 읽기 쉽습니다"
+        }
+    }
    
     @IBAction func okButtonTouch(_ sender: Any) {
         self.bookURL.keep = true
@@ -98,8 +105,14 @@ class ShareViewController: UIViewController {
         self.dismiss(success: false)
     }
 
-    private func handleError(_ e: ShareError) {
-        dismiss(success: false)
+    fileprivate func handleError(_ e: ShareError) {
+        switch e {
+        case .notNew:
+            self.dialogLabel.text = "이미 있는 책입니다"
+            self.bookView.isHidden = true
+        default:
+            self.dialogLabel.text = "AsdASd"
+        }
     }
     
     func dismiss(success: Bool) {
@@ -112,7 +125,7 @@ class ShareViewController: UIViewController {
         })
     }
     
-    private func hideExtensionWithCompletionHandler(completion: @escaping (Bool) -> Void) {
+    fileprivate func hideExtensionWithCompletionHandler(completion: @escaping (Bool) -> Void) {
         Ease.begin(.quintOut)
         let transform = CGAffineTransform(translationX:0, y: self.view.frame.size.height)
         UIView.animate(

@@ -35,7 +35,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.layout()
     }
     
-    private func layout() {
+    fileprivate func layout() {
         self.headerY = self.headerView.frame.minY
         
         self.tableView.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
@@ -102,7 +102,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
         return cell
     }
     
-    private func configureCellWithCorrect(_ cell: UITableViewCell, _ item: Word) {
+    fileprivate func configureCellWithCorrect(_ cell: UITableViewCell, _ item: Word) {
         let correct = item.correct
         if correct > 0 {
             cell.detailTextLabel!.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255)

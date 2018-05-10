@@ -40,7 +40,7 @@ class Epub {
     }
     
     static func getLocalBooks() -> [Epub] {
-        guard let paths = contentsOfDirectory(path: booksDir.path) else {
+        guard let paths = FileUtill.contentsOfDirectory(path: FileUtill.booksDir.path) else {
             assert(true)
             return []
         }

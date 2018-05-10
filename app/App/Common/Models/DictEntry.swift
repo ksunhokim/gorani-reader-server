@@ -26,7 +26,7 @@ class DictEntry {
         self.pron = pron.unstressed
     }
     
-    static func get(_ connection: Connection, word wordstr: String, pos: POS?, policy: Dict.EntrySortPolicy?) -> DictEntry? {
+    class func get(_ connection: Connection, word wordstr: String, pos: POS?, policy: Dict.EntrySortPolicy?) -> DictEntry? {
         let query = wordsTable.where(wordField.collate(.nocase) == wordstr)
         
         do {
@@ -40,7 +40,7 @@ class DictEntry {
         return nil
     }
     
-    static func search(_ connection: Connection, word: String, pos: POS?, type: VerbType?, policy: Dict.EntrySortPolicy?) -> [DictEntry] {
+    class func search(_ connection: Connection, word: String, pos: POS?, type: VerbType?, policy: Dict.EntrySortPolicy?) -> [DictEntry] {
         if word == "" {
             return []
         }

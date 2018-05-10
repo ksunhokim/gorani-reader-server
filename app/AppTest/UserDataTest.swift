@@ -57,7 +57,7 @@ class UserDataTest: XCTestCase {
         let html = """
             <html>
                 <body>
-                    <p>helloo, <chunk>from.</chunk> !the other-side.</p>
+                    <p>helloo, <chunk>from.</chunk> !the other-side.</p><p>...</p>
                 </body>
             </html>
         """
