@@ -1,11 +1,3 @@
-//
-//  testDict.swift
-//  AppTest
-//
-//  Created by Sunho Kim on 08/05/2018.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 import XCTest
 @testable import app
 import SQLite

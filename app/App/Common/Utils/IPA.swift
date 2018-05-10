@@ -1,13 +1,4 @@
-//
-//  IPA.swift
-//  app
-//
-//  Created by Sunho Kim on 08/05/2018.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 // https://en.wikipedia.org/wiki/ARPABET
-
 import Foundation
 import Regex
 

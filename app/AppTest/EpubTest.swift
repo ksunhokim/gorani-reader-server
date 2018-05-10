@@ -1,11 +1,3 @@
-//
-//  EpubTest.swift
-//  AppTest
-//
-//  Created by sunho on 2018/05/04.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 import XCTest
 @testable import app
 import FolioReaderKit

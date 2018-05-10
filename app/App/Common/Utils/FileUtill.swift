@@ -1,13 +1,4 @@
-//
-//  File.swift
-//  App
-//
-//  Created by sunho on 2018/05/03.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 import Foundation
-
 
 fileprivate let fileManager = FileManager.default
 

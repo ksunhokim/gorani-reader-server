@@ -1,11 +1,3 @@
-//
-//  EntryViewController.swift
-//  copyEpub
-//
-//  Created by sunho on 2018/05/02.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 import UIKit
 import FolioReaderKit
 

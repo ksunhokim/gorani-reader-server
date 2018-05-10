@@ -1,11 +1,3 @@
-//
-//  ShareViewController.swift
-//  copyEpub
-//
-//  Created by sunho on 2018/05/01.
-//  Copyright © 2018 sunho. All rights reserved.
-//
-
 import UIKit
 import Social
 import MobileCoreServices

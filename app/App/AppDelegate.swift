@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  app
-//
-//  Created by sunho on 2018. 4. 22..
-//  Copyright © 2018년 sunho. All rights reserved.
-//
 
 import UIKit
 import CoreData

@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "testKnownWord()"
-            landmarkType = "7">
+            landmarkName = "UserDataTest"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12"
             endingLineNumber = "12"
-            landmarkName = "UserDataTest"
-            landmarkType = "3">
+            landmarkName = "tearDown()"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
