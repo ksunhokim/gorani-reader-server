@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate let MAXCHAR = 120
+fileprivate let MaxChar = 120
 
 class DictViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
@@ -49,7 +49,6 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
 
         let (front, middle, end) = self.getFrontMiddleEnd()
-        
         let frontString = NSMutableAttributedString(string: front)
         let middleString = NSMutableAttributedString(string: middle, attributes:attrs)
         let endString = NSMutableAttributedString(string: end)
@@ -76,7 +75,6 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.register(UINib(nibName: kDictViewTableCell, bundle: nil), forCellReuseIdentifier: kDictViewTableCell)
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         self.view.addSubview(self.tableView)
-        
 
         self.cancelButton = UIButton(frame: CGRect(x: 14, y: view.frame.height - 70, width: view.frame.width - 28, height: 50))
         self.cancelButton.backgroundColor = UIUtill.blue
@@ -100,19 +98,23 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let back2 = UIView()
+        let entry = self.entries[section]
+        
+        let whole = UIView()
+        
         let back = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 40))
         back.backgroundColor = UIUtill.lightGray1
-        back2.addSubview(back)
+        whole.addSubview(back)
+        
         let view = UIView(frame: CGRect(x: 4, y: 8, width: self.tableView.bounds.width - 8, height: 50))
         view.backgroundColor = UIUtill.lightGray0
         UIUtill.roundView(view)
         back.addSubview(view)
+        
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.frame.origin.x = 14
         label.textColor = UIUtill.gray2
-        let entry = self.entries[section]
         label.text = entry.word
         label.sizeToFit()
         label.frame = CGRect(origin: label.frame.origin, size: CGSize(width: label.frame.width, height: 50))
@@ -131,7 +133,8 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         typeButton.frame = CGRect(x: view.frame.width -  typeButton.frame.width - 5, y: 5, width: typeButton.frame.width, height: 40)
         UIUtill.roundView(typeButton)
         view.addSubview(typeButton)
-        return back2
+        
+        return whole
     }
     
     fileprivate func getDictEntryColor(entry: DictEntry) -> UIColor {
@@ -142,35 +145,41 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: kDictViewTableCell, for: indexPath) as! DictViewTableCell
         let entry = self.entries[indexPath.section].defs[indexPath.row]
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: kDictViewTableCell, for: indexPath) as! DictViewTableCell
         cell.backgroundColor = UIColor.clear
         cell.label.text = entry.def
+        
         return cell
     }
 
     fileprivate func getFrontMiddleEnd() -> (String, String, String) {
         let arr = self.sentence.components(separatedBy: " ")
+        
         var front = ""
         var end = ""
+        
         if arr.count > index {
             let frontarr = arr[...(index - 1)]
             front = frontarr.joined(separator: " ")
+            
             let endarr = arr[(index + 1)...]
             end = endarr.joined(separator: " ")
         }
         
-        let candidate1 = min(front.count, MAXCHAR / 2)
-        let candidate2 = min(end.count, MAXCHAR / 2)
+        // trim
         var frontLength = 0
+        let candidate1 = min(front.count, MaxChar / 2)
+        let candidate2 = min(end.count, MaxChar / 2)
         if candidate1 < candidate2 {
             frontLength = candidate1
         } else {
-            frontLength = MAXCHAR - candidate2
+            frontLength = MaxChar - candidate2
         }
         
         front = String(front.suffix(frontLength))
-        end = String(end.prefix(MAXCHAR - frontLength))
+        end = String(end.prefix(MaxChar - frontLength))
         return (front, " \(arr[index]) ", end)
     }
 }

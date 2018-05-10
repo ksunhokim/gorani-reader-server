@@ -32,6 +32,7 @@ class DictEntry {
         do {
             if let entry = try connection.pluck(query) {
                 let entry = DictEntry(id: try entry.get(idField), word: try entry.get(wordField), pron: try entry.get(pronField) ?? "")
+                
                 DictDefinition.fetch(connection, entry: entry, pos: pos, policy: policy)
                 return entry
             }
@@ -46,10 +47,12 @@ class DictEntry {
         }
         
         var entries: [DictEntry] = []
+        
         let candidates = VerbType.candidates(word: word)
         for candidate in candidates {
             if let entry = DictEntry.get(connection, word: candidate.0, pos: pos, policy: policy) {
                 let entry = DictEntryRedirect(entry: entry, type: candidate.1)
+                
                 if candidate.1 == type {
                     entries.insert(entry, at: 0)
                 } else {
@@ -57,6 +60,7 @@ class DictEntry {
                 }
             }
         }
+
         if let entry = DictEntry.get(connection, word: word, pos: pos, policy: policy) {
             entries.append(entry)
         }

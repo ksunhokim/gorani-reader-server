@@ -10,6 +10,7 @@ import UIKit
 import FolioReaderKit
 
 fileprivate let MinActulReadRate = 0.7
+
 class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate, FolioReaderCenterDelegate {
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,10 +34,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self,
-                                               selector:#selector(applicationWillEnterForeground(_:)),
-                                               name:NSNotification.Name.UIApplicationWillEnterForeground,
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(applicationWillEnterForeground(_:)), name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,11 +49,13 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     fileprivate func calculateKnownWords() {
-        if let html = self.currentHTML {
-            if self.folioReader.readerCenter!.actualReadRate > MinActulReadRate {
-                DispatchQueue.global(qos: .default).async {
-                    try? UserData.shared.addKnownWords(html: html)
-                }
+        guard let html = self.currentHTML else {
+            return
+        }
+        
+        if self.folioReader.readerCenter!.actualReadRate > MinActulReadRate {
+            DispatchQueue.global(qos: .default).async {
+                try? UserData.shared.addKnownWords(html: html)
             }
         }
     }
@@ -75,15 +75,18 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let item = self.books[indexPath.row]
+        let book = self.books[indexPath.row]
+        
         let config = FolioReaderConfig()
         config.tintColor = UIUtill.blue
         config.canChangeScrollDirection = false
         config.hideBars = false
         config.scrollDirection = .horizontal
-        self.folioReader.presentReader(parentViewController: self, book: item.book!, config: config)
+        
+        self.folioReader.presentReader(parentViewController: self, book: book.book!, config: config)
         self.folioReader.readerCenter!.delegate = self
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

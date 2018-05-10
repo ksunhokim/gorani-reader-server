@@ -13,6 +13,7 @@ fileprivate let fileManager = FileManager.default
 
 class FileUtill {
     static let sharedDir: URL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.sunho.app")!
+    
     static let booksDir: URL = {
         let url = sharedDir.appendingPathComponent("books")
         if !fileManager.fileExists(atPath: url.path) {
@@ -20,6 +21,7 @@ class FileUtill {
         }
         return url
     }()
+    
     static let userDataURL: URL = sharedDir.appendingPathComponent("userData.db")
 
     class func contentsOfDirectory(path: String) -> [String]? {

@@ -36,6 +36,7 @@ class Epub {
         guard let title = self.book!.title else {
             throw EpubError.notProper
         }
+        
         self.title = title
     }
     
@@ -44,8 +45,8 @@ class Epub {
             assert(true)
             return []
         }
-        var books = [Epub]()
         
+        var books = [Epub]()
         for path in paths{
             if let book = try? Epub(path: path) {
                 books.append(book)
@@ -53,6 +54,7 @@ class Epub {
                 assert(true)
             }
         }
+        
         return books
     }
     

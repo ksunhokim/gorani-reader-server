@@ -17,11 +17,4 @@ class DictViewTableCell: UITableViewCell {
         self.label.numberOfLines = 0
         UIUtill.roundView(self.backView)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

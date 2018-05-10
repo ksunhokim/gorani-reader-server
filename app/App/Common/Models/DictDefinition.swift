@@ -30,25 +30,31 @@ class DictDefinition {
     class func fetch(_ connection: Connection, entry: DictEntry, pos pos2: POS?, policy: Dict.EntrySortPolicy?) {
         let query = defsTable.where(wordIdField == entry.id)
             .order(posField, idField)
-        
-        var defs: [DictDefinition] = []
         guard let results = try? connection.prepare(query) else {
             return
         }
+        
+        var defs: [DictDefinition] = []
+        
         for result in results {
             do {
                 let defi = DictDefinition(id: try result.get(idField), word: entry, pos: POS(rawValue: try result.get(posField) ?? ""), def: try result.get(defField))
+                
                 DictExample.fetch(connection, def: defi)
+                
                 if pos2 != nil && pos2 == defi.pos {
                     defs.insert(defi, at: 0)
                 } else {
                     defs.append(defi)
                 }
+                
             } catch{}
         }
+        
         if let policy = policy {
             defs = policy(entry.word, defs, pos2)
         }
+        
         entry.defs = defs
     }
 }

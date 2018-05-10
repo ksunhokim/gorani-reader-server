@@ -9,18 +9,6 @@
 import Foundation
 import SQLite
 
-
-fileprivate var userData_: Connection? = nil
-
-var userData: Connection {
-    if userData_ == nil {
-        userData_ = try! Connection(FileUtill.userDataURL.path)
-        try! KnownWord.prepare(userData_!)
-    }
-    
-    return userData_!
-}
-
 class UserData {
     var connection: Connection
     

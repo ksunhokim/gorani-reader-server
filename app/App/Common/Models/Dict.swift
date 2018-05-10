@@ -9,12 +9,14 @@
 import Foundation
 import SQLite
 
-let dictURL: URL = {
-    let path = Bundle.main.path(forResource: "dict", ofType: "db")!
-    return URL(string: path)!
-}()
+
 
 class Dict {
+    fileprivate static let dictURL: URL = {
+        let path = Bundle.main.path(forResource: "dict", ofType: "db")!
+        return URL(string: path)!
+    }()
+    
     static let shared = Dict(url: dictURL)
     
     let connection: Connection
