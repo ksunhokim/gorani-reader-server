@@ -65,7 +65,7 @@ class DictTest: XCTestCase {
         let entries2 = self.dict.search(word: "goes", pos: .verb)
         let entry2 = entries2[0] as! DictEntryRedirect
         XCTAssertEqual(entry2.word, "go")
-        XCTAssertEqual(entry2.verbType, .third)
+        XCTAssertEqual(entry2.verbType, nil)
 
         let entries3 = self.dict.search(word: "going", pos: .adj)
         let entry3 = entries3[0] as! DictEntryRedirect

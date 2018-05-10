@@ -13,12 +13,17 @@ class UIUtill {
     class var green: UIColor {
         return UIColor(rgba: "#4CD964")
     }
+    
     class var black: UIColor {
         return UIColor.black
     }
     
     class var white: UIColor {
         return UIColor.white
+    }
+    
+    class var gray2: UIColor {
+        return UIColor(rgba: "#484848")
     }
     
     class var gray1: UIColor {
@@ -30,7 +35,7 @@ class UIUtill {
     }
     
     class var lightGray1: UIColor {
-        return UIColor(rgba: "#D7D7DA")
+        return UIColor(rgba: "#E3E3E2")
     }
     
     class var lightGray0: UIColor {

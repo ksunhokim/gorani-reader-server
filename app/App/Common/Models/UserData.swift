@@ -39,6 +39,10 @@ class UserData {
         try word.add(self.connection)
     }
     
+    func addKnownWords(html: String) throws {
+        try KnownWord.add(self.connection, html: html)
+    }
+    
     func deleteKnownWord(word: KnownWord) throws {
         try word.delete(self.connection)
     }

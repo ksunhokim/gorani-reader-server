@@ -26,7 +26,3 @@ func contentsOfDirectory(path: String) -> [String]? {
     return paths.map { content in (path as NSString).appendingPathComponent(content)}
 }
 
-let dictURL: URL = {
-    let path = Bundle.main.path(forResource: "dict", ofType: "db")!
-    return URL(string: path)!
-}()

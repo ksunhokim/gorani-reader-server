@@ -10,7 +10,7 @@ import XCTest
 @testable import app
 
 class UserDataTest: XCTestCase {
-    override func setUp() {
+    override class func setUp() {
         super.setUp()
         try? app.fileManager.removeItem(at: userDataURL)
     }
@@ -33,8 +33,44 @@ class UserDataTest: XCTestCase {
         let word4 = UserData.shared.getKnownWord(word: "hello")
         XCTAssert(word4 == nil)
     }
+    
+    func testKnownWordFromHTML() {
+        let html = """
+            <html>
+                <body>
+                    <p>helloo <chunk>from</chunk> the other side</p>
+                </body>
+            </html>
+        """
+        try! UserData.shared.addKnownWords(html: html)
+        let word = UserData.shared.getKnownWord(word: "helloo")
+        XCTAssertNotNil(word)
+        
+        let word2 = UserData.shared.getKnownWord(word: "from")
+        XCTAssertNil(word2)
 
-    func testPerformanceExample() {
+        let word3 = UserData.shared.getKnownWord(word: "side")
+        XCTAssertNotNil(word3)
+    }
+
+    func testKnownWordFromSpecialHTML() {
+        let html = """
+            <html>
+                <body>
+                    <p>helloo, <chunk>from.</chunk> !the other-side.</p>
+                </body>
+            </html>
+        """
+        try! UserData.shared.addKnownWords(html: html)
+        let word = UserData.shared.getKnownWord(word: "helloo")
+        XCTAssertNotNil(word)
+        
+        let word2 = UserData.shared.getKnownWord(word: "from")
+        XCTAssertNil(word2)
+        
+        let word3 = UserData.shared.getKnownWord(word: "other-side")
+        XCTAssertNotNil(word3)
+        
     }
     
 }

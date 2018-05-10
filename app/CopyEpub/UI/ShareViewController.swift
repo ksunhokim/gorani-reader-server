@@ -17,6 +17,7 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var bookView: UIView!
     @IBOutlet weak var coverView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var difficultyLabel: UILabel!
     
     @IBOutlet weak var okayButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
@@ -39,6 +40,7 @@ class ShareViewController: UIViewController {
 
     private func layout() {
         UIUtill.roundView(self.okayButton)
+        UIUtill.roundView(self.difficultyLabel)
     }
     
     private func handleAttachment() {
@@ -62,6 +64,7 @@ class ShareViewController: UIViewController {
         }
         do {
             let epub = try NewEpub(epub: url)
+            let rate = epub.calculateKnownWordRate()
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()
                 self.bookURL = epub.tempURL
@@ -69,6 +72,7 @@ class ShareViewController: UIViewController {
                 self.titleLabel.text = epub.title
                 self.dialogLabel.text =  NSLocalizedString("CopyEpubConfirmDialog", comment: "")
                 self.okayButton.isHidden = false
+                self.difficultyLabel.text = "\(rate)"
             }
         } catch let err as ShareError {
             DispatchQueue.main.async {

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rij-Po-Ork">
-                                <rect key="frame" x="16" y="135" width="343" height="368"/>
+                                <rect key="frame" x="16" y="135" width="341" height="368"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qea-aN-Q4d">
@@ -33,6 +33,15 @@
                                         <rect key="frame" x="67" y="8" width="208" height="270"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이 책은 그다지 어렵지 않습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylU-AK-HuI">
+                                        <rect key="frame" x="25" y="326" width="291" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -51,7 +60,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUJ-5h-18H">
-                                <rect key="frame" x="14" y="511" width="343" height="50"/>
+                                <rect key="frame" x="18" y="538" width="343" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
@@ -62,7 +71,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1t-Eu-ER2">
-                                <rect key="frame" x="14" y="569" width="343" height="36"/>
+                                <rect key="frame" x="16" y="596" width="343" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="취소"/>
@@ -78,6 +87,7 @@
                         <outlet property="bookView" destination="Rij-Po-Ork" id="tR5-v3-lHA"/>
                         <outlet property="coverView" destination="Xvh-6d-NrH" id="FMm-aq-cDu"/>
                         <outlet property="dialogLabel" destination="p8p-zT-nmo" id="3YN-cm-HWy"/>
+                        <outlet property="difficultyLabel" destination="ylU-AK-HuI" id="aEE-8u-zpi"/>
                         <outlet property="noButton" destination="E1t-Eu-ER2" id="dCm-qQ-rEn"/>
                         <outlet property="okayButton" destination="LUJ-5h-18H" id="g2f-p9-jvj"/>
                         <outlet property="titleLabel" destination="qea-aN-Q4d" id="7h8-Zl-0n7"/>
@@ -85,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXc-0N-iy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792.79999999999995" y="-186.65667166416793"/>
+            <point key="canvasLocation" x="792.5" y="-187.5"/>
         </scene>
     </scenes>
 </document>

@@ -64,7 +64,6 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let line = UIView(frame: CGRect(x: 0, y: self.sentenceLabel.frame.height + self.sentenceLabel.frame.origin.y + 20, width: view.frame.width, height: 0.7))
         line.backgroundColor = UIUtill.gray1
-        self.view.addSubview(line)
 
         self.tableView = UITableView(frame: CGRect(x: 0, y: line.frame.origin.y + 0.7 , width: view.frame.width, height: view.frame.height - 200))
         self.tableView.delegate = self
@@ -112,7 +111,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.frame.origin.x = 14
-        label.textColor = UIColor.black
+        label.textColor = UIUtill.gray2
         let entry = self.entries[section]
         label.text = entry.word
         label.sizeToFit()

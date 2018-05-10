@@ -25,4 +25,28 @@ class NewEpub: Epub {
         self.book = try FREpubParser().readEpub(epubPath: epub.path, removeEpub: false, unzipPath: booksDir.path)
         try self.parse()
     }
+    
+    func calculateKnownWordRate() -> Int {
+        var counts = 0
+        var wordSet = Set<String>()
+        if let resources = self.book?.resources.resources {
+            for (_, resource) in resources{
+                if resource.mediaType == .xhtml {
+                    if let html = try? String(contentsOfFile: resource.fullHref) {
+                        let words = KnownWord.getWordsFromHTML(html: html)
+                        for word in words {
+                                wordSet.insert(word)
+                        }
+                    }
+                }
+            }
+        }
+        for word in wordSet {
+            if UserData.shared.getKnownWord(word: word) != nil {
+                counts += 1
+            }
+        }
+        return counts
+    }
+
 }

@@ -20,12 +20,28 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.books = Epub.getLocalBooks()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.folioReader.delegate = self
+    }
+    
+    @objc func applicationWillEnterForeground(_ notification: NSNotification) {
+        self.books = Epub.getLocalBooks()
+        self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(applicationWillEnterForeground(_:)),
+                                               name:NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func presentDictView(bookName: String, page: Int, scroll: CGFloat, sentence: String, word: String, index: Int) {
@@ -37,13 +53,14 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     fileprivate func calculateKnownWords() {
         if let html = self.currentHTML {
             if self.folioReader.readerCenter!.actualReadRate > MinActulReadRate {
-                
+                DispatchQueue.global(qos: .default).async {
+                    try? UserData.shared.addKnownWords(html: html)
+                }
             }
         }
     }
 
     func folioReaderDidClose(_ folioReader: FolioReader) {
-        self.calculateKnownWords()
         self.currentHTML = nil
     }
     
