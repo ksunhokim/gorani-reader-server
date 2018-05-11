@@ -3,7 +3,7 @@ import Foundation
 import SQLite
 
 fileprivate let examplesTable = Table("examples")
-fileprivate let defIdField = Expression<Int>("def_id")
+fileprivate let defIdField = Expression<Int64>("def_id")
 fileprivate let firstField = Expression<String>("first")
 fileprivate let secondField = Expression<String>("second")
 
@@ -16,9 +16,9 @@ class DictExample {
         self.second = second
     }
 
-    class func fetch(_ connection: Connection, def: DictDefinition) {
+    class func fetch(def: DictDefinition) {
         let query = examplesTable.where(defIdField == def.id)
-        guard let results = try? connection.prepare(query) else {
+        guard let results = try? Dict.shared.connection.prepare(query) else {
             return
         }
         

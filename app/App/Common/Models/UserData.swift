@@ -4,26 +4,15 @@ import SQLite
 class UserData {
     var connection: Connection
     
-    static let shared = try! UserData(url: FileUtill.userDataURL)
+    static let shared = UserData(url: FileUtill.userDataURL)
     
-    private init(url: URL) throws {
+    private init(url: URL) {
         self.connection = try! Connection(url.path)
-        try KnownWord.prepare(self.connection)
-    }
-  
-    func getKnownWord(word: String) -> KnownWord? {
-        return KnownWord.get(self.connection, word: word)
+        try! KnownWord.prepare(self.connection)
+        try! Wordbook.prepare(self.connection)
+        try! WordbookEntry.perpare(self.connection)
     }
     
-    func addKnownWord(word: KnownWord) throws {
-        try word.add(self.connection)
-    }
-    
-    func addKnownWords(html: String) throws {
-        try KnownWord.add(self.connection, html: html)
-    }
-    
-    func deleteKnownWord(word: KnownWord) throws {
-        try word.delete(self.connection)
+    private func prepare() throws {
     }
 }

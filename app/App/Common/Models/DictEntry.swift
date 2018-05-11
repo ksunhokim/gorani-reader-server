@@ -3,30 +3,30 @@ import Foundation
 import SQLite
 
 fileprivate let wordsTable = Table("words")
-fileprivate let idField = Expression<Int>("id")
+fileprivate let idField = Expression<Int64>("id")
 fileprivate let wordField = Expression<String>("word")
 fileprivate let pronField = Expression<String?>("pron")
 
 class DictEntry {
-    var id: Int
+    var id: Int64
     var word: String
     var pron: String
     var defs: [DictDefinition] = []
     
-    init(id: Int, word: String, pron: String) {
+    init(id: Int64, word: String, pron: String) {
         self.id = id
         self.word = word
         self.pron = pron.unstressed
     }
     
-    class func get(_ connection: Connection, word wordstr: String, pos: POS?, policy: Dict.EntrySortPolicy?) -> DictEntry? {
+    class func get(word wordstr: String, pos: POS?, policy: Dict.EntrySortPolicy?) -> DictEntry? {
         let query = wordsTable.where(wordField.collate(.nocase) == wordstr)
         
         do {
-            if let entry = try connection.pluck(query) {
+            if let entry = try Dict.shared.connection.pluck(query) {
                 let entry = DictEntry(id: try entry.get(idField), word: try entry.get(wordField), pron: try entry.get(pronField) ?? "")
                 
-                DictDefinition.fetch(connection, entry: entry, pos: pos, policy: policy)
+                DictDefinition.fetch(entry: entry, pos: pos, policy: policy)
                 return entry
             }
         } catch {}
@@ -34,7 +34,7 @@ class DictEntry {
         return nil
     }
     
-    class func search(_ connection: Connection, word: String, pos: POS?, type: VerbType?, policy: Dict.EntrySortPolicy?) -> [DictEntry] {
+    class func search(word: String, pos: POS?, type: VerbType?, policy: Dict.EntrySortPolicy?) -> [DictEntry] {
         if word == "" {
             return []
         }
@@ -43,7 +43,7 @@ class DictEntry {
         
         let candidates = VerbType.candidates(word: word)
         for candidate in candidates {
-            if let entry = DictEntry.get(connection, word: candidate.0, pos: pos, policy: policy) {
+            if let entry = DictEntry.get(word: candidate.0, pos: pos, policy: policy) {
                 let entry = DictEntryRedirect(entry: entry, type: candidate.1)
                 
                 if candidate.1 == type {
@@ -54,7 +54,7 @@ class DictEntry {
             }
         }
 
-        if let entry = DictEntry.get(connection, word: word, pos: pos, policy: policy) {
+        if let entry = DictEntry.get(word: word, pos: pos, policy: policy) {
             entries.append(entry)
         }
         
@@ -70,7 +70,7 @@ class DictEntryRedirect: DictEntry {
         self.defs = entry.defs
     }
     
-    init(id: Int, word: String, pron: String, type: VerbType?) {
+    init(id: Int64, word: String, pron: String, type: VerbType?) {
         self.verbType = type
         super.init(id: id, word: word, pron: pron)
     }

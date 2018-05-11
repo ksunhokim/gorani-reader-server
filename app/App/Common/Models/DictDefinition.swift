@@ -3,27 +3,27 @@ import Foundation
 import SQLite
 
 fileprivate let defsTable = Table("defs")
-fileprivate let idField = Expression<Int>("id")
-fileprivate let wordIdField = Expression<Int>("word_id")
+fileprivate let idField = Expression<Int64>("id")
+fileprivate let wordIdField = Expression<Int64>("word_id")
 fileprivate let posField = Expression<String?>("pos")
 fileprivate let defField = Expression<String>("def")
 
 class DictDefinition {
-    var id: Int
+    var id: Int64
     var pos: POS?
     var def: String
     var examples: [DictExample] = []
     
-    init(id: Int, word: DictEntry, pos: POS?, def: String) {
+    init(id: Int64, word: DictEntry, pos: POS?, def: String) {
         self.id = id
         self.pos = pos
         self.def = def
     }
     
-    class func fetch(_ connection: Connection, entry: DictEntry, pos pos2: POS?, policy: Dict.EntrySortPolicy?) {
+    class func fetch(entry: DictEntry, pos pos2: POS?, policy: Dict.EntrySortPolicy?) {
         let query = defsTable.where(wordIdField == entry.id)
             .order(posField, idField)
-        guard let results = try? connection.prepare(query) else {
+        guard let results = try? Dict.shared.connection.prepare(query) else {
             return
         }
         
@@ -33,7 +33,7 @@ class DictDefinition {
             do {
                 let defi = DictDefinition(id: try result.get(idField), word: entry, pos: POS(rawValue: try result.get(posField) ?? ""), def: try result.get(defField))
                 
-                DictExample.fetch(connection, def: defi)
+                DictExample.fetch(def: defi)
                 
                 if pos2 != nil && pos2 == defi.pos {
                     defs.insert(defi, at: 0)

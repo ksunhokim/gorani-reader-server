@@ -22,10 +22,10 @@ class Dict {
     }
     
     func get(word: String, pos: POS? = nil) -> DictEntry? {
-        return DictEntry.get(self.connection, word: word, pos: pos, policy: self.entrySortPolicy)
+        return DictEntry.get(word: word, pos: pos, policy: self.entrySortPolicy)
     }
     
     func search(word: String, pos: POS? = nil, type: VerbType? = nil) -> [DictEntry] {
-        return DictEntry.search(connection, word: word, pos: pos, type: type, policy: self.entrySortPolicy)
+        return DictEntry.search(word: word, pos: pos, type: type, policy: self.entrySortPolicy)
     }
 }

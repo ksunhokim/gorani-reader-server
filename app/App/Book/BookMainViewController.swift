@@ -48,7 +48,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if self.folioReader.readerCenter!.actualReadRate > MinActulReadRate {
             DispatchQueue.global(qos: .default).async {
-                try? UserData.shared.addKnownWords(html: html)
+                try? KnownWord.add(html: html)
             }
         }
     }

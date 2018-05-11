@@ -15,11 +15,11 @@ class KnownWord {
         self.word = word
     }
 
-    class func get(_ connection: Connection, word: String) -> KnownWord? {
+    class func get(word: String) -> KnownWord? {
         let query = table.where(wordField == word)
         
         do {
-            if let known = try connection.pluck(query) {
+            if let known = try UserData.shared.connection.pluck(query) {
                 return KnownWord(word: try known.get(wordField))
             }
         } catch {}
@@ -27,28 +27,28 @@ class KnownWord {
         return nil
     }
     
-    func add(_ connection: Connection) throws {
+    func add() throws {
         do {
-            try connection.run(table.insert( wordField <- self.word ))
+            try UserData.shared.connection.run(table.insert( wordField <- self.word ))
         } catch let Result.error(_, code, _) where code == SQLITE_CONSTRAINT {} // ignore unique contraint error
     }
     
-    class func add(_ connection: Connection, html: String) throws {
+    class func add(html: String) throws {
         var set = Set<String>()
         getWordsFromHTML(set: &set, html: html)
         
         for word in set {
-            try addWithVariants(connection, word: word)
+            try addWithVariants(word: word)
             let candidates = VerbType.candidates(word: word).filter { $0.1 != .past && $0.1 != .complete }
             for candidate in candidates {
-                try addWithVariants(connection, word: candidate.0)
+                try addWithVariants(word: candidate.0)
             }
         }
     }
     
-    class func addWithVariants(_ connection: Connection, word: String) throws {
+    class fileprivate func addWithVariants(word: String) throws {
         for variant in ["", "ing", "s", "es", "ed", "d"] {
-            try KnownWord(word: word + variant).add(connection)
+            try KnownWord(word: word + variant).add()
         }
     }
     
@@ -73,13 +73,13 @@ class KnownWord {
         } catch {}
     }
 
-    func delete(_ connection: Connection) throws {
+    func delete() throws {
         let me = table.where(wordField == self.word)
-        try connection.run(me.delete())
+        try UserData.shared.connection.run(me.delete())
     }
     
-    class func prepare(_ conenction: Connection) throws {
-        try conenction.run(table.create(ifNotExists: true) { t in
+    class func prepare(_ connection: Connection) throws {
+        try connection.run(table.create(ifNotExists: true) { t in
             t.column(wordField, unique: true)
         })
     }

@@ -19,7 +19,6 @@
 		B143B03A20A475DB003341A3 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00520A4758A003341A3 /* UserData.swift */; };
 		B143B03B20A475DB003341A3 /* KnownWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00620A4758A003341A3 /* KnownWord.swift */; };
 		B143B03C20A475DB003341A3 /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00820A4758A003341A3 /* Wordbook.swift */; };
-		B143B03D20A475DB003341A3 /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00920A4758A003341A3 /* WordbookEntry.swift */; };
 		B143B03E20A475DB003341A3 /* POS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00A20A4758A003341A3 /* POS.swift */; };
 		B143B04520A475ED003341A3 /* FileUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B00F20A4758A003341A3 /* FileUtill.swift */; };
 		B143B04620A475ED003341A3 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143B01020A4758A003341A3 /* Helper.swift */; };
@@ -32,8 +31,6 @@
 		B143B04D20A47613003341A3 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8920A4704F003341A3 /* UserData.swift */; };
 		B143B04E20A47613003341A3 /* KnownWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8A20A4704F003341A3 /* KnownWord.swift */; };
 		B143B04F20A47613003341A3 /* Dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8B20A4704F003341A3 /* Dict.swift */; };
-		B143B05020A47613003341A3 /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8C20A4704F003341A3 /* Wordbook.swift */; };
-		B143B05120A47613003341A3 /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8D20A4704F003341A3 /* WordbookEntry.swift */; };
 		B143B05220A47613003341A3 /* POS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8E20A4704F003341A3 /* POS.swift */; };
 		B143B05320A47613003341A3 /* DictEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF8F20A4704F003341A3 /* DictEntry.swift */; };
 		B143B05420A47613003341A3 /* DictExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF9020A4704F003341A3 /* DictExample.swift */; };
@@ -45,6 +42,9 @@
 		B143B05A20A47617003341A3 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF9720A4704F003341A3 /* Verb.swift */; };
 		B143B05B20A47617003341A3 /* UIUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF9820A4704F003341A3 /* UIUtill.swift */; };
 		B143B05C20A47617003341A3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143AF9920A4704F003341A3 /* Keys.swift */; };
+		B158D46A20A59A7600339CCC /* Wordbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B158D46920A59A7600339CCC /* Wordbook.swift */; };
+		B182550020A5AA4A00ADB1AC /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18254FF20A5AA4A00ADB1AC /* WordbookEntry.swift */; };
+		B182550320A5AAC200ADB1AC /* WordbookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182550120A5AA5200ADB1AC /* WordbookEntry.swift */; };
 		B19942D220A1A153004CF61A /* DictTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942D120A1A153004CF61A /* DictTest.swift */; };
 		B19942DD20A1B072004CF61A /* dict.db in Resources */ = {isa = PBXBuildFile; fileRef = B19942DC20A1B072004CF61A /* dict.db */; };
 		B19942E020A1B9A1004CF61A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7362F21209BE21B0081B012 /* SQLite.framework */; };
@@ -168,8 +168,6 @@
 		B143AF8920A4704F003341A3 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		B143AF8A20A4704F003341A3 /* KnownWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownWord.swift; sourceTree = "<group>"; };
 		B143AF8B20A4704F003341A3 /* Dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dict.swift; sourceTree = "<group>"; };
-		B143AF8C20A4704F003341A3 /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
-		B143AF8D20A4704F003341A3 /* WordbookEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B143AF8E20A4704F003341A3 /* POS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POS.swift; sourceTree = "<group>"; };
 		B143AF8F20A4704F003341A3 /* DictEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictEntry.swift; sourceTree = "<group>"; };
 		B143AF9020A4704F003341A3 /* DictExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictExample.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 		B143B00520A4758A003341A3 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		B143B00620A4758A003341A3 /* KnownWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownWord.swift; sourceTree = "<group>"; };
 		B143B00820A4758A003341A3 /* Wordbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
-		B143B00920A4758A003341A3 /* WordbookEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B143B00A20A4758A003341A3 /* POS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POS.swift; sourceTree = "<group>"; };
 		B143B00F20A4758A003341A3 /* FileUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtill.swift; sourceTree = "<group>"; };
 		B143B01020A4758A003341A3 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -194,6 +191,9 @@
 		B143B01320A4758A003341A3 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
 		B143B01420A4758A003341A3 /* UIUtill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtill.swift; sourceTree = "<group>"; };
 		B143B01520A4758A003341A3 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		B158D46920A59A7600339CCC /* Wordbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordbook.swift; sourceTree = "<group>"; };
+		B18254FF20A5AA4A00ADB1AC /* WordbookEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
+		B182550120A5AA5200ADB1AC /* WordbookEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordbookEntry.swift; sourceTree = "<group>"; };
 		B19942D120A1A153004CF61A /* DictTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictTest.swift; sourceTree = "<group>"; };
 		B19942DC20A1B072004CF61A /* dict.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dict.db; sourceTree = "<group>"; };
 		B19942E520A1BCA4004CF61A /* Regex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Regex.framework; path = Carthage/Build/iOS/Regex.framework; sourceTree = "<group>"; };
@@ -303,12 +303,12 @@
 				B143AF8920A4704F003341A3 /* UserData.swift */,
 				B143AF8A20A4704F003341A3 /* KnownWord.swift */,
 				B143AF8B20A4704F003341A3 /* Dict.swift */,
-				B143AF8C20A4704F003341A3 /* Wordbook.swift */,
-				B143AF8D20A4704F003341A3 /* WordbookEntry.swift */,
 				B143AF8E20A4704F003341A3 /* POS.swift */,
 				B143AF8F20A4704F003341A3 /* DictEntry.swift */,
-				B143AF9020A4704F003341A3 /* DictExample.swift */,
 				B143AF9120A4704F003341A3 /* DictDefinition.swift */,
+				B143AF9020A4704F003341A3 /* DictExample.swift */,
+				B158D46920A59A7600339CCC /* Wordbook.swift */,
+				B18254FF20A5AA4A00ADB1AC /* WordbookEntry.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -343,8 +343,8 @@
 				B143B00420A4758A003341A3 /* Epub.swift */,
 				B143B00520A4758A003341A3 /* UserData.swift */,
 				B143B00620A4758A003341A3 /* KnownWord.swift */,
+				B182550120A5AA5200ADB1AC /* WordbookEntry.swift */,
 				B143B00820A4758A003341A3 /* Wordbook.swift */,
-				B143B00920A4758A003341A3 /* WordbookEntry.swift */,
 				B143B00A20A4758A003341A3 /* POS.swift */,
 			);
 			path = Models;
@@ -665,20 +665,20 @@
 				B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
-				B143B05020A47613003341A3 /* Wordbook.swift in Sources */,
 				B143B05C20A47617003341A3 /* Keys.swift in Sources */,
 				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				B143B05820A47617003341A3 /* IPA.swift in Sources */,
 				B143B04F20A47613003341A3 /* Dict.swift in Sources */,
 				B143B05520A47613003341A3 /* DictDefinition.swift in Sources */,
-				B143B05120A47613003341A3 /* WordbookEntry.swift in Sources */,
 				B143B05920A47617003341A3 /* Ease.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
+				B182550020A5AA4A00ADB1AC /* WordbookEntry.swift in Sources */,
 				B143B05720A47617003341A3 /* Helper.swift in Sources */,
 				B143B04D20A47613003341A3 /* UserData.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				B143B05220A47613003341A3 /* POS.swift in Sources */,
 				C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */,
+				B158D46A20A59A7600339CCC /* Wordbook.swift in Sources */,
 				B143B04E20A47613003341A3 /* KnownWord.swift in Sources */,
 				B143B05320A47613003341A3 /* DictEntry.swift in Sources */,
 				B143B04C20A47613003341A3 /* Epub.swift in Sources */,
@@ -711,9 +711,9 @@
 				B143B03A20A475DB003341A3 /* UserData.swift in Sources */,
 				B143B04B20A475ED003341A3 /* Keys.swift in Sources */,
 				B143B04A20A475ED003341A3 /* UIUtill.swift in Sources */,
+				B182550320A5AAC200ADB1AC /* WordbookEntry.swift in Sources */,
 				C7A97417209A8FD700A41D02 /* ManagedEpubURL.swift in Sources */,
 				C7C1E37A20981A1700C909D7 /* ShareViewController.swift in Sources */,
-				B143B03D20A475DB003341A3 /* WordbookEntry.swift in Sources */,
 				B143B04520A475ED003341A3 /* FileUtill.swift in Sources */,
 				B143B03E20A475DB003341A3 /* POS.swift in Sources */,
 				B143B03B20A475DB003341A3 /* KnownWord.swift in Sources */,

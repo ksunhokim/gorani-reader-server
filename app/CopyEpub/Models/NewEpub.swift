@@ -36,7 +36,7 @@ class NewEpub: Epub {
         }
 
         for word in set {
-            if UserData.shared.getKnownWord(word: word) != nil {
+            if KnownWord.get(word: word) != nil {
                 counts += 1
             }
         }

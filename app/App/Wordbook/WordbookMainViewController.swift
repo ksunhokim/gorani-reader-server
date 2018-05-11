@@ -29,8 +29,7 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         
         let item = self.wordbooks[indexPath.row]
         cell.textLabel!.text = item.name
-        cell.detailTextLabel!.text = String(item.entries.count)
-        
+
 //        if item.new {
 //            cell.badge.image = UIImage(named: "circle")
 //        } else {

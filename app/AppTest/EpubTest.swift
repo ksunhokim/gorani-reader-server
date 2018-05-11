@@ -8,8 +8,8 @@ class EpubTest: XCTestCase {
     override func setUp() {
         super.setUp()
         let path = Bundle.main.path(forResource: "alice", ofType: "epub")!
-        let book = try! FREpubParser().readEpub(epubPath: path, removeEpub: false, unzipPath: booksDir.path)
-        self.epubPath = booksDir.appendingPathComponent(book.name!)
+        let book = try! FREpubParser().readEpub(epubPath: path, removeEpub: false, unzipPath: FileUtill.booksDir.path)
+        self.epubPath = FileUtill.booksDir.appendingPathComponent(book.name!)
     }
     
     override func tearDown() {
