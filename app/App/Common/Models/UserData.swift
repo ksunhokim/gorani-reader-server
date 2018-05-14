@@ -12,7 +12,4 @@ class UserData {
         try! Wordbook.prepare(self.connection)
         try! WordbookEntry.perpare(self.connection)
     }
-    
-    private func prepare() throws {
-    }
 }

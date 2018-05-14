@@ -1,3 +1,4 @@
+github "OAuthSwift/OAuthSwift" "1.2.1"
 github "crossroadlabs/Regex" "1.1.0"
 github "scinfu/SwiftSoup" "1.7.1"
 github "stephencelis/SQLite.swift" "0.11.5"

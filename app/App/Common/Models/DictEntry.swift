@@ -19,14 +19,14 @@ class DictEntry {
         self.pron = pron.unstressed
     }
     
-    class func get(word wordstr: String, pos: POS?, policy: Dict.EntrySortPolicy?) -> DictEntry? {
+    class func get(word wordstr: String, firstDefPos: POS?, policy: Dict.DefSortPolicy?) -> DictEntry? {
         let query = wordsTable.where(wordField.collate(.nocase) == wordstr)
         
         do {
             if let entry = try Dict.shared.connection.pluck(query) {
                 let entry = DictEntry(id: try entry.get(idField), word: try entry.get(wordField), pron: try entry.get(pronField) ?? "")
                 
-                DictDefinition.fetch(entry: entry, pos: pos, policy: policy)
+                DictDefinition.fetch(entry: entry, firstPos: firstDefPos, policy: policy)
                 return entry
             }
         } catch {}
@@ -34,7 +34,8 @@ class DictEntry {
         return nil
     }
     
-    class func search(word: String, pos: POS?, type: VerbType?, policy: Dict.EntrySortPolicy?) -> [DictEntry] {
+    
+    class func search(word: String, firstWordType: VerbType?, firstDefPos: POS?, policy: Dict.DefSortPolicy?) -> [DictEntry] {
         if word == "" {
             return []
         }
@@ -43,10 +44,11 @@ class DictEntry {
         
         let candidates = VerbType.candidates(word: word)
         for candidate in candidates {
-            if let entry = DictEntry.get(word: candidate.0, pos: pos, policy: policy) {
+            if let entry = DictEntry.get(word: candidate.0, firstDefPos: firstDefPos, policy: policy) {
                 let entry = DictEntryRedirect(entry: entry, type: candidate.1)
                 
-                if candidate.1 == type {
+                if candidate.1 == firstWordType
+         {
                     entries.insert(entry, at: 0)
                 } else {
                     entries.append(entry)
@@ -54,7 +56,7 @@ class DictEntry {
             }
         }
 
-        if let entry = DictEntry.get(word: word, pos: pos, policy: policy) {
+        if let entry = DictEntry.get(word: word, firstDefPos: firstDefPos, policy: policy) {
             entries.append(entry)
         }
         

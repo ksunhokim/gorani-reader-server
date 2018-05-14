@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B124047520A8CD90005EAE4F /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B124047220A8CD90005EAE4F /* Cartfile */; };
+		B13393A320A8DCC000F34525 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13393A020A8DCBF00F34525 /* OAuthSwift.framework */; };
+		B13393A520A8DCC800F34525 /* OAuthSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B13393A020A8DCBF00F34525 /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B13393A820A8E13400F34525 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393A720A8E13400F34525 /* AuthViewController.swift */; };
+		B13393AF20A8E82E00F34525 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393AE20A8E82E00F34525 /* AuthProvider.swift */; };
+		B13393B120A8F19300F34525 /* AuthServices.plist in Resources */ = {isa = PBXBuildFile; fileRef = B13393B020A8F19300F34525 /* AuthServices.plist */; };
+		B13393B320A8F78D00F34525 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B13393B220A8F78D00F34525 /* .gitignore */; };
+		B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */; };
 		B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1352ADD20A341DC007E132C /* DictViewTableCell.xib */; };
 		B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352ADF20A34204007E132C /* DictViewTableCell.swift */; };
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
@@ -127,6 +135,7 @@
 				C7362F19209BE2060081B012 /* FontBlaster.framework in CopyFiles */,
 				C7362F24209BE2340081B012 /* FolioReaderKit.framework in CopyFiles */,
 				B143AF8420A4393B003341A3 /* SwiftSoup.framework in CopyFiles */,
+				B13393A520A8DCC800F34525 /* OAuthSwift.framework in CopyFiles */,
 				B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */,
 				C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */,
 				C7362F23209BE2230081B012 /* SQLite.framework in CopyFiles */,
@@ -160,6 +169,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B124047220A8CD90005EAE4F /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		B13393A020A8DCBF00F34525 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
+		B13393A720A8E13400F34525 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		B13393AE20A8E82E00F34525 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		B13393B020A8F19300F34525 /* AuthServices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AuthServices.plist; sourceTree = "<group>"; };
+		B13393B220A8F78D00F34525 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoraniAuthProvider.swift; sourceTree = "<group>"; };
 		B1352ADD20A341DC007E132C /* DictViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DictViewTableCell.xib; sourceTree = "<group>"; };
 		B1352ADF20A34204007E132C /* DictViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewTableCell.swift; sourceTree = "<group>"; };
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
@@ -244,6 +260,7 @@
 			files = (
 				C7362F22209BE21B0081B012 /* SQLite.framework in Frameworks */,
 				B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */,
+				B13393A320A8DCC000F34525 /* OAuthSwift.framework in Frameworks */,
 				B143AF8520A43943003341A3 /* SwiftSoup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +290,7 @@
 		702F24C22323D91C0487792D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B13393A020A8DCBF00F34525 /* OAuthSwift.framework */,
 				B143AF8220A438FE003341A3 /* SwiftSoup.framework */,
 				B19942E520A1BCA4004CF61A /* Regex.framework */,
 				C7362F21209BE21B0081B012 /* SQLite.framework */,
@@ -285,6 +303,17 @@
 				C7C63EA9209946A50093CC02 /* FolioReaderKit.xcodeproj */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B13393A620A8E11800F34525 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B13393A720A8E13400F34525 /* AuthViewController.swift */,
+				B13393AE20A8E82E00F34525 /* AuthProvider.swift */,
+				B13393B020A8F19300F34525 /* AuthServices.plist */,
+				B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		B143AF8620A4704F003341A3 /* Common */ = {
@@ -378,6 +407,8 @@
 		C74CEFCB208C899F002765D6 = {
 			isa = PBXGroup;
 			children = (
+				B13393B220A8F78D00F34525 /* .gitignore */,
+				B124047220A8CD90005EAE4F /* Cartfile */,
 				C74CEFD6208C899F002765D6 /* App */,
 				C7C1E37820981A1700C909D7 /* CopyEpub */,
 				C78217AE209BB9A700C19E2F /* AppTest */,
@@ -402,6 +433,7 @@
 				B143AF8620A4704F003341A3 /* Common */,
 				C78217BB209BC1CF00C19E2F /* Resources */,
 				C7C1E3262098058500C909D7 /* app.entitlements */,
+				B13393A620A8E11800F34525 /* Auth */,
 				C7C1E2FF2098016D00C909D7 /* Book */,
 				C7403AE72091767D00099119 /* Wordbook */,
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
@@ -627,11 +659,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B124047520A8CD90005EAE4F /* Cartfile in Resources */,
 				C74CEFE5208C89A1002765D6 /* LaunchScreen.storyboard in Resources */,
 				B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */,
 				B19942DD20A1B072004CF61A /* dict.db in Resources */,
 				C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */,
+				B13393B120A8F19300F34525 /* AuthServices.plist in Resources */,
 				C78217BD209BC1F300C19E2F /* alice.epub in Resources */,
+				B13393B320A8F78D00F34525 /* .gitignore in Resources */,
 				C74CEFDD208C899F002765D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,9 +706,11 @@
 				B143B04F20A47613003341A3 /* Dict.swift in Sources */,
 				B143B05520A47613003341A3 /* DictDefinition.swift in Sources */,
 				B143B05920A47617003341A3 /* Ease.swift in Sources */,
+				B13393AF20A8E82E00F34525 /* AuthProvider.swift in Sources */,
 				C7403AEB209176D800099119 /* WordbookMainViewController.swift in Sources */,
 				B182550020A5AA4A00ADB1AC /* WordbookEntry.swift in Sources */,
 				B143B05720A47617003341A3 /* Helper.swift in Sources */,
+				B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */,
 				B143B04D20A47613003341A3 /* UserData.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				B143B05220A47613003341A3 /* POS.swift in Sources */,
@@ -683,6 +720,7 @@
 				B143B05320A47613003341A3 /* DictEntry.swift in Sources */,
 				B143B04C20A47613003341A3 /* Epub.swift in Sources */,
 				B143B05A20A47617003341A3 /* Verb.swift in Sources */,
+				B13393A820A8E13400F34525 /* AuthViewController.swift in Sources */,
 				B143B05620A47617003341A3 /* FileUtill.swift in Sources */,
 				B19942F320A21262004CF61A /* DictViewController.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,

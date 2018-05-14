@@ -42,37 +42,37 @@ class DictTest: XCTestCase {
     }
     
     func testSearchWithBase() {
-        let entries = self.dict.search(word: "go", pos: .verb)
+        let entries = self.dict.search(word: "go", firstDefPos: .verb)
         let entry = entries[0]
         XCTAssert(entry.word == "go")
         XCTAssert(entry.defs[0].pos == .verb)
     }
     
     func testSearchWithVariant() {
-        let entries = self.dict.search(word: "went", pos: .verb)
+        let entries = self.dict.search(word: "went", firstDefPos: .verb)
         let entry = entries[0] as! DictEntryRedirect
         XCTAssertEqual(entry.word, "go")
         XCTAssertEqual(entry.verbType, .past)
 
-        let entries2 = self.dict.search(word: "goes", pos: .verb)
+        let entries2 = self.dict.search(word: "goes", firstDefPos: .verb)
         let entry2 = entries2[0] as! DictEntryRedirect
         XCTAssertEqual(entry2.word, "go")
         XCTAssertEqual(entry2.verbType, nil)
 
-        let entries3 = self.dict.search(word: "going", pos: .adj)
+        let entries3 = self.dict.search(word: "going", firstDefPos: .adj)
         let entry3 = entries3[0] as! DictEntryRedirect
         XCTAssertEqual(entry3.word, "go")
         XCTAssertEqual(entry3.verbType, .present)
     }
     
     func testMockSearch() {
-        let entries = self.dict.search(word: "", pos: .verb)
+        let entries = self.dict.search(word: "", firstDefPos: .verb)
         XCTAssert(entries.count == 0)
         
-        let entries2 = self.dict.search(word: "ㅇ아아아", pos: .verb)
+        let entries2 = self.dict.search(word: "ㅇ아아아", firstDefPos: .verb)
         XCTAssert(entries2.count == 0)
         
-        let entries3 = self.dict.search(word: "🇰🇷", pos: .noun)
+        let entries3 = self.dict.search(word: "🇰🇷", firstDefPos: .noun)
         XCTAssert(entries3.count == 0)
     }
 }

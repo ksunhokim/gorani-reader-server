@@ -42,17 +42,21 @@ class Wordbook {
     class func get() -> [Wordbook] {
         let query = table.order(addedDateField.desc)
         
+        guard let results = try? UserData.shared.connection.prepare(query) else {
+            return []
+        }
+            
         var wordbooks: [Wordbook] = []
-        do {
-            for entry in try UserData.shared.connection.prepare(query) {
-                let wordbook = Wordbook(name: try entry.get(nameField))
-                wordbook.id = try entry.get(idField)
-                wordbook.addedDate = try entry.get(addedDateField)
+        for result in results {
+            do{
+                let wordbook = Wordbook(name: try result.get(nameField))
+                wordbook.id = try result.get(idField)
+                wordbook.addedDate = try result.get(addedDateField)
                 if wordbook.id != UnknownWordbookId {
                     wordbooks.append(wordbook)
                 }
-            }
-        } catch {}
+            } catch {}
+        }
         
         return wordbooks
     }

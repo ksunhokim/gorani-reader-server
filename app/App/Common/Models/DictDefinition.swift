@@ -20,7 +20,7 @@ class DictDefinition {
         self.def = def
     }
     
-    class func fetch(entry: DictEntry, pos pos2: POS?, policy: Dict.EntrySortPolicy?) {
+    class func fetch(entry: DictEntry, firstPos pos2: POS?, policy: Dict.DefSortPolicy?) {
         let query = defsTable.where(wordIdField == entry.id)
             .order(posField, idField)
         guard let results = try? Dict.shared.connection.prepare(query) else {

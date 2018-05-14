@@ -14,18 +14,18 @@ class Dict {
     
     let connection: Connection
     
-    typealias EntrySortPolicy = (_ word: String, _ entries: [DictDefinition], _ pos: POS?) -> [DictDefinition]
-    var entrySortPolicy: EntrySortPolicy?
+    typealias DefSortPolicy = (_ word: String, _ entries: [DictDefinition], _ pos: POS?) -> [DictDefinition]
+    var defSortPolicy: DefSortPolicy?
 
     private init(url: URL) {
         self.connection = try! Connection(url.path)
     }
     
-    func get(word: String, pos: POS? = nil) -> DictEntry? {
-        return DictEntry.get(word: word, pos: pos, policy: self.entrySortPolicy)
+    func get(word: String, firstDefPos: POS? = nil) -> DictEntry? {
+        return DictEntry.get(word: word, firstDefPos: firstDefPos, policy: self.defSortPolicy)
     }
     
-    func search(word: String, pos: POS? = nil, type: VerbType? = nil) -> [DictEntry] {
-        return DictEntry.search(word: word, pos: pos, type: type, policy: self.entrySortPolicy)
+    func search(word: String, firstWordType: VerbType? = nil, firstDefPos: POS? = nil) -> [DictEntry] {
+        return DictEntry.search(word: word, firstWordType: firstWordType, firstDefPos: firstDefPos, policy: self.defSortPolicy)
     }
 }
