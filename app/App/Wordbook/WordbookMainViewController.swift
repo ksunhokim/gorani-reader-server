@@ -1,10 +1,19 @@
 
 import UIKit
 
-class WordbookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WordbookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,  TabViewControllerDelegate {
     @IBOutlet var tableView: UITableView!
     
     var wordbooks: [Wordbook] = []
+
+    public lazy var sideView: UIView = {
+        let button = UIButton()
+        button.setTitleColor(UIUtill.tint, for: .normal)
+        button.setTitle("Add", for: .normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(openAddAction(_:)), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,11 +21,12 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.reloadWordbooks()
-    }
-    
-    func reloadWordbooks() {
         self.wordbooks = Wordbook.get()
+    }
+
+    @objc func openAddAction(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "WordbookAddModalViewController")
+        self.present(vc, animated: true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

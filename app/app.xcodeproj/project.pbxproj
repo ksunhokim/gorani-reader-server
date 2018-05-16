@@ -18,6 +18,7 @@
 		B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393B720AB2AE600F34525 /* TabViewController.swift */; };
 		B13393BA20AB6CC400F34525 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; };
 		B13393BC20AB6CCE00F34525 /* SwipeCellKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B13393C020ACB86C00F34525 /* WordbookAddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */; };
 		B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1352ADD20A341DC007E132C /* DictViewTableCell.xib */; };
 		B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352ADF20A34204007E132C /* DictViewTableCell.swift */; };
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
@@ -181,6 +182,7 @@
 		B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoraniAuthProvider.swift; sourceTree = "<group>"; };
 		B13393B720AB2AE600F34525 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		B13393B920AB6CC400F34525 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
+		B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookAddModalViewController.swift; sourceTree = "<group>"; };
 		B1352ADD20A341DC007E132C /* DictViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DictViewTableCell.xib; sourceTree = "<group>"; };
 		B1352ADF20A34204007E132C /* DictViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewTableCell.swift; sourceTree = "<group>"; };
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				C7403AEA209176D800099119 /* WordbookMainViewController.swift */,
 				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
 				C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */,
+				B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */,
 			);
 			path = Wordbook;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				B182550020A5AA4A00ADB1AC /* WordbookEntry.swift in Sources */,
 				B143B05720A47617003341A3 /* Helper.swift in Sources */,
 				B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */,
+				B13393C020ACB86C00F34525 /* WordbookAddModalViewController.swift in Sources */,
 				B143B04D20A47613003341A3 /* UserData.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */,
@@ -967,7 +971,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -994,7 +998,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kim.sunho.goraniReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

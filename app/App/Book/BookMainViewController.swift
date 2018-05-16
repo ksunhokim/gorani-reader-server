@@ -7,28 +7,29 @@ fileprivate let MinActulReadRate = 0.7
 
 class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate, FolioReaderCenterDelegate, SwipeTableViewCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
+
     var books: [Epub]!
-    var dict: Dict!
     var folioReader = FolioReader()
     var currentHTML: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.books = Epub.getLocalBooks()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         self.folioReader.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector:#selector(applicationWillEnterForeground(_:)), name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     @objc func applicationWillEnterForeground(_ notification: NSNotification) {
         self.books = Epub.getLocalBooks()
         self.tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector:#selector(applicationWillEnterForeground(_:)), name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,12 +38,18 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func presentDictView(bookName: String, page: Int, scroll: CGFloat, sentence: String, word: String, index: Int) {
-        let viewController = DictViewController(word: word, sentence: sentence, index: index)
-        self.folioReader.readerContainer?.present(viewController, animated:  true)
-        print(bookName, page, scroll, sentence, word, index)
+        let vc = DictViewController(word: word, sentence: sentence, index: index)
+        self.folioReader.readerContainer?.present(vc, animated:  true)
+    }
+
+    func htmlContentForPage(_ page: FolioReaderPage, htmlContent: String) -> String {
+        self.updateKnownWords()
+        
+        self.currentHTML = htmlContent
+        return htmlContent
     }
     
-    fileprivate func calculateKnownWords() {
+    fileprivate func updateKnownWords() {
         guard let html = self.currentHTML else {
             return
         }
@@ -53,34 +60,26 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
 
     func folioReaderDidClose(_ folioReader: FolioReader) {
         self.currentHTML = nil
     }
-    
-    func htmlContentForPage(_ page: FolioReaderPage, htmlContent: String) -> String {
-        self.calculateKnownWords()
-        self.currentHTML = htmlContent
-        return htmlContent
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.books.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let book = self.books[indexPath.row]
-        
         let config = FolioReaderConfig()
         config.tintColor = UIUtill.tint
         config.canChangeScrollDirection = false
         config.hideBars = false
         config.scrollDirection = .horizontal
+        
+        let book = self.books[indexPath.row]
+        
         self.folioReader.presentReader(parentViewController: self, book: book.book!, config: config)
         self.folioReader.readerCenter!.delegate = self
-        
-
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
@@ -97,15 +96,18 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BooksTableCell") as! BooksTableCell
-        
         let item = self.books[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BooksTableCell") as! BooksTableCell
+        cell.titleLabel.text = item.title
+        cell.coverImage.image = item.cover
+        
         UIUtill.dropShadow(cell.back, offset: CGSize(width: 0, height: 3), radius: 4)
         cell.contentView.layer.masksToBounds = false
         cell.clipsToBounds = false
-        cell.titleLabel.text = item.title
-        cell.coverImage.image = item.cover
+        
         cell.editingAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        
         cell.delegate = self
 
         return cell

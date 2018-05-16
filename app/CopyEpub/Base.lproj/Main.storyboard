@@ -81,7 +81,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="6Rq-0h-1tE"/>
+                        <viewLayoutGuide key="safeArea" id="OkP-jO-V6a"/>
                     </view>
                     <connections>
                         <outlet property="bookView" destination="Rij-Po-Ork" id="tR5-v3-lHA"/>
@@ -95,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXc-0N-iy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792.5" y="-187.5"/>
+            <point key="canvasLocation" x="1105" y="-224"/>
         </scene>
     </scenes>
 </document>

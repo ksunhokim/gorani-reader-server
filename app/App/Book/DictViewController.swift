@@ -36,8 +36,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         self.view.backgroundColor = UIColor.white
         let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
 
@@ -77,7 +76,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIUtill.roundView(self.cancelButton)
         self.view.addSubview(self.cancelButton)
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.entries.count
     }

@@ -16,6 +16,7 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var navView: UIView!
     @IBOutlet weak var closeButton: UIButton!
+    
     var wordbook: Wordbook!
     
     override func viewDidLoad() {
@@ -30,28 +31,13 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     fileprivate func layout() {
-
         UIUtill.roundView(self.memorizeButton)
         UIUtill.roundView(self.flashcardButton)
         UIUtill.roundView(self.speakButton)
         UIUtill.roundView(self.sentenceButton)
         UIUtill.dropShadow(self.tableViewBack, offset: CGSize(width: 0, height: 3), radius: 4)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let view = UIView()
-        let label = UILabel()
-        label.text = self.wordbook.name
-        label.sizeToFit()
-        label.alpha = 0
-        view.addSubview(label)
-        view.frame = label.frame
-        
-        self.navigationItem.titleView = view
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
