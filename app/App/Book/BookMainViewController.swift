@@ -1,10 +1,11 @@
 
 import UIKit
 import FolioReaderKit
+import SwipeCellKit
 
 fileprivate let MinActulReadRate = 0.7
 
-class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate, FolioReaderCenterDelegate {
+class BookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FolioReaderDelegate, FolioReaderCenterDelegate, SwipeTableViewCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var books: [Epub]!
@@ -52,6 +53,7 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
+    
 
     func folioReaderDidClose(_ folioReader: FolioReader) {
         self.currentHTML = nil
@@ -71,24 +73,41 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         let book = self.books[indexPath.row]
         
         let config = FolioReaderConfig()
-        config.tintColor = UIUtill.blue
+        config.tintColor = UIUtill.tint
         config.canChangeScrollDirection = false
         config.hideBars = false
         config.scrollDirection = .horizontal
-        
         self.folioReader.presentReader(parentViewController: self, book: book.book!, config: config)
         self.folioReader.readerCenter!.delegate = self
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        
+        return [deleteAction]
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BooksTableCell") as! BooksTableCell
         
         let item = self.books[indexPath.row]
+        UIUtill.dropShadow(cell.back, offset: CGSize(width: 0, height: 3), radius: 4)
+        cell.contentView.layer.masksToBounds = false
+        cell.clipsToBounds = false
         cell.titleLabel.text = item.title
         cell.coverImage.image = item.cover
-        
+        cell.editingAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        cell.delegate = self
+
         return cell
     }
 }

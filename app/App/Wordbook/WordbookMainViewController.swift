@@ -4,9 +4,7 @@ import UIKit
 class WordbookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     
-    var wordbooks: [Wordbook] = [
-    ]
-    
+    var wordbooks: [Wordbook] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,6 +12,11 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.reloadWordbooks()
+    }
+    
+    func reloadWordbooks() {
+        self.wordbooks = Wordbook.get()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,14 +31,11 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: kWordbooksTableCell) as! WordbooksTableCell
         
         let item = self.wordbooks[indexPath.row]
-        cell.textLabel!.text = item.name
+        cell.titleLabel.text = item.name
+        cell.countLabel.text = "\(item.count)"
+        cell.quizIcons[0].isSelected = true
+        UIUtill.dropShadow(cell.back, offset: CGSize(width: 0, height: 3), radius: 4)
 
-//        if item.new {
-//            cell.badge.image = UIImage(named: "circle")
-//        } else {
-//            cell.badge.image = UIImage()
-//        }
-        
         return cell
     }
     

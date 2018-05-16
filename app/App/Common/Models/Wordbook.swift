@@ -52,9 +52,7 @@ class Wordbook {
                 let wordbook = Wordbook(name: try result.get(nameField))
                 wordbook.id = try result.get(idField)
                 wordbook.addedDate = try result.get(addedDateField)
-                if wordbook.id != UnknownWordbookId {
-                    wordbooks.append(wordbook)
-                }
+                wordbooks.append(wordbook)
             } catch {}
         }
         

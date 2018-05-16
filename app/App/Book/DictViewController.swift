@@ -70,7 +70,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(self.tableView)
 
         self.cancelButton = UIButton(frame: CGRect(x: 14, y: view.frame.height - 70, width: view.frame.width - 28, height: 50))
-        self.cancelButton.backgroundColor = UIUtill.blue
+        self.cancelButton.backgroundColor = UIUtill.tint
         self.cancelButton.setTitleColor(UIUtill.white, for: .normal)
         self.cancelButton.setTitle("Cancel", for: .normal)
         self.cancelButton.addTarget(self, action: #selector(onCacnelButton(_:)), for: .touchUpInside)
@@ -123,7 +123,7 @@ class DictViewController: UIViewController, UITableViewDelegate, UITableViewData
         typeButton.contentVerticalAlignment = .center
         typeButton.titleLabel?.sizeToFit()
         typeButton.sizeToFit()
-        typeButton.frame = CGRect(x: view.frame.width -  typeButton.frame.width - 5, y: 5, width: typeButton.frame.width, height: 40)
+        typeButton.frame = CGRect(x: view.frame.width - typeButton.frame.width - 5, y: 5, width: typeButton.frame.width, height: 40)
         UIUtill.roundView(typeButton)
         view.addSubview(typeButton)
         

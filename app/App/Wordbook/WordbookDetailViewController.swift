@@ -11,12 +11,13 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var sentenceButton: UIButton!
     @IBOutlet weak var speakButton: UIButton!
     
+    @IBOutlet weak var tableViewBack: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var navView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
     var wordbook: Wordbook!
     
-    private var headerY: CGFloat = 0
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,14 +30,12 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     fileprivate func layout() {
-        self.headerY = self.headerView.frame.minY
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(self.headerView.frame.height, 0, 0, 0)
-        
+
         UIUtill.roundView(self.memorizeButton)
         UIUtill.roundView(self.flashcardButton)
         UIUtill.roundView(self.speakButton)
         UIUtill.roundView(self.sentenceButton)
+        UIUtill.dropShadow(self.tableViewBack, offset: CGSize(width: 0, height: 3), radius: 4)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,32 +52,12 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.navigationItem.titleView = view
     }
     
-    // header location
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let frame = self.headerView.frame
-        let y = scrollView.contentOffset.y + frame.height
-        self.headerView.frame = CGRect(x: frame.minX, y: self.headerY - y, width: frame.width, height: frame.height)
-        
-        if let titleView = self.navigationItem.titleView {
-            let textView = titleView.subviews[0]
-            if y > titleLabel.frame.minY + titleLabel.frame.height {
-                UIView.animate(withDuration: 0.2, animations: {
-                    textView.alpha = 1
-                }, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    textView.alpha = 0
-                }, completion: nil)
-            }
-        }
-    }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.wordbook.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -88,20 +67,13 @@ class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kWordsTableCell)!
         
-//        cell.textLabel!.text = item.word
-//        self.configureCellWithCorrect(cell, item)
+        let item = self.wordbook.entries[indexPath.row]
+        cell.textLabel!.text = item.word
 
         return cell
     }
     
-    fileprivate func configureCellWithCorrect(_ cell: UITableViewCell, _ item: Word) {
-        let correct = item.correct
-        if correct > 0 {
-            cell.detailTextLabel!.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 255)
-            cell.detailTextLabel!.text = "+\(correct)"
-        } else if correct < 0 {
-            cell.detailTextLabel!.textColor = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
-            cell.detailTextLabel!.text = String(correct)
-        }
+    @IBAction func didPressClose(_ sender: Any) {
+        self.dismiss(animated: true)
     }
 }

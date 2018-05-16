@@ -15,6 +15,9 @@
 		B13393B120A8F19300F34525 /* AuthServices.plist in Resources */ = {isa = PBXBuildFile; fileRef = B13393B020A8F19300F34525 /* AuthServices.plist */; };
 		B13393B320A8F78D00F34525 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B13393B220A8F78D00F34525 /* .gitignore */; };
 		B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */; };
+		B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393B720AB2AE600F34525 /* TabViewController.swift */; };
+		B13393BA20AB6CC400F34525 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; };
+		B13393BC20AB6CCE00F34525 /* SwipeCellKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1352ADD20A341DC007E132C /* DictViewTableCell.xib */; };
 		B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352ADF20A34204007E132C /* DictViewTableCell.swift */; };
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
@@ -80,7 +83,6 @@
 		C78217BD209BC1F300C19E2F /* alice.epub in Resources */ = {isa = PBXBuildFile; fileRef = C78217BC209BC1F300C19E2F /* alice.epub */; };
 		C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78217C0209BCAA900C19E2F /* BooksTableCell.swift */; };
 		C78217CF209BD5A500C19E2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78217D1209BD5A500C19E2F /* Main.storyboard */; };
-		C7905B4320956A7C00CE3D17 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4220956A7C00CE3D17 /* Word.swift */; };
 		C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */; };
 		C7A97415209A5F0C00A41D02 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97414209A5F0C00A41D02 /* Spinner.swift */; };
 		C7A97417209A8FD700A41D02 /* ManagedEpubURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */; };
@@ -137,6 +139,7 @@
 				B143AF8420A4393B003341A3 /* SwiftSoup.framework in CopyFiles */,
 				B13393A520A8DCC800F34525 /* OAuthSwift.framework in CopyFiles */,
 				B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */,
+				B13393BC20AB6CCE00F34525 /* SwipeCellKit.framework in CopyFiles */,
 				C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */,
 				C7362F23209BE2230081B012 /* SQLite.framework in CopyFiles */,
 				C7362F1B209BE2060081B012 /* MenuItemKit.framework in CopyFiles */,
@@ -176,6 +179,8 @@
 		B13393B020A8F19300F34525 /* AuthServices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AuthServices.plist; sourceTree = "<group>"; };
 		B13393B220A8F78D00F34525 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoraniAuthProvider.swift; sourceTree = "<group>"; };
+		B13393B720AB2AE600F34525 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		B13393B920AB6CC400F34525 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
 		B1352ADD20A341DC007E132C /* DictViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DictViewTableCell.xib; sourceTree = "<group>"; };
 		B1352ADF20A34204007E132C /* DictViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewTableCell.swift; sourceTree = "<group>"; };
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
@@ -238,7 +243,6 @@
 		C78217C8209BD32700C19E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C78217D0209BD5A500C19E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C78217D5209BD5C000C19E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C7905B4220956A7C00CE3D17 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbooksTableCell.swift; sourceTree = "<group>"; };
 		C7A97414209A5F0C00A41D02 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		C7A97416209A8FD700A41D02 /* ManagedEpubURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedEpubURL.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7362F22209BE21B0081B012 /* SQLite.framework in Frameworks */,
+				B13393BA20AB6CC400F34525 /* SwipeCellKit.framework in Frameworks */,
 				B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */,
 				B13393A320A8DCC000F34525 /* OAuthSwift.framework in Frameworks */,
 				B143AF8520A43943003341A3 /* SwiftSoup.framework in Frameworks */,
@@ -290,6 +295,7 @@
 		702F24C22323D91C0487792D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B13393B920AB6CC400F34525 /* SwipeCellKit.framework */,
 				B13393A020A8DCBF00F34525 /* OAuthSwift.framework */,
 				B143AF8220A438FE003341A3 /* SwiftSoup.framework */,
 				B19942E520A1BCA4004CF61A /* Regex.framework */,
@@ -314,6 +320,14 @@
 				B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		B13393B620AB2AD500F34525 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				B13393B720AB2AE600F34525 /* TabViewController.swift */,
+			);
+			path = Tab;
 			sourceTree = "<group>";
 		};
 		B143AF8620A4704F003341A3 /* Common */ = {
@@ -398,7 +412,6 @@
 			children = (
 				C7403AEA209176D800099119 /* WordbookMainViewController.swift */,
 				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
-				C7905B4220956A7C00CE3D17 /* Word.swift */,
 				C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */,
 			);
 			path = Wordbook;
@@ -430,6 +443,7 @@
 		C74CEFD6208C899F002765D6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				B13393B620AB2AD500F34525 /* Tab */,
 				B143AF8620A4704F003341A3 /* Common */,
 				C78217BB209BC1CF00C19E2F /* Resources */,
 				C7C1E3262098058500C909D7 /* app.entitlements */,
@@ -701,7 +715,6 @@
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				B143B05C20A47617003341A3 /* Keys.swift in Sources */,
-				C7905B4320956A7C00CE3D17 /* Word.swift in Sources */,
 				B143B05820A47617003341A3 /* IPA.swift in Sources */,
 				B143B04F20A47613003341A3 /* Dict.swift in Sources */,
 				B143B05520A47613003341A3 /* DictDefinition.swift in Sources */,
@@ -713,6 +726,7 @@
 				B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */,
 				B143B04D20A47613003341A3 /* UserData.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
+				B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */,
 				B143B05220A47613003341A3 /* POS.swift in Sources */,
 				C78217C1209BCAA900C19E2F /* BooksTableCell.swift in Sources */,
 				B158D46A20A59A7600339CCC /* Wordbook.swift in Sources */,
