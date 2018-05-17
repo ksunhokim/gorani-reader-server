@@ -1,4 +1,3 @@
-
 import UIKit
 
 class WordbookDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {

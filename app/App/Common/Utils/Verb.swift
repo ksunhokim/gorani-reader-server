@@ -5,8 +5,7 @@ enum VerbType {
     case past
     case complete
     case both
-    
-    
+
     static fileprivate func appendPastExceptDuplicate(arr: inout [(String, VerbType?)], element: (String, VerbType?)) {
         for ele in arr.indices {
             if element.0 == arr[ele].0 {

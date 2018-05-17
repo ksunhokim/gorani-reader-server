@@ -1,4 +1,3 @@
-
 import UIKit
 
 fileprivate let MaxChar = 120

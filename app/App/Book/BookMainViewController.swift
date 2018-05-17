@@ -1,4 +1,3 @@
-
 import UIKit
 import FolioReaderKit
 import SwipeCellKit
@@ -105,8 +104,6 @@ class BookMainViewController: UIViewController, UITableViewDataSource, UITableVi
         UIUtill.dropShadow(cell.back, offset: CGSize(width: 0, height: 3), radius: 4)
         cell.contentView.layer.masksToBounds = false
         cell.clipsToBounds = false
-        
-        cell.editingAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
         cell.delegate = self
 

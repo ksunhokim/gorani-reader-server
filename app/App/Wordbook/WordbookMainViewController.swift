@@ -1,4 +1,3 @@
-
 import UIKit
 
 class WordbookMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,  TabViewControllerDelegate {
@@ -21,12 +20,27 @@ class WordbookMainViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         self.wordbooks = Wordbook.get()
     }
 
     @objc func openAddAction(_ sender: Any) {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "WordbookAddModalViewController")
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "ModalViewController") as! ModalViewController
+        vc.dialog = NSLocalizedString("WordbookAddModalDialog", comment: "")
+        vc.subDialog = NSLocalizedString("WordbookAddModalSubDialog", comment: "")
+        vc.completion = self.addWordbook
         self.present(vc, animated: true)
+    }
+    
+    func addWordbook(_ name: String) {
+        let wordbook = Wordbook(name: name)
+        do {
+            try wordbook.add()
+            self.wordbooks.insert(wordbook, at: 0)
+            self.tableView.reloadData()
+        } catch {
+            assertionFailure()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

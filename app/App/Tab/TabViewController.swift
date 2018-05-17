@@ -23,10 +23,13 @@ class TabViewController: UIViewController {
 
         let bookViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookMainViewController")
         let wordbookViewController = self.storyboard!.instantiateViewController(withIdentifier: "WordbookMainViewController")
+        let unknownWordViewController = self.storyboard!.instantiateViewController(withIdentifier: "UnknownWordMainViewController")
         
-        self.viewControllers = [bookViewController, wordbookViewController]
+        self.viewControllers = [bookViewController, wordbookViewController, unknownWordViewController]
         
         self.didPressTab(self.buttons[0])
+        
+        self.layout()
     }
     
     fileprivate func layout() {

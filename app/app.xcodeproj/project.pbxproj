@@ -18,7 +18,7 @@
 		B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393B720AB2AE600F34525 /* TabViewController.swift */; };
 		B13393BA20AB6CC400F34525 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; };
 		B13393BC20AB6CCE00F34525 /* SwipeCellKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B13393B920AB6CC400F34525 /* SwipeCellKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B13393C020ACB86C00F34525 /* WordbookAddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */; };
+		B13393C020ACB86C00F34525 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13393BF20ACB86C00F34525 /* ModalViewController.swift */; };
 		B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1352ADD20A341DC007E132C /* DictViewTableCell.xib */; };
 		B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1352ADF20A34204007E132C /* DictViewTableCell.swift */; };
 		B142EB1C209D42670047D6EA /* UserDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B142EB1B209D42670047D6EA /* UserDataTest.swift */; };
@@ -63,6 +63,10 @@
 		B19942E820A1BCB5004CF61A /* Regex.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B19942E520A1BCA4004CF61A /* Regex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19942E920A1BCE0004CF61A /* FolioReaderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C63EAF209946A50093CC02 /* FolioReaderKit.framework */; };
 		B19942F320A21262004CF61A /* DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19942F220A21262004CF61A /* DictViewController.swift */; };
+		B1A2125320ACDDA90067A6DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1A2125120ACDC2F0067A6DD /* Localizable.strings */; };
+		B1A2125620ACEA120067A6DD /* UnknownWordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2125520ACEA120067A6DD /* UnknownWordMainViewController.swift */; };
+		B1A2125820ACEE460067A6DD /* UnknownWordTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2125720ACEE460067A6DD /* UnknownWordTableDelegate.swift */; };
+		B1A2125A20ACEE5E0067A6DD /* UnknownWordBookTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2125920ACEE5E0067A6DD /* UnknownWordBookTableDelegate.swift */; };
 		C7362F18209BE2060081B012 /* AEXML.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0D209BE1FE0081B012 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F19209BE2060081B012 /* FontBlaster.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0A209BE1FE0081B012 /* FontBlaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7362F1A209BE2060081B012 /* JSQWebViewController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -182,7 +186,7 @@
 		B13393B420A9001F00F34525 /* GoraniAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoraniAuthProvider.swift; sourceTree = "<group>"; };
 		B13393B720AB2AE600F34525 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		B13393B920AB6CC400F34525 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
-		B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookAddModalViewController.swift; sourceTree = "<group>"; };
+		B13393BF20ACB86C00F34525 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		B1352ADD20A341DC007E132C /* DictViewTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DictViewTableCell.xib; sourceTree = "<group>"; };
 		B1352ADF20A34204007E132C /* DictViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewTableCell.swift; sourceTree = "<group>"; };
 		B142EB1B209D42670047D6EA /* UserDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTest.swift; sourceTree = "<group>"; };
@@ -221,6 +225,10 @@
 		B19942DC20A1B072004CF61A /* dict.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dict.db; sourceTree = "<group>"; };
 		B19942E520A1BCA4004CF61A /* Regex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Regex.framework; path = Carthage/Build/iOS/Regex.framework; sourceTree = "<group>"; };
 		B19942F220A21262004CF61A /* DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictViewController.swift; sourceTree = "<group>"; };
+		B1A2125220ACDC2F0067A6DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B1A2125520ACEA120067A6DD /* UnknownWordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownWordMainViewController.swift; sourceTree = "<group>"; };
+		B1A2125720ACEE460067A6DD /* UnknownWordTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownWordTableDelegate.swift; sourceTree = "<group>"; };
+		B1A2125920ACEE5E0067A6DD /* UnknownWordBookTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownWordBookTableDelegate.swift; sourceTree = "<group>"; };
 		C7362F08209BE1FE0081B012 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = FolioReaderKit/Carthage/Build/iOS/ZipArchive.framework; sourceTree = "<group>"; };
 		C7362F0A209BE1FE0081B012 /* FontBlaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontBlaster.framework; path = FolioReaderKit/Carthage/Build/iOS/FontBlaster.framework; sourceTree = "<group>"; };
 		C7362F0B209BE1FE0081B012 /* JSQWebViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSQWebViewController.framework; path = FolioReaderKit/Carthage/Build/iOS/JSQWebViewController.framework; sourceTree = "<group>"; };
@@ -409,13 +417,23 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		B1A2125420ACE9F30067A6DD /* Unknown */ = {
+			isa = PBXGroup;
+			children = (
+				B1A2125520ACEA120067A6DD /* UnknownWordMainViewController.swift */,
+				B1A2125720ACEE460067A6DD /* UnknownWordTableDelegate.swift */,
+				B1A2125920ACEE5E0067A6DD /* UnknownWordBookTableDelegate.swift */,
+			);
+			path = Unknown;
+			sourceTree = "<group>";
+		};
 		C7403AE72091767D00099119 /* Wordbook */ = {
 			isa = PBXGroup;
 			children = (
 				C7403AEA209176D800099119 /* WordbookMainViewController.swift */,
 				C751A8F72092838000E7B04E /* WordbookDetailViewController.swift */,
 				C7905B4420956F0300CE3D17 /* WordbooksTableCell.swift */,
-				B13393BF20ACB86C00F34525 /* WordbookAddModalViewController.swift */,
+				B13393BF20ACB86C00F34525 /* ModalViewController.swift */,
 			);
 			path = Wordbook;
 			sourceTree = "<group>";
@@ -446,6 +464,7 @@
 		C74CEFD6208C899F002765D6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				B1A2125420ACE9F30067A6DD /* Unknown */,
 				B13393B620AB2AD500F34525 /* Tab */,
 				B143AF8620A4704F003341A3 /* Common */,
 				C78217BB209BC1CF00C19E2F /* Resources */,
@@ -456,6 +475,7 @@
 				C74CEFD7208C899F002765D6 /* AppDelegate.swift */,
 				C74CEFE1208C89A1002765D6 /* Assets.xcassets */,
 				C74CEFDB208C899F002765D6 /* Main.storyboard */,
+				B1A2125120ACDC2F0067A6DD /* Localizable.strings */,
 				C74CEFE3208C89A1002765D6 /* LaunchScreen.storyboard */,
 				C74CEFE6208C89A1002765D6 /* Info.plist */,
 				C74CEFDE208C899F002765D6 /* app.xcdatamodeld */,
@@ -681,6 +701,7 @@
 				B1352ADE20A341DD007E132C /* DictViewTableCell.xib in Resources */,
 				B19942DD20A1B072004CF61A /* dict.db in Resources */,
 				C74CEFE2208C89A1002765D6 /* Assets.xcassets in Resources */,
+				B1A2125320ACDDA90067A6DD /* Localizable.strings in Resources */,
 				B13393B120A8F19300F34525 /* AuthServices.plist in Resources */,
 				C78217BD209BC1F300C19E2F /* alice.epub in Resources */,
 				B13393B320A8F78D00F34525 /* .gitignore in Resources */,
@@ -715,6 +736,7 @@
 				C7905B4520956F0300CE3D17 /* WordbooksTableCell.swift in Sources */,
 				B143B05B20A47617003341A3 /* UIUtill.swift in Sources */,
 				B1352AE020A34204007E132C /* DictViewTableCell.swift in Sources */,
+				B1A2125820ACEE460067A6DD /* UnknownWordTableDelegate.swift in Sources */,
 				C7C63E92209905900093CC02 /* BookMainViewController.swift in Sources */,
 				C751A8F82092838000E7B04E /* WordbookDetailViewController.swift in Sources */,
 				B143B05C20A47617003341A3 /* Keys.swift in Sources */,
@@ -727,7 +749,7 @@
 				B182550020A5AA4A00ADB1AC /* WordbookEntry.swift in Sources */,
 				B143B05720A47617003341A3 /* Helper.swift in Sources */,
 				B13393B520A9001F00F34525 /* GoraniAuthProvider.swift in Sources */,
-				B13393C020ACB86C00F34525 /* WordbookAddModalViewController.swift in Sources */,
+				B13393C020ACB86C00F34525 /* ModalViewController.swift in Sources */,
 				B143B04D20A47613003341A3 /* UserData.swift in Sources */,
 				C74CEFD8208C899F002765D6 /* AppDelegate.swift in Sources */,
 				B13393B820AB2AE600F34525 /* TabViewController.swift in Sources */,
@@ -739,8 +761,10 @@
 				B143B04C20A47613003341A3 /* Epub.swift in Sources */,
 				B143B05A20A47617003341A3 /* Verb.swift in Sources */,
 				B13393A820A8E13400F34525 /* AuthViewController.swift in Sources */,
+				B1A2125A20ACEE5E0067A6DD /* UnknownWordBookTableDelegate.swift in Sources */,
 				B143B05620A47617003341A3 /* FileUtill.swift in Sources */,
 				B19942F320A21262004CF61A /* DictViewController.swift in Sources */,
+				B1A2125620ACEA120067A6DD /* UnknownWordMainViewController.swift in Sources */,
 				C74CEFE0208C899F002765D6 /* app.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -797,6 +821,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B1A2125120ACDC2F0067A6DD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1A2125220ACDC2F0067A6DD /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		C74CEFDB208C899F002765D6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

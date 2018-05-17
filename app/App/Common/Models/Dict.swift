@@ -1,8 +1,5 @@
-
 import Foundation
 import SQLite
-
-
 
 class Dict {
     fileprivate static let dictURL: URL = {

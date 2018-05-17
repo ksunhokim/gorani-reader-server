@@ -33,6 +33,7 @@ class ShareViewController: UIViewController {
     fileprivate func layout() {
         UIUtill.roundView(self.okayButton)
         UIUtill.roundView(self.difficultyLabel)
+        UIUtill.dropShadow(self.coverView, offset: CGSize(width: 0, height: 4), radius: 5, alpha: 0.25)
     }
     
     fileprivate func handleAttachment() {
@@ -65,7 +66,7 @@ class ShareViewController: UIViewController {
                 self.dialogLabel.text =  NSLocalizedString("CopyEpubConfirmDialog", comment: "")
                 self.okayButton.isHidden = false
                 self.difficultyLabel.text = self.getDifficultyString(difficulty)
-            }
+                }
         } catch let err as ShareError {
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()
@@ -82,9 +83,9 @@ class ShareViewController: UIViewController {
 
     fileprivate func getDifficultyString(_ difficulty: Double) -> String {
         if difficulty > 0.5 {
-            return "이 책은 읽기 상당히 어렵습니다"
+            return NSLocalizedString("HardBook", comment: "")
         } else {
-            return "이 책은 읽기 쉽습니다"
+            return NSLocalizedString("EasyBook", comment: "")
         }
     }
    
@@ -100,7 +101,7 @@ class ShareViewController: UIViewController {
     fileprivate func handleError(_ e: ShareError) {
         switch e {
         case .notNew:
-            self.dialogLabel.text = "이미 있는 책입니다"
+            self.dialogLabel.text = NSLocalizedString("ExistingBook", comment: "")
             self.bookView.isHidden = true
         default:
             self.dialogLabel.text = "AsdASd"

@@ -4,6 +4,7 @@ import SQLite
 fileprivate let table = Table("wordbooks")
 fileprivate let idField = Expression<Int64>("id")
 fileprivate let addedDateField = Expression<Date>("added_date")
+fileprivate let updatedDateField = Expression<Date>("updated_date")
 fileprivate let nameField = Expression<String>("name")
 
 fileprivate let UnknownWordbookId: Int64 = 1
@@ -18,6 +19,7 @@ class Wordbook {
     var id: Int64?
     var name: String
     var addedDate: Date
+    var updatedData: Date
     
     static let unknown: Wordbook = {
         let wordbook = Wordbook(name: "")
@@ -37,6 +39,7 @@ class Wordbook {
     init(name: String) {
         self.name = name
         self.addedDate = Date()
+        self.updatedData = Date()
     }
     
     class func get() -> [Wordbook] {
@@ -51,6 +54,7 @@ class Wordbook {
             do{
                 let wordbook = Wordbook(name: try result.get(nameField))
                 wordbook.id = try result.get(idField)
+                wordbook.updatedData = try result.get(updatedDateField)
                 wordbook.addedDate = try result.get(addedDateField)
                 wordbooks.append(wordbook)
             } catch {}
@@ -88,6 +92,7 @@ class Wordbook {
     func add() throws {
         self.id = try UserData.shared.connection.run(table.insert(
             addedDateField <- self.addedDate,
+            updatedDateField <- self.updatedData,
             nameField <- self.name
         ))
     }
@@ -112,6 +117,7 @@ class Wordbook {
         if counts == 0 {
             let id = try connection.run(table.insert(
                 addedDateField <- Date(),
+                updatedDateField <- Date(),
                 nameField <- ""
             ))
             assert(id == UnknownWordbookId)
@@ -121,6 +127,7 @@ class Wordbook {
     class func prepare(_ connection: Connection) throws {
         try connection.run(table.create(ifNotExists: true) { t in
             t.column(idField, primaryKey: true)
+            t.column(updatedDateField)
             t.column(addedDateField)
             t.column(nameField)
         })
