@@ -5,19 +5,28 @@ import (
 )
 
 type Config struct {
-	MysqlURL           string
-	RedisURL           string
-	MLQueuePort        int
-	MLQueueSize        int
-	ApiPort            int
-	GoMaxProcs         int
-	ConnectionPoolSize int
+	MysqlURL                string `yaml:"mysql_url"`
+	RedisURL                string `yaml:"redis_url"`
+	ApiAddress              string `yaml:"api_address"`
+	GoMaxProcs              int    `yaml:"go_max_procs"`
+	MysqlConnectionPoolSize int    `yaml:"mysql_connection_pool_size"`
+	RedisConnectionPoolSize int    `yaml:"redis_connection_pool_size"`
+	LoggerType              string `yaml:"logger_type"`
+	FluentHost              string `yaml:"fluent_host"`
+	FluentPort              int    `yaml:"fluent_port"`
+	SecretKey               string `yaml:"secret_key"`
 }
 
-func NewConfig(bytes []byte) (Config, error) {
+const (
+	LoggerTypeFluent = "fluentd"
+	LoggerTypeStdout = "stdout"
+	LoggerTypeBoth   = "both"
+)
+
+func NewConfig(yamlBytes []byte) (Config, error) {
 	conf := Config{}
 
-	err := yaml.Unmarshal(bytes, &conf)
+	err := yaml.Unmarshal(yamlBytes, &conf)
 	if err != nil {
 		return Config{}, err
 	}

@@ -7,13 +7,6 @@ import (
 	"github.com/sunho/gorani-reader/server/api/httputil"
 )
 
-type TokenStoreDelegate interface {
-	Id(token string) int64
-	Token(user User) string
-}
-
-var TokenStore TokenStoreDelegate = nil
-
 func FetchUser(serviceName string, token string) (User, error) {
 	service, err := GetService(serviceName)
 	if err != nil {
