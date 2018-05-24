@@ -10,6 +10,7 @@ import (
 	"github.com/sunho/gorani-reader/server/api/config"
 	"github.com/sunho/gorani-reader/server/api/gorani"
 	"github.com/sunho/gorani-reader/server/api/log"
+	"github.com/sunho/gorani-reader/server/api/router"
 )
 
 type Server struct {
@@ -41,7 +42,7 @@ func (s *Server) ListenAndServe() {
 }
 
 func NewServer(gorn *gorani.Gorani) *Server {
-	r := NewRouter(gorn)
+	r := router.NewRouter(gorn)
 
 	hs := &http.Server{
 		Handler:        r,

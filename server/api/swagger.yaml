@@ -1,0 +1,650 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: gorani reader
+tags:
+- name: user
+- name: wordbook
+- name: word
+- name: book
+- name: memory
+- name: quiz
+
+# schemes:
+# - http
+paths:
+  /user/createWithOauth:
+    post:
+      tags:
+      - user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required: 
+            - token
+            - service
+          properties:
+            token:
+              type: string
+            service:
+              type: string
+              enum: [naver, google, facebook]
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              api_key:
+                type: string
+        400:
+          description: Invalid input
+        409:
+          description: Already exist
+  /wordbook:
+    get:
+      tags:
+      - wordbook
+      summary: List all wordbooks
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Wordbook'
+        403:
+          description: Permission denied
+      security: 
+      - api_key: []
+  /wordbook/{uuid}:
+    post:
+      tags:
+      - wordbook
+      summary: Create a wordbook
+      consumes:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        format: uuid
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Wordbook'
+      responses:
+        201:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+        409:
+          description: Already exist
+      security:
+      - api_key: []
+    put:
+      tags:
+      - wordbook
+      summary: Chnage the wordbook
+      consumes:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        format: uuid
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Wordbook'
+      responses:
+        200:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+        404:
+          description: No such wordbook
+        409:
+          description: Conflict
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - wordbook
+      summary: Delete the wordbook
+      consumes:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: Success
+        403:
+          description: Permission denied
+        404:
+          description: No such wordbook
+      security:
+      - api_key: []
+  /wordbook/{uuid}/quiz:
+    post:
+      tags:
+      - wordbook
+      summary: Add a quiz history
+      consumes:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        format: uuid
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Quiz'
+      responses:
+        201:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /wordbook/{uuid}/entries:
+    get:
+      tags:
+      - wordbook
+      summary: Get entries from the wordbook
+      produces:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: UUID of the wordbook
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WordbookEntry'
+        403:
+          description: Permission denied
+        404:
+          description: No such wordbook
+      security:
+      - api_key: []
+    put:
+      tags:
+      - wordbook
+      summary: Change entries of the wordbook
+      consumes:
+      - application/json
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: UUID of the wordbook
+        type: string
+        format: uuid
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            update_date:
+              type: string
+              format: date-time
+            entries:
+              type: array
+              items:
+                $ref: '#/definitions/WordbookEntry'
+      responses:
+        200:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+        404:
+          description: No such wordbook
+        409:
+          description: Conflict
+      security:
+      - api_key: []
+  /word/known:
+    get:
+      tags:
+      - word
+      summary: Get word ids of known words
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+        403:
+          description: Permission denied
+      security:
+        - api_key: []
+    post:
+      tags:
+      - word
+      summary: Add known word
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            word_id:
+              type: integer
+              format: int64
+      responses:
+        201:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+        409:
+          description: Conflict
+      security:
+      - api_key: []
+  /word/unknown/choice:
+    post:
+      tags:
+      - memory
+      summary: Send definition choice data
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            sentence:
+              type: string
+            word:
+              type: string
+            word_index:
+              type: integer
+              format: int64
+            definitions:
+              type: array
+              items:
+                type: integer
+                format: int64
+            choice:
+              type: integer
+              format: int64
+      responses:
+        201:
+          description: Success
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /word/unknown:
+    get:
+      tags:
+      - word
+      summary: Get unknown wordbook
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Wordbook'
+        403:
+          description: Permission denied
+      security: 
+      - api_key: []
+  /word/unknown/entries:
+    get:
+      tags:
+      - word
+      summary: Get entries from the unknown wordbook
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WordbookEntry'
+        403:
+          description: Permission denied
+      security:
+      - api_key: [] 
+    post:
+      tags:
+      - word
+      summary: Add an entry to unknown wordbook
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/WordbookEntry'
+      responses:
+        201:
+          description: Success
+        400:
+          description: Invalid input
+        403:
+          description: Permission denied
+        409:
+          description: Conflict
+      security:
+      - api_key: []
+  /book/analyze:
+    post:
+      tags:
+      - book
+      summary: Analyze the sentences from html
+      consumes:
+      - text/html
+      produces:
+      - application/json
+      responses:
+        400:
+          description: Invalid input
+        201:
+          description: Success
+          schema:
+            type: object
+            properties:
+              analyzed_sentences:
+                type: array
+                items:
+                  $ref: '#/definitions/AnalyzedSentence'
+              chuncked_html:
+                type: string
+                description: chuncked html string
+              
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /book/recommended:
+   get:
+    tags:
+    - book
+    summary: Get recommended books
+    produces:
+    - application/json
+    responses:
+      200:
+        description: Success
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/Book'
+      403:
+        description: Permission denied
+    security:
+    - api_key: []
+  /memory/sentence:
+    post:
+      tags:
+      - memory
+      summary: Create memorizable sentences from a word
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            word:
+              type: string
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Sentence'
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /memory/sentence/choice:
+    post:
+      tags:
+      - memory
+      summary: Send sentence choice data
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            sentences:
+              type: array
+              items:
+                $ref: '#/definitions/Sentence'
+            choice:
+              type: integer
+              format: int64
+      responses:
+        201:
+          description: Success
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /memory/picture:
+    post:
+      tags:
+      - memory
+      summary: Get a picture that represents a word
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            word:
+              type: string
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Success
+          schema:
+            type: object
+            properties:
+              picture: 
+                type: string
+                format: url
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+  /quiz/sentence:
+    post:
+      tags:
+      - quiz
+      summary: Check a sentence's fluency
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            sentence:
+              type: string
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Success
+          schema:
+            type: object
+            properties:
+              correct: 
+                type: integer
+              alternative:
+                type: string
+        403:
+          description: Permission denied
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: X-API-Key
+    in: header
+definitions:
+  Wordbook:
+    type: object
+    properties:
+      uuid:
+        type: string
+        format: uuid
+      name:
+        type: string
+      update_date:
+        type: string
+        format: date-time
+      needed_quizes:
+        type: array
+        items:
+          type: string
+          enum: ["flashcard","speak", "sentence"]
+  WordbookEntry:
+    type: object
+    properties:
+      definition_id:
+        type: integer
+        format: int32
+      update_date:
+        type: string
+        format: date-time
+      source_book: 
+        type: string
+      source_sentence:
+        type: string
+  AnalyzedSentence:
+    type: object
+    properties:
+      original:
+        type: string
+      korean:
+        type: string
+      poses:
+        type: array
+        items:
+          type: integer
+          format: int64
+  Book:
+    type: object
+    properties: 
+      name:
+        type: string
+      cover_image:
+        type: string
+        format: url
+      author:
+        type: string
+      publish_date:
+        type: string
+        format: date
+      difficulty:
+        type: integer
+  Sentence:
+    type: object
+    properties:
+      sentence:
+        type: string
+      source_book:
+        type: string
+      priority:
+        type: integer
+      cause:
+        type: string
+        enum: ["rhyme", "letters", "popularity", "ml"]
+  Quiz:
+    type: object
+    properties:
+      wordbook_uuid:
+        type: string
+        format: uuid
+      type:
+        type: string
+        enum: ["flashcard", "speak", "sentence"]
+      ended_date:
+        type: string
+        format: date-time
+      entries:
+        type: array
+        items:
+          $ref: '#/definitions/QuizEntry'
+  QuizEntry:
+    type: object
+    properties:
+      definition_id:
+        type: integer
+        format: int64
+      accuracy:
+        type: integer
+        
+basePath: /gorani-reader/Gorani-reader/1.0.0
+schemes:
+ - https

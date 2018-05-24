@@ -1,4 +1,4 @@
-package server
+package router
 
 func (r *Router) registerHandlers() {
 
