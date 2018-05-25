@@ -2,19 +2,22 @@ package gorani
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	"github.com/go-redis/redis"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/sunho/gorani-reader/server/api/auth"
 	"github.com/sunho/gorani-reader/server/api/config"
 	"github.com/sunho/gorani-reader/server/api/log"
 )
 
 type Gorani struct {
-	Config config.Config
-	Mysql  *gorm.DB
-	Redis  *redis.Client
-	Logger log.Logger
+	Config   config.Config
+	Mysql    *gorm.DB
+	Redis    *redis.Client
+	Logger   log.Logger
+	Services auth.Services
 }
 
 func NewGorani(conf config.Config) (*Gorani, error) {
@@ -33,14 +36,31 @@ func NewGorani(conf config.Config) (*Gorani, error) {
 		return nil, err
 	}
 
+	s, err := createServices(conf)
+
 	gorn := &Gorani{
-		Config: conf,
-		Mysql:  mysql,
-		Redis:  redis,
-		Logger: l,
+		Config:   conf,
+		Mysql:    mysql,
+		Redis:    redis,
+		Logger:   l,
+		Services: s,
 	}
 
 	return gorn, nil
+}
+
+func createServices(conf config.Config) (auth.Services, error) {
+	bytes, err := ioutil.ReadFile(conf.ServicesUrl)
+	if err != nil {
+		return auth.Services{}, err
+	}
+
+	services, err := auth.NewServices(bytes)
+	if err != nil {
+		return auth.Services{}, err
+	}
+
+	return services, nil
 }
 
 func createLogger(conf config.Config) (log.Logger, error) {

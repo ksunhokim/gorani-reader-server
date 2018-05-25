@@ -21,6 +21,7 @@ func NewFluentLogger(host string, port int) (*FluentLogger, error) {
 	conf := fluent.Config{
 		FluentHost: host,
 		FluentPort: port,
+		Async:      true,
 	}
 
 	flu, err := fluent.New(conf)

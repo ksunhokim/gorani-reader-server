@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"time"
 
 	"github.com/sunho/gorani-reader/server/api/config"
@@ -22,14 +23,14 @@ func (s *Server) ListenAndServe() {
 	// graceful shutdown
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
-
 	go func() {
 		s.logger.Log(log.TagSystem, log.M{
 			"info": "begin listening :" + s.Addr,
 		})
 		if err := s.Server.ListenAndServe(); err != nil {
 			s.logger.Log(log.TagSystem, log.M{
-				"panic": err,
+				"panic": err.Error(),
+				"stack": string(debug.Stack()),
 			})
 			panic(err)
 		}
@@ -43,6 +44,8 @@ func (s *Server) ListenAndServe() {
 
 func NewServer(gorn *gorani.Gorani) *Server {
 	r := router.NewRouter(gorn)
+
+	gorn.Logger.Log(log.TagConfig, gorn.Config)
 
 	hs := &http.Server{
 		Handler:        r,

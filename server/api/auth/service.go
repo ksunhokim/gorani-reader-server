@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	selector "github.com/sunho/json-selector"
+	yaml "gopkg.in/yaml.v2"
 )
 
 type User struct {
@@ -14,13 +15,26 @@ type User struct {
 }
 
 type Service struct {
-	Name    string
-	BaseUrl string
+	Name    string `yaml:"name"`
+	BaseUrl string `yaml:"base_url"`
 
-	UserEndPoint     string
-	UsernameSelector string
-	AvatorSelector   string
-	IdSelector       string
+	UserEndPoint     string `yaml:"user_end_point"`
+	UsernameSelector string `yaml:"username_selector"`
+	AvatorSelector   string `yaml:"avator_selector"`
+	IdSelector       string `yaml:"id_selector"`
+}
+
+type Services []Service
+
+func NewServices(yamlBytes []byte) (Services, error) {
+	conf := Services{}
+
+	err := yaml.Unmarshal(yamlBytes, &conf)
+	if err != nil {
+		return Services{}, err
+	}
+
+	return conf, nil
 }
 
 func (s *Service) GetUserFromPayload(payload []byte) (User, error) {
@@ -48,10 +62,8 @@ func (s *Service) GetUserFromPayload(payload []byte) (User, error) {
 	return user, nil
 }
 
-var services = []Service{}
-
-func GetService(name string) (Service, error) {
-	for _, service := range services {
+func (s *Services) GetService(name string) (Service, error) {
+	for _, service := range *s {
 		if service.Name == name {
 			return service, nil
 		}
@@ -59,12 +71,12 @@ func GetService(name string) (Service, error) {
 	return Service{}, fmt.Errorf("couldn't find such service")
 }
 
-func AddService(service Service) error {
-	_, err := GetService(service.Name)
+func (s *Services) AddService(service Service) error {
+	_, err := s.GetService(service.Name)
 	if err == nil {
 		return fmt.Errorf("already exist")
 	}
 
-	services = append(services, service)
+	*s = append(*s, service)
 	return nil
 }

@@ -7,8 +7,8 @@ import (
 	"github.com/sunho/gorani-reader/server/api/httputil"
 )
 
-func FetchUser(serviceName string, token string) (User, error) {
-	service, err := GetService(serviceName)
+func (s *Services) FetchUser(serviceName string, token string) (User, error) {
+	service, err := s.GetService(serviceName)
 	if err != nil {
 		return User{}, err
 	}

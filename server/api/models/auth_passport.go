@@ -7,6 +7,9 @@ type OauthService struct {
 	Name string `gorm:"column:oauth_service_name"`
 }
 
+func (OauthService) TableName() string {
+	return "oauth_service"
+}
 func GetOauthServiceNameByCode(db *gorm.DB, code int) (string, error) {
 	service := OauthService{}
 	if err := db.

@@ -8,14 +8,22 @@ import (
 )
 
 type User struct {
-	Id           int       `gorm:"column:user_id"`
-	Name         string    `gorm:"column:name"`
+	Id   int    `gorm:"column:user_id;primary_key"`
+	Name string `gorm:"column:user_name"`
+}
+
+func (User) TableName() string {
+	return "user"
+}
+
+type UserDetail struct {
+	Id           int       `gorm:"column:user_id;primary_key"`
 	ProfileImage string    `gorm:"column:user_profile_image"`
 	AddedDate    time.Time `gorm:"column:user_added_date"`
 }
 
-func (User) TableName() string {
-	return "user_with_detail"
+func (UserDetail) TableName() string {
+	return "user_detail"
 }
 
 func GetUser(db *gorm.DB, id int) (User, error) {
@@ -29,7 +37,7 @@ func GetUser(db *gorm.DB, id int) (User, error) {
 	return out, nil
 }
 
-func CreateOrGetUserByOauth(db *gorm.DB, user auth.User) (_ User, err error) {
+func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 	passport := OauthPassport{}
 
 	code, err := GetOauthServiceCodeByName(db, user.Service)
@@ -56,7 +64,7 @@ func CreateOrGetUserByOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 				oauth_user_id = ?
 			LOCK IN SHARE MODE;`,
 			code, user.Id).
-		First(&passport); result.RecordNotFound() {
+		Scan(&passport); result.RecordNotFound() {
 		return createUser(tx, user)
 	} else if err = result.Error; err != nil {
 		return User{}, err
@@ -72,11 +80,18 @@ func createUser(db *gorm.DB, user auth.User) (User, error) {
 	}
 
 	newUser := User{
-		Name:         user.Username,
+		Name: user.Username,
+	}
+	if err = db.Create(&newUser).Error; err != nil {
+		return User{}, err
+	}
+
+	newUserDetail := UserDetail{
+		Id:           newUser.Id,
 		ProfileImage: user.Avator,
 		AddedDate:    time.Now().UTC(),
 	}
-	if err = db.Create(&newUser).Error; err != nil {
+	if err = db.Create(&newUserDetail).Error; err != nil {
 		return User{}, err
 	}
 

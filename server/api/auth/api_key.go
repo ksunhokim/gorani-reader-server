@@ -5,21 +5,22 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"encoding/base64"
+	"fmt"
 	"io"
 	"strconv"
 	"strings"
 )
 
-func IdFromToken(key []byte, token string, name string) int {
+func IdFromApiKey(secretKey string, token string, name string) (int, error) {
 	cipherText, _ := base64.URLEncoding.DecodeString(token)
 
-	block, err := aes.NewCipher(key)
+	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
-		return -1
+		return -1, err
 	}
 
 	if len(cipherText) < aes.BlockSize {
-		return -1
+		return -1, fmt.Errorf("Invalid length")
 	}
 
 	iv := cipherText[:aes.BlockSize]
@@ -33,27 +34,27 @@ func IdFromToken(key []byte, token string, name string) int {
 
 	arr := strings.Split(text, "@")
 	if len(arr) <= 1 {
-		return -1
+		return -1, fmt.Errorf("Invalid key")
 	}
 
 	idPart := arr[0]
 	namePart := strings.Join(arr[1:], "@")
 	if namePart != name {
-		return -1
+		return -1, fmt.Errorf("Name doesn't match")
 	}
 
 	i, err := strconv.Atoi(idPart)
 	if err != nil {
-		return -1
+		return -1, err
 	}
 
-	return i
+	return i, nil
 }
 
-func TokeFromId(key []byte, id int, name string) string {
-	block, err := aes.NewCipher(key)
+func ApiKeyFromId(secretKey string, id int, name string) (string, error) {
+	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
-		return err.Error()
+		return "", err
 	}
 
 	text := strconv.Itoa(id) + "@" + name
@@ -62,11 +63,11 @@ func TokeFromId(key []byte, id int, name string) string {
 
 	iv := cipherText[:aes.BlockSize]
 	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
-		return err.Error()
+		return "", err
 	}
 
 	stream := cipher.NewCFBEncrypter(block, iv)
 	stream.XORKeyStream(cipherText[aes.BlockSize:], plainText)
 
-	return base64.URLEncoding.EncodeToString(cipherText)
+	return base64.URLEncoding.EncodeToString(cipherText), nil
 }
