@@ -97,6 +97,7 @@ func createMysqlConn(conf config.Config) (*gorm.DB, error) {
 	}
 
 	db.DB().SetMaxIdleConns(conf.MysqlConnectionPoolSize)
+	db.Exec(`SET @@session.time_zone = '+00:00';`)
 
 	return db, nil
 }

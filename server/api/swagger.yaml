@@ -10,8 +10,6 @@ tags:
 - name: memory
 - name: quiz
 
-# schemes:
-# - http
 paths:
   /user/createWithOauth:
     post:

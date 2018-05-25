@@ -29,7 +29,10 @@ func Setup() *gorani.Gorani {
 	return gorn
 }
 
-const TestWordbookUUID = "3f06af63-a93c-11e4-9797-00505690773f"
+const (
+	TestWordbookUuid = "3f06af63-a93c-11e4-9797-00505690773f"
+	TestUserId       = 1
+)
 
 func setupDB(db *gorm.DB) {
 	rows, err := db.DB().Query(`
@@ -48,16 +51,16 @@ func setupDB(db *gorm.DB) {
 			panic(err)
 		}
 	}
-	db.Exec(`
+	db.Exec(fmt.Sprintf(`
 	INSERT INTO user 
 		(user_id, user_name)
 	VALUES
-		(1, 'test');`)
+		(%d, 'test');`, TestUserId))
 
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO wordbook 
 		(wordbook_uuid, user_id, wordbook_is_unknown, wordbook_name, wordbook_update_date)
 	VALUES
-		(UNHEX(REPLACE('%s', '-', '')), 1, FALSE, 'test', NOW());`, TestWordbookUUID))
+		(UNHEX(REPLACE('%s', '-', '')), 1, FALSE, 'test', NOW());`, TestWordbookUuid))
 
 }
