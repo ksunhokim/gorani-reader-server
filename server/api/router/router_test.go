@@ -12,7 +12,7 @@ import (
 )
 
 func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
-	bytes, err := ioutil.ReadFile("../config.yaml")
+	bytes, err := ioutil.ReadFile("../config_test.yaml")
 	if err != nil {
 		panic(err)
 	}

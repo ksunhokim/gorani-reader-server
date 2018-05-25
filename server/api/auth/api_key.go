@@ -11,16 +11,16 @@ import (
 	"strings"
 )
 
-func IdFromApiKey(secretKey string, token string, name string) (int, error) {
+func UserByApiKey(secretKey string, token string) (int, string, error) {
 	cipherText, _ := base64.URLEncoding.DecodeString(token)
 
 	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
-		return -1, err
+		return -1, "", err
 	}
 
 	if len(cipherText) < aes.BlockSize {
-		return -1, fmt.Errorf("Invalid length")
+		return -1, "", fmt.Errorf("Invalid length")
 	}
 
 	iv := cipherText[:aes.BlockSize]
@@ -34,24 +34,21 @@ func IdFromApiKey(secretKey string, token string, name string) (int, error) {
 
 	arr := strings.Split(text, "@")
 	if len(arr) <= 1 {
-		return -1, fmt.Errorf("Invalid key")
+		return -1, "", fmt.Errorf("Invalid key")
 	}
 
 	idPart := arr[0]
-	namePart := strings.Join(arr[1:], "@")
-	if namePart != name {
-		return -1, fmt.Errorf("Name doesn't match")
-	}
+	name := strings.Join(arr[1:], "@")
 
 	i, err := strconv.Atoi(idPart)
 	if err != nil {
-		return -1, err
+		return -1, "", err
 	}
 
-	return i, nil
+	return i, name, nil
 }
 
-func ApiKeyFromId(secretKey string, id int, name string) (string, error) {
+func ApiKeyByUser(secretKey string, id int, name string) (string, error) {
 	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
 		return "", err

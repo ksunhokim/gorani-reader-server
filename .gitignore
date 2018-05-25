@@ -10,4 +10,6 @@ node_modules
 Carthage
 app/App/Auth/AuthProviders.plist
 server/api/config.yaml
+server/api/config_test.yaml
+server/api/services.yaml
 server/db/err.mwb.bak

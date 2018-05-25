@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/sunho/gorani-reader/server/api/httputil"
+	"github.com/sunho/gorani-reader/server/api/util"
 )
 
 func (s *Services) FetchUser(serviceName string, token string) (User, error) {
@@ -13,7 +13,7 @@ func (s *Services) FetchUser(serviceName string, token string) (User, error) {
 		return User{}, err
 	}
 
-	client := httputil.CreateClient()
+	client := util.CreateClient()
 
 	req, err := http.NewRequest("GET", service.BaseUrl+service.UserEndPoint, nil)
 	if err != nil {

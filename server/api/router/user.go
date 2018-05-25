@@ -30,7 +30,7 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	key, err := auth.ApiKeyFromId(gorn.Config.SecretKey, user.Id, user.Name)
+	key, err := auth.ApiKeyByUser(gorn.Config.SecretKey, user.Id, user.Name)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
