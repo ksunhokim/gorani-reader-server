@@ -16,6 +16,7 @@ type Config struct {
 	FluentPort              int    `yaml:"fluent_port"`
 	SecretKey               string `yaml:"secret_key"`
 	ServicesUrl             string `yaml:"services_url"`
+	Debug                   bool   `yaml:"debug"`
 }
 
 const (
