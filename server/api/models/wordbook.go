@@ -66,7 +66,7 @@ func (u *User) AddWordbook(db *gorm.DB, wordbook *Wordbook) (err error) {
 	}
 
 	t, _ := time.Parse(time.RFC3339, "2006-01-02T15:04:05Z")
-	date := wordbookEntriesUpdateDate{
+	date := WordbookEntriesUpdateDate{
 		WordbookId: wordbook.Id,
 		Date:       t,
 	}

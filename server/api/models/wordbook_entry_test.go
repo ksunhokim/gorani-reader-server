@@ -88,20 +88,6 @@ func TestWordbookUpdateInvalidEntries(t *testing.T) {
 	a.Nil(err)
 	a.Equal(1, len(entries))
 
-	str := "book2"
-	str2 := "asdf2"
-	entry := models.WordbookEntry{
-		WordbookId:     util.UuidToBytes(id),
-		DefinitionId:   1,
-		SourceBook:     &str,
-		SourceSentence: &str2,
-		AddedDate:      time.Now().UTC(),
-	}
-
-	entries2 := append(entries, entry)
-	err = wordbook.UpdateEntries(gorn.Mysql, time.Now().UTC(), entries2)
-	a.NotNil(err)
-
 	err = wordbook.UpdateEntries(gorn.Mysql, time.Now().UTC().Add(time.Hour*-3), entries)
 	a.NotNil(err)
 }

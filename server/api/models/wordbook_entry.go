@@ -2,7 +2,6 @@ package models
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -21,12 +20,12 @@ func (WordbookEntry) TableName() string {
 	return "wordbook_entry"
 }
 
-type wordbookEntriesUpdateDate struct {
+type WordbookEntriesUpdateDate struct {
 	WordbookId []byte    `gorm:"column:wordbook_uuid;primary_key"`
 	Date       time.Time `gorm:"column:wordbook_entry_update_date"`
 }
 
-func (wordbookEntriesUpdateDate) TableName() string {
+func (WordbookEntriesUpdateDate) TableName() string {
 	return "wordbook_entries_update_date"
 }
 
@@ -40,10 +39,9 @@ func (wb *Wordbook) GetEntries(db *gorm.DB) ([]WordbookEntry, error) {
 	return out, nil
 }
 
-func (wb *Wordbook) getEntriesUpdateDate(db *gorm.DB) (wordbookEntriesUpdateDate, error) {
-	date := wordbookEntriesUpdateDate{}
+func (wb *Wordbook) getEntriesUpdateDate(db *gorm.DB) (WordbookEntriesUpdateDate, error) {
+	date := WordbookEntriesUpdateDate{}
 	if err := db.
-		Debug().
 		Raw(`SELECT
 				* 
 			FROM 
@@ -53,7 +51,7 @@ func (wb *Wordbook) getEntriesUpdateDate(db *gorm.DB) (wordbookEntriesUpdateDate
 			LOCK IN SHARE MODE;`,
 			wb.Id).
 		Scan(&date).Error; err != nil {
-		return wordbookEntriesUpdateDate{}, err
+		return WordbookEntriesUpdateDate{}, err
 	}
 	return date, nil
 }
@@ -68,7 +66,6 @@ func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) 
 		}
 	}()
 
-	log.Println("asdf")
 	date2, err := wb.getEntriesUpdateDate(tx)
 	if err != nil {
 		return err
@@ -86,7 +83,7 @@ func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) 
 
 	date2.Date = date
 	if err = tx.
-		Update(&date2).Error; err != nil {
+		Save(&date2).Error; err != nil {
 		return err
 	}
 
@@ -129,7 +126,7 @@ func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []Wordboo
 
 	date2.Date = date
 	if err = tx.
-		Update(&date2).Error; err != nil {
+		Save(&date2).Error; err != nil {
 		return err
 	}
 
