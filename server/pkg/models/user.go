@@ -29,8 +29,7 @@ func (UserDetail) TableName() string {
 func GetUser(db *gorm.DB, id int) (User, error) {
 	out := User{}
 	if err := db.
-		Where("user_id = ?", id).
-		First(&out).
+		First(&out, id).
 		Error; err != nil {
 		return out, err
 	}

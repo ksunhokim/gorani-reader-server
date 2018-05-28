@@ -5,13 +5,11 @@ import (
 	"time"
 
 	"github.com/sunho/gorani-reader/server/api/api"
-	"github.com/sunho/gorani-reader/server/api/apiconfig"
 	"github.com/sunho/gorani-reader/server/api/router"
-	"github.com/sunho/gorani-reader/server/pkg/config"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
-func setup(conf config.Config, aconf apiconfig.Config) (*http.Server, error) {
+func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 	gorn, err := gorani.New(conf)
 
 	ap, err := api.New(gorn, aconf)

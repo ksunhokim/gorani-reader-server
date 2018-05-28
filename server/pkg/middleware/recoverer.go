@@ -14,7 +14,7 @@ func Recoverer(next http.Handler) http.Handler {
 		defer func() {
 			if rvr := recover(); rvr != nil {
 				body, _ := ioutil.ReadAll(r.Body)
-				log.Log(log.TopicError.Api(), log.M{
+				log.Log(log.TopicError, log.M{
 					"panic":  fmt.Sprintf("%v", rvr),
 					"body":   body,
 					"stack":  string(debug.Stack()),

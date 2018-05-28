@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/sunho/gorani-reader/server/api/api"
+	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/auth"
 	"github.com/sunho/gorani-reader/server/pkg/models"
 )
@@ -13,18 +13,18 @@ var UserKey = &contextKey{name: "user id"}
 
 const ApiKeyHeader = "X-API-Key"
 
-func Auth(ap *api.Api) func(next http.Handler) http.Handler {
+func Auth(db *gorm.DB, secret string) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			key := r.Header.Get(ApiKeyHeader)
 
-			id, name, err := auth.UserByApiKey(ap.Config.SecretKey, key)
+			id, name, err := auth.UserByApiKey(secret, key)
 			if err != nil {
 				http.Error(w, http.StatusText(403), 403)
 				return
 			}
 
-			user, err := models.GetUser(ap.Gorn.Mysql, id)
+			user, err := models.GetUser(db, id)
 			if err != nil {
 				http.Error(w, http.StatusText(403), 403)
 				return

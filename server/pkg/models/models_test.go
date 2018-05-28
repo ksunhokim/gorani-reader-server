@@ -79,13 +79,13 @@ func setupDB(db *gorm.DB) {
 	INSERT INTO definition
 		(definition_id, word_id, definition_pos, definition)
 	VALUES
-		(1, 1, 'test', 'test');`)
+		(1, 1, NULL, 'test');`)
 
 	db.Exec(`
 	INSERT INTO definition
 		(definition_id, word_id, definition_pos, definition)
 	VALUES
-		(2, 1, 'test', 'test');`)
+		(2, 1, NULL, 'test');`)
 
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO wordbook_entry

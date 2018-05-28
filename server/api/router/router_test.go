@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/gavv/httpexpect"
-	"github.com/sunho/gorani-reader/server/api/config"
-	"github.com/sunho/gorani-reader/server/api/gorani"
 	"github.com/sunho/gorani-reader/server/api/router"
+	"github.com/sunho/gorani-reader/server/pkg/config"
+	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
 func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
@@ -29,5 +29,6 @@ func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
 	router := router.NewRouter(gorn)
 	server := httptest.NewServer(router)
 	e := httpexpect.New(t, server.URL)
+
 	return e, server
 }

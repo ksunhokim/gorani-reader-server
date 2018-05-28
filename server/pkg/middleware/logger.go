@@ -19,7 +19,7 @@ func Logger(next http.Handler) http.Handler {
 				scheme = "https"
 			}
 			url := fmt.Sprintf("%s://%s%s %s", scheme, r.Host, r.RequestURI, r.Proto)
-			log.Log(log.TopicRequest.Api(), log.M{
+			log.Log(log.TopicRequest, log.M{
 				"status":      ww.Status(),
 				"bytes":       ww.BytesWritten(),
 				"url":         url,

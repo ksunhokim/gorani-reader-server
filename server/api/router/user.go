@@ -42,10 +42,11 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 		ApiKey: key,
 	}
 
-	w.WriteHeader(200)
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+
+	w.WriteHeader(200)
 }

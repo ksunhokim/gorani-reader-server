@@ -3,35 +3,24 @@ package main
 import (
 	"io/ioutil"
 
-	"github.com/sunho/gorani-reader/server/api/api"
-	"github.com/sunho/gorani-reader/server/pkg/gorani"
+	"github.com/sunho/gorani-reader/server/pkg/config"
 	"github.com/sunho/gorani-reader/server/pkg/log"
 )
 
 func main() {
-	log.AppName = "api"
+	log.AppName = "etl"
 
 	bytes, err := ioutil.ReadFile("../config.yaml")
 	if err != nil {
 		panic(err)
 	}
 
-	conf, err := gorani.NewConfig(bytes)
+	conf, err := config.New(bytes)
 	if err != nil {
 		panic(err)
 	}
 
-	abytes, err := ioutil.ReadFile("aconfig.yaml")
-	if err != nil {
-		panic(err)
-	}
-
-	aconf, err := api.NewConfig(abytes)
-	if err != nil {
-		panic(err)
-	}
-
-	serv, err := setup(conf, aconf)
+	serv, err := setup(conf)
 	if err != nil {
 		panic(err)
 	}

@@ -1,14 +1,8 @@
 package log
 
-type Topic string
-
 const (
-	TopicConfig  Topic = "config"
-	TopicSystem  Topic = "system"
-	TopicRequest Topic = "request"
-	TopicError   Topic = "error"
+	TopicConfig  = "config"
+	TopicSystem  = "system"
+	TopicRequest = "request"
+	TopicError   = "error"
 )
-
-func (t Topic) Api() Topic {
-	return "api." + t
-}
