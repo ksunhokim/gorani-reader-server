@@ -1,0 +1,7 @@
+mysql_url: "gorani:api@/gorani_reader?parseTime=true"
+redis_url: "redis://localhost:6379/1"
+mysql_connection_pool_size: 2
+redis_connection_pool_size: 2
+logger_type: "fluentd"
+fluent_host: "127.0.0.1"
+fluent_port: 2423

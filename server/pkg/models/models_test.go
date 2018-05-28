@@ -5,22 +5,22 @@ import (
 	"io/ioutil"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader/server/api/config"
-	"github.com/sunho/gorani-reader/server/api/gorani"
+	"github.com/sunho/gorani-reader/server/pkg/config"
+	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
 func Setup() *gorani.Gorani {
-	bytes, err := ioutil.ReadFile("../config_test.yaml")
+	bytes, err := ioutil.ReadFile("../../config_test.yaml")
 	if err != nil {
 		panic(err)
 	}
 
-	conf, err := config.NewConfig(bytes)
+	conf, err := config.New(bytes)
 	if err != nil {
 		panic(err)
 	}
 
-	gorn, err := gorani.NewGorani(conf)
+	gorn, err := gorani.New(conf)
 	if err != nil {
 		panic(err)
 	}

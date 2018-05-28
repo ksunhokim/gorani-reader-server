@@ -1,0 +1,9 @@
+mysql_url: "gorani:api@/gorani_reader_test?parseTime=true"
+redis_url: "redis://localhost:6379/1"
+api_address: ":6007"
+mysql_connection_pool_size: 2
+redis_connection_pool_size: 2
+logger_type: "stdout"
+secret_key: "532b6195636c61279a010000"
+services_url: "services.yaml"
+debug: true

@@ -9,7 +9,7 @@ import (
 func (ro *Router) registerHandlers() {
 	ro.Use(chimid.RealIP)
 	ro.Use(mymid.RequestId)
-	ro.Use(mymid.Logger(ro.gorn.Logger))
+	ro.Use(mymid.Logger)
 	ro.Use(mymid.Recoverer)
 	v1 := chi.NewRouter()
 

@@ -1,0 +1,3 @@
+api_address: ":6006"
+secret_key: "532b6195636c61279a010000"
+services_url: "services.yaml"

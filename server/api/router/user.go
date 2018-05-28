@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/sunho/gorani-reader/server/api/auth"
-	"github.com/sunho/gorani-reader/server/api/models"
+	"github.com/sunho/gorani-reader/server/pkg/auth"
+	"github.com/sunho/gorani-reader/server/pkg/models"
 )
 
 func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
@@ -16,21 +16,21 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 
 	json.NewDecoder(r.Body).Decode(&req)
 
-	gorn := ro.gorn
+	ap := ro.ap
 
-	ouser, err := gorn.Services.FetchUser(req.Service, req.Token)
+	ouser, err := ap.Services.FetchUser(req.Service, req.Token)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
 
-	user, err := models.CreateOrGetUserWithOauth(gorn.Mysql, ouser)
+	user, err := models.CreateOrGetUserWithOauth(ap.Gorn.Mysql, ouser)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
 
-	key, err := auth.ApiKeyByUser(gorn.Config.SecretKey, user.Id, user.Name)
+	key, err := auth.ApiKeyByUser(ap.Config.SecretKey, user.Id, user.Name)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return

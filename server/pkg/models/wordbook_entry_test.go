@@ -6,8 +6,8 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/api/models"
-	"github.com/sunho/gorani-reader/server/api/util"
+	"github.com/sunho/gorani-reader/server/pkg/models"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 func TestWordbookGetEntries(t *testing.T) {
@@ -44,7 +44,6 @@ func TestWordbookAddEntry(t *testing.T) {
 	entries, err := wordbook.GetEntries(gorn.Mysql)
 
 	a.Equal(2, len(entries))
-
 }
 
 func TestWordbookUpdateEntries(t *testing.T) {
