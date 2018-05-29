@@ -5,7 +5,8 @@ import (
 	"net/http"
 
 	"github.com/sunho/gorani-reader/server/pkg/auth"
-	"github.com/sunho/gorani-reader/server/pkg/models"
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +25,7 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := models.CreateOrGetUserWithOauth(ap.Gorn.Mysql, ouser)
+	user, err := dbh.CreateOrGetUserWithOauth(ap.Gorn.Mysql, ouser)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -42,11 +43,5 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 		ApiKey: key,
 	}
 
-	err = json.NewEncoder(w).Encode(resp)
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-
-	w.WriteHeader(200)
+	util.JSON(w, resp)
 }

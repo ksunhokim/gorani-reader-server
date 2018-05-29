@@ -6,7 +6,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/auth"
-	"github.com/sunho/gorani-reader/server/pkg/models"
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
 var UserKey = &contextKey{name: "user id"}
@@ -24,7 +24,7 @@ func Auth(db *gorm.DB, secret string) func(next http.Handler) http.Handler {
 				return
 			}
 
-			user, err := models.GetUser(db, id)
+			user, err := dbh.GetUser(db, id)
 			if err != nil {
 				http.Error(w, http.StatusText(403), 403)
 				return
@@ -42,12 +42,12 @@ func Auth(db *gorm.DB, secret string) func(next http.Handler) http.Handler {
 	}
 }
 
-func WithUser(r *http.Request, user models.User) *http.Request {
+func WithUser(r *http.Request, user dbh.User) *http.Request {
 	r = r.WithContext(context.WithValue(r.Context(), UserKey, user))
 	return r
 }
 
-func GetUser(r *http.Request) models.User {
-	user, _ := r.Context().Value(UserKey).(models.User)
+func GetUser(r *http.Request) dbh.User {
+	user, _ := r.Context().Value(UserKey).(dbh.User)
 	return user
 }

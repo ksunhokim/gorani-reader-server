@@ -1,4 +1,4 @@
-package models
+package dbh
 
 import "github.com/jinzhu/gorm"
 

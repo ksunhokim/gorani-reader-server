@@ -1,21 +1,20 @@
-package models_test
+package util
 
 import (
 	"fmt"
 	"io/ioutil"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader/server/pkg/config"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
-func Setup() *gorani.Gorani {
+func SetupTestGorani() *gorani.Gorani {
 	bytes, err := ioutil.ReadFile("../../config_test.yaml")
 	if err != nil {
 		panic(err)
 	}
 
-	conf, err := config.New(bytes)
+	conf, err := gorani.NewConfig(bytes)
 	if err != nil {
 		panic(err)
 	}

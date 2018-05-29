@@ -8,8 +8,6 @@ import (
 
 var AppName = ""
 
-type M map[string]interface{}
-
 func Log(topic string, obj interface{}) {
 	bytes, _ := json.Marshal(obj)
 	str := string(bytes)

@@ -7,7 +7,6 @@ import (
 
 	"github.com/gavv/httpexpect"
 	"github.com/sunho/gorani-reader/server/api/router"
-	"github.com/sunho/gorani-reader/server/pkg/config"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
@@ -17,12 +16,12 @@ func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
 		panic(err)
 	}
 
-	conf, err := config.NewConfig(bytes)
+	conf, err := gorani.NewConfig(bytes)
 	if err != nil {
 		panic(err)
 	}
 
-	gorn, err := gorani.NewGorani(conf)
+	gorn, err := gorani.New(conf)
 	if err != nil {
 		panic(err)
 	}

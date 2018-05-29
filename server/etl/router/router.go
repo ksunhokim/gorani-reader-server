@@ -16,5 +16,7 @@ func NewRouter(gorn *gorani.Gorani) *Router {
 		gorn:   gorn,
 	}
 
+	r.registerHandlers()
+
 	return r
 }

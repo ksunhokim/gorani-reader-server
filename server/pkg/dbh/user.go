@@ -1,4 +1,4 @@
-package models
+package dbh
 
 import (
 	"time"

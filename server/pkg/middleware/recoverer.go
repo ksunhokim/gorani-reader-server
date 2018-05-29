@@ -7,6 +7,7 @@ import (
 	"runtime/debug"
 
 	"github.com/sunho/gorani-reader/server/pkg/log"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 func Recoverer(next http.Handler) http.Handler {
@@ -14,7 +15,7 @@ func Recoverer(next http.Handler) http.Handler {
 		defer func() {
 			if rvr := recover(); rvr != nil {
 				body, _ := ioutil.ReadAll(r.Body)
-				log.Log(log.TopicError, log.M{
+				log.Log(log.TopicError, util.M{
 					"panic":  fmt.Sprintf("%v", rvr),
 					"body":   body,
 					"stack":  string(debug.Stack()),

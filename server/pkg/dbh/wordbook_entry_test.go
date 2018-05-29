@@ -1,4 +1,4 @@
-package models_test
+package dbh_test
 
 import (
 	"testing"
@@ -6,15 +6,15 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/pkg/models"
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
 	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 func TestWordbookGetEntries(t *testing.T) {
-	gorn := Setup()
+	gorn := util.SetupTestGorani()
 	a := assert.New(t)
-	id, _ := uuid.Parse(TestWordbookUuid)
-	wordbook, err := models.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	id, _ := uuid.Parse(util.TestWordbookUuid)
+	wordbook, err := dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)
@@ -28,13 +28,13 @@ func TestWordbookGetEntries(t *testing.T) {
 }
 
 func TestWordbookAddEntry(t *testing.T) {
-	gorn := Setup()
+	gorn := util.SetupTestGorani()
 	a := assert.New(t)
-	id, _ := uuid.Parse(TestWordbookUuid)
-	wordbook, err := models.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	id, _ := uuid.Parse(util.TestWordbookUuid)
+	wordbook, err := dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
-	entry := models.WordbookEntry{
+	entry := dbh.WordbookEntry{
 		DefinitionId: 2,
 		AddedDate:    time.Now().UTC(),
 	}
@@ -47,10 +47,10 @@ func TestWordbookAddEntry(t *testing.T) {
 }
 
 func TestWordbookUpdateEntries(t *testing.T) {
-	gorn := Setup()
+	gorn := util.SetupTestGorani()
 	a := assert.New(t)
-	id, _ := uuid.Parse(TestWordbookUuid)
-	wordbook, err := models.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	id, _ := uuid.Parse(util.TestWordbookUuid)
+	wordbook, err := dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)
@@ -59,7 +59,7 @@ func TestWordbookUpdateEntries(t *testing.T) {
 
 	str := "book2"
 	str2 := "asdf2"
-	entry := models.WordbookEntry{
+	entry := dbh.WordbookEntry{
 		WordbookId:     util.UuidToBytes(id),
 		DefinitionId:   2,
 		SourceBook:     &str,
@@ -77,10 +77,10 @@ func TestWordbookUpdateEntries(t *testing.T) {
 }
 
 func TestWordbookUpdateInvalidEntries(t *testing.T) {
-	gorn := Setup()
+	gorn := util.SetupTestGorani()
 	a := assert.New(t)
-	id, _ := uuid.Parse(TestWordbookUuid)
-	wordbook, err := models.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	id, _ := uuid.Parse(util.TestWordbookUuid)
+	wordbook, err := dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)

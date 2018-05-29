@@ -7,6 +7,7 @@ import (
 
 	chmid "github.com/go-chi/chi/middleware"
 	"github.com/sunho/gorani-reader/server/pkg/log"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 func Logger(next http.Handler) http.Handler {
@@ -19,7 +20,7 @@ func Logger(next http.Handler) http.Handler {
 				scheme = "https"
 			}
 			url := fmt.Sprintf("%s://%s%s %s", scheme, r.Host, r.RequestURI, r.Proto)
-			log.Log(log.TopicRequest, log.M{
+			log.Log(log.TopicRequest, util.M{
 				"status":      ww.Status(),
 				"bytes":       ww.BytesWritten(),
 				"url":         url,
