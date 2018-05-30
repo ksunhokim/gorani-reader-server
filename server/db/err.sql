@@ -377,13 +377,6 @@ CREATE TABLE IF NOT EXISTS `example` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `table1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `table1` (
-)
-ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

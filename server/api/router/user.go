@@ -37,10 +37,8 @@ func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		ApiKey string `json:"api_key"`
-	}{
-		ApiKey: key,
+	resp := util.M{
+		"api_key": key,
 	}
 
 	util.JSON(w, resp)

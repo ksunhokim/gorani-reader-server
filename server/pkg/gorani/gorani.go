@@ -1,15 +1,17 @@
 package gorani
 
 import (
-	"github.com/go-redis/redis"
+	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	minio "github.com/minio/minio-go"
 )
 
 type Gorani struct {
 	Config Config
 	Mysql  *gorm.DB
-	Redis  *redis.Client
+	S3     *minio.Client
 }
 
 func New(conf Config) (*Gorani, error) {
@@ -18,9 +20,15 @@ func New(conf Config) (*Gorani, error) {
 		return nil, err
 	}
 
+	s, err := createS3(conf)
+	if err != nil {
+		return nil, err
+	}
+
 	gorn := &Gorani{
 		Config: conf,
 		Mysql:  mysql,
+		S3:     s,
 	}
 
 	return gorn, nil
@@ -40,4 +48,23 @@ func createMysqlConn(conf Config) (*gorm.DB, error) {
 	db.Exec(`SET @@session.time_zone = '+00:00';`)
 
 	return db, nil
+}
+
+func createS3(conf Config) (*minio.Client, error) {
+	m, err := minio.New(conf.S3EndPoint, conf.S3Id, conf.S3Secret, conf.S3Ssl)
+	if err != nil {
+		return nil, err
+	}
+
+	exists, _ := m.BucketExists("dict")
+	if !exists {
+		return nil, fmt.Errorf("We don't own bucket: dict")
+	}
+
+	exists, _ = m.BucketExists("picture")
+	if !exists {
+		return nil, fmt.Errorf("We don't own bucket: picture")
+	}
+
+	return m, err
 }

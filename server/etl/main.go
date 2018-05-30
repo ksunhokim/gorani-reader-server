@@ -8,6 +8,7 @@ import (
 	"github.com/sunho/gorani-reader/server/etl/router"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 	"github.com/sunho/gorani-reader/server/pkg/log"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 const Addr = "localhost:5982"
@@ -48,7 +49,7 @@ func main() {
 		panic(err)
 	}
 
-	log.Log(log.TopicSystem, log.M{
+	log.Log(log.TopicSystem, util.M{
 		"info":    "begin listening",
 		"address": serv.Addr,
 	})

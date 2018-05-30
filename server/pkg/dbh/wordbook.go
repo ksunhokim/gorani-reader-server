@@ -23,7 +23,7 @@ func (wb *Wordbook) Update(db *gorm.DB) error {
 }
 
 func (wb *Wordbook) Delete(db *gorm.DB) error {
-	err := db.Delete(wb).Error
+	err := db.Delete(&wb).Error
 	return err
 }
 

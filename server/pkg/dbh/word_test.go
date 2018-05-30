@@ -37,14 +37,14 @@ func TestWord(t *testing.T) {
 
 	a.Equal("test2", word2.Word)
 
-	defs, err := word2.GetDefinitions(gorn.Mysql)
+	defs := word2.Definitions
 	a.Nil(err)
 
 	a.Equal(2, len(defs))
 	a.Equal("test1", defs[0].Definition)
 	a.Equal("test2", defs[1].Definition)
 
-	examples, err := defs[0].GetExamples(gorn.Mysql)
+	examples := defs[0].Examples
 	a.Nil(err)
 
 	a.Equal(1, len(examples))
