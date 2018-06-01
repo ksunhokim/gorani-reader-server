@@ -4,6 +4,7 @@ import (
 	"io"
 
 	"github.com/meskio/epubgo"
+	"github.com/sunho/gorani-reader/server/pkg/log"
 )
 
 type Book struct {
@@ -35,23 +36,39 @@ func Parse(dict Dictionary, r io.ReaderAt, size int64) (*Book, error) {
 		return nil, err
 	}
 
-	bytes, err := getReaderBy(iter)
+	sentences, err := parseSentencesByIter(dict, iter)
 	if err != nil {
 		return nil, err
+	}
+
+	return nil, nil
+}
+
+func parseSentencesByIter(dict Dictionary, iter *epubgo.SpineIterator) ([]Sentence, error) {
+	ri, err := iter.Open()
+	if err != nil {
+		return nil, err
+	}
+	sentences := []Sentence{}
+	sentences2, err := parseSentences(dict, ri)
+	if err == nil {
+		sentences = append(sentences, sentences2...)
+	} else {
+		log.Log(log.TopicError, err.Error())
 	}
 
 	for iter.Next() == nil {
 		ri, err := iter.Open()
 		if err != nil {
-			return []io.Reader{}, err
+			return nil, err
 		}
-
-		out = append(out, ri)
+		sentences2, err := parseSentences(dict, ri)
+		if err == nil {
+			sentences = append(sentences, sentences2...)
+		} else {
+			log.Log(log.TopicError, err.Error())
+		}
 	}
-	return nil, nil
-}
 
-func parseSentences(dict Dictionary, r io.Reader) ([]Sentence, error) {
-	out := []io.Reader{ri}
-	return out, nil
+	return sentences, nil
 }
