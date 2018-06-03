@@ -9,6 +9,7 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 	"github.com/sunho/gorani-reader/server/pkg/log"
 	"github.com/sunho/gorani-reader/server/pkg/util"
+	"golang.org/x/net/http2"
 )
 
 const Addr = "localhost:5982"
@@ -27,7 +28,7 @@ func setup(conf gorani.Config) (*http.Server, error) {
 		MaxHeaderBytes: 1 << 20,
 		Addr:           Addr,
 	}
-
+	http2.ConfigureServer(hs, &http2.Server{})
 	return hs, nil
 }
 

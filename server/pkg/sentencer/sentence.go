@@ -39,12 +39,10 @@ func (s *Sentencer) ExtractSentencesFromText(str string) (out []Sentence) {
 			word := strings.ToLower(tok.Lit)
 			if id, ok := s.Dict[word]; ok {
 				out[i].Words = append(out[i].Words, id)
-				continue
 			}
 			word = s.Stemmer.Stem(word)
 			if id, ok := s.Dict[word]; ok {
 				out[i].Words = append(out[i].Words, id)
-				continue
 			}
 		}
 		if tok.Kind == TokenKindEos {

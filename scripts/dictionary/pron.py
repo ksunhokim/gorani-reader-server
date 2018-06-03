@@ -14,7 +14,7 @@ with codecs.open('./raw/cmudict-0.7b', encoding='utf-8', errors='ignore') as fil
 missed = 0
 missed_list = []
 dictionary = dict()
-with open('./raw/crawled.json', encoding='utf8') as file:
+with open('./raw/output.json', encoding='utf8') as file:
   dictionary = json.load(file)
   for word, v  in dictionary.items():
     if word in prons:
@@ -26,5 +26,5 @@ with open('./raw/crawled.json', encoding='utf8') as file:
 with open('./result/missed.txt', 'w') as file:
   print(missed_list, sep='\n', file=file)
 
-with open('./result/proned_crawled.json', 'w', encoding='utf8') as file:
+with open('./result/proned_output.json', 'w', encoding='utf8') as file:
   json.dump(dictionary, file, ensure_ascii=False)
