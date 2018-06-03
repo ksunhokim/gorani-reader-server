@@ -10,7 +10,7 @@ import (
 func parseSentences(dict Dictionary, r io.Reader) ([]Sentence, error) {
 	doc, err := goquery.NewDocumentFromReader(r)
 	if err != nil {
-		return []Sentence{}, err
+		return nil, err
 	}
 
 	strs, err := lang.ExtractSentencesFromHtml(doc)

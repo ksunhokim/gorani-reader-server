@@ -44,7 +44,7 @@ func (u *User) GetWordbooks(db *gorm.DB) ([]Wordbook, error) {
 		Where("user_id = ?", u.Id).
 		Find(&wordbooks).
 		Error; err != nil {
-		return []Wordbook{}, err
+		return nil, err
 	}
 	return wordbooks, nil
 }

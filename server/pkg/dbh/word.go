@@ -58,7 +58,7 @@ func GetWords(db *gorm.DB) ([]Word, error) {
 	words := []Word{}
 	if err := db.
 		Find(&words).Error; err != nil {
-		return []Word{}, err
+		return nil, err
 	}
 	return words, nil
 }

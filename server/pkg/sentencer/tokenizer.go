@@ -1,4 +1,4 @@
-package lang
+package sentencer
 
 import (
 	"bufio"
@@ -20,24 +20,28 @@ const (
 	TokenKindBlank
 )
 
-type Token struct {
-	Kind TokenKind
-	Lit  string
-}
+type (
+	Token struct {
+		Kind TokenKind
+		Lit  string
+	}
 
-type Tokenizer struct {
+	Tokenizer struct {
+		DotSpecialCases []map[string]bool
+		index           int
+		s               *bufio.Scanner
+		toks            []Token
+		buffer          []Token
+	}
+
 	DotSpecialCases []map[string]bool
-	index           int
-	s               *bufio.Scanner
-	toks            []Token
-	buffer          []Token
-}
+)
 
 func NewTokenizer(r io.Reader) *Tokenizer {
 	s := bufio.NewScanner(r)
 	s.Split(split)
 	return &Tokenizer{
-		DotSpecialCases: []map[string]bool{},
+		DotSpecialCases: DotSpecialCases{},
 		s:               s,
 		buffer:          []Token{},
 		toks:            []Token{},
@@ -119,14 +123,14 @@ func (t *Tokenizer) hasDotSpecialCase(index int, word string) (bool, bool) {
 }
 
 func (t *Tokenizer) scanDotSpecialCase() (lit string) {
-	tok := t.lastToken(1)
-
 	var (
-		index int = 1
+		tok   = t.lastToken(1)
+		index = 1
 		clit  string
 		readn int
 		state int
 	)
+
 	if v, ok := t.hasDotSpecialCase(0, tok.Lit); !ok {
 		return
 	} else {

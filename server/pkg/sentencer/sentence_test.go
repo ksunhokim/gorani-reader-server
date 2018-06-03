@@ -1,4 +1,4 @@
-package lang_test
+package sentencer_test
 
 import (
 	"fmt"
@@ -7,17 +7,17 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/pkg/lang"
+	"github.com/sunho/gorani-reader/server/pkg/sentencer"
 )
 
 func splitSentences(str string) (sens []string) {
-	t := lang.NewTokenizer(strings.NewReader(str))
+	t := sentencer.NewTokenizer(strings.NewReader(str))
 	toks := t.Tokenize()
 
 	n := 0
 	sens = []string{""}
 	for _, tok := range toks {
-		if tok.Kind == lang.TokenKindEos {
+		if tok.Kind == sentencer.TokenKindEos {
 			sens = append(sens, "")
 			n++
 			continue
