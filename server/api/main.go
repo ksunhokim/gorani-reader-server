@@ -9,9 +9,8 @@ import (
 	"github.com/sunho/gorani-reader/server/api/router"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 	"github.com/sunho/gorani-reader/server/pkg/log"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
-
-const Addr = ":5981"
 
 func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 	gorn, err := gorani.New(conf)
@@ -64,7 +63,7 @@ func main() {
 		panic(err)
 	}
 
-	log.Log(log.TopicSystem, log.M{
+	log.Log(log.TopicSystem, util.M{
 		"info":    "begin listening",
 		"address": serv.Addr,
 	})

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package etl;
+
+service ETL {
+    rpc AddWord (Word) returns (AddWordResponse) {}
+}
+
+message AddWordResponse {
+    int32 id = 1;
+}
+
+message Word {
+    int32 id = 1;
+    string word = 2;
+    string pronunciation = 3;
+    repeated Definition definitions = 4;
+}
+
+message Definition {
+    int32 id = 1;
+    int32 word_id = 2;
+    string definition = 3;
+    string pos = 4;
+    repeated Example examples= 5;
+}
+
+message Example {
+    int32 definition_id = 1;
+    string foreign = 2;
+    string native = 3;
+}
