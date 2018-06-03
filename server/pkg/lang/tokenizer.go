@@ -2,126 +2,247 @@ package lang
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"strings"
 	"unicode"
 	"unicode/utf8"
 )
 
-type tokenKind int
+type TokenKind int
 
 const (
-	tokenKindCapitalWord = iota
-	tokenKindNormalWord
-	tokenKindPunc
-	tokenKindUnknown
-	tokenKindBlank
-	tokenKindEos
-	tokenKindEof
+	TokenKindEof = iota
+	TokenKindEos
+	TokenKindCapitalWord
+	TokenKindNormalWord
+	TokenKindPunc
+	TokenKindUnknown
+	TokenKindBlank
 )
 
-type token struct {
-	kind tokenKind
-	lit  string
+type Token struct {
+	Kind TokenKind
+	Lit  string
 }
 
-type tokenizer struct {
-	s *bufio.Scanner
+type Tokenizer struct {
+	DotSpecialCases []map[string]bool
+	index           int
+	s               *bufio.Scanner
+	toks            []Token
+	buffer          []Token
 }
 
-func newTokenizer(r io.Reader) *tokenizer {
+func NewTokenizer(r io.Reader) *Tokenizer {
 	s := bufio.NewScanner(r)
 	s.Split(split)
-	return &tokenizer{
-		s: s,
+	return &Tokenizer{
+		DotSpecialCases: []map[string]bool{},
+		s:               s,
+		buffer:          []Token{},
+		toks:            []Token{},
 	}
 }
 
-func (t *tokenizer) tokenize() (toks []token) {
+func isWordToken(t Token) bool {
+	return t.Kind == TokenKindCapitalWord || t.Kind == TokenKindNormalWord
+}
+
+func (t *Tokenizer) Tokenize() []Token {
 	for {
-		tok := t.scan()
-		toks = append(toks, tok)
-		if tok.kind == tokenKindEof {
-			return
+		tok := t.read()
+		t.toks = append(t.toks, tok)
+		if tok.Kind == TokenKindEof {
+			return t.toks
 		}
 
-		if strings.HasSuffix(tok.lit, "\"") {
-			toks = append(toks, t.scanQuoteEos(toks)...)
-			continue
+		if tok.Lit == "-" && isWordToken(t.lastToken(1)) {
+			tok2 := t.read()
+			if isWordToken(tok2) {
+				t.toks = t.toks[:len(t.toks)-1]
+				t.toks[len(t.toks)-1].Lit += tok.Lit + tok2.Lit
+				continue
+			}
+			t.unread()
 		}
 
-		if strings.HasSuffix(tok.lit, "”") {
-			toks = append(toks, t.scanQuoteEos(toks)...)
+		if tok.Lit == "." && isWordToken(t.lastToken(1)) {
+			if lit := t.scanDotSpecialCase(); lit != "" {
+				t.toks = t.toks[:len(t.toks)-1]
+				t.toks[len(t.toks)-1].Lit = lit
+				continue
+			}
+		}
+
+		if strings.HasSuffix(tok.Lit, "”") || strings.HasSuffix(tok.Lit, "\"") {
+			if t.scanQuoteEos() {
+				t.toks = append(t.toks, Token{TokenKindEos, ""})
+				continue
+			}
+		}
+
+		if strings.HasSuffix(tok.Lit, ".") || strings.HasSuffix(tok.Lit, "?") || strings.HasSuffix(tok.Lit, "!") {
+			t.toks = append(t.toks, Token{TokenKindEos, ""})
 			continue
 		}
 	}
 }
 
-func backseekToken(toks []token, kind tokenKind, n int) token {
+func (t *Tokenizer) backseekToken(Kind TokenKind, n int) Token {
+	if n >= len(t.toks) {
+		return Token{TokenKindEof, ""}
+	}
+
 	for i := 1; i <= n; i++ {
-		if tok := toks[len(toks)-i]; tok.kind == kind {
+		if tok := t.toks[len(t.toks)-i]; tok.Kind == Kind {
 			return tok
 		}
 	}
-	return token{tokenKindEof, ""}
+	return Token{TokenKindEof, ""}
 }
 
-func (t *tokenizer) scanQuoteEos(toks []token) (out []token) {
-	for {
-		tok := t.scan()
-		out = append(out, tok)
-		switch tok.kind {
-		case tokenKindBlank:
-			continue
-		case tokenKindCapitalWord:
-			if len(toks) <= 2 ||
-				backseekToken(toks, tokenKindEos, 3).kind != tokenKindEof {
-			} else {
-				out = append(out[:len(out)-1], token{tokenKindEos, ""}, out[len(out)-1])
-			}
-			return
-		case tokenKindEof:
-			out = out[:len(out)-1]
-			return
-		default:
-			return
-		}
+func (t *Tokenizer) lastToken(n int) Token {
+	if len(t.toks) <= n {
+		return Token{TokenKindEof, ""}
 	}
+
+	return t.toks[len(t.toks)-n-1]
 }
 
-func (t *tokenizer) scan() (tok token) {
-	if t.s.Scan() {
-		s := t.s.Bytes()
-		u, _ := utf8.DecodeRune(s)
-		tok.lit = string(s)
+func (t *Tokenizer) hasDotSpecialCase(index int, word string) (bool, bool) {
+	if index >= len(t.DotSpecialCases) {
+		return false, false
+	}
 
-		if unicode.IsSpace(u) {
-			fmt.Println(u)
-			tok.kind = tokenKindBlank
-			return
-		}
+	v, ok := t.DotSpecialCases[index][strings.ToLower(word)]
+	return v, ok
+}
 
-		if unicode.IsPunct(u) {
-			tok.kind = tokenKindPunc
-			return
-		}
+func (t *Tokenizer) scanDotSpecialCase() (lit string) {
+	tok := t.lastToken(1)
 
-		if unicode.IsUpper(u) {
-			tok.kind = tokenKindCapitalWord
-			return
-		}
-
-		if unicode.IsLower(u) {
-			tok.kind = tokenKindNormalWord
-			return
-		}
-
-		tok.kind = tokenKindUnknown
+	var (
+		index int = 1
+		clit  string
+		readn int
+		state int
+	)
+	if v, ok := t.hasDotSpecialCase(0, tok.Lit); !ok {
 		return
+	} else {
+		if v {
+			lit = tok.Lit + "."
+		} else {
+			clit = tok.Lit + "."
+		}
 	}
 
-	return token{kind: tokenKindEof}
+	for {
+		tok = t.read()
+		readn++
+		if state == 0 {
+			if isWordToken(tok) {
+				t.unread()
+				readn--
+				state = 1
+			} else if tok.Kind == TokenKindBlank {
+				state = 1
+			} else {
+				break
+			}
+		} else if state == 1 {
+			if isWordToken(tok) {
+				if v, ok := t.hasDotSpecialCase(index, tok.Lit); ok {
+					index++
+					state = 2
+
+					if v {
+						lit += clit + tok.Lit
+						clit = ""
+						readn = 0
+					} else {
+						clit += tok.Lit
+					}
+				} else {
+					break
+				}
+			} else {
+				break
+			}
+		} else if state == 2 {
+			if tok.Lit == "." {
+				if clit == "" {
+					lit += "."
+					readn = 0
+				} else {
+					clit += "."
+				}
+				state = 0
+			} else {
+				break
+			}
+		}
+	}
+
+	for i := 0; i < readn; i++ {
+		t.unread()
+	}
+	return
+}
+
+func (t *Tokenizer) scanQuoteEos() bool {
+	for {
+		tok := t.read()
+		defer t.unread()
+
+		switch tok.Kind {
+		case TokenKindBlank:
+			continue
+		case TokenKindCapitalWord:
+			if len(t.toks) >= 3 && t.backseekToken(TokenKindEos, 3).Kind == TokenKindEof {
+				return true
+			}
+			return false
+		default:
+			return false
+		}
+	}
+}
+
+func (t *Tokenizer) unread() {
+	if t.index != 0 {
+		t.index--
+	}
+}
+
+func (t *Tokenizer) read() Token {
+	if t.index == len(t.buffer) {
+		var tok Token
+		if t.s.Scan() {
+			s := t.s.Bytes()
+			u, _ := utf8.DecodeRune(s)
+			tok.Lit = string(s)
+
+			if unicode.IsSpace(u) {
+				tok.Kind = TokenKindBlank
+			} else if unicode.IsPunct(u) {
+				tok.Kind = TokenKindPunc
+			} else if unicode.IsUpper(u) {
+				tok.Kind = TokenKindCapitalWord
+			} else if unicode.IsLower(u) {
+				tok.Kind = TokenKindNormalWord
+			} else {
+				tok.Kind = TokenKindUnknown
+			}
+		} else {
+			tok = Token{TokenKindEof, ""}
+		}
+		t.buffer = append(t.buffer, tok)
+	}
+
+	tok := t.buffer[t.index]
+	t.index++
+	return tok
 }
 
 func isAlphabet(u rune) bool {
@@ -146,7 +267,7 @@ func splitOne(eof bool, data []byte, start int, u rune, shouldAdvance func(u run
 	return 0, nil, nil
 }
 
-func split(data []byte, atEOF bool) (advance int, token []byte, err error) {
+func split(data []byte, atEOF bool) (advance int, Token []byte, err error) {
 	u, start := utf8.DecodeRune(data)
 	if unicode.IsSpace(u) {
 		return splitOne(atEOF, data, start, u, unicode.IsSpace)

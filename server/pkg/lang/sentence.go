@@ -9,7 +9,3 @@ func ExtractSentencesFromHtml(doc *goquery.Document) ([]string, error) {
 	})
 	return []string{}, nil
 }
-
-func SplitSentences(str string) []string {
-	return []string{}
-}

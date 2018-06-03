@@ -1,2 +1,0 @@
-mysql_url: "gorani:api@/gorani_reader?parseTime=true"
-mysql_connection_pool_size: 2

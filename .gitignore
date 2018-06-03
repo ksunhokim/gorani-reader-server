@@ -9,8 +9,9 @@ node_modules
 ._*
 Carthage
 app/App/Auth/AuthProviders.plist
+server/db/err.mwb.bak
+
 aconfig.yaml
 config.yaml
 config_test.yaml
 services.yaml
-server/db/err.mwb.bak
