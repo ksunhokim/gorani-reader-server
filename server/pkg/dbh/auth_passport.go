@@ -3,14 +3,14 @@ package dbh
 import "github.com/jinzhu/gorm"
 
 type OauthService struct {
-	Code int    `gorm:"column:oauth_service_code"`
+	Code int32  `gorm:"column:oauth_service_code"`
 	Name string `gorm:"column:oauth_service_name"`
 }
 
 func (OauthService) TableName() string {
 	return "oauth_service"
 }
-func GetOauthServiceNameByCode(db *gorm.DB, code int) (string, error) {
+func GetOauthServiceNameByCode(db *gorm.DB, code int32) (string, error) {
 	service := OauthService{}
 	if err := db.
 		Where("oauth_service_code = ?", code).
@@ -21,7 +21,7 @@ func GetOauthServiceNameByCode(db *gorm.DB, code int) (string, error) {
 	return service.Name, nil
 }
 
-func GetOauthServiceCodeByName(db *gorm.DB, name string) (int, error) {
+func GetOauthServiceCodeByName(db *gorm.DB, name string) (int32, error) {
 	service := OauthService{}
 	if err := db.
 		Where("oauth_service_name = ?", name).
@@ -33,8 +33,8 @@ func GetOauthServiceCodeByName(db *gorm.DB, name string) (int, error) {
 }
 
 type OauthPassport struct {
-	Code        int    `gorm:"column:oauth_service_code"`
-	UserId      int    `gorm:"column:user_id"`
+	Code        int32  `gorm:"column:oauth_service_code"`
+	UserId      int32  `gorm:"column:user_id"`
 	OauthUserId string `gorm:"column:oauth_user_id"`
 }
 

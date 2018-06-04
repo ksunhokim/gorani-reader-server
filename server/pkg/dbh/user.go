@@ -8,7 +8,7 @@ import (
 )
 
 type User struct {
-	Id   int    `gorm:"column:user_id;primary_key"`
+	Id   int32  `gorm:"column:user_id;primary_key"`
 	Name string `gorm:"column:user_name"`
 }
 
@@ -17,7 +17,7 @@ func (User) TableName() string {
 }
 
 type UserDetail struct {
-	Id           int       `gorm:"column:user_id;primary_key"`
+	Id           int32     `gorm:"column:user_id;primary_key"`
 	ProfileImage string    `gorm:"column:user_profile_image"`
 	AddedDate    time.Time `gorm:"column:user_added_date"`
 }
@@ -26,7 +26,7 @@ func (UserDetail) TableName() string {
 	return "user_detail"
 }
 
-func GetUser(db *gorm.DB, id int) (User, error) {
+func GetUser(db *gorm.DB, id int32) (User, error) {
 	out := User{}
 	if err := db.
 		First(&out, id).

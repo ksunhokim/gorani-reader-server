@@ -2,9 +2,11 @@ package router_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/sunho/gorani-reader/server/pkg/auth"
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
 	"github.com/sunho/gorani-reader/server/pkg/middleware"
 	"github.com/sunho/gorani-reader/server/pkg/util"
 )
@@ -140,4 +142,46 @@ func TestWordbookGetEntries(t *testing.T) {
 	entries.Length().Equal(1)
 	entry := entries.Element(0).Object()
 	entry.Keys().ContainsOnly("definition_id", "source_book", "source_sentence", "added_date", "word_index", "correct")
+}
+
+func TestWordbookPutEntries(t *testing.T) {
+	a := assert.New(t)
+	e, s, ap := prepareServer(t)
+	defer s.Close()
+
+	key, err := auth.ApiKeyByUser(ap.Config.SecretKey, util.TestUserId, "test")
+	a.Nil(err)
+
+	entries := []dbh.WordbookEntry{
+		dbh.WordbookEntry{
+			DefinitionId: 1,
+			AddedDate:    util.RFCTime{time.Now()},
+		},
+		dbh.WordbookEntry{
+			DefinitionId: 1,
+			AddedDate:    util.RFCTime{time.Now()},
+		},
+	}
+
+	req := util.M{
+		"entries": entries,
+		"time":    util.RFCTime{time.Now()},
+	}
+
+	e.
+		PUT("/wordbook/"+util.TestWordbookUuid+"/entries").
+		WithJSON(req).
+		WithHeader(middleware.ApiKeyHeader, key).
+		Expect().
+		Status(200)
+
+	entries2 := e.
+		GET("/wordbook/"+util.TestWordbookUuid+"/entries").
+		WithHeader(middleware.ApiKeyHeader, key).
+		Expect().
+		Status(200).
+		JSON().
+		Array()
+
+	entries2.Length().Equal(2)
 }

@@ -43,7 +43,6 @@ func TestAddWordbook(t *testing.T) {
 	a.Nil(err)
 
 	a.Equal("asdf", wordbook.Name)
-	a.Equal(user.Id, wordbook.UserId)
 }
 
 func TestGetWordbooks(t *testing.T) {

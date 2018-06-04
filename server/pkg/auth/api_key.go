@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func UserByApiKey(secretKey string, token string) (int, string, error) {
+func UserByApiKey(secretKey string, token string) (int32, string, error) {
 	cipherText, _ := base64.URLEncoding.DecodeString(token)
 
 	block, err := aes.NewCipher([]byte(secretKey))
@@ -45,16 +45,16 @@ func UserByApiKey(secretKey string, token string) (int, string, error) {
 		return -1, "", err
 	}
 
-	return i, name, nil
+	return int32(i), name, nil
 }
 
-func ApiKeyByUser(secretKey string, id int, name string) (string, error) {
+func ApiKeyByUser(secretKey string, id int32, name string) (string, error) {
 	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
 		return "", err
 	}
 
-	text := strconv.Itoa(id) + "@" + name
+	text := strconv.Itoa(int(id)) + "@" + name
 	plainText := []byte(text)
 	cipherText := make([]byte, aes.BlockSize+len(plainText))
 

@@ -23,8 +23,9 @@ func SetupTestGorani() *gorani.Gorani {
 }
 
 const (
-	TestWordbookUuid = "3f06af63-a93c-11e4-9797-00505690773f"
-	TestUserId       = 1
+	TestWordbookUuid        = "3f06af63-a93c-11e4-9797-00505690773f"
+	TestUnknownWordbookUuid = "3f06af63-a93c-11e4-9797-005056907731"
+	TestUserId              = 1
 )
 
 func setupDB(db *gorm.DB) {
@@ -65,9 +66,27 @@ func setupDB(db *gorm.DB) {
 
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO wordbook 
-		(wordbook_uuid, user_id, wordbook_name, wordbook_seen_date, wordbook_update_date)
+		(wordbook_uuid, wordbook_name, wordbook_seen_date, wordbook_update_date)
 	VALUES
-		(UUID_TO_BIN('%s'), 1, 'test', NOW(), NOW());`, TestWordbookUuid))
+		(UUID_TO_BIN('%s'), 'test', NOW(), NOW());`, TestWordbookUuid))
+
+	db.Exec(fmt.Sprintf(`
+	INSERT INTO user_wordbook 
+		(user_id, wordbook_uuid)
+	VALUES
+		(%d, UUID_TO_BIN('%s'));`, TestUserId, TestWordbookUuid))
+
+	db.Exec(fmt.Sprintf(`
+	INSERT INTO wordbook 
+		(wordbook_uuid, wordbook_name, wordbook_seen_date, wordbook_update_date)
+	VALUES
+		(UUID_TO_BIN('%s'), '', NOW(), NOW());`, TestUnknownWordbookUuid))
+
+	db.Exec(fmt.Sprintf(`
+	INSERT INTO unknown_wordbook 
+		(user_id, wordbook_uuid)
+	VALUES
+		(%d, UUID_TO_BIN('%s'));`, TestUserId, TestUnknownWordbookUuid))
 
 	db.Exec(`
 	INSERT INTO word
@@ -92,4 +111,10 @@ func setupDB(db *gorm.DB) {
 		(wordbook_uuid, definition_id, wordbook_entry_source_book, wordbook_entry_source_sentence, wordbook_entry_added_date, wordbook_entry_word_index)
 	VALUES
 		(UUID_TO_BIN('%s'), 1, 'book', 'asdf', NOW(), 0);`, TestWordbookUuid))
+
+	db.Exec(fmt.Sprintf(`
+	INSERT INTO wordbook_entry
+		(wordbook_uuid, definition_id, wordbook_entry_source_book, wordbook_entry_source_sentence, wordbook_entry_added_date, wordbook_entry_word_index)
+	VALUES
+		(UUID_TO_BIN('%s'), 1, 'book', 'asdf', NOW(), 0);`, TestUnknownWordbookUuid))
 }

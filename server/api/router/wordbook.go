@@ -114,17 +114,26 @@ func (ro *Router) GetWordbookEntries(w http.ResponseWriter, r *http.Request) {
 }
 
 type PutWordbookEntriesRequest struct {
-	Entries []dbh.WordbookEntry
+	Entries []dbh.WordbookEntry `json:"entries"`
+	Time    util.RFCTime        `json:"time"`
 }
 
 func (ro *Router) PutWordbookEntries(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
-	entries, err := wb.GetEntries(ro.ap.Mysql)
+	req := PutWordbookEntriesRequest{}
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), 400)
 		return
 	}
 
-	util.JSON(w, entries)
+	ctx := r.Context()
+	wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
+
+	err = wb.UpdateEntries(ro.ap.Mysql, req.Time.Time, req.Entries)
+	if err != nil {
+		http.Error(w, err.Error(), 409)
+		return
+	}
+
+	w.WriteHeader(200)
 }
