@@ -22,6 +22,7 @@ func (ro *Router) registerHandlers() {
 		r.Post("/", ro.AddWordbook)
 		r.Route("/{uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", func(r chi.Router) {
 			r.Use(ro.WordbookCtx)
+			r.Put("/", ro.PutWordbook)
 			r.Delete("/", ro.DeleteWordbook)
 			r.Get("/entries", ro.GetWordbookEntries)
 		})

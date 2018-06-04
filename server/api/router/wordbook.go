@@ -24,7 +24,7 @@ func (ro *Router) WordbookCtx(next http.Handler) http.Handler {
 		}
 
 		user := middleware.GetUser(r)
-		wb, err := user.GetWordbook(ro.ap.Mysql, dbh.UUID{u})
+		wb, err := user.GetWordbook(ro.ap.Mysql, util.UUID{u})
 		if err != nil {
 			http.Error(w, http.StatusText(404), 404)
 			return
@@ -65,6 +65,30 @@ func (ro *Router) AddWordbook(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(201)
 }
 
+func (ro *Router) PutWordbook(w http.ResponseWriter, r *http.Request) {
+	new := dbh.Wordbook{}
+	err := json.NewDecoder(r.Body).Decode(&new)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	ctx := r.Context()
+	old := ctx.Value(wordbookContextKey).(dbh.Wordbook)
+	old.Name = new.Name
+	if new.SeenDate.After(old.SeenDate.Time) {
+		old.SeenDate = new.SeenDate
+	}
+
+	err = old.Update(ro.ap.Mysql)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.WriteHeader(200)
+}
+
 func (ro *Router) DeleteWordbook(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
@@ -78,12 +102,29 @@ func (ro *Router) DeleteWordbook(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ro *Router) GetWordbookEntries(w http.ResponseWriter, r *http.Request) {
-	// ctx := r.Context()
-	// wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
-	// entries, err := wb.GetEntries(ro.ap.Mysql)
-	// if err != nil {
-	// 	http.Error(w, err.Error(), 500)
-	// 	return
-	// }
+	ctx := r.Context()
+	wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
+	entries, err := wb.GetEntries(ro.ap.Mysql)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 
+	util.JSON(w, entries)
+}
+
+type PutWordbookEntriesRequest struct {
+	Entries []dbh.WordbookEntry
+}
+
+func (ro *Router) PutWordbookEntries(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
+	entries, err := wb.GetEntries(ro.ap.Mysql)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	util.JSON(w, entries)
 }

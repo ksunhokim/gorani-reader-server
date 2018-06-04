@@ -4,14 +4,15 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 type Wordbook struct {
-	Id         UUID    `gorm:"column:wordbook_uuid;primary_key" json:"uuid"`
-	UserId     int     `gorm:"column:user_id" json:"-"`
-	Name       string  `gorm:"column:wordbook_name" json:"name"`
-	SeenDate   RFCTime `gorm:"column:wordbook_seen_date" json:"seen_date"`
-	UpdateDate RFCTime `gorm:"column:wordbook_update_date" json:"update_date"`
+	Id         util.UUID    `gorm:"column:wordbook_uuid;primary_key" json:"uuid"`
+	UserId     int          `gorm:"column:user_id" json:"-"`
+	Name       string       `gorm:"column:wordbook_name" json:"name"`
+	SeenDate   util.RFCTime `gorm:"column:wordbook_seen_date" json:"seen_date"`
+	UpdateDate util.RFCTime `gorm:"column:wordbook_update_date" json:"update_date"`
 }
 
 func (Wordbook) TableName() string {
@@ -28,7 +29,7 @@ func (wb *Wordbook) Delete(db *gorm.DB) error {
 	return err
 }
 
-func (u *User) GetWordbook(db *gorm.DB, id UUID) (Wordbook, error) {
+func (u *User) GetWordbook(db *gorm.DB, id util.UUID) (Wordbook, error) {
 	wordbook := Wordbook{}
 	if err := db.
 		Where("wordbook_uuid = ? AND user_id = ?", id, u.Id).
@@ -63,7 +64,7 @@ func (u *User) AddWordbook(db *gorm.DB, wordbook *Wordbook) (err error) {
 
 	wordbook.UserId = u.Id
 	t, _ := time.Parse(time.RFC3339, "2006-01-02T15:04:05Z")
-	wordbook.UpdateDate = RFCTime{t}
+	wordbook.UpdateDate = util.RFCTime{t}
 
 	err = tx.Create(wordbook).Error
 	return err

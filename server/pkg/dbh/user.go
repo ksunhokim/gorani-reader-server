@@ -57,7 +57,7 @@ func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 		Raw(`SELECT
 				* 
 			FROM
-			oauth_passport
+				oauth_passport
 			WHERE
 				oauth_service_code = ? AND
 				oauth_user_id = ?

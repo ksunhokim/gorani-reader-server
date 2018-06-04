@@ -1,4 +1,4 @@
-package dbh
+package util
 
 import (
 	"database/sql/driver"

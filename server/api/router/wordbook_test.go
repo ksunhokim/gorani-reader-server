@@ -64,6 +64,38 @@ func TestWordbookCreate(t *testing.T) {
 	wordbooks.Length().Equal(2)
 }
 
+func TestWordbookPut(t *testing.T) {
+	a := assert.New(t)
+	e, s, ap := prepareServer(t)
+	defer s.Close()
+
+	key, err := auth.ApiKeyByUser(ap.Config.SecretKey, util.TestUserId, "test")
+	a.Nil(err)
+
+	wordbook := util.M{
+		"uuid":      util.TestWordbookUuid,
+		"seen_date": "2018-06-04T11:03:49.859Z",
+		"name":      "test3",
+	}
+
+	e.
+		PUT("/wordbook/"+util.TestWordbookUuid).
+		WithHeader(middleware.ApiKeyHeader, key).
+		WithJSON(wordbook).
+		Expect().
+		Status(200)
+
+	wordbooks := e.
+		GET("/wordbook").
+		WithHeader(middleware.ApiKeyHeader, key).
+		Expect().
+		Status(200).
+		JSON().
+		Array()
+
+	wordbooks.Element(0).Object().Value("name").Equal("test3")
+}
+
 func TestWordbookDelete(t *testing.T) {
 	a := assert.New(t)
 	e, s, ap := prepareServer(t)
@@ -87,4 +119,25 @@ func TestWordbookDelete(t *testing.T) {
 		Array()
 
 	wordbooks.Length().Equal(0)
+}
+
+func TestWordbookGetEntries(t *testing.T) {
+	a := assert.New(t)
+	e, s, ap := prepareServer(t)
+	defer s.Close()
+
+	key, err := auth.ApiKeyByUser(ap.Config.SecretKey, util.TestUserId, "test")
+	a.Nil(err)
+
+	entries := e.
+		GET("/wordbook/"+util.TestWordbookUuid+"/entries").
+		WithHeader(middleware.ApiKeyHeader, key).
+		Expect().
+		Status(200).
+		JSON().
+		Array()
+
+	entries.Length().Equal(1)
+	entry := entries.Element(0).Object()
+	entry.Keys().ContainsOnly("definition_id", "source_book", "source_sentence", "added_date", "word_index", "correct")
 }

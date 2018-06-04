@@ -16,7 +16,7 @@ func TestGetWordbook(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
+	wordbook, err := user.GetWordbook(gorn.Mysql, util.UUID{id})
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -29,8 +29,8 @@ func TestAddWordbook(t *testing.T) {
 	a.Nil(err)
 
 	wordbook := dbh.Wordbook{
-		Id:       dbh.UUID{uuid.New()},
-		SeenDate: dbh.RFCTime{time.Now().UTC()},
+		Id:       util.UUID{uuid.New()},
+		SeenDate: util.RFCTime{time.Now().UTC()},
 		Name:     "asdf",
 	}
 
@@ -67,7 +67,7 @@ func TestUpdateWordbook(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
+	wordbook, err := user.GetWordbook(gorn.Mysql, util.UUID{id})
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -75,7 +75,7 @@ func TestUpdateWordbook(t *testing.T) {
 	wordbook.Name = "hoi"
 	wordbook.Update(gorn.Mysql)
 
-	wordbook, err = user.GetWordbook(gorn.Mysql, dbh.UUID{id})
+	wordbook, err = user.GetWordbook(gorn.Mysql, util.UUID{id})
 	a.Nil(err)
 
 	a.Equal("hoi", wordbook.Name)
