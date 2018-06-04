@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"net/http"
 	"time"
 
@@ -29,7 +28,7 @@ func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
-		Addr:           Addr,
+		Addr:           aconf.ApiAddress,
 	}
 
 	return hs, nil
@@ -38,22 +37,12 @@ func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 func main() {
 	log.AppName = "api"
 
-	bytes, err := ioutil.ReadFile("../config.yaml")
+	conf, err := gorani.NewConfig("config.yaml")
 	if err != nil {
 		panic(err)
 	}
 
-	conf, err := gorani.NewConfig(bytes)
-	if err != nil {
-		panic(err)
-	}
-
-	abytes, err := ioutil.ReadFile("aconfig.yaml")
-	if err != nil {
-		panic(err)
-	}
-
-	aconf, err := api.NewConfig(abytes)
+	aconf, err := api.NewConfig("aconfig.yaml")
 	if err != nil {
 		panic(err)
 	}

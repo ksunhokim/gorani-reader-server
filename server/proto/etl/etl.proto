@@ -3,11 +3,25 @@ syntax = "proto3";
 package etl;
 
 service ETL {
-    rpc AddWord (Word) returns (AddWordResponse) {}
+    rpc GetWords (Empty) returns (GetWordsResponse) {}
+    rpc AddWord (AddWordRequest) returns (Empty) {}
+    rpc GetWordById (GetWordByIdRequest) returns (Word) {}
+    rpc GetWordByWord (GetWordByWordRequest) returns (Word) {}
+    rpc DeleteWord (DeleteWordRequest) returns (Empty) {}
+
+    rpc BuildSqlite (Empty) returns (BuildSqliteResponse) {}
+    rpc InsepectISBN (InsepectIsbnRequest) returns (InsepectIsbnResponse) {}
+    rpc InsertBook (InsertBookRequest) returns (Empty) {}
+
+    rpc GetNeededQuiz (GetNeededQuizRequest) returns (GetNeededQuizResponse) {}
+    rpc AnalyzeHtml (AnalyzeHtmlRequest) returns (AnalyzeHtmlResponse) {}
+    rpc CreateSentences (CreateSentencesRequest) returns (CreateSentencesResponse) {}
+
+    rpc RenewRelevantWords (RenewRelevantWordsRequest) returns (Empty) {}
+    rpc RenewRecommenededBook (RenewRecommenededBookRequest) returns (Empty) {}
 }
 
-message AddWordResponse {
-    int32 id = 1;
+message Empty {
 }
 
 message Word {
@@ -29,4 +43,79 @@ message Example {
     int32 definition_id = 1;
     string foreign = 2;
     string native = 3;
+}
+
+message AddWordRequest {
+    Word word = 1;
+}
+
+message GetWordsResponse {
+    repeated Word words = 1;
+}
+
+message GetWordByIdRequest{
+    int32 id = 1;
+}
+
+message GetWordByWordRequest{
+    string word = 1;
+}
+
+message GetWordResponse{
+    Word word = 1;
+}
+
+message DeleteWordRequest {
+    int32 id = 1;
+}
+
+message BuildSqliteResponse {
+    string url = 1;
+}
+
+message InsepectIsbnRequest {
+    string isbn = 1;
+}
+
+message InsepectIsbnResponse {
+    
+}
+
+message InsertBookRequest {
+    string redis_key = 1;
+    string isbn = 2;
+}
+
+message RenewRelevantWordsRequest {
+    int32 word_low = 1;
+    int32 word_hi = 2;
+}
+
+message RenewRecommenededBookRequest {
+    int32 user_low = 1;
+    int32 user_high = 2;
+}
+
+message GetNeededQuizRequest {
+
+}
+
+message GetNeededQuizResponse {
+
+}
+
+message AnalyzeHtmlRequest {
+
+}
+
+message AnalyzeHtmlResponse {
+
+}
+
+message CreateSentencesRequest {
+
+}
+
+message CreateSentencesResponse {
+
 }

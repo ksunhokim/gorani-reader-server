@@ -2,19 +2,13 @@ package util
 
 import (
 	"fmt"
-	"io/ioutil"
 
 	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 )
 
 func SetupTestGorani() *gorani.Gorani {
-	bytes, err := ioutil.ReadFile("../../config_test.yaml")
-	if err != nil {
-		panic(err)
-	}
-
-	conf, err := gorani.NewConfig(bytes)
+	conf, err := gorani.NewConfig("../../config_test.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -50,11 +44,24 @@ func setupDB(db *gorm.DB) {
 			panic(err)
 		}
 	}
+
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO user 
 		(user_id, user_name)
 	VALUES
 		(%d, 'test');`, TestUserId))
+
+	db.Exec(`
+	INSERT INTO oauth_service
+		(oauth_service_code, oauth_service_name)
+	VALUES
+		(1, 'naver');`)
+
+	db.Exec(`
+	INSERT INTO oauth_passport
+		(user_id, oauth_service_code, oauth_user_id)
+	VALUES
+		(1, 1, 'asdf');`)
 
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO wordbook 

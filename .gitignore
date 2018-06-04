@@ -12,6 +12,7 @@ app/App/Auth/AuthProviders.plist
 server/db/err.mwb.bak
 
 aconfig.yaml
+econfig.yaml
 config.yaml
 config_test.yaml
 services.yaml

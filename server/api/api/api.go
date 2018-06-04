@@ -9,7 +9,7 @@ import (
 )
 
 type Api struct {
-	Gorn     *gorani.Gorani
+	*gorani.Gorani
 	Config   Config
 	Services auth.Services
 	Redis    *redis.Client
@@ -27,11 +27,12 @@ func New(gorn *gorani.Gorani, conf Config) (*Api, error) {
 	}
 
 	ap := &Api{
-		Gorn:     gorn,
+		Gorani:   gorn,
 		Config:   conf,
 		Services: s,
 		Redis:    r,
 	}
+	ap.Config.Config = gorn.Config
 	return ap, nil
 }
 

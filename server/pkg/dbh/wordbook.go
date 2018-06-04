@@ -1,9 +1,13 @@
 package dbh
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
 type Wordbook struct {
@@ -11,6 +15,62 @@ type Wordbook struct {
 	UserId   int       `gorm:"column:user_id"`
 	Name     string    `gorm:"column:wordbook_name"`
 	SeenDate time.Time `gorm:"column:wordbook_seen_date"`
+}
+
+func (w *Wordbook) MarshalJSON() ([]byte, error) {
+	var id string
+	if w.Id == nil {
+		id = ""
+	} else {
+		uid, err := uuid.FromBytes(w.Id)
+		if err != nil {
+			id = ""
+		} else {
+			id = uid.String()
+		}
+	}
+	t := w.SeenDate.Format(time.RFC3339)
+	jsonResult := fmt.Sprintf(`{"name":%q,"uuid":%q,"seen_date":%q}`, w.Name, id, t)
+	return []byte(jsonResult), nil
+}
+
+func (w *Wordbook) UnmarshalJSON(b []byte) error {
+	u := util.M{}
+	err := json.Unmarshal(b, &u)
+	if err != nil {
+		return err
+	}
+
+	if name, ok := u["name"].(string); ok {
+		w.Name = name
+	} else {
+		return fmt.Errorf("JSON error")
+	}
+
+	if uid, ok := u["uuid"].(string); ok {
+		id, err := uuid.Parse(uid)
+		if err != nil {
+			return err
+		}
+		bytes, err := id.MarshalBinary()
+		if err != nil {
+			return err
+		}
+		w.Id = bytes
+	} else {
+		return fmt.Errorf("JSON error")
+	}
+
+	if seendate, ok := u["seen_date"].(string); ok {
+		d, err := time.Parse(time.RFC3339, seendate)
+		if err != nil {
+			return err
+		}
+		w.SeenDate = d
+	} else {
+		w.SeenDate = time.Time{}
+	}
+	return nil
 }
 
 func (Wordbook) TableName() string {
@@ -27,10 +87,10 @@ func (wb *Wordbook) Delete(db *gorm.DB) error {
 	return err
 }
 
-func GetWordbook(db *gorm.DB, id []byte) (Wordbook, error) {
+func (u *User) GetWordbook(db *gorm.DB, id []byte) (Wordbook, error) {
 	wordbook := Wordbook{}
 	if err := db.
-		Where("wordbook_uuid = ?", id).
+		Where("wordbook_uuid = ? AND user_id = ?", id, u.Id).
 		First(&wordbook).
 		Error; err != nil {
 		return Wordbook{}, err

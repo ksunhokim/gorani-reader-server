@@ -10,9 +10,15 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
-func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
+func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server, *api.Api) {
 	gorn := util.SetupTestGorani()
-	ap, err := api.New(gorn, api.Config{})
+
+	aconf, err := api.NewConfig("../aconfig_test.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	ap, err := api.New(gorn, aconf)
 	if err != nil {
 		panic(err)
 	}
@@ -21,5 +27,5 @@ func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server) {
 	server := httptest.NewServer(router)
 	e := httpexpect.New(t, server.URL)
 
-	return e, server
+	return e, server, ap
 }

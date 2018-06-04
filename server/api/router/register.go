@@ -15,4 +15,14 @@ func (ro *Router) registerHandlers() {
 	ro.Route("/user", func(r chi.Router) {
 		r.Post("/withOauth", ro.UserWithOauth)
 	})
+
+	ro.Route("/wordbook", func(r chi.Router) {
+		r.Use(mymid.Auth(ro.ap.Mysql, ro.ap.Config.SecretKey))
+		r.Get("/", ro.GetWordbook)
+		r.Post("/", ro.AddWordbook)
+		r.Route("/{uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", func(r chi.Router) {
+			r.Use(ro.WordbookCtx)
+			r.Delete("/", ro.DeleteWordbook)
+		})
+	})
 }

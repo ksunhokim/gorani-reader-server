@@ -74,46 +74,43 @@ func main() {
 	}
 
 	work := make(chan *pb.Word, 10000)
-	go func() {
-		for _, word := range iwords {
-			oword := &pb.Word{
-				Word:          word.Word,
-				Pronunciation: word.Pronunciation,
-				Definitions:   []*pb.Definition{},
-			}
-			for _, def := range word.Definitions {
-				odef := &pb.Definition{
-					Definition: def.Definition,
-					Pos:        dealPOS(def.POS),
-					Examples:   []*pb.Example{},
-				}
-				for _, ex := range def.Examples {
-					oex := &pb.Example{
-						Foreign: ex.Foreign,
-						Native:  ex.Native,
-					}
-					odef.Examples = append(odef.Examples, oex)
-				}
-				oword.Definitions = append(oword.Definitions, odef)
-			}
-			work <- oword
-		}
-		close(work)
-	}()
-
 	wg := sync.WaitGroup{}
 	for i := 0; i < 100; i++ {
 		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			for w := range work {
 				_, err := cli.AddWord(context.Background(), w)
 				if err != nil {
 					log.Println(err)
 				}
 			}
-			wg.Done()
 		}()
 	}
-	wg.Wait()
 
+	for _, word := range iwords {
+		oword := &pb.Word{
+			Word:          word.Word,
+			Pronunciation: word.Pronunciation,
+			Definitions:   []*pb.Definition{},
+		}
+		for _, def := range word.Definitions {
+			odef := &pb.Definition{
+				Definition: def.Definition,
+				Pos:        dealPOS(def.POS),
+				Examples:   []*pb.Example{},
+			}
+			for _, ex := range def.Examples {
+				oex := &pb.Example{
+					Foreign: ex.Foreign,
+					Native:  ex.Native,
+				}
+				odef.Examples = append(odef.Examples, oex)
+			}
+			oword.Definitions = append(oword.Definitions, odef)
+		}
+		work <- oword
+	}
+	close(work)
+	wg.Wait()
 }

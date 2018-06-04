@@ -42,7 +42,7 @@ func AddWord(db *gorm.DB, word *Word) error {
 	return err
 }
 
-func GetWord(db *gorm.DB, id int) (Word, error) {
+func GetWord(db *gorm.DB, id int32) (Word, error) {
 	word := Word{}
 	if err := db.
 		Preload("Definitions").

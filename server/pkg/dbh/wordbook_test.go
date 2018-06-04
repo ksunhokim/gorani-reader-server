@@ -14,7 +14,9 @@ func TestGetWordbook(t *testing.T) {
 	a := assert.New(t)
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	bytes := util.UuidToBytes(id)
-	wordbook, err := dbh.GetWordbook(gorn.Mysql, bytes)
+	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
+	a.Nil(err)
+	wordbook, err := user.GetWordbook(gorn.Mysql, bytes)
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -37,7 +39,7 @@ func TestAddWordbook(t *testing.T) {
 	id := wordbook.Id
 	a.Equal(16, len(id))
 
-	wordbook, err = dbh.GetWordbook(gorn.Mysql, id)
+	wordbook, err = user.GetWordbook(gorn.Mysql, id)
 	a.Nil(err)
 
 	a.Equal("asdf", wordbook.Name)
@@ -63,7 +65,9 @@ func TestUpdateWordbook(t *testing.T) {
 	gorn := util.SetupTestGorani()
 	a := assert.New(t)
 	id, _ := uuid.Parse(util.TestWordbookUuid)
-	wordbook, err := dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
+	a.Nil(err)
+	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -71,7 +75,7 @@ func TestUpdateWordbook(t *testing.T) {
 	wordbook.Name = "hoi"
 	wordbook.Update(gorn.Mysql)
 
-	wordbook, err = dbh.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err = user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
 	a.Nil(err)
 
 	a.Equal("hoi", wordbook.Name)

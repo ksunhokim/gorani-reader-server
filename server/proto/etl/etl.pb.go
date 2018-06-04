@@ -23,43 +23,35 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type AddWordResponse struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+type Empty struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *AddWordResponse) Reset()         { *m = AddWordResponse{} }
-func (m *AddWordResponse) String() string { return proto.CompactTextString(m) }
-func (*AddWordResponse) ProtoMessage()    {}
-func (*AddWordResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_etl_a45fdd65d00661f4, []int{0}
+func (m *Empty) Reset()         { *m = Empty{} }
+func (m *Empty) String() string { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()    {}
+func (*Empty) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{0}
 }
-func (m *AddWordResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddWordResponse.Unmarshal(m, b)
+func (m *Empty) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Empty.Unmarshal(m, b)
 }
-func (m *AddWordResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddWordResponse.Marshal(b, m, deterministic)
+func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
 }
-func (dst *AddWordResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddWordResponse.Merge(dst, src)
+func (dst *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(dst, src)
 }
-func (m *AddWordResponse) XXX_Size() int {
-	return xxx_messageInfo_AddWordResponse.Size(m)
+func (m *Empty) XXX_Size() int {
+	return xxx_messageInfo_Empty.Size(m)
 }
-func (m *AddWordResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddWordResponse.DiscardUnknown(m)
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_AddWordResponse proto.InternalMessageInfo
-
-func (m *AddWordResponse) GetId() int32 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 type Word struct {
 	Id                   int32         `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
@@ -75,7 +67,7 @@ func (m *Word) Reset()         { *m = Word{} }
 func (m *Word) String() string { return proto.CompactTextString(m) }
 func (*Word) ProtoMessage()    {}
 func (*Word) Descriptor() ([]byte, []int) {
-	return fileDescriptor_etl_a45fdd65d00661f4, []int{1}
+	return fileDescriptor_etl_655459306405747f, []int{1}
 }
 func (m *Word) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Word.Unmarshal(m, b)
@@ -138,7 +130,7 @@ func (m *Definition) Reset()         { *m = Definition{} }
 func (m *Definition) String() string { return proto.CompactTextString(m) }
 func (*Definition) ProtoMessage()    {}
 func (*Definition) Descriptor() ([]byte, []int) {
-	return fileDescriptor_etl_a45fdd65d00661f4, []int{2}
+	return fileDescriptor_etl_655459306405747f, []int{2}
 }
 func (m *Definition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Definition.Unmarshal(m, b)
@@ -206,7 +198,7 @@ func (m *Example) Reset()         { *m = Example{} }
 func (m *Example) String() string { return proto.CompactTextString(m) }
 func (*Example) ProtoMessage()    {}
 func (*Example) Descriptor() ([]byte, []int) {
-	return fileDescriptor_etl_a45fdd65d00661f4, []int{3}
+	return fileDescriptor_etl_655459306405747f, []int{3}
 }
 func (m *Example) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Example.Unmarshal(m, b)
@@ -247,11 +239,681 @@ func (m *Example) GetNative() string {
 	return ""
 }
 
+type AddWordRequest struct {
+	Word                 *Word    `protobuf:"bytes,1,opt,name=word" json:"word,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddWordRequest) Reset()         { *m = AddWordRequest{} }
+func (m *AddWordRequest) String() string { return proto.CompactTextString(m) }
+func (*AddWordRequest) ProtoMessage()    {}
+func (*AddWordRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{4}
+}
+func (m *AddWordRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddWordRequest.Unmarshal(m, b)
+}
+func (m *AddWordRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddWordRequest.Marshal(b, m, deterministic)
+}
+func (dst *AddWordRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddWordRequest.Merge(dst, src)
+}
+func (m *AddWordRequest) XXX_Size() int {
+	return xxx_messageInfo_AddWordRequest.Size(m)
+}
+func (m *AddWordRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddWordRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddWordRequest proto.InternalMessageInfo
+
+func (m *AddWordRequest) GetWord() *Word {
+	if m != nil {
+		return m.Word
+	}
+	return nil
+}
+
+type GetWordsResponse struct {
+	Words                []*Word  `protobuf:"bytes,1,rep,name=words" json:"words,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetWordsResponse) Reset()         { *m = GetWordsResponse{} }
+func (m *GetWordsResponse) String() string { return proto.CompactTextString(m) }
+func (*GetWordsResponse) ProtoMessage()    {}
+func (*GetWordsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{5}
+}
+func (m *GetWordsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetWordsResponse.Unmarshal(m, b)
+}
+func (m *GetWordsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetWordsResponse.Marshal(b, m, deterministic)
+}
+func (dst *GetWordsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetWordsResponse.Merge(dst, src)
+}
+func (m *GetWordsResponse) XXX_Size() int {
+	return xxx_messageInfo_GetWordsResponse.Size(m)
+}
+func (m *GetWordsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetWordsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetWordsResponse proto.InternalMessageInfo
+
+func (m *GetWordsResponse) GetWords() []*Word {
+	if m != nil {
+		return m.Words
+	}
+	return nil
+}
+
+type GetWordByIdRequest struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetWordByIdRequest) Reset()         { *m = GetWordByIdRequest{} }
+func (m *GetWordByIdRequest) String() string { return proto.CompactTextString(m) }
+func (*GetWordByIdRequest) ProtoMessage()    {}
+func (*GetWordByIdRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{6}
+}
+func (m *GetWordByIdRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetWordByIdRequest.Unmarshal(m, b)
+}
+func (m *GetWordByIdRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetWordByIdRequest.Marshal(b, m, deterministic)
+}
+func (dst *GetWordByIdRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetWordByIdRequest.Merge(dst, src)
+}
+func (m *GetWordByIdRequest) XXX_Size() int {
+	return xxx_messageInfo_GetWordByIdRequest.Size(m)
+}
+func (m *GetWordByIdRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetWordByIdRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetWordByIdRequest proto.InternalMessageInfo
+
+func (m *GetWordByIdRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type GetWordByWordRequest struct {
+	Word                 string   `protobuf:"bytes,1,opt,name=word" json:"word,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetWordByWordRequest) Reset()         { *m = GetWordByWordRequest{} }
+func (m *GetWordByWordRequest) String() string { return proto.CompactTextString(m) }
+func (*GetWordByWordRequest) ProtoMessage()    {}
+func (*GetWordByWordRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{7}
+}
+func (m *GetWordByWordRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetWordByWordRequest.Unmarshal(m, b)
+}
+func (m *GetWordByWordRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetWordByWordRequest.Marshal(b, m, deterministic)
+}
+func (dst *GetWordByWordRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetWordByWordRequest.Merge(dst, src)
+}
+func (m *GetWordByWordRequest) XXX_Size() int {
+	return xxx_messageInfo_GetWordByWordRequest.Size(m)
+}
+func (m *GetWordByWordRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetWordByWordRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetWordByWordRequest proto.InternalMessageInfo
+
+func (m *GetWordByWordRequest) GetWord() string {
+	if m != nil {
+		return m.Word
+	}
+	return ""
+}
+
+type GetWordResponse struct {
+	Word                 *Word    `protobuf:"bytes,1,opt,name=word" json:"word,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetWordResponse) Reset()         { *m = GetWordResponse{} }
+func (m *GetWordResponse) String() string { return proto.CompactTextString(m) }
+func (*GetWordResponse) ProtoMessage()    {}
+func (*GetWordResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{8}
+}
+func (m *GetWordResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetWordResponse.Unmarshal(m, b)
+}
+func (m *GetWordResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetWordResponse.Marshal(b, m, deterministic)
+}
+func (dst *GetWordResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetWordResponse.Merge(dst, src)
+}
+func (m *GetWordResponse) XXX_Size() int {
+	return xxx_messageInfo_GetWordResponse.Size(m)
+}
+func (m *GetWordResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetWordResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetWordResponse proto.InternalMessageInfo
+
+func (m *GetWordResponse) GetWord() *Word {
+	if m != nil {
+		return m.Word
+	}
+	return nil
+}
+
+type DeleteWordRequest struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteWordRequest) Reset()         { *m = DeleteWordRequest{} }
+func (m *DeleteWordRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteWordRequest) ProtoMessage()    {}
+func (*DeleteWordRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{9}
+}
+func (m *DeleteWordRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteWordRequest.Unmarshal(m, b)
+}
+func (m *DeleteWordRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteWordRequest.Marshal(b, m, deterministic)
+}
+func (dst *DeleteWordRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteWordRequest.Merge(dst, src)
+}
+func (m *DeleteWordRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteWordRequest.Size(m)
+}
+func (m *DeleteWordRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteWordRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteWordRequest proto.InternalMessageInfo
+
+func (m *DeleteWordRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type BuildSqliteResponse struct {
+	Url                  string   `protobuf:"bytes,1,opt,name=url" json:"url,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *BuildSqliteResponse) Reset()         { *m = BuildSqliteResponse{} }
+func (m *BuildSqliteResponse) String() string { return proto.CompactTextString(m) }
+func (*BuildSqliteResponse) ProtoMessage()    {}
+func (*BuildSqliteResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{10}
+}
+func (m *BuildSqliteResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BuildSqliteResponse.Unmarshal(m, b)
+}
+func (m *BuildSqliteResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BuildSqliteResponse.Marshal(b, m, deterministic)
+}
+func (dst *BuildSqliteResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BuildSqliteResponse.Merge(dst, src)
+}
+func (m *BuildSqliteResponse) XXX_Size() int {
+	return xxx_messageInfo_BuildSqliteResponse.Size(m)
+}
+func (m *BuildSqliteResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_BuildSqliteResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BuildSqliteResponse proto.InternalMessageInfo
+
+func (m *BuildSqliteResponse) GetUrl() string {
+	if m != nil {
+		return m.Url
+	}
+	return ""
+}
+
+type InsepectIsbnRequest struct {
+	Isbn                 string   `protobuf:"bytes,1,opt,name=isbn" json:"isbn,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *InsepectIsbnRequest) Reset()         { *m = InsepectIsbnRequest{} }
+func (m *InsepectIsbnRequest) String() string { return proto.CompactTextString(m) }
+func (*InsepectIsbnRequest) ProtoMessage()    {}
+func (*InsepectIsbnRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{11}
+}
+func (m *InsepectIsbnRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_InsepectIsbnRequest.Unmarshal(m, b)
+}
+func (m *InsepectIsbnRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InsepectIsbnRequest.Marshal(b, m, deterministic)
+}
+func (dst *InsepectIsbnRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InsepectIsbnRequest.Merge(dst, src)
+}
+func (m *InsepectIsbnRequest) XXX_Size() int {
+	return xxx_messageInfo_InsepectIsbnRequest.Size(m)
+}
+func (m *InsepectIsbnRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_InsepectIsbnRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InsepectIsbnRequest proto.InternalMessageInfo
+
+func (m *InsepectIsbnRequest) GetIsbn() string {
+	if m != nil {
+		return m.Isbn
+	}
+	return ""
+}
+
+type InsepectIsbnResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *InsepectIsbnResponse) Reset()         { *m = InsepectIsbnResponse{} }
+func (m *InsepectIsbnResponse) String() string { return proto.CompactTextString(m) }
+func (*InsepectIsbnResponse) ProtoMessage()    {}
+func (*InsepectIsbnResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{12}
+}
+func (m *InsepectIsbnResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_InsepectIsbnResponse.Unmarshal(m, b)
+}
+func (m *InsepectIsbnResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InsepectIsbnResponse.Marshal(b, m, deterministic)
+}
+func (dst *InsepectIsbnResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InsepectIsbnResponse.Merge(dst, src)
+}
+func (m *InsepectIsbnResponse) XXX_Size() int {
+	return xxx_messageInfo_InsepectIsbnResponse.Size(m)
+}
+func (m *InsepectIsbnResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_InsepectIsbnResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InsepectIsbnResponse proto.InternalMessageInfo
+
+type InsertBookRequest struct {
+	RedisKey             string   `protobuf:"bytes,1,opt,name=redis_key,json=redisKey" json:"redis_key,omitempty"`
+	Isbn                 string   `protobuf:"bytes,2,opt,name=isbn" json:"isbn,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *InsertBookRequest) Reset()         { *m = InsertBookRequest{} }
+func (m *InsertBookRequest) String() string { return proto.CompactTextString(m) }
+func (*InsertBookRequest) ProtoMessage()    {}
+func (*InsertBookRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{13}
+}
+func (m *InsertBookRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_InsertBookRequest.Unmarshal(m, b)
+}
+func (m *InsertBookRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InsertBookRequest.Marshal(b, m, deterministic)
+}
+func (dst *InsertBookRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InsertBookRequest.Merge(dst, src)
+}
+func (m *InsertBookRequest) XXX_Size() int {
+	return xxx_messageInfo_InsertBookRequest.Size(m)
+}
+func (m *InsertBookRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_InsertBookRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InsertBookRequest proto.InternalMessageInfo
+
+func (m *InsertBookRequest) GetRedisKey() string {
+	if m != nil {
+		return m.RedisKey
+	}
+	return ""
+}
+
+func (m *InsertBookRequest) GetIsbn() string {
+	if m != nil {
+		return m.Isbn
+	}
+	return ""
+}
+
+type RenewRelevantWordsRequest struct {
+	WordLow              int32    `protobuf:"varint,1,opt,name=word_low,json=wordLow" json:"word_low,omitempty"`
+	WordHi               int32    `protobuf:"varint,2,opt,name=word_hi,json=wordHi" json:"word_hi,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RenewRelevantWordsRequest) Reset()         { *m = RenewRelevantWordsRequest{} }
+func (m *RenewRelevantWordsRequest) String() string { return proto.CompactTextString(m) }
+func (*RenewRelevantWordsRequest) ProtoMessage()    {}
+func (*RenewRelevantWordsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{14}
+}
+func (m *RenewRelevantWordsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RenewRelevantWordsRequest.Unmarshal(m, b)
+}
+func (m *RenewRelevantWordsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RenewRelevantWordsRequest.Marshal(b, m, deterministic)
+}
+func (dst *RenewRelevantWordsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RenewRelevantWordsRequest.Merge(dst, src)
+}
+func (m *RenewRelevantWordsRequest) XXX_Size() int {
+	return xxx_messageInfo_RenewRelevantWordsRequest.Size(m)
+}
+func (m *RenewRelevantWordsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_RenewRelevantWordsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RenewRelevantWordsRequest proto.InternalMessageInfo
+
+func (m *RenewRelevantWordsRequest) GetWordLow() int32 {
+	if m != nil {
+		return m.WordLow
+	}
+	return 0
+}
+
+func (m *RenewRelevantWordsRequest) GetWordHi() int32 {
+	if m != nil {
+		return m.WordHi
+	}
+	return 0
+}
+
+type RenewRecommenededBookRequest struct {
+	UserLow              int32    `protobuf:"varint,1,opt,name=user_low,json=userLow" json:"user_low,omitempty"`
+	UserHigh             int32    `protobuf:"varint,2,opt,name=user_high,json=userHigh" json:"user_high,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RenewRecommenededBookRequest) Reset()         { *m = RenewRecommenededBookRequest{} }
+func (m *RenewRecommenededBookRequest) String() string { return proto.CompactTextString(m) }
+func (*RenewRecommenededBookRequest) ProtoMessage()    {}
+func (*RenewRecommenededBookRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{15}
+}
+func (m *RenewRecommenededBookRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RenewRecommenededBookRequest.Unmarshal(m, b)
+}
+func (m *RenewRecommenededBookRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RenewRecommenededBookRequest.Marshal(b, m, deterministic)
+}
+func (dst *RenewRecommenededBookRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RenewRecommenededBookRequest.Merge(dst, src)
+}
+func (m *RenewRecommenededBookRequest) XXX_Size() int {
+	return xxx_messageInfo_RenewRecommenededBookRequest.Size(m)
+}
+func (m *RenewRecommenededBookRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_RenewRecommenededBookRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RenewRecommenededBookRequest proto.InternalMessageInfo
+
+func (m *RenewRecommenededBookRequest) GetUserLow() int32 {
+	if m != nil {
+		return m.UserLow
+	}
+	return 0
+}
+
+func (m *RenewRecommenededBookRequest) GetUserHigh() int32 {
+	if m != nil {
+		return m.UserHigh
+	}
+	return 0
+}
+
+type GetNeededQuizRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetNeededQuizRequest) Reset()         { *m = GetNeededQuizRequest{} }
+func (m *GetNeededQuizRequest) String() string { return proto.CompactTextString(m) }
+func (*GetNeededQuizRequest) ProtoMessage()    {}
+func (*GetNeededQuizRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{16}
+}
+func (m *GetNeededQuizRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetNeededQuizRequest.Unmarshal(m, b)
+}
+func (m *GetNeededQuizRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetNeededQuizRequest.Marshal(b, m, deterministic)
+}
+func (dst *GetNeededQuizRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetNeededQuizRequest.Merge(dst, src)
+}
+func (m *GetNeededQuizRequest) XXX_Size() int {
+	return xxx_messageInfo_GetNeededQuizRequest.Size(m)
+}
+func (m *GetNeededQuizRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetNeededQuizRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetNeededQuizRequest proto.InternalMessageInfo
+
+type GetNeededQuizResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetNeededQuizResponse) Reset()         { *m = GetNeededQuizResponse{} }
+func (m *GetNeededQuizResponse) String() string { return proto.CompactTextString(m) }
+func (*GetNeededQuizResponse) ProtoMessage()    {}
+func (*GetNeededQuizResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{17}
+}
+func (m *GetNeededQuizResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetNeededQuizResponse.Unmarshal(m, b)
+}
+func (m *GetNeededQuizResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetNeededQuizResponse.Marshal(b, m, deterministic)
+}
+func (dst *GetNeededQuizResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetNeededQuizResponse.Merge(dst, src)
+}
+func (m *GetNeededQuizResponse) XXX_Size() int {
+	return xxx_messageInfo_GetNeededQuizResponse.Size(m)
+}
+func (m *GetNeededQuizResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetNeededQuizResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetNeededQuizResponse proto.InternalMessageInfo
+
+type AnalyzeHtmlRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AnalyzeHtmlRequest) Reset()         { *m = AnalyzeHtmlRequest{} }
+func (m *AnalyzeHtmlRequest) String() string { return proto.CompactTextString(m) }
+func (*AnalyzeHtmlRequest) ProtoMessage()    {}
+func (*AnalyzeHtmlRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{18}
+}
+func (m *AnalyzeHtmlRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnalyzeHtmlRequest.Unmarshal(m, b)
+}
+func (m *AnalyzeHtmlRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AnalyzeHtmlRequest.Marshal(b, m, deterministic)
+}
+func (dst *AnalyzeHtmlRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnalyzeHtmlRequest.Merge(dst, src)
+}
+func (m *AnalyzeHtmlRequest) XXX_Size() int {
+	return xxx_messageInfo_AnalyzeHtmlRequest.Size(m)
+}
+func (m *AnalyzeHtmlRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnalyzeHtmlRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnalyzeHtmlRequest proto.InternalMessageInfo
+
+type AnalyzeHtmlResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AnalyzeHtmlResponse) Reset()         { *m = AnalyzeHtmlResponse{} }
+func (m *AnalyzeHtmlResponse) String() string { return proto.CompactTextString(m) }
+func (*AnalyzeHtmlResponse) ProtoMessage()    {}
+func (*AnalyzeHtmlResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{19}
+}
+func (m *AnalyzeHtmlResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnalyzeHtmlResponse.Unmarshal(m, b)
+}
+func (m *AnalyzeHtmlResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AnalyzeHtmlResponse.Marshal(b, m, deterministic)
+}
+func (dst *AnalyzeHtmlResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnalyzeHtmlResponse.Merge(dst, src)
+}
+func (m *AnalyzeHtmlResponse) XXX_Size() int {
+	return xxx_messageInfo_AnalyzeHtmlResponse.Size(m)
+}
+func (m *AnalyzeHtmlResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnalyzeHtmlResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnalyzeHtmlResponse proto.InternalMessageInfo
+
+type CreateSentencesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateSentencesRequest) Reset()         { *m = CreateSentencesRequest{} }
+func (m *CreateSentencesRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateSentencesRequest) ProtoMessage()    {}
+func (*CreateSentencesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{20}
+}
+func (m *CreateSentencesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateSentencesRequest.Unmarshal(m, b)
+}
+func (m *CreateSentencesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateSentencesRequest.Marshal(b, m, deterministic)
+}
+func (dst *CreateSentencesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateSentencesRequest.Merge(dst, src)
+}
+func (m *CreateSentencesRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateSentencesRequest.Size(m)
+}
+func (m *CreateSentencesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateSentencesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateSentencesRequest proto.InternalMessageInfo
+
+type CreateSentencesResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateSentencesResponse) Reset()         { *m = CreateSentencesResponse{} }
+func (m *CreateSentencesResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateSentencesResponse) ProtoMessage()    {}
+func (*CreateSentencesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_etl_655459306405747f, []int{21}
+}
+func (m *CreateSentencesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateSentencesResponse.Unmarshal(m, b)
+}
+func (m *CreateSentencesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateSentencesResponse.Marshal(b, m, deterministic)
+}
+func (dst *CreateSentencesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateSentencesResponse.Merge(dst, src)
+}
+func (m *CreateSentencesResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateSentencesResponse.Size(m)
+}
+func (m *CreateSentencesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateSentencesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateSentencesResponse proto.InternalMessageInfo
+
 func init() {
-	proto.RegisterType((*AddWordResponse)(nil), "etl.AddWordResponse")
+	proto.RegisterType((*Empty)(nil), "etl.Empty")
 	proto.RegisterType((*Word)(nil), "etl.Word")
 	proto.RegisterType((*Definition)(nil), "etl.Definition")
 	proto.RegisterType((*Example)(nil), "etl.Example")
+	proto.RegisterType((*AddWordRequest)(nil), "etl.AddWordRequest")
+	proto.RegisterType((*GetWordsResponse)(nil), "etl.GetWordsResponse")
+	proto.RegisterType((*GetWordByIdRequest)(nil), "etl.GetWordByIdRequest")
+	proto.RegisterType((*GetWordByWordRequest)(nil), "etl.GetWordByWordRequest")
+	proto.RegisterType((*GetWordResponse)(nil), "etl.GetWordResponse")
+	proto.RegisterType((*DeleteWordRequest)(nil), "etl.DeleteWordRequest")
+	proto.RegisterType((*BuildSqliteResponse)(nil), "etl.BuildSqliteResponse")
+	proto.RegisterType((*InsepectIsbnRequest)(nil), "etl.InsepectIsbnRequest")
+	proto.RegisterType((*InsepectIsbnResponse)(nil), "etl.InsepectIsbnResponse")
+	proto.RegisterType((*InsertBookRequest)(nil), "etl.InsertBookRequest")
+	proto.RegisterType((*RenewRelevantWordsRequest)(nil), "etl.RenewRelevantWordsRequest")
+	proto.RegisterType((*RenewRecommenededBookRequest)(nil), "etl.RenewRecommenededBookRequest")
+	proto.RegisterType((*GetNeededQuizRequest)(nil), "etl.GetNeededQuizRequest")
+	proto.RegisterType((*GetNeededQuizResponse)(nil), "etl.GetNeededQuizResponse")
+	proto.RegisterType((*AnalyzeHtmlRequest)(nil), "etl.AnalyzeHtmlRequest")
+	proto.RegisterType((*AnalyzeHtmlResponse)(nil), "etl.AnalyzeHtmlResponse")
+	proto.RegisterType((*CreateSentencesRequest)(nil), "etl.CreateSentencesRequest")
+	proto.RegisterType((*CreateSentencesResponse)(nil), "etl.CreateSentencesResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -266,7 +928,19 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ETLClient interface {
-	AddWord(ctx context.Context, in *Word, opts ...grpc.CallOption) (*AddWordResponse, error)
+	GetWords(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetWordsResponse, error)
+	AddWord(ctx context.Context, in *AddWordRequest, opts ...grpc.CallOption) (*Empty, error)
+	GetWordById(ctx context.Context, in *GetWordByIdRequest, opts ...grpc.CallOption) (*Word, error)
+	GetWordByWord(ctx context.Context, in *GetWordByWordRequest, opts ...grpc.CallOption) (*Word, error)
+	DeleteWord(ctx context.Context, in *DeleteWordRequest, opts ...grpc.CallOption) (*Empty, error)
+	BuildSqlite(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*BuildSqliteResponse, error)
+	InsepectISBN(ctx context.Context, in *InsepectIsbnRequest, opts ...grpc.CallOption) (*InsepectIsbnResponse, error)
+	InsertBook(ctx context.Context, in *InsertBookRequest, opts ...grpc.CallOption) (*Empty, error)
+	GetNeededQuiz(ctx context.Context, in *GetNeededQuizRequest, opts ...grpc.CallOption) (*GetNeededQuizResponse, error)
+	AnalyzeHtml(ctx context.Context, in *AnalyzeHtmlRequest, opts ...grpc.CallOption) (*AnalyzeHtmlResponse, error)
+	CreateSentences(ctx context.Context, in *CreateSentencesRequest, opts ...grpc.CallOption) (*CreateSentencesResponse, error)
+	RenewRelevantWords(ctx context.Context, in *RenewRelevantWordsRequest, opts ...grpc.CallOption) (*Empty, error)
+	RenewRecommenededBook(ctx context.Context, in *RenewRecommenededBookRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type eTLClient struct {
@@ -277,9 +951,117 @@ func NewETLClient(cc *grpc.ClientConn) ETLClient {
 	return &eTLClient{cc}
 }
 
-func (c *eTLClient) AddWord(ctx context.Context, in *Word, opts ...grpc.CallOption) (*AddWordResponse, error) {
-	out := new(AddWordResponse)
+func (c *eTLClient) GetWords(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetWordsResponse, error) {
+	out := new(GetWordsResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/GetWords", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) AddWord(ctx context.Context, in *AddWordRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/etl.ETL/AddWord", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) GetWordById(ctx context.Context, in *GetWordByIdRequest, opts ...grpc.CallOption) (*Word, error) {
+	out := new(Word)
+	err := c.cc.Invoke(ctx, "/etl.ETL/GetWordById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) GetWordByWord(ctx context.Context, in *GetWordByWordRequest, opts ...grpc.CallOption) (*Word, error) {
+	out := new(Word)
+	err := c.cc.Invoke(ctx, "/etl.ETL/GetWordByWord", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) DeleteWord(ctx context.Context, in *DeleteWordRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etl.ETL/DeleteWord", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) BuildSqlite(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*BuildSqliteResponse, error) {
+	out := new(BuildSqliteResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/BuildSqlite", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) InsepectISBN(ctx context.Context, in *InsepectIsbnRequest, opts ...grpc.CallOption) (*InsepectIsbnResponse, error) {
+	out := new(InsepectIsbnResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/InsepectISBN", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) InsertBook(ctx context.Context, in *InsertBookRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etl.ETL/InsertBook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) GetNeededQuiz(ctx context.Context, in *GetNeededQuizRequest, opts ...grpc.CallOption) (*GetNeededQuizResponse, error) {
+	out := new(GetNeededQuizResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/GetNeededQuiz", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) AnalyzeHtml(ctx context.Context, in *AnalyzeHtmlRequest, opts ...grpc.CallOption) (*AnalyzeHtmlResponse, error) {
+	out := new(AnalyzeHtmlResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/AnalyzeHtml", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) CreateSentences(ctx context.Context, in *CreateSentencesRequest, opts ...grpc.CallOption) (*CreateSentencesResponse, error) {
+	out := new(CreateSentencesResponse)
+	err := c.cc.Invoke(ctx, "/etl.ETL/CreateSentences", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) RenewRelevantWords(ctx context.Context, in *RenewRelevantWordsRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etl.ETL/RenewRelevantWords", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eTLClient) RenewRecommenededBook(ctx context.Context, in *RenewRecommenededBookRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etl.ETL/RenewRecommenededBook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -288,15 +1070,45 @@ func (c *eTLClient) AddWord(ctx context.Context, in *Word, opts ...grpc.CallOpti
 
 // ETLServer is the server API for ETL service.
 type ETLServer interface {
-	AddWord(context.Context, *Word) (*AddWordResponse, error)
+	GetWords(context.Context, *Empty) (*GetWordsResponse, error)
+	AddWord(context.Context, *AddWordRequest) (*Empty, error)
+	GetWordById(context.Context, *GetWordByIdRequest) (*Word, error)
+	GetWordByWord(context.Context, *GetWordByWordRequest) (*Word, error)
+	DeleteWord(context.Context, *DeleteWordRequest) (*Empty, error)
+	BuildSqlite(context.Context, *Empty) (*BuildSqliteResponse, error)
+	InsepectISBN(context.Context, *InsepectIsbnRequest) (*InsepectIsbnResponse, error)
+	InsertBook(context.Context, *InsertBookRequest) (*Empty, error)
+	GetNeededQuiz(context.Context, *GetNeededQuizRequest) (*GetNeededQuizResponse, error)
+	AnalyzeHtml(context.Context, *AnalyzeHtmlRequest) (*AnalyzeHtmlResponse, error)
+	CreateSentences(context.Context, *CreateSentencesRequest) (*CreateSentencesResponse, error)
+	RenewRelevantWords(context.Context, *RenewRelevantWordsRequest) (*Empty, error)
+	RenewRecommenededBook(context.Context, *RenewRecommenededBookRequest) (*Empty, error)
 }
 
 func RegisterETLServer(s *grpc.Server, srv ETLServer) {
 	s.RegisterService(&_ETL_serviceDesc, srv)
 }
 
+func _ETL_GetWords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).GetWords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/GetWords",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).GetWords(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ETL_AddWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Word)
+	in := new(AddWordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -308,7 +1120,205 @@ func _ETL_AddWord_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: "/etl.ETL/AddWord",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ETLServer).AddWord(ctx, req.(*Word))
+		return srv.(ETLServer).AddWord(ctx, req.(*AddWordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_GetWordById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWordByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).GetWordById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/GetWordById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).GetWordById(ctx, req.(*GetWordByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_GetWordByWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWordByWordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).GetWordByWord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/GetWordByWord",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).GetWordByWord(ctx, req.(*GetWordByWordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_DeleteWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).DeleteWord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/DeleteWord",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).DeleteWord(ctx, req.(*DeleteWordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_BuildSqlite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).BuildSqlite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/BuildSqlite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).BuildSqlite(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_InsepectISBN_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InsepectIsbnRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).InsepectISBN(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/InsepectISBN",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).InsepectISBN(ctx, req.(*InsepectIsbnRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_InsertBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InsertBookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).InsertBook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/InsertBook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).InsertBook(ctx, req.(*InsertBookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_GetNeededQuiz_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNeededQuizRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).GetNeededQuiz(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/GetNeededQuiz",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).GetNeededQuiz(ctx, req.(*GetNeededQuizRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_AnalyzeHtml_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AnalyzeHtmlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).AnalyzeHtml(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/AnalyzeHtml",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).AnalyzeHtml(ctx, req.(*AnalyzeHtmlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_CreateSentences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSentencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).CreateSentences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/CreateSentences",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).CreateSentences(ctx, req.(*CreateSentencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_RenewRelevantWords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenewRelevantWordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).RenewRelevantWords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/RenewRelevantWords",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).RenewRelevantWords(ctx, req.(*RenewRelevantWordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ETL_RenewRecommenededBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenewRecommenededBookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ETLServer).RenewRecommenededBook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etl.ETL/RenewRecommenededBook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ETLServer).RenewRecommenededBook(ctx, req.(*RenewRecommenededBookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -318,35 +1328,114 @@ var _ETL_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*ETLServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetWords",
+			Handler:    _ETL_GetWords_Handler,
+		},
+		{
 			MethodName: "AddWord",
 			Handler:    _ETL_AddWord_Handler,
+		},
+		{
+			MethodName: "GetWordById",
+			Handler:    _ETL_GetWordById_Handler,
+		},
+		{
+			MethodName: "GetWordByWord",
+			Handler:    _ETL_GetWordByWord_Handler,
+		},
+		{
+			MethodName: "DeleteWord",
+			Handler:    _ETL_DeleteWord_Handler,
+		},
+		{
+			MethodName: "BuildSqlite",
+			Handler:    _ETL_BuildSqlite_Handler,
+		},
+		{
+			MethodName: "InsepectISBN",
+			Handler:    _ETL_InsepectISBN_Handler,
+		},
+		{
+			MethodName: "InsertBook",
+			Handler:    _ETL_InsertBook_Handler,
+		},
+		{
+			MethodName: "GetNeededQuiz",
+			Handler:    _ETL_GetNeededQuiz_Handler,
+		},
+		{
+			MethodName: "AnalyzeHtml",
+			Handler:    _ETL_AnalyzeHtml_Handler,
+		},
+		{
+			MethodName: "CreateSentences",
+			Handler:    _ETL_CreateSentences_Handler,
+		},
+		{
+			MethodName: "RenewRelevantWords",
+			Handler:    _ETL_RenewRelevantWords_Handler,
+		},
+		{
+			MethodName: "RenewRecommenededBook",
+			Handler:    _ETL_RenewRecommenededBook_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "etl.proto",
 }
 
-func init() { proto.RegisterFile("etl.proto", fileDescriptor_etl_a45fdd65d00661f4) }
+func init() { proto.RegisterFile("etl.proto", fileDescriptor_etl_655459306405747f) }
 
-var fileDescriptor_etl_a45fdd65d00661f4 = []byte{
-	// 292 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x91, 0xcd, 0x4a, 0x03, 0x31,
-	0x10, 0xc7, 0xdd, 0xee, 0x97, 0x3b, 0x6d, 0xad, 0x0c, 0xa2, 0xc1, 0x83, 0xac, 0xab, 0x87, 0x3d,
-	0x48, 0xc1, 0xf6, 0x09, 0x04, 0x7b, 0x28, 0x78, 0x0a, 0x82, 0xc7, 0xba, 0x9a, 0x54, 0x02, 0x6b,
-	0xb2, 0x64, 0xe3, 0xc7, 0xdd, 0x27, 0xf0, 0x8d, 0x25, 0x69, 0xdc, 0xad, 0xf5, 0xf6, 0xff, 0x18,
-	0x26, 0x3f, 0x32, 0x90, 0x71, 0x53, 0x4f, 0x1b, 0xad, 0x8c, 0xc2, 0x90, 0x9b, 0xba, 0x38, 0x87,
-	0xc9, 0x0d, 0x63, 0x0f, 0x4a, 0x33, 0xca, 0xdb, 0x46, 0xc9, 0x96, 0xe3, 0x01, 0x0c, 0x04, 0x23,
-	0x41, 0x1e, 0x94, 0x31, 0x1d, 0x08, 0x56, 0x7c, 0x05, 0x10, 0xd9, 0x81, 0xdd, 0x02, 0x11, 0xa2,
-	0x0f, 0xa5, 0x19, 0x19, 0xe4, 0x41, 0x99, 0x51, 0xa7, 0xf1, 0x12, 0xc6, 0x8d, 0x56, 0xf2, 0x4d,
-	0x3e, 0x8b, 0xca, 0x08, 0x25, 0x49, 0xe8, 0xca, 0xbf, 0x21, 0x5e, 0xc3, 0x90, 0xf1, 0xb5, 0x90,
-	0xc2, 0xba, 0x96, 0x44, 0x79, 0x58, 0x0e, 0x67, 0x93, 0xa9, 0x65, 0xbb, 0xed, 0x72, 0xba, 0x3d,
-	0x53, 0x7c, 0x07, 0x00, 0x7d, 0xf7, 0x8f, 0xe5, 0x04, 0x52, 0xfb, 0xfe, 0x4a, 0x6c, 0x70, 0x62,
-	0x9a, 0x58, 0xbb, 0x64, 0x78, 0x06, 0xd0, 0xaf, 0xf1, 0x34, 0x5b, 0x09, 0x1e, 0x42, 0xd8, 0x28,
-	0x8b, 0x60, 0x0b, 0x2b, 0xb1, 0x84, 0x7d, 0xfe, 0x59, 0xbd, 0x36, 0x35, 0x6f, 0x49, 0xec, 0xc8,
-	0x46, 0x8e, 0x6c, 0xb1, 0x09, 0x69, 0xd7, 0x16, 0x8f, 0x90, 0xfa, 0x10, 0x2f, 0x60, 0xdc, 0x2f,
-	0x5d, 0x75, 0x68, 0xa3, 0x3e, 0x5c, 0x32, 0x24, 0x90, 0xae, 0x95, 0xe6, 0xe2, 0x45, 0xfa, 0x3f,
-	0xfb, 0xb5, 0x78, 0x0c, 0x89, 0xac, 0x8c, 0x78, 0xe7, 0x9e, 0xd0, 0xbb, 0xd9, 0x1c, 0xc2, 0xc5,
-	0xfd, 0x1d, 0x5e, 0x41, 0xea, 0xaf, 0x84, 0x99, 0x63, 0xb1, 0xf2, 0xf4, 0xc8, 0xc9, 0x9d, 0xf3,
-	0x15, 0x7b, 0x4f, 0x89, 0xbb, 0xef, 0xfc, 0x27, 0x00, 0x00, 0xff, 0xff, 0x51, 0xfc, 0xe1, 0x70,
-	0xec, 0x01, 0x00, 0x00,
+var fileDescriptor_etl_655459306405747f = []byte{
+	// 789 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x55, 0xd1, 0x72, 0xda, 0x46,
+	0x14, 0x05, 0x63, 0x0c, 0x5c, 0xec, 0xd8, 0xb9, 0xb6, 0x41, 0xe0, 0x34, 0x75, 0x37, 0x99, 0x29,
+	0xed, 0x74, 0x92, 0x16, 0x4f, 0xa7, 0xcf, 0xa1, 0x66, 0x02, 0xd3, 0x8c, 0x3b, 0x95, 0x3b, 0xed,
+	0xa3, 0x8b, 0xd1, 0x8d, 0xd9, 0x89, 0x58, 0x11, 0x69, 0x09, 0xc5, 0xaf, 0xfd, 0x82, 0xfe, 0x43,
+	0x3f, 0xb4, 0xb3, 0xab, 0x95, 0xb4, 0x12, 0xea, 0xf4, 0x6d, 0xf7, 0xdc, 0xbb, 0x67, 0x0f, 0x57,
+	0xe7, 0x2c, 0xd0, 0x22, 0xe9, 0xbf, 0x5a, 0x85, 0x81, 0x0c, 0xb0, 0x46, 0xd2, 0x67, 0x0d, 0xa8,
+	0x8f, 0x97, 0x2b, 0xb9, 0x65, 0x7f, 0x55, 0x61, 0xff, 0xf7, 0x20, 0xf4, 0xf0, 0x09, 0xec, 0x71,
+	0xcf, 0xa9, 0x5e, 0x56, 0x07, 0x75, 0x77, 0x8f, 0x7b, 0x88, 0xb0, 0xbf, 0x09, 0x42, 0xcf, 0xd9,
+	0xbb, 0xac, 0x0e, 0x5a, 0xae, 0x5e, 0xe3, 0x4b, 0x38, 0x5a, 0x85, 0x81, 0x58, 0x8b, 0x39, 0x9f,
+	0x49, 0x1e, 0x08, 0xa7, 0xa6, 0x8b, 0x79, 0x10, 0xbf, 0x83, 0xb6, 0x47, 0xef, 0xb9, 0xe0, 0x6a,
+	0x17, 0x39, 0xfb, 0x97, 0xb5, 0x41, 0x7b, 0x78, 0xfc, 0x4a, 0x29, 0xb8, 0x4e, 0x71, 0xd7, 0xee,
+	0x61, 0x7f, 0x57, 0x01, 0xb2, 0xda, 0x8e, 0x96, 0x2e, 0x34, 0xd4, 0xfd, 0x77, 0x3c, 0x96, 0x53,
+	0x77, 0x0f, 0xd4, 0x76, 0xea, 0xe1, 0x73, 0x80, 0x8c, 0xc6, 0xa8, 0xb1, 0x10, 0x3c, 0x81, 0xda,
+	0x2a, 0x50, 0x12, 0x54, 0x41, 0x2d, 0x71, 0x00, 0x4d, 0xfa, 0x73, 0xb6, 0x5c, 0xf9, 0x14, 0x39,
+	0x75, 0xad, 0xec, 0x50, 0x2b, 0x1b, 0xc7, 0xa0, 0x9b, 0x56, 0xd9, 0x1f, 0xd0, 0x30, 0x20, 0xbe,
+	0x80, 0xa3, 0x8c, 0xf4, 0x2e, 0x95, 0x76, 0x98, 0x81, 0x53, 0x0f, 0x1d, 0x68, 0xbc, 0x0f, 0x42,
+	0xe2, 0x0f, 0xc2, 0xcc, 0x2c, 0xd9, 0x62, 0x07, 0x0e, 0xc4, 0x4c, 0xf2, 0x4f, 0x64, 0x14, 0x9a,
+	0x1d, 0x7b, 0x0d, 0x4f, 0xde, 0x78, 0x9e, 0x9a, 0xbe, 0x4b, 0x1f, 0xd7, 0x14, 0x49, 0xfc, 0xcc,
+	0x0c, 0x5d, 0xf1, 0xb7, 0x87, 0x2d, 0xad, 0x4c, 0xd7, 0x35, 0xcc, 0xae, 0xe0, 0xe4, 0x2d, 0x49,
+	0x05, 0x44, 0x2e, 0x45, 0xab, 0x40, 0x44, 0x84, 0x9f, 0x43, 0x5d, 0xd5, 0x22, 0xa7, 0xaa, 0x7f,
+	0x8d, 0x75, 0x26, 0xc6, 0xd9, 0x4b, 0x40, 0x73, 0x68, 0xb4, 0x9d, 0xa6, 0x37, 0x15, 0x46, 0xcc,
+	0xbe, 0x86, 0xb3, 0xb4, 0xcb, 0x56, 0x84, 0x96, 0x22, 0x63, 0x03, 0xf6, 0x2d, 0x1c, 0x9b, 0xde,
+	0x54, 0xc5, 0xff, 0x08, 0x7f, 0x01, 0x4f, 0xaf, 0xc9, 0x27, 0x49, 0x36, 0x75, 0x51, 0xc2, 0x97,
+	0x70, 0x3a, 0x5a, 0x73, 0xdf, 0xbb, 0xfd, 0xe8, 0x73, 0x49, 0x29, 0xf5, 0x09, 0xd4, 0xd6, 0xa1,
+	0x6f, 0x04, 0xa8, 0x25, 0xfb, 0x0a, 0x4e, 0xa7, 0x22, 0xa2, 0x15, 0xcd, 0xe5, 0x34, 0xba, 0x17,
+	0x96, 0x54, 0x1e, 0xdd, 0x8b, 0x44, 0xaa, 0x5a, 0xb3, 0x0e, 0x9c, 0xe5, 0x5b, 0x63, 0x52, 0x76,
+	0x0d, 0x4f, 0x15, 0x1e, 0xca, 0x51, 0x10, 0x7c, 0x48, 0x08, 0x2e, 0xa0, 0x15, 0x92, 0xc7, 0xa3,
+	0xbb, 0x0f, 0xb4, 0x35, 0x2c, 0x4d, 0x0d, 0xfc, 0x44, 0xdb, 0x94, 0x7d, 0xcf, 0x62, 0xff, 0x19,
+	0x7a, 0x2e, 0x09, 0xda, 0xb8, 0xe4, 0xd3, 0xa7, 0x99, 0x48, 0xbe, 0x4c, 0xcc, 0xd6, 0x83, 0xa6,
+	0x36, 0xad, 0x1f, 0x6c, 0xcc, 0x8f, 0xd4, 0x26, 0x7e, 0x17, 0x6c, 0x52, 0x3f, 0x2f, 0xb8, 0xed,
+	0xe7, 0x09, 0x67, 0xbf, 0xc1, 0x33, 0x43, 0x38, 0x0f, 0x96, 0x4b, 0x12, 0xe4, 0x91, 0x67, 0x2b,
+	0xec, 0x41, 0x73, 0x1d, 0x51, 0x68, 0x73, 0xaa, 0xbd, 0xe2, 0xbc, 0x80, 0x96, 0x2e, 0x2d, 0xf8,
+	0xc3, 0xc2, 0xb0, 0xea, 0xde, 0x09, 0x7f, 0x58, 0xa8, 0x31, 0xbc, 0x25, 0x79, 0x43, 0x8a, 0xef,
+	0x97, 0x35, 0x7f, 0x34, 0x7c, 0xac, 0x0b, 0xe7, 0x05, 0xdc, 0xcc, 0xe7, 0x0c, 0xf0, 0x8d, 0x98,
+	0xf9, 0xdb, 0x47, 0x9a, 0xc8, 0xa5, 0x9f, 0xb4, 0x9f, 0xc3, 0x69, 0x0e, 0x35, 0xcd, 0x0e, 0x74,
+	0x7e, 0x0c, 0x69, 0x26, 0xe9, 0x96, 0x84, 0x24, 0x31, 0xa7, 0x64, 0x06, 0xac, 0x07, 0xdd, 0x9d,
+	0x4a, 0x7c, 0x68, 0xf8, 0xcf, 0x01, 0xd4, 0xc6, 0xbf, 0xbe, 0xc3, 0xd7, 0xd0, 0x4c, 0x3c, 0x8d,
+	0x10, 0x47, 0x51, 0x3d, 0x4c, 0xfd, 0x73, 0xbd, 0x2e, 0xda, 0x9d, 0x55, 0xf0, 0x1b, 0x68, 0x98,
+	0xd4, 0xe0, 0xa9, 0xee, 0xc9, 0x67, 0xa8, 0x6f, 0x91, 0xb0, 0x0a, 0x5e, 0x41, 0xdb, 0x72, 0x3f,
+	0x76, 0x6d, 0x56, 0x2b, 0x0f, 0xfd, 0xcc, 0xb2, 0xac, 0x82, 0x3f, 0xc0, 0x51, 0x2e, 0x0c, 0xd8,
+	0xcb, 0x1f, 0xb3, 0xaf, 0xcb, 0x1d, 0x1c, 0xaa, 0x67, 0x2c, 0xf1, 0x39, 0x76, 0xcc, 0x9b, 0x57,
+	0x30, 0x7e, 0x41, 0xe1, 0xf7, 0xd0, 0xb6, 0x6c, 0x9f, 0x9b, 0x81, 0xa3, 0xd7, 0x25, 0xa1, 0x60,
+	0x15, 0x1c, 0xc3, 0x61, 0xea, 0xec, 0xdb, 0xd1, 0x0d, 0xc6, 0xbd, 0x25, 0xb9, 0xe8, 0xf7, 0x4a,
+	0x2a, 0x29, 0xcd, 0x10, 0x20, 0x0b, 0x82, 0x51, 0xbc, 0x93, 0x8c, 0x82, 0xe2, 0x89, 0x1e, 0x4f,
+	0xe6, 0x9a, 0x6c, 0x3c, 0x3b, 0x0e, 0xeb, 0xf7, 0xcb, 0x4a, 0xe9, 0xed, 0x23, 0x68, 0x5b, 0x86,
+	0x32, 0x5f, 0x67, 0xd7, 0x78, 0x66, 0x10, 0x65, 0xde, 0xab, 0xe0, 0x0d, 0x1c, 0x17, 0x3c, 0x86,
+	0x17, 0xba, 0xbd, 0xdc, 0x93, 0xfd, 0x67, 0xe5, 0x45, 0x4b, 0x13, 0xee, 0x86, 0x1a, 0x9f, 0xeb,
+	0x53, 0xff, 0x99, 0xf6, 0x9d, 0x09, 0x9d, 0x97, 0xe6, 0x18, 0xbf, 0xb0, 0x69, 0x4a, 0x33, 0x9e,
+	0x67, 0xba, 0x3f, 0xd0, 0x7f, 0xda, 0x57, 0xff, 0x06, 0x00, 0x00, 0xff, 0xff, 0x62, 0x40, 0x15,
+	0x35, 0xc1, 0x07, 0x00, 0x00,
 }

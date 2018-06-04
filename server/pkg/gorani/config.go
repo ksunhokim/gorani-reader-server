@@ -1,6 +1,8 @@
 package gorani
 
 import (
+	"io/ioutil"
+
 	"gopkg.in/yaml.v2"
 )
 
@@ -15,10 +17,14 @@ type Config struct {
 	S3Ssl                   bool   `yaml:"s3_ssl"`
 }
 
-func NewConfig(yamlBytes []byte) (Config, error) {
-	conf := Config{}
+func NewConfig(path string) (Config, error) {
+	bytes, err := ioutil.ReadFile(path)
+	if err != nil {
+		return Config{}, err
+	}
 
-	err := yaml.Unmarshal(yamlBytes, &conf)
+	conf := Config{}
+	err = yaml.Unmarshal(bytes, &conf)
 	if err != nil {
 		return Config{}, err
 	}
