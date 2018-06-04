@@ -40,6 +40,13 @@ func (ro *Router) registerHandlers() {
 			r.Use(ro.UnknownWordbookCtx)
 
 			r.Get("/", ro.GetUnknownWordbook)
+			r.Get("/entries", ro.GetUnknownWordbookEntries)
+			r.Post("/entries", ro.AddUnknownWordbookEntry)
+		})
+
+		r.Route("/known", func(r chi.Router) {
+			r.Get("/", ro.GetKnownWords)
+			r.Post("/", ro.AddKnownWord)
 		})
 	})
 }

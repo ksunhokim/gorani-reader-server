@@ -95,6 +95,12 @@ func setupDB(db *gorm.DB) {
 		(1, 'test', NULL);`)
 
 	db.Exec(`
+	INSERT INTO word
+		(word_id, word, word_pronunciation)
+	VALUES
+		(2, 'test', NULL);`)
+
+	db.Exec(`
 	INSERT INTO definition
 		(definition_id, word_id, definition_pos, definition)
 	VALUES

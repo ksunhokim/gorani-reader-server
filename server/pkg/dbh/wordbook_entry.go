@@ -117,7 +117,7 @@ func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []Wordboo
 		return
 	}
 
-	if wb.UpdateDate.After(date) {
+	if wb.UpdateDate.Add(-10 * time.Second).After(date) {
 		return fmt.Errorf("Trying to use old value")
 	}
 
