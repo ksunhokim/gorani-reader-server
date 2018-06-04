@@ -8,25 +8,16 @@ import (
 )
 
 type WordbookEntry struct {
-	WordbookId     []byte    `gorm:"column:wordbook_uuid;primary_key"`
-	DefinitionId   int       `gorm:"column:definition_id"`
-	SourceBook     *string   `gorm:"column:wordbook_entry_source_book"`
-	SourceSentence *string   `gorm:"column:wordbook_entry_source_sentence"`
-	WordIndex      *int      `gorm:"column:wordbook_entry_word_index"`
-	AddedDate      time.Time `gorm:"column:wordbook_entry_added_date"`
+	WordbookId     UUID    `gorm:"column:wordbook_uuid;primary_key" json:"-"`
+	DefinitionId   int     `gorm:"column:definition_id" json:"definition_id"`
+	SourceBook     *string `gorm:"column:wordbook_entry_source_book" json:"source_book;omitempty"`
+	SourceSentence *string `gorm:"column:wordbook_entry_source_sentence" json:"source_sentence;omitempty"`
+	WordIndex      *int    `gorm:"column:wordbook_entry_word_index" json:"word_inder;omitempty"`
+	AddedDate      RFCTime `gorm:"column:wordbook_entry_added_date" json:"added_date"`
 }
 
 func (WordbookEntry) TableName() string {
 	return "wordbook_entry"
-}
-
-type WordbookEntriesUpdateDate struct {
-	WordbookId []byte    `gorm:"column:wordbook_uuid;primary_key"`
-	Date       time.Time `gorm:"column:wordbook_entry_update_date"`
-}
-
-func (WordbookEntriesUpdateDate) TableName() string {
-	return "wordbook_entries_update_date"
 }
 
 func (wb *Wordbook) GetEntries(db *gorm.DB) ([]WordbookEntry, error) {
@@ -39,21 +30,20 @@ func (wb *Wordbook) GetEntries(db *gorm.DB) ([]WordbookEntry, error) {
 	return out, nil
 }
 
-func (wb *Wordbook) getEntriesUpdateDate(db *gorm.DB) (WordbookEntriesUpdateDate, error) {
-	date := WordbookEntriesUpdateDate{}
-	if err := db.
+func (wb *Wordbook) ReloadLockInShareMode(tx *gorm.DB) error {
+	if err := tx.
 		Raw(`SELECT
-				* 
-			FROM 
-			wordbook_entries_update_date 
-			WHERE
-				wordbook_uuid = ?
-			LOCK IN SHARE MODE;`,
+			* 
+		FROM 
+		wordbook
+		WHERE
+			wordbook_uuid = ?
+		LOCK IN SHARE MODE;`,
 			wb.Id).
-		Scan(&date).Error; err != nil {
-		return WordbookEntriesUpdateDate{}, err
+		Scan(wb).Error; err != nil {
+		return err
 	}
-	return date, nil
+	return nil
 }
 
 func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) (err error) {
@@ -66,28 +56,24 @@ func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) 
 		}
 	}()
 
-	date2, err := wb.getEntriesUpdateDate(tx)
+	err = wb.ReloadLockInShareMode(tx)
 	if err != nil {
-		return err
+		return
 	}
 
-	if date2.Date.After(date) {
+	if wb.UpdateDate.After(date) {
 		return fmt.Errorf("Trying to use old value")
 	}
 
 	entry.WordbookId = wb.Id
 	if err = tx.
 		Create(entry).Error; err != nil {
-		return err
+		return
 	}
 
-	date2.Date = date
-	if err = tx.
-		Save(&date2).Error; err != nil {
-		return err
-	}
-
-	return nil
+	wb.UpdateDate = RFCTime{date}
+	err = wb.Update(tx)
+	return
 }
 
 func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []WordbookEntry) (err error) {
@@ -100,19 +86,19 @@ func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []Wordboo
 		}
 	}()
 
-	date2, err := wb.getEntriesUpdateDate(tx)
+	err = wb.ReloadLockInShareMode(tx)
 	if err != nil {
-		return err
+		return
 	}
 
-	if date2.Date.After(date) {
+	if wb.UpdateDate.After(date) {
 		return fmt.Errorf("Trying to use old value")
 	}
 
 	if err = tx.
 		Where("wordbook_uuid = ?", wb.Id).
 		Delete(WordbookEntry{}).Error; err != nil {
-		return err
+		return
 	}
 
 	for _, entry := range entries {
@@ -120,15 +106,11 @@ func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []Wordboo
 		if err = tx.
 			Create(&entry).
 			Error; err != nil {
-			return err
+			return
 		}
 	}
 
-	date2.Date = date
-	if err = tx.
-		Save(&date2).Error; err != nil {
-		return err
-	}
-
-	return nil
+	wb.UpdateDate = RFCTime{date}
+	err = wb.Update(tx)
+	return
 }

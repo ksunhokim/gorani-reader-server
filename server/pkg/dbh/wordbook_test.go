@@ -2,6 +2,7 @@ package dbh_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -13,10 +14,9 @@ func TestGetWordbook(t *testing.T) {
 	gorn := util.SetupTestGorani()
 	a := assert.New(t)
 	id, _ := uuid.Parse(util.TestWordbookUuid)
-	bytes := util.UuidToBytes(id)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, bytes)
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -29,15 +29,15 @@ func TestAddWordbook(t *testing.T) {
 	a.Nil(err)
 
 	wordbook := dbh.Wordbook{
-		Id:   util.UuidToBytes(uuid.New()),
-		Name: "asdf",
+		Id:       dbh.UUID{uuid.New()},
+		SeenDate: dbh.RFCTime{time.Now().UTC()},
+		Name:     "asdf",
 	}
 
 	err = user.AddWordbook(gorn.Mysql, &wordbook)
 	a.Nil(err)
 
 	id := wordbook.Id
-	a.Equal(16, len(id))
 
 	wordbook, err = user.GetWordbook(gorn.Mysql, id)
 	a.Nil(err)
@@ -67,7 +67,7 @@ func TestUpdateWordbook(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	a.Equal("test", wordbook.Name)
@@ -75,7 +75,7 @@ func TestUpdateWordbook(t *testing.T) {
 	wordbook.Name = "hoi"
 	wordbook.Update(gorn.Mysql)
 
-	wordbook, err = user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err = user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	a.Equal("hoi", wordbook.Name)

@@ -23,14 +23,8 @@ func (ro *Router) WordbookCtx(next http.Handler) http.Handler {
 			return
 		}
 
-		bytes, err := u.MarshalBinary()
-		if err != nil {
-			http.Error(w, http.StatusText(400), 400)
-			return
-		}
-
 		user := middleware.GetUser(r)
-		wb, err := user.GetWordbook(ro.ap.Mysql, bytes)
+		wb, err := user.GetWordbook(ro.ap.Mysql, dbh.UUID{u})
 		if err != nil {
 			http.Error(w, http.StatusText(404), 404)
 			return
@@ -81,4 +75,15 @@ func (ro *Router) DeleteWordbook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(200)
+}
+
+func (ro *Router) GetWordbookEntries(w http.ResponseWriter, r *http.Request) {
+	// ctx := r.Context()
+	// wb := ctx.Value(wordbookContextKey).(dbh.Wordbook)
+	// entries, err := wb.GetEntries(ro.ap.Mysql)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), 500)
+	// 	return
+	// }
+
 }

@@ -65,15 +65,9 @@ func setupDB(db *gorm.DB) {
 
 	db.Exec(fmt.Sprintf(`
 	INSERT INTO wordbook 
-		(wordbook_uuid, user_id, wordbook_name, wordbook_seen_date)
+		(wordbook_uuid, user_id, wordbook_name, wordbook_seen_date, wordbook_update_date)
 	VALUES
-		(UUID_TO_BIN('%s'), 1, 'test', NOW());`, TestWordbookUuid))
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO wordbook_entries_update_date
-		(wordbook_uuid, wordbook_entry_update_date)
-	VALUES
-		(UUID_TO_BIN('%s'), NOW());`, TestWordbookUuid))
+		(UUID_TO_BIN('%s'), 1, 'test', NOW(), NOW());`, TestWordbookUuid))
 
 	db.Exec(`
 	INSERT INTO word

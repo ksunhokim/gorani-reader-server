@@ -16,7 +16,7 @@ func TestWordbookGetEntries(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)
@@ -35,12 +35,12 @@ func TestWordbookAddEntry(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	entry := dbh.WordbookEntry{
 		DefinitionId: 2,
-		AddedDate:    time.Now().UTC(),
+		AddedDate:    dbh.RFCTime{time.Now().UTC()},
 	}
 	err = wordbook.AddEntry(gorn.Mysql, time.Now().UTC(), &entry)
 	a.Nil(err)
@@ -56,7 +56,7 @@ func TestWordbookUpdateEntries(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)
@@ -66,11 +66,11 @@ func TestWordbookUpdateEntries(t *testing.T) {
 	str := "book2"
 	str2 := "asdf2"
 	entry := dbh.WordbookEntry{
-		WordbookId:     util.UuidToBytes(id),
+		WordbookId:     dbh.UUID{id},
 		DefinitionId:   2,
 		SourceBook:     &str,
 		SourceSentence: &str2,
-		AddedDate:      time.Now().UTC(),
+		AddedDate:      dbh.RFCTime{time.Now().UTC()},
 	}
 
 	entries = append(entries, entry)
@@ -88,7 +88,7 @@ func TestWordbookUpdateInvalidEntries(t *testing.T) {
 	id, _ := uuid.Parse(util.TestWordbookUuid)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	wordbook, err := user.GetWordbook(gorn.Mysql, util.UuidToBytes(id))
+	wordbook, err := user.GetWordbook(gorn.Mysql, dbh.UUID{id})
 	a.Nil(err)
 
 	entries, err := wordbook.GetEntries(gorn.Mysql)

@@ -25,7 +25,14 @@ func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server, *api.Api
 
 	router := router.NewRouter(ap)
 	server := httptest.NewServer(router)
-	e := httpexpect.New(t, server.URL)
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  server.URL,
+		Reporter: httpexpect.NewRequireReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewCurlPrinter(t),
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
 
 	return e, server, ap
 }
