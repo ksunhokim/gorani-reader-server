@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package etl;
 
-service ETL {
+service ETLService {
     rpc GetWords (Empty) returns (GetWordsResponse) {}
     rpc AddWord (AddWordRequest) returns (Empty) {}
     rpc GetWordById (GetWordByIdRequest) returns (Word) {}
@@ -10,15 +10,10 @@ service ETL {
     rpc DeleteWord (DeleteWordRequest) returns (Empty) {}
 
     rpc BuildSqlite (Empty) returns (BuildSqliteResponse) {}
-    rpc InsepectISBN (InsepectIsbnRequest) returns (InsepectIsbnResponse) {}
+    rpc InsepectIsbn(InsepectIsbnRequest) returns (InsepectIsbnResponse) {}
     rpc InsertBook (InsertBookRequest) returns (Empty) {}
 
-    rpc GetNeededQuiz (GetNeededQuizRequest) returns (GetNeededQuizResponse) {}
-    rpc AnalyzeHtml (AnalyzeHtmlRequest) returns (AnalyzeHtmlResponse) {}
-    rpc CreateSentences (CreateSentencesRequest) returns (CreateSentencesResponse) {}
-
     rpc RenewRelevantWords (RenewRelevantWordsRequest) returns (Empty) {}
-    rpc RenewRecommenededBook (RenewRecommenededBookRequest) returns (Empty) {}
 }
 
 message Empty {

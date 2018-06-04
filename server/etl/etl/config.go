@@ -12,18 +12,17 @@ type Config struct {
 	Address string `yaml:"address"`
 }
 
-func NewConfig(path string, gconf gorani.Config) (Config, error) {
+func NewConfig(path string) (Config, error) {
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		return Config{}, err
 	}
 
 	conf := Config{}
-	err := yaml.Unmarshal(bytes, &conf)
+	err = yaml.Unmarshal(bytes, &conf)
 	if err != nil {
 		return Config{}, err
 	}
-	conf.Config = gconf
 
 	return conf, nil
 }

@@ -1,49 +1,56 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"os/signal"
 
 	"github.com/sunho/gorani-reader/server/etl/etl"
+	"github.com/sunho/gorani-reader/server/etl/service"
 	"github.com/sunho/gorani-reader/server/pkg/gorani"
 	"github.com/sunho/gorani-reader/server/pkg/log"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
-func main() {
-	log.AppName = "etl"
-
-	bytes, err := ioutil.ReadFile("../config.yaml")
-	if err != nil {
-		panic(err)
-	}
-
-	conf, err := gorani.NewConfig(bytes)
-	if err != nil {
-		panic(err)
-	}
-
+func setup(conf gorani.Config, econf etl.Config) (*service.Service, error) {
 	gorn, err := gorani.New(conf)
 	if err != nil {
-		panic(err)
-	}
-
-	ebytes, err := ioutil.ReadFile("econfig.yaml")
-	if err != nil {
-		panic(err)
-	}
-
-	econf, err := etl.NewConfig(ebytes)
-	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	e, err := etl.New(gorn, econf)
 	if err != nil {
+		return nil, err
+	}
+
+	serv := service.New(e)
+
+	return serv, nil
+}
+
+func main() {
+	log.AppName = "etl"
+
+	conf, err := gorani.NewConfig("../config.yaml")
+	if err != nil {
 		panic(err)
 	}
 
-	err = e.Open()
+	econf, err := etl.NewConfig("econfig.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	serv, err := setup(conf, econf)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Log(log.TopicSystem, util.M{
+		"info":    "begin listening",
+		"address": serv.Addr,
+	})
+
+	err = serv.Open()
 	if err != nil {
 		panic(err)
 	}
@@ -51,5 +58,6 @@ func main() {
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt)
 	<-signalChan
-	e.Close()
+
+	serv.Close()
 }
