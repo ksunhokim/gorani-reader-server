@@ -23,8 +23,8 @@ var send = make(chan Word)
 var dict = make(map[string]Word)
 
 type Example struct {
-	First  string `json:"first"`
-	Second string `json:"second"`
+	First  string `json:"foreign"`
+	Second string `json:"native"`
 }
 
 type Def struct {
@@ -77,8 +77,18 @@ func getDefinition(word string, url string, primary bool, source string) {
 		return
 	}
 
+	src := doc.Find(".dicType").After(".box_wrap1").First()
+	if src == nil {
+		// log.Println("returning")
+		return
+	}
+
+	if !strings.Contains(src.Text(), "Oxford Advanced Learner's English-Korean Dictionary") {
+		// log.Println("returning")
+		return
+	}
 	log.Println("definition:", url)
-	log.Println("source:", source)
+	// log.Println("source:", source)
 	wor := Word{
 		Word: word,
 		Pron: "",
@@ -88,7 +98,9 @@ func getDefinition(word string, url string, primary bool, source string) {
 	doc.Find(".box_wrap1").Each(func(i int, s *goquery.Selection) {
 		part := s.Find("h3 .fnt_syn").First().Text()
 		s.Find("dl dt").Each(func(i int, ss *goquery.Selection) {
-			input := ss.Find("em").First().Children().Not("a").Not("p").Not(".fnt_intro").Text()
+			base := ss.Find("em").First()
+			verbType := base.Find(".fnt_k04").Text()
+			input := base.Find(".fnt_k05, .fnt_k06, fnt_k09").Text()
 			re_leadclose_whtsp := regexp.MustCompile(`^[\s\p{Zs}]+|[\s\p{Zs}]+$`)
 			re_inside_whtsp := regexp.MustCompile(`[\s\p{Zs}]{2,}`)
 			final := re_leadclose_whtsp.ReplaceAllString(input, "")
@@ -97,6 +109,12 @@ func getDefinition(word string, url string, primary bool, source string) {
 				Pos:      part,
 				Def:      final,
 				Examples: []Example{},
+			}
+			if strings.Contains(verbType, "[자동사") {
+				def.Pos = "자동사"
+			}
+			if strings.Contains(verbType, "[타동사") {
+				def.Pos = "타동사"
 			}
 			ss.NextUntil("dt").Each(func(i int, sss *goquery.Selection) {
 				eng := ""
@@ -117,7 +135,6 @@ func getDefinition(word string, url string, primary bool, source string) {
 }
 
 func getQuery(word string) {
-	log.Println("fetch:", word)
 	body := getBody("http://endic.naver.com/search.nhn?sLn=kr&query=" + word)
 	log.Println("query:", word)
 	if body == nil {
@@ -136,9 +153,11 @@ func getQuery(word string) {
 				href, _ := s.Attr("href")
 				pat := regexp.MustCompile("entryId=([^&]+)")
 				res := pat.FindAllStringSubmatch(href, -1)
+				text := s.Children().Not("sup").Text()
+				text = strings.ToLower(text)
 				if len(res) == 1 {
-					if strings.ToLower(s.Text()) == strings.ToLower(word) {
-						getDefinition(strings.ToLower(s.Text()), "http://endic.naver.com"+href, true, res[0][0])
+					if text == strings.ToLower(word) {
+						getDefinition(text, "http://endic.naver.com"+href, true, res[0][0])
 					}
 				}
 			})
@@ -147,6 +166,7 @@ func getQuery(word string) {
 }
 
 var wg sync.WaitGroup
+var wg2 sync.WaitGroup
 
 func worker(input chan int) {
 	for index := range input {
@@ -157,24 +177,26 @@ func worker(input chan int) {
 	wg.Done()
 }
 
-var quit = make(chan bool)
 func worker2() {
-	for {
-		select {
-		case item :=  <-send:
-			if _, ok := dict[item.Word]; !ok {
-				dict[item.Word] = item
-			} else {
-				word := dict[item.Word]
-				word.Defs = append(word.Defs, item.Defs...)
-				dict[item.Word] = word
-			}
-		case <-quit:
-			return
+	for item := range send {
+		if _, ok := dict[item.Word]; !ok {
+			dict[item.Word] = item
+		} else {
+			word := dict[item.Word]
+			word.Defs = append(word.Defs, item.Defs...)
+			dict[item.Word] = word
 		}
 	}
+	wg2.Done()
 }
 
+func writeFile() {
+	json, _ := json.Marshal(dict)
+	err := ioutil.WriteFile("output.json", json, 0644)
+	if err != nil {
+		panic(err)
+	}
+}
 func main() {
 	txt, err := ioutil.ReadFile("words.txt")
 	if err != nil {
@@ -189,28 +211,27 @@ func main() {
 	t := time.Now()
 	mw := io.MultiWriter(os.Stdout, file)
 	log.SetOutput(mw)
-	list = strings.Split(string(txt), "=")
+	list = strings.Split(string(txt), "\n")
 	list = list[:len(list)-1]
 	log.Printf("%d entries inputed\n", len(list))
 
-	input := make(chan int, 1000)
-	for i := 0; i < 20; i++ {
+	input := make(chan int, 10000)
+	for i := 0; i < 100; i++ {
 		go worker(input)
 		wg.Add(1)
 	}
 	go worker2()
+	wg2.Add(1)
 
 	for index, _ := range list {
 		input <- index
 	}
 	close(input)
-	log.Println("done")
 	wg.Wait()
-	time.Sleep(1000)
-	quit <- true
-	json, _ := json.Marshal(dict)
-	err = ioutil.WriteFile("output.json", json, 0644)
-	log.Println(err)
+	close(send)
+	wg2.Wait()
+	writeFile()
+	log.Println("done")
 	log.Println(time.Now().Sub(t).Minutes(), " minutes")
 	log.Println("exiting")
 }

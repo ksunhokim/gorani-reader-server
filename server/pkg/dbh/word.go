@@ -42,12 +42,25 @@ func AddWord(db *gorm.DB, word *Word) error {
 	return err
 }
 
-func GetWord(db *gorm.DB, id int32) (Word, error) {
+func GetWordById(db *gorm.DB, id int32) (Word, error) {
 	word := Word{}
 	if err := db.
 		Preload("Definitions").
 		Preload("Definitions.Examples").
 		First(&word, id).Error; err != nil {
+		return Word{}, err
+	}
+
+	return word, nil
+}
+
+func GetWordByWord(db *gorm.DB, str string) (Word, error) {
+	word := Word{}
+	if err := db.
+		Preload("Definitions").
+		Preload("Definitions.Examples").
+		Where("word = ?", str).
+		First(&word).Error; err != nil {
 		return Word{}, err
 	}
 

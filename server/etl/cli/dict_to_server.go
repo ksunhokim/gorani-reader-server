@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"strings"
 	"sync"
 
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
@@ -24,8 +25,8 @@ type IDef struct {
 }
 
 type IExample struct {
-	Foreign string `json:"first"`
-	Native  string `json:"second"`
+	Foreign string `json:"foreign"`
+	Native  string `json:"native"`
 }
 
 //ENUM('verb', 'aux', 'tverb', 'noun', 'adj', 'adv', 'abr', 'prep', 'symbol', 'pronoun', 'conj', 'suffix', 'prefix', 'det')
@@ -53,24 +54,23 @@ func dealPOS(pos string) string {
 	return ""
 }
 
-func main() {
-	addr := "127.0.0.1:5982"
+func dictToServer(addr string, dict string) error {
 	iwords := make(map[string]IWord)
 	conn, err := grpc.Dial(addr, grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("failed to connect: %s", err.Error())
+		return err
 	}
 	defer conn.Close()
 
-	cli := pb.NewETLClient(conn)
-	bytes, err := ioutil.ReadFile("raw/proned_output.json")
+	cli := pb.NewETLServiceClient(conn)
+	bytes, err := ioutil.ReadFile(dict)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	err = json.Unmarshal(bytes, &iwords)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	work := make(chan *pb.Word, 10000)
@@ -80,7 +80,7 @@ func main() {
 		go func() {
 			defer wg.Done()
 			for w := range work {
-				_, err := cli.AddWord(context.Background(), w)
+				_, err := cli.AddWord(context.Background(), &pb.AddWordRequest{Word: w})
 				if err != nil {
 					log.Println(err)
 				}
@@ -88,7 +88,12 @@ func main() {
 		}()
 	}
 
+	i := 0
 	for _, word := range iwords {
+		i++
+		if i%1000 == 0 {
+			log.Println(i, "/", len(iwords))
+		}
 		oword := &pb.Word{
 			Word:          word.Word,
 			Pronunciation: word.Pronunciation,
@@ -101,9 +106,17 @@ func main() {
 				Examples:   []*pb.Example{},
 			}
 			for _, ex := range def.Examples {
+				foreign := ex.Foreign
+				native := ex.Native
+				if strings.Contains(foreign, "출처") {
+					continue
+				}
+				if strings.Contains(native, "반복듣기") {
+					native = ""
+				}
 				oex := &pb.Example{
-					Foreign: ex.Foreign,
-					Native:  ex.Native,
+					Foreign: foreign,
+					Native:  native,
 				}
 				odef.Examples = append(odef.Examples, oex)
 			}
@@ -113,4 +126,5 @@ func main() {
 	}
 	close(work)
 	wg.Wait()
+	return nil
 }
