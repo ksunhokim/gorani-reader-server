@@ -28,9 +28,9 @@ func Create(mysql *gorm.DB) (string, error) {
 		return "", err
 	}
 
-	// words.definitions are not loaded yet
+	// words.definitions are not fully loaded yet
 	for i := range words {
-		fullWord, err := dbh.GetWord(mysql, words[i].Id)
+		fullWord, err := dbh.GetWordById(mysql, words[i].Id)
 		if err != nil {
 			return "", err
 		}

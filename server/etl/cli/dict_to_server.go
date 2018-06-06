@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"regexp"
 	"strings"
 	"sync"
 
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
-	"google.golang.org/grpc"
 )
 
 type IWord struct {
@@ -29,11 +29,12 @@ type IExample struct {
 	Native  string `json:"native"`
 }
 
-//ENUM('verb', 'aux', 'tverb', 'noun', 'adj', 'adv', 'abr', 'prep', 'symbol', 'pronoun', 'conj', 'suffix', 'prefix', 'det')
+//ENUM('verb', 'aux', 'tverb', 'iverb', 'noun', 'adj', 'adv', 'abr', 'prep', 'symbol', 'pronoun', 'conj', 'suffix', 'prefix', 'det')
 var POSMap = map[string]string{
 	"동사":  "verb",
 	"조동사": "aux",
-	"자동사": "tverb",
+	"자동사": "iverb",
+	"타동사": "tverb",
 	"명사":  "noun",
 	"형용사": "adj",
 	"부사":  "adv",
@@ -56,13 +57,11 @@ func dealPOS(pos string) string {
 
 func dictToServer(addr string, dict string) error {
 	iwords := make(map[string]IWord)
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	cli, conn, err := makeClient(addr)
 	if err != nil {
 		return err
 	}
 	defer conn.Close()
-
-	cli := pb.NewETLServiceClient(conn)
 	bytes, err := ioutil.ReadFile(dict)
 	if err != nil {
 		return err
@@ -88,15 +87,17 @@ func dictToServer(addr string, dict string) error {
 		}()
 	}
 
+	stressPat := regexp.MustCompile("[0-2]+")
 	i := 0
 	for _, word := range iwords {
 		i++
 		if i%1000 == 0 {
 			log.Println(i, "/", len(iwords))
 		}
+		pron := stressPat.ReplaceAllString(word.Pronunciation, "")
 		oword := &pb.Word{
 			Word:          word.Word,
-			Pronunciation: word.Pronunciation,
+			Pronunciation: pron,
 			Definitions:   []*pb.Definition{},
 		}
 		for _, def := range word.Definitions {

@@ -10,6 +10,7 @@ type Config struct {
 	MysqlURL                string `yaml:"mysql_url"`
 	GoMaxProcs              int    `yaml:"go_max_procs"`
 	MysqlConnectionPoolSize int    `yaml:"mysql_connection_pool_size"`
+	MysqlConnectionLimit    int    `yaml:"mysql_connection_pool_limit"`
 	Debug                   bool   `yaml:"debug"`
 	S3Id                    string `yaml:"s3_id"`
 	S3Secret                string `yaml:"s3_secret"`

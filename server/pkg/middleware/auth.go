@@ -30,6 +30,7 @@ func Auth(db *gorm.DB, secret string) func(next http.Handler) http.Handler {
 				return
 			}
 
+			// invalid api key
 			if user.Name != name {
 				http.Error(w, http.StatusText(403), 403)
 				return

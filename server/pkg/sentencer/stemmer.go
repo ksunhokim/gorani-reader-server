@@ -14,6 +14,8 @@ func NewStemmer(irregularPast map[string]string, irregularComplete map[string]st
 	}
 }
 
+// stem to verb's base form or singular form
+// severe stemming causes words that are not in dictionary
 func (s *Stemmer) Stem(word string) string {
 	if w, ok := s.IrComplete[word]; ok {
 		return w

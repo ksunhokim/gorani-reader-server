@@ -15,5 +15,6 @@ func New(gorn *gorani.Gorani, conf Config) (*Etl, error) {
 		Config: conf,
 	}
 	e.Config.Config = gorn.Config
+
 	return e, nil
 }

@@ -28,12 +28,16 @@ type (
 
 	Tokenizer struct {
 		DotSpecialCases []map[string]bool
-		index           int
 		s               *bufio.Scanner
 		toks            []Token
-		buffer          []Token
+		// store read data to buffer
+		// in order to implement unread
+		head   int
+		buffer []Token
 	}
 
+	// abbrs
+	// [index in word array splitted by dot]map[word](true if it is the end of abbr)
 	DotSpecialCases []map[string]bool
 )
 
@@ -60,16 +64,19 @@ func (t *Tokenizer) Tokenize() []Token {
 			return t.toks
 		}
 
+		// this combines word dash word
+		// eg) three-dimentional
 		if tok.Lit == "-" && isWordToken(t.lastToken(1)) {
-			tok2 := t.read()
-			if isWordToken(tok2) {
+			next := t.read()
+			if isWordToken(next) {
 				t.toks = t.toks[:len(t.toks)-1]
-				t.toks[len(t.toks)-1].Lit += tok.Lit + tok2.Lit
+				t.toks[len(t.toks)-1].Lit += tok.Lit + next.Lit
 				continue
 			}
 			t.unread()
 		}
 
+		// abbr
 		if tok.Lit == "." && isWordToken(t.lastToken(1)) {
 			if lit := t.scanDotSpecialCase(); lit != "" {
 				t.toks = t.toks[:len(t.toks)-1]
@@ -78,6 +85,7 @@ func (t *Tokenizer) Tokenize() []Token {
 			}
 		}
 
+		// if the front token is capitalized word, " ends the sentence
 		if strings.HasSuffix(tok.Lit, "”") || strings.HasSuffix(tok.Lit, "\"") {
 			if t.scanQuoteEos() {
 				t.toks = append(t.toks, Token{TokenKindEos, ""})
@@ -85,6 +93,7 @@ func (t *Tokenizer) Tokenize() []Token {
 			}
 		}
 
+		// if it is not abbr, dot ends the sentence
 		if strings.HasSuffix(tok.Lit, ".") || strings.HasSuffix(tok.Lit, "?") || strings.HasSuffix(tok.Lit, "!") {
 			t.toks = append(t.toks, Token{TokenKindEos, ""})
 			continue
@@ -92,21 +101,11 @@ func (t *Tokenizer) Tokenize() []Token {
 	}
 }
 
-func (t *Tokenizer) backseekToken(Kind TokenKind, n int) Token {
-	if n >= len(t.toks) {
-		return Token{TokenKindEof, ""}
-	}
-
-	for i := 1; i <= n; i++ {
-		if tok := t.toks[len(t.toks)-i]; tok.Kind == Kind {
-			return tok
-		}
-	}
-	return Token{TokenKindEof, ""}
-}
-
+// lastToken(0) -> the last token
+// lastToken(n) -> n+1 previous token
+// returns Eof if n is invalid
 func (t *Tokenizer) lastToken(n int) Token {
-	if len(t.toks) <= n {
+	if n >= len(t.toks) {
 		return Token{TokenKindEof, ""}
 	}
 
@@ -118,23 +117,31 @@ func (t *Tokenizer) hasDotSpecialCase(index int, word string) (bool, bool) {
 		return false, false
 	}
 
-	v, ok := t.DotSpecialCases[index][strings.ToLower(word)]
-	return v, ok
+	isend, ok := t.DotSpecialCases[index][strings.ToLower(word)]
+	return isend, ok
 }
 
 func (t *Tokenizer) scanDotSpecialCase() (lit string) {
 	var (
-		tok   = t.lastToken(1)
+		tok = t.lastToken(1)
+		// index in DotSpecialCases
 		index = 1
-		clit  string
+		// candidate lit that might be part of complete abbr
+		clit string
+		// in order to roll back the reads
+		// that happened to check if clit is part of complete abbr
 		readn int
+		// fsm state
+		// 0: reads blank
+		// 1: reads word
+		// 2: reads dot
 		state int
 	)
 
-	if v, ok := t.hasDotSpecialCase(0, tok.Lit); !ok {
+	if isend, ok := t.hasDotSpecialCase(0, tok.Lit); !ok {
 		return
 	} else {
-		if v {
+		if isend {
 			lit = tok.Lit + "."
 		} else {
 			clit = tok.Lit + "."
@@ -145,49 +152,54 @@ func (t *Tokenizer) scanDotSpecialCase() (lit string) {
 		tok = t.read()
 		readn++
 		if state == 0 {
+			state = 1
 			if isWordToken(tok) {
+				// accept the abbr that doesn't have
+				// spaces between them
 				t.unread()
 				readn--
-				state = 1
-			} else if tok.Kind == TokenKindBlank {
-				state = 1
-			} else {
+			} else if tok.Kind != TokenKindBlank {
 				break
 			}
 		} else if state == 1 {
 			if isWordToken(tok) {
-				if v, ok := t.hasDotSpecialCase(index, tok.Lit); ok {
+				if isend, ok := t.hasDotSpecialCase(index, tok.Lit); ok {
 					index++
 					state = 2
 
-					if v {
+					if isend {
 						lit += clit + tok.Lit
 						clit = ""
+						// set to 0 to not roll back because
+						// read tokens were already processed
 						readn = 0
 					} else {
 						clit += tok.Lit
 					}
-				} else {
-					break
+					continue
 				}
-			} else {
-				break
 			}
+			break
 		} else if state == 2 {
 			if tok.Lit == "." {
+				state = 0
+				// clit is empty if the prior state 1
+				// determined a complete abbr
 				if clit == "" {
 					lit += "."
+					// set to 0 to not roll back because
+					// read tokens were already processed
 					readn = 0
 				} else {
 					clit += "."
 				}
-				state = 0
 			} else {
 				break
 			}
 		}
 	}
 
+	// roll back
 	for i := 0; i < readn; i++ {
 		t.unread()
 	}
@@ -195,6 +207,24 @@ func (t *Tokenizer) scanDotSpecialCase() (lit string) {
 }
 
 func (t *Tokenizer) scanQuoteEos() bool {
+	// check if it is starting quotes
+	isStarting := true
+	for i := len(t.toks) - 2; i >= 0; i-- {
+		tok := t.toks[i]
+		if strings.HasSuffix(tok.Lit, "\"") || strings.HasPrefix(tok.Lit, "“") {
+			isStarting = false
+			break
+		}
+
+		if tok.Kind == TokenKindEos {
+			break
+		}
+	}
+
+	if isStarting {
+		return false
+	}
+
 	for {
 		tok := t.read()
 		defer t.unread()
@@ -203,10 +233,7 @@ func (t *Tokenizer) scanQuoteEos() bool {
 		case TokenKindBlank:
 			continue
 		case TokenKindCapitalWord:
-			if len(t.toks) >= 3 && t.backseekToken(TokenKindEos, 3).Kind == TokenKindEof {
-				return true
-			}
-			return false
+			return true
 		default:
 			return false
 		}
@@ -214,13 +241,14 @@ func (t *Tokenizer) scanQuoteEos() bool {
 }
 
 func (t *Tokenizer) unread() {
-	if t.index != 0 {
-		t.index--
+	if t.head != 0 {
+		t.head--
 	}
 }
 
 func (t *Tokenizer) read() Token {
-	if t.index == len(t.buffer) {
+	if t.head == len(t.buffer) {
+		// load more data to buffer
 		var tok Token
 		if t.s.Scan() {
 			s := t.s.Bytes()
@@ -244,8 +272,8 @@ func (t *Tokenizer) read() Token {
 		t.buffer = append(t.buffer, tok)
 	}
 
-	tok := t.buffer[t.index]
-	t.index++
+	tok := t.buffer[t.head]
+	t.head++
 	return tok
 }
 

@@ -13,7 +13,7 @@ service ETLService {
     rpc InsepectIsbn(InsepectIsbnRequest) returns (InsepectIsbnResponse) {}
     rpc InsertBook (InsertBookRequest) returns (Empty) {}
 
-    rpc RenewRelevantWords (RenewRelevantWordsRequest) returns (Empty) {}
+    rpc CalculateRelevantWords (CalculateRelevantWordsRequest) returns (Empty) {}
 }
 
 message Empty {
@@ -81,9 +81,8 @@ message InsertBookRequest {
     string isbn = 2;
 }
 
-message RenewRelevantWordsRequest {
-    int32 word_low = 1;
-    int32 word_hi = 2;
+message CalculateRelevantWordsRequest {
+    string reltype = 1;
 }
 
 message RenewRecommenededBookRequest {

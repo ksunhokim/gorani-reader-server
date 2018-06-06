@@ -27,6 +27,17 @@ func main() {
 				return dictToServer(addr, dict)
 			},
 		},
+		{
+			Name:      "relword",
+			ArgsUsage: "[reltype]",
+			Flags:     addrFlags,
+			Usage:     "renew calculated relword",
+			Action: func(c *cli.Context) error {
+				reltype := c.Args().First()
+				addr := c.String("addr")
+				return relevantWords(addr, reltype)
+			},
+		},
 	}
 
 	err := app.Run(os.Args)

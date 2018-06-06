@@ -1,10 +1,15 @@
 package auth
 
 import (
-	"fmt"
+	"errors"
 
 	selector "github.com/sunho/json-selector"
 	yaml "gopkg.in/yaml.v2"
+)
+
+var (
+	ErrAlreadyExist = errors.New("auth: Service already exists")
+	ErrNotFound     = errors.New("auth: Service not found")
 )
 
 type User struct {
@@ -24,6 +29,7 @@ type Service struct {
 	IdSelector       string `yaml:"id_selector"`
 }
 
+// is not thread-safe; shoul be initialized only once
 type Services []Service
 
 func NewServices(yamlBytes []byte) (Services, error) {
@@ -62,19 +68,19 @@ func (s *Service) GetUserFromPayload(payload []byte) (User, error) {
 	return user, nil
 }
 
-func (s *Services) GetService(name string) (Service, error) {
-	for _, service := range *s {
+func (s Services) GetService(name string) (Service, error) {
+	for _, service := range s {
 		if service.Name == name {
 			return service, nil
 		}
 	}
-	return Service{}, fmt.Errorf("couldn't find such service")
+	return Service{}, ErrNotFound
 }
 
 func (s *Services) AddService(service Service) error {
 	_, err := s.GetService(service.Name)
 	if err == nil {
-		return fmt.Errorf("already exist")
+		return ErrAlreadyExist
 	}
 
 	*s = append(*s, service)

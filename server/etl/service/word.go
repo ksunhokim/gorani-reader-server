@@ -11,7 +11,7 @@ import (
 )
 
 func protoWordToDbhWord(word *pb.Word) (out dbh.Word) {
-	var pron *string = nil
+	var pron *string
 	if word.Pronunciation != "" {
 		pron = &word.Pronunciation
 	}
@@ -21,9 +21,9 @@ func protoWordToDbhWord(word *pb.Word) (out dbh.Word) {
 		Definitions:   []dbh.Definition{},
 	}
 	for _, def := range word.Definitions {
-		var pos *string = nil
+		var pos *string
 		if def.Pos != "" {
-			pron = &def.Pos
+			pos = &def.Pos
 		}
 		odef := dbh.Definition{
 			Definition: def.Definition,
@@ -31,7 +31,7 @@ func protoWordToDbhWord(word *pb.Word) (out dbh.Word) {
 			Examples:   []dbh.Example{},
 		}
 		for _, example := range def.Examples {
-			var native *string = nil
+			var native *string
 			if example.Native != "" {
 				native = &example.Native
 			}

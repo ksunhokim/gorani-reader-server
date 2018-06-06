@@ -8,6 +8,7 @@ import (
 )
 
 type Config struct {
+	// gorani config is initialized by etl.New
 	gorani.Config
 	Address string `yaml:"address"`
 }

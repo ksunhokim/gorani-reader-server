@@ -36,16 +36,6 @@ func (UserWordbook) TableName() string {
 	return "user_wordbook"
 }
 
-func (wb *Wordbook) Update(db *gorm.DB) error {
-	err := db.Save(wb).Error
-	return err
-}
-
-func (wb *Wordbook) Delete(db *gorm.DB) error {
-	err := db.Delete(&wb).Error
-	return err
-}
-
 func getWordbook(db *gorm.DB, id util.UUID) (Wordbook, error) {
 	wordbook := Wordbook{}
 	if err := db.
@@ -56,19 +46,6 @@ func getWordbook(db *gorm.DB, id util.UUID) (Wordbook, error) {
 	}
 
 	return wordbook, nil
-}
-
-func (u *User) GetWordbook(db *gorm.DB, id util.UUID) (Wordbook, error) {
-	userwordbook := UserWordbook{}
-	if err := db.
-		Where("wordbook_uuid = ? AND user_id = ?", id, u.Id).
-		First(&userwordbook).
-		Error; err != nil {
-		return Wordbook{}, err
-	}
-
-	wordbook, err := getWordbook(db, userwordbook.WordbookId)
-	return wordbook, err
 }
 
 func (u *User) GetWordbooks(db *gorm.DB) ([]Wordbook, error) {
@@ -91,6 +68,49 @@ func (u *User) GetWordbooks(db *gorm.DB) ([]Wordbook, error) {
 	return wordbooks, nil
 }
 
+func (u *User) GetWordbook(db *gorm.DB, id util.UUID) (Wordbook, error) {
+	// in order to prohibit the access to other user's wordbook
+	userwordbook := UserWordbook{}
+	if err := db.
+		Where("wordbook_uuid = ? AND user_id = ?", id, u.Id).
+		First(&userwordbook).
+		Error; err != nil {
+		return Wordbook{}, err
+	}
+
+	wordbook, err := getWordbook(db, userwordbook.WordbookId)
+	return wordbook, err
+}
+
+func (u *User) GetUnknownWordbook(db *gorm.DB) (Wordbook, error) {
+	uwordbook := UnknownWordbook{}
+	if err := db.
+		Where("user_id = ?", u.Id).
+		First(&uwordbook).
+		Error; err != nil {
+		return Wordbook{}, err
+	}
+
+	wordbook, err := getWordbook(db, uwordbook.WordbookId)
+	return wordbook, err
+}
+
+func (wb *Wordbook) ReloadLockInShareMode(db *gorm.DB) error {
+	if err := db.
+		Raw(`SELECT
+			* 
+		FROM 
+			wordbook
+		WHERE
+			wordbook_uuid = ?
+		LOCK IN SHARE MODE;`,
+			wb.Id).
+		Scan(wb).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func (u *User) AddWordbook(db *gorm.DB, wordbook *Wordbook) (err error) {
 	tx := db.Begin()
 	defer func() {
@@ -101,6 +121,7 @@ func (u *User) AddWordbook(db *gorm.DB, wordbook *Wordbook) (err error) {
 		}
 	}()
 
+	// mysql doesn't allow zero time
 	t, _ := time.Parse(time.RFC3339, "2006-01-02T15:04:05Z")
 	wordbook.UpdateDate = util.RFCTime{t}
 
@@ -117,15 +138,12 @@ func (u *User) AddWordbook(db *gorm.DB, wordbook *Wordbook) (err error) {
 	return
 }
 
-func (u *User) GetUnknownWordbook(db *gorm.DB) (Wordbook, error) {
-	uwordbook := UnknownWordbook{}
-	if err := db.
-		Where("user_id = ?", u.Id).
-		First(&uwordbook).
-		Error; err != nil {
-		return Wordbook{}, err
-	}
+func (wb *Wordbook) Update(db *gorm.DB) error {
+	err := db.Save(wb).Error
+	return err
+}
 
-	wordbook, err := getWordbook(db, uwordbook.WordbookId)
-	return wordbook, err
+func (wb *Wordbook) Delete(db *gorm.DB) error {
+	err := db.Delete(&wb).Error
+	return err
 }
