@@ -5,22 +5,29 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"encoding/base64"
-	"fmt"
+	"errors"
 	"io"
 	"strconv"
 	"strings"
 )
 
-func UserByApiKey(secretKey string, token string) (int32, string, error) {
+var (
+	ErrInvalidLength = errors.New("auth: Invalid length")
+	ErrInvalidKey    = errors.New("auth: Invalid key")
+)
+
+// the name from a valid api key is equal to the actual name in db
+func UserByApiKey(secretKey string, token string) (id int32, name string, err error) {
 	cipherText, _ := base64.URLEncoding.DecodeString(token)
 
 	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
-		return -1, "", err
+		return
 	}
 
 	if len(cipherText) < aes.BlockSize {
-		return -1, "", fmt.Errorf("Invalid length")
+		err = ErrInvalidLength
+		return
 	}
 
 	iv := cipherText[:aes.BlockSize]
@@ -34,18 +41,20 @@ func UserByApiKey(secretKey string, token string) (int32, string, error) {
 
 	arr := strings.Split(text, "@")
 	if len(arr) <= 1 {
-		return -1, "", fmt.Errorf("Invalid key")
+		err = ErrInvalidKey
+		return
 	}
 
 	idPart := arr[0]
-	name := strings.Join(arr[1:], "@")
+	name = strings.Join(arr[1:], "@")
 
 	i, err := strconv.Atoi(idPart)
 	if err != nil {
-		return -1, "", err
+		return
 	}
 
-	return int32(i), name, nil
+	id = int32(i)
+	return
 }
 
 func ApiKeyByUser(secretKey string, id int32, name string) (string, error) {

@@ -7,6 +7,16 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/auth"
 )
 
+type OauthPassport struct {
+	Service     string `gorm:"column:oauth_service"`
+	UserId      int32  `gorm:"column:user_id"`
+	OauthUserId string `gorm:"column:oauth_user_id"`
+}
+
+func (OauthPassport) TableName() string {
+	return "oauth_passport"
+}
+
 type User struct {
 	Id   int32  `gorm:"column:user_id;primary_key"`
 	Name string `gorm:"column:user_name"`
@@ -39,11 +49,6 @@ func GetUser(db *gorm.DB, id int32) (User, error) {
 func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 	passport := OauthPassport{}
 
-	code, err := GetOauthServiceCodeByName(db, user.Service)
-	if err != nil {
-		return User{}, err
-	}
-
 	tx := db.Begin()
 	defer func() {
 		if err == nil {
@@ -53,35 +58,34 @@ func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 		}
 	}()
 
-	if result := tx.
+	result := tx.
 		Raw(`SELECT
 				* 
 			FROM
 				oauth_passport
 			WHERE
-				oauth_service_code = ? AND
+				oauth_service = ? AND
 				oauth_user_id = ?
 			LOCK IN SHARE MODE;`,
-			code, user.Id).
-		Scan(&passport); result.RecordNotFound() {
+			user.Service, user.Id).
+		Scan(&passport)
+
+	if result.RecordNotFound() {
 		return createUser(tx, user)
-	} else if err = result.Error; err != nil {
-		return User{}, err
-	} else {
-		return GetUser(tx, passport.UserId)
 	}
+
+	if err = result.Error; err != nil {
+		return User{}, err
+	}
+
+	return GetUser(tx, passport.UserId)
 }
 
 func createUser(db *gorm.DB, user auth.User) (User, error) {
-	code, err := GetOauthServiceCodeByName(db, user.Service)
-	if err != nil {
-		return User{}, err
-	}
-
 	newUser := User{
 		Name: user.Username,
 	}
-	if err = db.Create(&newUser).Error; err != nil {
+	if err := db.Create(&newUser).Error; err != nil {
 		return User{}, err
 	}
 
@@ -90,16 +94,16 @@ func createUser(db *gorm.DB, user auth.User) (User, error) {
 		ProfileImage: user.Avator,
 		AddedDate:    time.Now().UTC(),
 	}
-	if err = db.Create(&newUserDetail).Error; err != nil {
+	if err := db.Create(&newUserDetail).Error; err != nil {
 		return User{}, err
 	}
 
 	newPassport := OauthPassport{
-		Code:        code,
+		Service:     user.Service,
 		UserId:      newUser.Id,
 		OauthUserId: user.Id,
 	}
-	if err = db.Create(&newPassport).Error; err != nil {
+	if err := db.Create(&newPassport).Error; err != nil {
 		return User{}, err
 	}
 

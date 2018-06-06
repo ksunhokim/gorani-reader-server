@@ -24,6 +24,7 @@ func splitSentences(str string) (sens []string) {
 		}
 		sens[n] += tok.Lit
 	}
+	fmt.Println(sens)
 	return
 }
 

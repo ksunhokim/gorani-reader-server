@@ -14,7 +14,7 @@ func testTokenizer(text string, toks []Token, t *testing.T) {
 		make(map[string]bool),
 	}
 	tz.DotSpecialCases[0]["u"] = false
-	tz.DotSpecialCases[1]["s"] = true
+	tz.DotSpecialCases[1]["s"] = false
 	tz.DotSpecialCases[2]["a"] = true
 
 	toks2 := tz.Tokenize()
@@ -71,9 +71,11 @@ func TestTokenizerDash(t *testing.T) {
 	}
 	testTokenizer(s, a, t)
 
-	s = `Three-dimensional text`
+	s = `Three-dimensional-0 text`
 	a = []Token{
 		Token{TokenKindCapitalWord, "Three-dimensional"},
+		Token{TokenKindPunc, "-"},
+		Token{TokenKindUnknown, "0"},
 		Token{TokenKindBlank, " "},
 		Token{TokenKindNormalWord, "text"},
 		Token{TokenKindEof, ""},
@@ -115,13 +117,6 @@ func TestTokenizerUSA(t *testing.T) {
 	}
 	testTokenizer(s, a, t)
 
-	s = `U. S.`
-	a = []Token{
-		Token{TokenKindCapitalWord, "U.S."},
-		Token{TokenKindEof, ""},
-	}
-	testTokenizer(s, a, t)
-
 	s = `U.`
 	a = []Token{
 		Token{TokenKindCapitalWord, "U"},
@@ -141,9 +136,12 @@ func TestTokenizerUSA(t *testing.T) {
 		Token{TokenKindEof, ""},
 	}
 	testTokenizer(s, a, t)
-	s = `U.U.S.A`
+	s = `U.S.U. S. A`
 	a = []Token{
 		Token{TokenKindCapitalWord, "U"},
+		Token{TokenKindPunc, "."},
+		Token{TokenKindEos, ""},
+		Token{TokenKindCapitalWord, "S"},
 		Token{TokenKindPunc, "."},
 		Token{TokenKindEos, ""},
 		Token{TokenKindCapitalWord, "U.S.A"},

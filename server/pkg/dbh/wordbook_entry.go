@@ -1,11 +1,15 @@
 package dbh
 
 import (
-	"fmt"
+	"errors"
 	"time"
 
 	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/util"
+)
+
+var (
+	ErrTooOld = errors.New("dbh: Trying to using old values")
 )
 
 type WordbookEntry struct {
@@ -56,22 +60,6 @@ func (wb *Wordbook) GetEntries(db *gorm.DB) ([]WordbookEntryWithCorrect, error) 
 	return out, nil
 }
 
-func (wb *Wordbook) ReloadLockInShareMode(tx *gorm.DB) error {
-	if err := tx.
-		Raw(`SELECT
-			* 
-		FROM 
-			wordbook
-		WHERE
-			wordbook_uuid = ?
-		LOCK IN SHARE MODE;`,
-			wb.Id).
-		Scan(wb).Error; err != nil {
-		return err
-	}
-	return nil
-}
-
 func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) (err error) {
 	tx := db.Begin()
 	defer func() {
@@ -88,7 +76,8 @@ func (wb *Wordbook) AddEntry(db *gorm.DB, date time.Time, entry *WordbookEntry) 
 	}
 
 	if wb.UpdateDate.After(date) {
-		return fmt.Errorf("Trying to use old value")
+		err = ErrTooOld
+		return
 	}
 
 	entry.WordbookId = wb.Id
@@ -118,7 +107,8 @@ func (wb *Wordbook) UpdateEntries(db *gorm.DB, date time.Time, entries []Wordboo
 	}
 
 	if wb.UpdateDate.Add(-10 * time.Second).After(date) {
-		return fmt.Errorf("Trying to use old value")
+		err = ErrTooOld
+		return
 	}
 
 	if err = tx.

@@ -28,7 +28,7 @@ func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
-		Addr:           aconf.ApiAddress,
+		Addr:           aconf.Address,
 	}
 
 	return hs, nil
@@ -37,7 +37,7 @@ func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {
 func main() {
 	log.AppName = "api"
 
-	conf, err := gorani.NewConfig("config.yaml")
+	conf, err := gorani.NewConfig("../config.yaml")
 	if err != nil {
 		panic(err)
 	}

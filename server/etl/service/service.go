@@ -46,7 +46,7 @@ func (s *Service) Open() error {
 		if err != nil {
 			log.Log(log.TopicError, util.M{
 				"msg": "grpc error ",
-				"er":  err,
+				"err": err.Error(),
 			})
 		}
 	}()

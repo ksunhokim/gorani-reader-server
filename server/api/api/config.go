@@ -8,10 +8,11 @@ import (
 )
 
 type Config struct {
+	// gorani config is initialized by api.New
 	gorani.Config
 	RedisURL                string `yaml:"redis_url"`
 	RedisConnectionPoolSize int    `yaml:"redis_connection_pool_size"`
-	ApiAddress              string `yaml:"api_address"`
+	Address                 string `yaml:"address"`
 	ServicesUrl             string `yaml:"services_url"`
 	SecretKey               string `yaml:"secret_key"`
 }

@@ -66,8 +66,7 @@ func getDefinition(word string, url string, primary bool, source string) {
 
 	body := getBody(url)
 	if body == nil {
-		time.Sleep(1000)
-		getDefinition(word, url, primary, source)
+		log.Println("ERROR")
 		return
 	}
 
@@ -223,7 +222,7 @@ func main() {
 	go worker2()
 	wg2.Add(1)
 
-	for index, _ := range list {
+	for index := range list {
 		input <- index
 	}
 	close(input)
@@ -231,6 +230,7 @@ func main() {
 	close(send)
 	wg2.Wait()
 	writeFile()
+	log.Println(len(dict))
 	log.Println("done")
 	log.Println(time.Now().Sub(t).Minutes(), " minutes")
 	log.Println("exiting")

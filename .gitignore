@@ -17,3 +17,8 @@ config.yaml
 config_test.yaml
 aconfig_test.yaml
 services.yaml
+
+log.txt
+server/etl/cli/cli
+
+err.sql
