@@ -1,6 +1,6 @@
 package relword
 
-type wordSet map[int32]struct{}
+type wordSet map[int]struct{}
 
 func (a wordSet) Sub(b wordSet) wordSet {
 	out := make(wordSet, len(a))

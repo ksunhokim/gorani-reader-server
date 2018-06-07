@@ -17,7 +17,7 @@ var (
 )
 
 // the name from a valid api key is equal to the actual name in db
-func UserByApiKey(secretKey string, token string) (id int32, name string, err error) {
+func UserByApiKey(secretKey string, token string) (id int, name string, err error) {
 	cipherText, _ := base64.URLEncoding.DecodeString(token)
 
 	block, err := aes.NewCipher([]byte(secretKey))
@@ -53,11 +53,11 @@ func UserByApiKey(secretKey string, token string) (id int32, name string, err er
 		return
 	}
 
-	id = int32(i)
+	id = int(i)
 	return
 }
 
-func ApiKeyByUser(secretKey string, id int32, name string) (string, error) {
+func ApiKeyByUser(secretKey string, id int, name string) (string, error) {
 	block, err := aes.NewCipher([]byte(secretKey))
 	if err != nil {
 		return "", err

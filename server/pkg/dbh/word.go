@@ -5,7 +5,7 @@ import (
 )
 
 type Word struct {
-	Id            int32        `gorm:"column:word_id;primary_key" json:"id"`
+	Id            int          `gorm:"column:word_id;primary_key" json:"id"`
 	Word          string       `gorm:"column:word;not null;unique" json:"word"`
 	Pronunciation *string      `gorm:"column:word_pronunciation" json:"pronunciation,omitempty"`
 	Definitions   []Definition `json:"definitions,omitempty"`
@@ -16,8 +16,8 @@ func (Word) TableName() string {
 }
 
 type Definition struct {
-	Id         int32     `gorm:"column:definition_id;primary_key" json:"id"`
-	WordId     int32     `gorm:"column:word_id;not null" json:"word_id"`
+	Id         int       `gorm:"column:definition_id;primary_key" json:"id"`
+	WordId     int       `gorm:"column:word_id;not null" json:"word_id"`
 	Definition string    `gorm:"column:definition;not null" json:"definition"`
 	POS        *string   `gorm:"column:definition_pos" json:"pos,omitempty"`
 	Examples   []Example `json:"examples,omitempty"`
@@ -28,7 +28,7 @@ func (Definition) TableName() string {
 }
 
 type Example struct {
-	DefinitionId int32   `gorm:"column:definition_id;not null" json:"definition_id"`
+	DefinitionId int     `gorm:"column:definition_id;not null" json:"definition_id"`
 	Foreign      string  `gorm:"column:foreign;not null" json:"foreign"`
 	Native       *string `gorm:"column:native" json:"native,omitempty"`
 }
@@ -42,7 +42,7 @@ func AddWord(db *gorm.DB, word *Word) error {
 	return err
 }
 
-func GetWordById(db *gorm.DB, id int32) (Word, error) {
+func GetWordById(db *gorm.DB, id int) (Word, error) {
 	word := Word{}
 	if err := db.
 		Preload("Definitions").

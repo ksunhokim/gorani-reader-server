@@ -16,5 +16,10 @@ func New(gorn *gorani.Gorani, conf Config) (*Etl, error) {
 	}
 	e.Config.Config = gorn.Config
 
+	err := e.ReloadSentencer()
+	if err != nil {
+		return nil, err
+	}
+
 	return e, nil
 }

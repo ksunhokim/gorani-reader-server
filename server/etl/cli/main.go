@@ -15,6 +15,15 @@ func main() {
 			Usage: "address of the server",
 		},
 	}
+
+	redisFlags := []cli.Flag{
+		cli.StringFlag{
+			Name:  "redis",
+			Value: "redis://localhost:6379/1",
+			Usage: "redis url",
+		},
+	}
+
 	app.Commands = []cli.Command{
 		{
 			Name:      "dict",
@@ -36,6 +45,18 @@ func main() {
 				reltype := c.Args().First()
 				addr := c.String("addr")
 				return relevantWords(addr, reltype)
+			},
+		},
+		{
+			Name:      "addbook",
+			ArgsUsage: "[epub path]",
+			Flags:     append(addrFlags, redisFlags...),
+			Usage:     "post book to etl server",
+			Action: func(c *cli.Context) error {
+				epub := c.Args().First()
+				addr := c.String("addr")
+				redisurl := c.String("redis")
+				return addBook(epub, addr, redisurl)
 			},
 		},
 	}

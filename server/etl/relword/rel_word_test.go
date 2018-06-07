@@ -1,6 +1,9 @@
 package relword_test
 
-import "github.com/sunho/gorani-reader/server/pkg/dbh"
+import (
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader/server/pkg/util"
+)
 
 var (
 	testSet1 []dbh.Word
@@ -8,44 +11,38 @@ var (
 )
 
 func init() {
-	grainPron := "G R EY N"
-	brainPron := "B R EY N"
 	testSet1 = []dbh.Word{
 		dbh.Word{
 			Id:            1,
 			Word:          "grain",
-			Pronunciation: &grainPron,
+			Pronunciation: util.NewString("G R EY N"),
 		},
 		dbh.Word{
 			Id:            2,
 			Word:          "brain",
-			Pronunciation: &brainPron,
+			Pronunciation: util.NewString("B R EY N"),
 		},
 	}
-	iPron := "AY"
-	cryPron := "K R AY"
-	dryPron := "D R AY"
-	goPron := "G OW"
 	testSet2 = []dbh.Word{
 		dbh.Word{
 			Id:            1,
-			Word:          "i",
-			Pronunciation: &iPron,
+			Word:          "o",
+			Pronunciation: util.NewString("OW"),
 		},
 		dbh.Word{
 			Id:            2,
 			Word:          "cry",
-			Pronunciation: &cryPron,
+			Pronunciation: util.NewString("K R AY"),
 		},
 		dbh.Word{
 			Id:            3,
 			Word:          "dry",
-			Pronunciation: &dryPron,
+			Pronunciation: util.NewString("D R AY"),
 		},
 		dbh.Word{
 			Id:            4,
 			Word:          "go",
-			Pronunciation: &goPron,
+			Pronunciation: util.NewString("G OW"),
 		},
 	}
 }

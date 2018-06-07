@@ -9,7 +9,7 @@ import (
 
 type OauthPassport struct {
 	Service     string `gorm:"column:oauth_service"`
-	UserId      int32  `gorm:"column:user_id"`
+	UserId      int    `gorm:"column:user_id"`
 	OauthUserId string `gorm:"column:oauth_user_id"`
 }
 
@@ -18,7 +18,7 @@ func (OauthPassport) TableName() string {
 }
 
 type User struct {
-	Id   int32  `gorm:"column:user_id;primary_key"`
+	Id   int    `gorm:"column:user_id;primary_key"`
 	Name string `gorm:"column:user_name"`
 }
 
@@ -27,7 +27,7 @@ func (User) TableName() string {
 }
 
 type UserDetail struct {
-	Id           int32     `gorm:"column:user_id;primary_key"`
+	Id           int       `gorm:"column:user_id;primary_key"`
 	ProfileImage string    `gorm:"column:user_profile_image"`
 	AddedDate    time.Time `gorm:"column:user_added_date"`
 }
@@ -36,7 +36,7 @@ func (UserDetail) TableName() string {
 	return "user_detail"
 }
 
-func GetUser(db *gorm.DB, id int32) (User, error) {
+func GetUser(db *gorm.DB, id int) (User, error) {
 	out := User{}
 	if err := db.
 		First(&out, id).

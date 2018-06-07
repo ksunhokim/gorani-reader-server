@@ -65,11 +65,7 @@ func (ro *Router) AddUnknownWordbookEntry(w http.ResponseWriter, r *http.Request
 }
 
 type KnwonWordRequest struct {
-	WordId int32 `json:"word_id"`
-}
-
-type KnwonWordResponse struct {
-	WordIds []int32 `json:"word_ids"`
+	WordId int `json:"word_id"`
 }
 
 func (ro *Router) AddKnownWord(w http.ResponseWriter, r *http.Request) {
@@ -89,6 +85,10 @@ func (ro *Router) AddKnownWord(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(200)
+}
+
+type KnwonWordResponse struct {
+	WordIds []int `json:"word_ids"`
 }
 
 func (ro *Router) GetKnownWords(w http.ResponseWriter, r *http.Request) {

@@ -5,39 +5,28 @@ import (
 	"strings"
 
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader/server/pkg/util"
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func protoWordToDbhWord(word *pb.Word) (out dbh.Word) {
-	var pron *string
-	if word.Pronunciation != "" {
-		pron = &word.Pronunciation
-	}
 	out = dbh.Word{
 		Word:          word.Word,
-		Pronunciation: pron,
+		Pronunciation: util.BlankToNil(word.Pronunciation),
 		Definitions:   []dbh.Definition{},
 	}
 	for _, def := range word.Definitions {
-		var pos *string
-		if def.Pos != "" {
-			pos = &def.Pos
-		}
 		odef := dbh.Definition{
 			Definition: def.Definition,
-			POS:        pos,
+			POS:        util.BlankToNil(def.Pos),
 			Examples:   []dbh.Example{},
 		}
 		for _, example := range def.Examples {
-			var native *string
-			if example.Native != "" {
-				native = &example.Native
-			}
 			oexample := dbh.Example{
 				Foreign: example.Foreign,
-				Native:  native,
+				Native:  util.BlankToNil(example.Native),
 			}
 			odef.Examples = append(odef.Examples, oexample)
 		}
@@ -47,37 +36,25 @@ func protoWordToDbhWord(word *pb.Word) (out dbh.Word) {
 }
 
 func dbhWordToProtoWord(word dbh.Word) (out *pb.Word) {
-	pron := ""
-	if word.Pronunciation != nil {
-		pron = *word.Pronunciation
-	}
 	out = &pb.Word{
-		Id:            word.Id,
+		Id:            int32(word.Id),
 		Word:          word.Word,
-		Pronunciation: pron,
+		Pronunciation: util.NilToBlank(word.Pronunciation),
 		Definitions:   []*pb.Definition{},
 	}
 	for _, def := range word.Definitions {
-		pos := ""
-		if def.POS != nil {
-			pos = *def.POS
-		}
 		odef := &pb.Definition{
-			Id:         def.Id,
-			WordId:     word.Id,
+			Id:         int32(def.Id),
+			WordId:     int32(word.Id),
 			Definition: def.Definition,
-			Pos:        pos,
+			Pos:        util.NilToBlank(def.POS),
 			Examples:   []*pb.Example{},
 		}
 		for _, example := range def.Examples {
-			nat := ""
-			if example.Native != nil {
-				nat = *example.Native
-			}
 			oexample := &pb.Example{
-				DefinitionId: def.Id,
+				DefinitionId: int32(def.Id),
 				Foreign:      example.Foreign,
-				Native:       nat,
+				Native:       util.NilToBlank(example.Native),
 			}
 			odef.Examples = append(odef.Examples, oexample)
 		}
@@ -95,15 +72,10 @@ func (s *Service) GetWords(c context.Context, em *pb.Empty) (*pb.GetWordsRespons
 
 	out := make([]*pb.Word, 0, len(words))
 	for _, word := range words {
-		pron := ""
-		if word.Pronunciation != nil {
-			pron = *word.Pronunciation
-		}
-
 		out = append(out, &pb.Word{
-			Id:            word.Id,
+			Id:            int32(word.Id),
 			Word:          word.Word,
-			Pronunciation: pron,
+			Pronunciation: util.NilToBlank(word.Pronunciation),
 		})
 	}
 
@@ -129,7 +101,7 @@ func (s *Service) AddWord(c context.Context, req *pb.AddWordRequest) (*pb.Empty,
 }
 
 func (s *Service) GetWordById(c context.Context, req *pb.GetWordByIdRequest) (*pb.Word, error) {
-	word, err := dbh.GetWordById(s.e.Mysql, req.Id)
+	word, err := dbh.GetWordById(s.e.Mysql, int(req.Id))
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
 			err = status.Error(codes.NotFound, err.Error())
@@ -157,7 +129,7 @@ func (s *Service) GetWordByWord(c context.Context, req *pb.GetWordByWordRequest)
 }
 
 func (s *Service) DeleteWord(c context.Context, req *pb.DeleteWordRequest) (*pb.Empty, error) {
-	word, err := dbh.GetWordById(s.e.Mysql, req.Id)
+	word, err := dbh.GetWordById(s.e.Mysql, int(req.Id))
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
 			err = status.Error(codes.NotFound, err.Error())

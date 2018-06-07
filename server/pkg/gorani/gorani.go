@@ -3,6 +3,7 @@ package gorani
 import (
 	"fmt"
 
+	"github.com/go-redis/redis"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	minio "github.com/minio/minio-go"
@@ -11,11 +12,17 @@ import (
 type Gorani struct {
 	Config Config
 	Mysql  *gorm.DB
+	Redis  *redis.Client
 	S3     *minio.Client
 }
 
 func New(conf Config) (*Gorani, error) {
 	mysql, err := createMysqlConn(conf)
+	if err != nil {
+		return nil, err
+	}
+
+	r, err := createRedisConn(conf)
 	if err != nil {
 		return nil, err
 	}
@@ -28,6 +35,7 @@ func New(conf Config) (*Gorani, error) {
 	gorn := &Gorani{
 		Config: conf,
 		Mysql:  mysql,
+		Redis:  r,
 		S3:     s,
 	}
 
@@ -68,4 +76,18 @@ func createS3(conf Config) (*minio.Client, error) {
 	}
 
 	return m, err
+}
+
+func createRedisConn(conf Config) (*redis.Client, error) {
+	opt, err := redis.ParseURL(conf.RedisURL)
+	if err != nil {
+		return nil, err
+	}
+
+	opt.PoolSize = conf.RedisConnectionPoolSize
+
+	client := redis.NewClient(opt)
+	_, err = client.Ping().Result()
+
+	return client, err
 }

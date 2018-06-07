@@ -56,6 +56,14 @@ func isWordToken(t Token) bool {
 	return t.Kind == TokenKindCapitalWord || t.Kind == TokenKindNormalWord
 }
 
+func isStartingQuote(t Token) bool {
+	return strings.HasPrefix(t.Lit, "“") || strings.HasPrefix(t.Lit, "\"")
+}
+
+func isEndingQuote(t Token) bool {
+	return strings.HasSuffix(t.Lit, "”") || strings.HasSuffix(t.Lit, "\"")
+}
+
 func (t *Tokenizer) Tokenize() []Token {
 	for {
 		tok := t.read()
@@ -86,7 +94,7 @@ func (t *Tokenizer) Tokenize() []Token {
 		}
 
 		// if the front token is capitalized word, " ends the sentence
-		if strings.HasSuffix(tok.Lit, "”") || strings.HasSuffix(tok.Lit, "\"") {
+		if isEndingQuote(tok) {
 			if t.scanQuoteEos() {
 				t.toks = append(t.toks, Token{TokenKindEos, ""})
 				continue
@@ -211,7 +219,7 @@ func (t *Tokenizer) scanQuoteEos() bool {
 	isStarting := true
 	for i := len(t.toks) - 2; i >= 0; i-- {
 		tok := t.toks[i]
-		if strings.HasSuffix(tok.Lit, "\"") || strings.HasPrefix(tok.Lit, "“") {
+		if isStartingQuote(tok) {
 			isStarting = false
 			break
 		}
@@ -234,6 +242,11 @@ func (t *Tokenizer) scanQuoteEos() bool {
 			continue
 		case TokenKindCapitalWord:
 			return true
+		case TokenKindPunc:
+			if isStartingQuote(tok) {
+				return true
+			}
+			return false
 		default:
 			return false
 		}

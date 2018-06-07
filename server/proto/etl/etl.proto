@@ -11,7 +11,7 @@ service ETLService {
 
     rpc BuildSqlite (Empty) returns (BuildSqliteResponse) {}
     rpc InsepectIsbn(InsepectIsbnRequest) returns (InsepectIsbnResponse) {}
-    rpc InsertBook (InsertBookRequest) returns (Empty) {}
+    rpc AddBook (AddBookRequest) returns (Empty) {}
 
     rpc CalculateRelevantWords (CalculateRelevantWordsRequest) returns (Empty) {}
 }
@@ -76,9 +76,9 @@ message InsepectIsbnResponse {
     
 }
 
-message InsertBookRequest {
-    string redis_key = 1;
-    string isbn = 2;
+message AddBookRequest {
+    string isbn = 1;
+    string redis_key = 2;
 }
 
 message CalculateRelevantWordsRequest {

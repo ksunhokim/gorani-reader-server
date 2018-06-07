@@ -27,8 +27,8 @@ func (s *Sentencer) createTokenizer(r io.Reader) *Tokenizer {
 	return t
 }
 
-func (s *Sentencer) ExtractSentencesFromText(str string) (out []Sentence) {
-	t := s.createTokenizer(strings.NewReader(str))
+func (s *Sentencer) ExtractSentencesFromText(r io.Reader) (out []Sentence) {
+	t := s.createTokenizer(r)
 	toks := t.Tokenize()
 
 	i := 0
@@ -39,15 +39,18 @@ func (s *Sentencer) ExtractSentencesFromText(str string) (out []Sentence) {
 		if isWordToken(tok) {
 			// also add raw word if it exists in dictionary
 			word := strings.ToLower(tok.Lit)
-			if id, ok := s.Dict[word]; ok {
+			id, ok := s.Dict[word]
+			if ok {
 				out[i].Words = append(out[i].Words, id)
 			}
 
 			word = s.Stemmer.Stem(word)
-			if id, ok := s.Dict[word]; ok {
-				out[i].Words = append(out[i].Words, id)
+			sid, ok := s.Dict[word]
+			if ok && sid != id {
+				out[i].Words = append(out[i].Words, sid)
 			}
 		}
+
 		if tok.Kind == TokenKindEos {
 			i++
 			out = append(out, Sentence{Words: []WordId{}})
@@ -57,8 +60,8 @@ func (s *Sentencer) ExtractSentencesFromText(str string) (out []Sentence) {
 	return
 }
 
-func (s *Sentencer) ExtractSentencesFromHtml(raw string) (sens []Sentence, err error) {
-	doc, err := goquery.NewDocumentFromReader(strings.NewReader(raw))
+func (s *Sentencer) ExtractSentencesFromHtml(r io.Reader) (sens []Sentence, err error) {
+	doc, err := goquery.NewDocumentFromReader(r)
 	if err != nil {
 		return
 	}
@@ -66,7 +69,8 @@ func (s *Sentencer) ExtractSentencesFromHtml(raw string) (sens []Sentence, err e
 	// every texts were in p tag as I analyzed some samples
 	doc.Find("p").Each(func(i int, sel *goquery.Selection) {
 		str := sel.Text()
-		sens = append(sens, s.ExtractSentencesFromText(str)...)
+		r := strings.NewReader(str)
+		sens = append(sens, s.ExtractSentencesFromText(r)...)
 	})
 
 	return

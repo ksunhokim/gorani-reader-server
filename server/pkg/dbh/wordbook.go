@@ -19,7 +19,7 @@ func (Wordbook) TableName() string {
 }
 
 type UnknownWordbook struct {
-	UserId     int32     `gorm:"column:user_id"`
+	UserId     int       `gorm:"column:user_id"`
 	WordbookId util.UUID `gorm:"column:wordbook_uuid"`
 }
 
@@ -28,7 +28,7 @@ func (UnknownWordbook) TableName() string {
 }
 
 type UserWordbook struct {
-	UserId     int32     `gorm:"column:user_id"`
+	UserId     int       `gorm:"column:user_id"`
 	WordbookId util.UUID `gorm:"column:wordbook_uuid"`
 }
 

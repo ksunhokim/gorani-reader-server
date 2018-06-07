@@ -26,7 +26,7 @@ func init() {
 	}
 }
 
-func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph RelGraph, err error) {
+func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph Graph, err error) {
 	// [token's offset in the syllables counting from the back][token number]wordSet
 	sufTokWordArr := [][maxToken]wordSet{}
 
@@ -76,9 +76,9 @@ func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph RelGraph
 		pron := *word.Pronunciation
 		rawToks := strings.Split(pron, " ")
 
-		vertex := RelVertex{
+		vertex := Vertex{
 			WordId: word.Id,
-			Edges:  []RelEdge{},
+			Edges:  []Edge{},
 		}
 
 		val := rawToks[len(rawToks)-1]
@@ -102,9 +102,9 @@ func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph RelGraph
 				if minscore > score {
 					continue
 				}
-				edge := RelEdge{
+				edge := Edge{
 					TargetId: ele,
-					Score:    int32(score),
+					Score:    int(score),
 				}
 				vertex.Edges = append(vertex.Edges, edge)
 			}
@@ -125,15 +125,15 @@ func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph RelGraph
 				if minscore > score {
 					continue
 				}
-				edge := RelEdge{
+				edge := Edge{
 					TargetId: ele,
-					Score:    int32(score),
+					Score:    int(score),
 				}
 				vertex.Edges = append(vertex.Edges, edge)
 			}
 		}
 
-		graph = append(graph, vertex)
+		graph.Vertexs = append(graph.Vertexs, vertex)
 	}
 
 	return

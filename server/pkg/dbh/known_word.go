@@ -7,8 +7,8 @@ import (
 )
 
 type KnownWord struct {
-	UserId    int32     `gorm:"column:user_id"`
-	WordId    int32     `gorm:"column:word_id"`
+	UserId    int       `gorm:"column:user_id"`
+	WordId    int       `gorm:"column:word_id"`
 	AddedDate time.Time `gorm:"column:known_word_added_date"`
 }
 
@@ -16,7 +16,7 @@ func (KnownWord) TableName() string {
 	return "known_word"
 }
 
-func (u *User) AddKnownWord(db *gorm.DB, wordId int32) error {
+func (u *User) AddKnownWord(db *gorm.DB, wordId int) error {
 	word := KnownWord{
 		UserId:    u.Id,
 		WordId:    wordId,
@@ -26,7 +26,7 @@ func (u *User) AddKnownWord(db *gorm.DB, wordId int32) error {
 	return err
 }
 
-func (u *User) GetKnownWords(db *gorm.DB) ([]int32, error) {
+func (u *User) GetKnownWords(db *gorm.DB) ([]int, error) {
 	words := []KnownWord{}
 	if err := db.
 		Where("user_id = ?", u.Id).
@@ -34,7 +34,7 @@ func (u *User) GetKnownWords(db *gorm.DB) ([]int32, error) {
 		return nil, err
 	}
 
-	arr := make([]int32, 0, len(words))
+	arr := make([]int, 0, len(words))
 	for _, w := range words {
 		arr = append(arr, w.WordId)
 	}

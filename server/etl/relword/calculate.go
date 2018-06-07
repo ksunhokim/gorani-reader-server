@@ -4,7 +4,6 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
@@ -14,7 +13,7 @@ var (
 )
 
 type Calculator interface {
-	Calculate(minscore int, words []dbh.Word) (RelGraph, error)
+	Calculate(minscore int, words []dbh.Word) (Graph, error)
 	RelType() string
 }
 
@@ -54,40 +53,18 @@ func RegisterCalculator(cal Calculator) error {
 	return calculators.add(cal)
 }
 
-func Calculate(db *gorm.DB, minscore int, reltype string) (err error) {
+func Calculate(reltype string, words []dbh.Word, minscore int) (graph Graph, err error) {
 	cal, err := calculators.get(reltype)
 	if err != nil {
 		return
 	}
 
-	words, err := dbh.GetWords(db)
+	graph, err = cal.Calculate(minscore, words)
 	if err != nil {
 		return
 	}
 
-	tx := db.Begin()
-	defer func() {
-		if err == nil {
-			tx.Commit()
-		} else {
-			tx.Rollback()
-		}
-	}()
-
-	err = deleteRelevantWords(tx, reltype)
-	if err != nil {
-		return
-	}
-
-	graph, err := cal.Calculate(minscore, words)
-	if err != nil {
-		return
-	}
-
-	err = addRelevantWords(tx, reltype, graph)
-	if err != nil {
-		return
-	}
+	graph.Reltype = cal.RelType()
 
 	return
 }

@@ -2,19 +2,36 @@ package book
 
 import (
 	"io"
+
+	"github.com/sunho/gorani-reader/server/pkg/sentencer"
 )
 
-type Book struct {
-	Title       string
-	Author      string
-	Genre       string
-	CoverExt    string
-	CoverReader io.Reader
-	Reviews     []Review
-}
+type (
+	Book struct {
+		Isbn      string
+		Name      string
+		Author    string
+		Cover     Cover
+		Genre     []string
+		Sentences []sentencer.Sentence
+		Ratings   []BookRating
+		Reviews   []BookReview
+	}
 
-type Review struct {
-	Provider string
-	Number   int
-	Rate     float32
-}
+	BookRating struct {
+		Provider string
+		Number   string
+		Rating   float32
+	}
+
+	BookReview struct {
+		Provider string
+		Comment  string
+	}
+
+	Cover struct {
+		Reader io.Reader
+		Ext    string
+		Object string
+	}
+)

@@ -9,26 +9,28 @@ import (
 
 func TestRhymeCalculatorSimple(t *testing.T) {
 	a := assert.New(t)
-	cal := relword.RhymeCalculator{}
-	graph, err := cal.Calculate(0, testSet1)
+	graph, err := relword.Calculate("rhyme", testSet1, 0)
 	a.Nil(err)
 
-	solution := relword.RelGraph{
-		relword.RelVertex{
-			WordId: 1,
-			Edges: []relword.RelEdge{
-				relword.RelEdge{
-					TargetId: 2,
-					Score:    3,
+	solution := relword.Graph{
+		Reltype: "rhyme",
+		Vertexs: []relword.Vertex{
+			relword.Vertex{
+				WordId: 1,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 2,
+						Score:    3,
+					},
 				},
 			},
-		},
-		relword.RelVertex{
-			WordId: 2,
-			Edges: []relword.RelEdge{
-				relword.RelEdge{
-					TargetId: 1,
-					Score:    3,
+			relword.Vertex{
+				WordId: 2,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 1,
+						Score:    3,
+					},
 				},
 			},
 		},
@@ -38,54 +40,50 @@ func TestRhymeCalculatorSimple(t *testing.T) {
 
 func TestRhymeCalculatorComplex(t *testing.T) {
 	a := assert.New(t)
-	cal := relword.RhymeCalculator{}
-	graph, err := cal.Calculate(0, testSet2)
+	graph, err := relword.Calculate("rhyme", testSet2, 0)
 	a.Nil(err)
 
-	solution := relword.RelGraph{
-		relword.RelVertex{
-			WordId: 1,
-			Edges: []relword.RelEdge{
-				relword.RelEdge{
-					TargetId: 2,
-					Score:    1,
-				},
-				relword.RelEdge{
-					TargetId: 3,
-					Score:    1,
-				},
-			},
-		},
-		relword.RelVertex{
-			WordId: 2,
-			Edges: []relword.RelEdge{
-				relword.RelEdge{
-					TargetId: 1,
-					Score:    1,
-				},
-				relword.RelEdge{
-					TargetId: 3,
-					Score:    2,
+	solution := relword.Graph{
+		Reltype: "rhyme",
+		Vertexs: []relword.Vertex{
+			relword.Vertex{
+				WordId: 1,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 4,
+						Score:    1,
+					},
 				},
 			},
-		},
-		relword.RelVertex{
-			WordId: 3,
-			Edges: []relword.RelEdge{
-				relword.RelEdge{
-					TargetId: 1,
-					Score:    1,
-				},
-				relword.RelEdge{
-					TargetId: 2,
-					Score:    2,
+			relword.Vertex{
+				WordId: 2,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 3,
+						Score:    2,
+					},
 				},
 			},
-		},
-		relword.RelVertex{
-			WordId: 4,
-			Edges:  []relword.RelEdge{},
+			relword.Vertex{
+				WordId: 3,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 2,
+						Score:    2,
+					},
+				},
+			},
+			relword.Vertex{
+				WordId: 4,
+				Edges: []relword.Edge{
+					relword.Edge{
+						TargetId: 1,
+						Score:    1,
+					},
+				},
+			},
 		},
 	}
 	a.Equal(solution, graph)
+
 }
