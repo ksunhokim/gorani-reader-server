@@ -53,10 +53,7 @@ func (GoodReadsProvider) Rating(isbn string) (float32, error) {
 
 	rateNode := doc.Find(".rating .average").First()
 	rate := rateNode.Text()
-	f, err := strconv.ParseFloat(rate, 32)
-	if err != nil {
-		return 0, err
-	}
+	f, _ := strconv.ParseFloat(rate, 32)
 
 	return float32(f), nil
 }

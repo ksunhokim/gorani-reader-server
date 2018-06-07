@@ -9,7 +9,7 @@ import (
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
 )
 
-func addBook(epub string, addr string, redisurl string) error {
+func addBook(isbn string, epub string, addr string, redisurl string) error {
 	buf, err := ioutil.ReadFile(epub)
 	if err != nil {
 		return err
@@ -34,8 +34,9 @@ func addBook(epub string, addr string, redisurl string) error {
 
 	red.Set("asdf", buf, time.Hour)
 
-	_, err = cli.InsertBook(context.Background(), &pb.InsertBookRequest{
+	_, err = cli.AddBook(context.Background(), &pb.AddBookRequest{
 		RedisKey: "asdf",
+		Isbn:     isbn,
 	})
 
 	if err != nil {

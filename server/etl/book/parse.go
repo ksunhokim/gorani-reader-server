@@ -23,6 +23,8 @@ func Parse(isbn string, r io.ReaderAt, size int64) (b Book, err error) {
 		return
 	}
 
+	b.fetchInfos()
+
 	return
 }
 

@@ -3,7 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
-	"fmt"
+	"strings"
 
 	"github.com/sunho/gorani-reader/server/etl/book"
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
@@ -19,7 +19,7 @@ func (s *Service) InspectIsbn(c context.Context, req *pb.InsepectIsbnRequest) (*
 	return nil, nil
 }
 
-func (s *Service) InsertBook(c context.Context, req *pb.InsertBookRequest) (*pb.Empty, error) {
+func (s *Service) AddBook(c context.Context, req *pb.AddBookRequest) (*pb.Empty, error) {
 	// TODO implement grpc file transfer
 	cmd := s.e.Redis.Get(req.RedisKey)
 	buf, err := cmd.Bytes()
@@ -29,7 +29,7 @@ func (s *Service) InsertBook(c context.Context, req *pb.InsertBookRequest) (*pb.
 	}
 
 	r := bytes.NewReader(buf)
-	b, err := book.Parse("sdfsf", r, int64(len(buf)))
+	b, err := book.Parse(req.Isbn, r, int64(len(buf)))
 	if err != nil {
 		err = status.Error(codes.Internal, err.Error())
 		return nil, err
@@ -39,9 +39,16 @@ func (s *Service) InsertBook(c context.Context, req *pb.InsertBookRequest) (*pb.
 		err = status.Error(codes.Internal, err.Error())
 		return nil, err
 	}
-	fmt.Println(b.Name)
-	fmt.Println(b.Author)
-	fmt.Println(b.Cover)
+
+	err = b.AddToDB(s.e.Mysql)
+	if err != nil {
+		if strings.Contains(err.Error(), "Duplicate") {
+			err = status.Error(codes.AlreadyExists, err.Error())
+		} else {
+			err = status.Error(codes.Internal, err.Error())
+		}
+		return nil, err
+	}
 
 	return &pb.Empty{}, nil
 }

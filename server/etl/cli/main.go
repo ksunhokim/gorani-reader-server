@@ -49,14 +49,15 @@ func main() {
 		},
 		{
 			Name:      "addbook",
-			ArgsUsage: "[epub path]",
+			ArgsUsage: "[isbn] [epub path]",
 			Flags:     append(addrFlags, redisFlags...),
 			Usage:     "post book to etl server",
 			Action: func(c *cli.Context) error {
-				epub := c.Args().First()
+				isbn := c.Args().First()
+				epub := c.Args().Get(1)
 				addr := c.String("addr")
 				redisurl := c.String("redis")
-				return addBook(epub, addr, redisurl)
+				return addBook(isbn, epub, addr, redisurl)
 			},
 		},
 	}
