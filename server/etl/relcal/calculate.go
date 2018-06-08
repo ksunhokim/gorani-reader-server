@@ -1,4 +1,4 @@
-package relword
+package relcal
 
 import (
 	"errors"
@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	ErrAlreadyExist = errors.New("relword: Calculator with the same reltype already exists")
-	ErrNoSuch       = errors.New("relword: No such reltype")
+	ErrAlreadyExist = errors.New("relcal: Calculator with the same reltype already exists")
+	ErrNoSuch       = errors.New("relcal: No such reltype")
 )
 
 type calculator interface {

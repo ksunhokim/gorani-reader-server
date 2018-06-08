@@ -1,4 +1,4 @@
-package relword
+package dbh_test
 
 import (
 	"testing"
@@ -18,14 +18,14 @@ func TestSearch(t *testing.T) {
 	a.Nil(err)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	words, err := FindKnowns(gorn.Mysql, "test", word, user, 10)
+	words, err := word.FindRelevantKnownWords(gorn.Mysql, "test", user, 10)
 	a.Nil(err)
 	a.Equal(0, len(words))
 
 	user.AddKnownWord(gorn.Mysql, word)
 	user.AddKnownWord(gorn.Mysql, word2)
 
-	words, err = FindKnowns(gorn.Mysql, "test", word, user, 10)
+	words, err = word.FindRelevantKnownWords(gorn.Mysql, "test", user, 10)
 	a.Nil(err)
 	a.Equal(1, len(words))
 }

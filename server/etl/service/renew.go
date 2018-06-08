@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	"github.com/sunho/gorani-reader/server/etl/relword"
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 	pb "github.com/sunho/gorani-reader/server/proto/etl"
 	"google.golang.org/grpc/codes"
@@ -17,7 +16,7 @@ func (s *Service) CalculateRelevantWords(c context.Context, req *pb.CalculateRel
 		return nil, err
 	}
 
-	err = relword.Calculate(s.e.Mysql, req.Reltype, words, 3)
+	err = relcal.Calculate(s.e.Mysql, req.Reltype, words, 3)
 	if err != nil {
 		err = status.Error(codes.Internal, err.Error())
 		return nil, err

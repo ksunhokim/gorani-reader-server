@@ -37,10 +37,10 @@ func main() {
 			},
 		},
 		{
-			Name:      "relword",
+			Name:      "relcal",
 			ArgsUsage: "[reltype]",
 			Flags:     addrFlags,
-			Usage:     "renew calculated relword",
+			Usage:     "renew calculated relcal",
 			Action: func(c *cli.Context) error {
 				reltype := c.Args().First()
 				addr := c.String("addr")

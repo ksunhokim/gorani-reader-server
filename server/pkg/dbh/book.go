@@ -92,3 +92,25 @@ func AddBookReview(db *gorm.DB, review *BookReview) error {
 	err := db.Create(review).Error
 	return err
 }
+
+func FindSentences(db *gorm.DB, word1 Word, word2 Word, maxdistance int) (sentences []Sentence, err error) {
+	err = db.Raw(`
+		SELECT sentence.*
+		FROM
+			word_sentence a
+		INNER JOIN
+			word_sentence b
+		ON 
+			a.word_id = ? AND
+			b.word_id = ? AND
+			a.sentence_id = b.sentence_id AND
+			ABS(a.word_position - b.word_position) <= ? 
+		INNER JOIN
+			sentence
+		ON
+			a.sentence_id = sentence.sentence_id
+		GROUP BY
+			sentence_id;`, word1.Id, word2.Id, maxdistance).
+		Scan(&sentences).Error
+	return
+}

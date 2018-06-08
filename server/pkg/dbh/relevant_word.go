@@ -58,3 +58,28 @@ func StreamAddRelevantWords(db *gorm.DB, c chan RelevantWord) <-chan error {
 
 	return errC
 }
+
+func (w *Word) FindRelevantKnownWords(db *gorm.DB, reltype string, user User, maxresult int) (words []Word, err error) {
+	err = db.Raw(`
+		SELECT word.* 
+		FROM
+			relevant_word rw 
+		INNER JOIN
+			known_word nw
+		ON
+			rw.target_word_id = nw.word_id
+		INNER JOIN
+			word
+		ON
+			word.word_id = rw.word_id
+		WHERE
+			rw.relevant_word_type = ? AND
+			rw.word_id = ? AND
+			nw.user_id = ?
+		ORDER BY
+			rw.relevant_word_score DESC,
+			rw.relevant_word_vote_sum DESC
+		LIMIT ?;`, reltype, w.Id, user.Id, maxresult).
+		Scan(&words).Error
+	return
+}

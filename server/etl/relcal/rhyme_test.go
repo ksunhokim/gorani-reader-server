@@ -1,4 +1,4 @@
-package relword
+package relcal
 
 import (
 	"testing"
@@ -44,7 +44,6 @@ func TestRhymeCalculatorComplex(t *testing.T) {
 	a.Nil(err)
 
 	solution := Graph{
-		Reltype: "rhyme",
 		Vertexs: []Vertex{
 			Vertex{
 				WordId: 1,

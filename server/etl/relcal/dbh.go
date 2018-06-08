@@ -1,24 +1,9 @@
-package relword
+package relcal
 
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
-
-type Edge struct {
-	TargetId int
-	Score    int
-}
-
-type Vertex struct {
-	WordId int
-	Edges  []Edge
-}
-
-type Graph struct {
-	Vertexs []Vertex
-	Reltype string
-}
 
 func (graph *Graph) upsertToDB(db *gorm.DB) (err error) {
 	tx := db.Begin()
