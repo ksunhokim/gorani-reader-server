@@ -49,6 +49,6 @@ func TestGetKnownDegree(t *testing.T) {
 	known, total, err := user.GetKnownDegreeOfSentence(gorn.Mysql, sen)
 	a.Nil(err)
 
-	a.Equal(known, 1)
-	a.Equal(total, 2)
+	a.Equal(1, known)
+	a.Equal(2, total)
 }
