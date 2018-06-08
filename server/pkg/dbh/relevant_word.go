@@ -28,13 +28,6 @@ func (RelevantWordVote) TableName() string {
 	return "relevant_word_vote"
 }
 
-func DeleteRelevantWords(db *gorm.DB, reltype string) error {
-	err := db.
-		Where("relevant_word_type = ?", reltype).
-		Delete(&RelevantWord{}).Error
-	return err
-}
-
 // c should be closed manually
 func StreamAddRelevantWords(db *gorm.DB, c chan RelevantWord) <-chan error {
 	c2 := make(chan []interface{})
@@ -59,7 +52,7 @@ func StreamAddRelevantWords(db *gorm.DB, c chan RelevantWord) <-chan error {
 	return errC
 }
 
-func (w *Word) FindRelevantKnownWords(db *gorm.DB, reltype string, user User, maxresult int) (words []Word, err error) {
+func (u *User) FindRelevantKnownWords(db *gorm.DB, reltype string, word Word, maxresult int) (words []Word, err error) {
 	err = db.Raw(`
 		SELECT word.* 
 		FROM
@@ -79,7 +72,14 @@ func (w *Word) FindRelevantKnownWords(db *gorm.DB, reltype string, user User, ma
 		ORDER BY
 			rw.relevant_word_score DESC,
 			rw.relevant_word_vote_sum DESC
-		LIMIT ?;`, reltype, w.Id, user.Id, maxresult).
+		LIMIT ?;`, reltype, word.Id, u.Id, maxresult).
 		Scan(&words).Error
 	return
+}
+
+func DeleteRelevantWords(db *gorm.DB, reltype string) error {
+	err := db.
+		Where("relevant_word_type = ?", reltype).
+		Delete(&RelevantWord{}).Error
+	return err
 }

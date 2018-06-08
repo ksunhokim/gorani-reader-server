@@ -8,7 +8,7 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/util"
 )
 
-func TestSearch(t *testing.T) {
+func TestFindRelevantWords(t *testing.T) {
 	gorn := util.SetupTestGorani()
 	a := assert.New(t)
 
@@ -18,14 +18,14 @@ func TestSearch(t *testing.T) {
 	a.Nil(err)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	words, err := word.FindRelevantKnownWords(gorn.Mysql, "test", user, 10)
+	words, err := user.FindRelevantKnownWords(gorn.Mysql, "test", word, 10)
 	a.Nil(err)
 	a.Equal(0, len(words))
 
 	user.AddKnownWord(gorn.Mysql, word)
 	user.AddKnownWord(gorn.Mysql, word2)
 
-	words, err = word.FindRelevantKnownWords(gorn.Mysql, "test", user, 10)
+	words, err = user.FindRelevantKnownWords(gorn.Mysql, "test", word, 10)
 	a.Nil(err)
 	a.Equal(1, len(words))
 }

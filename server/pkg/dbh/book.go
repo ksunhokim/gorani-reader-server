@@ -114,3 +114,21 @@ func FindSentences(db *gorm.DB, word1 Word, word2 Word, maxdistance int) (senten
 		Scan(&sentences).Error
 	return
 }
+
+func (u *User) GetKnownDegreeOfSentence(db *gorm.DB, sen Sentence) (known int, total int, err error) {
+	err = db.DB().QueryRow(`
+		SELECT COUNT(ws.word_id), COUNT(ws2.word_id)
+		FROM
+			word_sentence ws,
+			word_sentence ws2
+		INNER JOIN
+			known_word nw
+		ON
+			ws2.word_id = nw.word_id
+		WHERE
+			ws.sentence_id = ? AND
+			ws2.sentence_id = ? AND
+			nw.user_id = ?;`, sen.Id, sen.Id, u.Id).
+		Scan(&total, &known)
+	return
+}
