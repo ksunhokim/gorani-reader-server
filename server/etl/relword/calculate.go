@@ -14,7 +14,7 @@ var (
 )
 
 type calculator interface {
-	Calculate(minscore int, words []dbh.Word) (Graph, error)
+	Calculate(words []dbh.Word, minscore int) (Graph, error)
 	RelType() string
 }
 
@@ -56,7 +56,7 @@ func Calculate(db *gorm.DB, reltype string, words []dbh.Word, minscore int) erro
 		return err
 	}
 
-	graph, err := cal.Calculate(minscore, words)
+	graph, err := cal.Calculate(words, minscore)
 	if err != nil {
 		return err
 	}

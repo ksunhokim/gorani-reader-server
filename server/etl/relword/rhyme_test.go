@@ -1,33 +1,32 @@
-package relword_test
+package relword
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/etl/relword"
 )
 
 func TestRhymeCalculatorSimple(t *testing.T) {
 	a := assert.New(t)
-	graph, err := relword.Calculate("rhyme", testSet1, 0)
+	c := rhymeCalculator{}
+	graph, err := c.Calculate(testSet1, 0)
 	a.Nil(err)
 
-	solution := relword.Graph{
-		Reltype: "rhyme",
-		Vertexs: []relword.Vertex{
-			relword.Vertex{
+	solution := Graph{
+		Vertexs: []Vertex{
+			Vertex{
 				WordId: 1,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 2,
 						Score:    3,
 					},
 				},
 			},
-			relword.Vertex{
+			Vertex{
 				WordId: 2,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 1,
 						Score:    3,
 					},
@@ -40,43 +39,44 @@ func TestRhymeCalculatorSimple(t *testing.T) {
 
 func TestRhymeCalculatorComplex(t *testing.T) {
 	a := assert.New(t)
-	graph, err := relword.Calculate("rhyme", testSet2, 0)
+	c := rhymeCalculator{}
+	graph, err := c.Calculate(testSet2, 0)
 	a.Nil(err)
 
-	solution := relword.Graph{
+	solution := Graph{
 		Reltype: "rhyme",
-		Vertexs: []relword.Vertex{
-			relword.Vertex{
+		Vertexs: []Vertex{
+			Vertex{
 				WordId: 1,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 4,
 						Score:    1,
 					},
 				},
 			},
-			relword.Vertex{
+			Vertex{
 				WordId: 2,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 3,
 						Score:    2,
 					},
 				},
 			},
-			relword.Vertex{
+			Vertex{
 				WordId: 3,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 2,
 						Score:    2,
 					},
 				},
 			},
-			relword.Vertex{
+			Vertex{
 				WordId: 4,
-				Edges: []relword.Edge{
-					relword.Edge{
+				Edges: []Edge{
+					Edge{
 						TargetId: 1,
 						Score:    1,
 					},

@@ -1,0 +1,31 @@
+package relword
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader/server/pkg/util"
+)
+
+func TestSearch(t *testing.T) {
+	gorn := util.SetupTestGorani()
+	a := assert.New(t)
+
+	word, err := dbh.GetWordById(gorn.Mysql, 1)
+	a.Nil(err)
+	word2, err := dbh.GetWordById(gorn.Mysql, 2)
+	a.Nil(err)
+	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
+	a.Nil(err)
+	words, err := FindKnowns(gorn.Mysql, "test", word, user, 10)
+	a.Nil(err)
+	a.Equal(0, len(words))
+
+	user.AddKnownWord(gorn.Mysql, word)
+	user.AddKnownWord(gorn.Mysql, word2)
+
+	words, err = FindKnowns(gorn.Mysql, "test", word, user, 10)
+	a.Nil(err)
+	a.Equal(1, len(words))
+}

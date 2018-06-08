@@ -14,15 +14,15 @@ func (KnownWord) TableName() string {
 	return "known_word"
 }
 
-func (u *User) AddKnownWord(db *gorm.DB, wordId int) error {
-	err := db.
-		Exec(`INSERT INTO known_word 
-				(user_id, word_id, known_word_number)
-			VALUES
-				(?, ?, 1) 
-			ON DUPLICATE KEY UPDATE 
-				known_word_number = known_word_number + 1;`,
-			u.Id, wordId).Error
+func (u *User) AddKnownWord(db *gorm.DB, word Word) error {
+	err := db.Exec(`
+		INSERT INTO known_word 
+			(user_id, word_id, known_word_number)
+		VALUES
+			(?, ?, 1) 
+		ON DUPLICATE KEY UPDATE 
+			known_word_number = known_word_number + 1;`,
+		u.Id, word.Id).Error
 	return err
 }
 

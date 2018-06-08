@@ -23,10 +23,11 @@ func (Sentence) TableName() string {
 	return "sentence"
 }
 
+// TODO insert stream
 type WordSentence struct {
 	WordId     int `gorm:"column:word_id"`
 	SentenceId int `gorm:"column:sentence_id"`
-	Position   int `gorm:"column:word_sentence_position"`
+	Position   int `gorm:"column:word_position"`
 }
 
 func (WordSentence) TableName() string {

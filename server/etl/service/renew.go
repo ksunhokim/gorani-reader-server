@@ -17,13 +17,7 @@ func (s *Service) CalculateRelevantWords(c context.Context, req *pb.CalculateRel
 		return nil, err
 	}
 
-	graph, err := relword.Calculate(req.Reltype, words, 3)
-	if err != nil {
-		err = status.Error(codes.Internal, err.Error())
-		return nil, err
-	}
-
-	err = graph.UpsertToDB(s.e.Mysql)
+	err = relword.Calculate(s.e.Mysql, req.Reltype, words, 3)
 	if err != nil {
 		err = status.Error(codes.Internal, err.Error())
 		return nil, err

@@ -1,4 +1,4 @@
-package relword_test
+package relword
 
 import (
 	"github.com/sunho/gorani-reader/server/pkg/dbh"

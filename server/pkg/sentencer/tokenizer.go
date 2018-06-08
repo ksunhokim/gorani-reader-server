@@ -93,7 +93,7 @@ func (t *Tokenizer) Tokenize() []Token {
 			}
 		}
 
-		// if the front token is capitalized word, " ends the sentence
+		// if the next token is capitalized word, " ends the sentence
 		if isEndingQuote(tok) {
 			if t.scanQuoteEos() {
 				t.toks = append(t.toks, Token{TokenKindEos, ""})
@@ -109,8 +109,8 @@ func (t *Tokenizer) Tokenize() []Token {
 	}
 }
 
-// lastToken(0) -> the last token
-// lastToken(n) -> n+1 previous token
+// lastToken(0) -> current token
+// lastToken(n) -> n previous token
 // returns Eof if n is invalid
 func (t *Tokenizer) lastToken(n int) Token {
 	if n >= len(t.toks) {

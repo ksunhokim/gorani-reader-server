@@ -48,7 +48,7 @@ func init() {
 	}
 }
 
-func (rhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph Graph, err error) {
+func (rhymeCalculator) Calculate(words []dbh.Word, minscore int) (graph Graph, err error) {
 	// [token's offset in the syllables counting from the back][token number]wordSet
 	sufTokWordArr := [][maxToken]wordSet{}
 
