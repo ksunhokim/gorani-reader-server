@@ -23,9 +23,7 @@ func SetupTestGorani() *gorani.Gorani {
 }
 
 const (
-	TestWordbookUuid        = "3f06af63-a93c-11e4-9797-00505690773f"
-	TestUnknownWordbookUuid = "3f06af63-a93c-11e4-9797-005056907731"
-	TestUserId              = 1
+	TestUserId = 1
 )
 
 func setupDB(db *gorm.DB) {
@@ -53,40 +51,10 @@ func setupDB(db *gorm.DB) {
 		(%d, 'test');`, TestUserId))
 
 	db.Exec(`
-	INSERT INTO oauth_service
-		(oauth_service_code, oauth_service_name)
-	VALUES
-		(1, 'naver');`)
-
-	db.Exec(`
 	INSERT INTO oauth_passport
-		(user_id, oauth_service_code, oauth_user_id)
+		(user_id, oauth_service, oauth_user_id)
 	VALUES
-		(1, 1, 'asdf');`)
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO wordbook 
-		(wordbook_uuid, wordbook_name, wordbook_seen_date, wordbook_update_date)
-	VALUES
-		(UUID_TO_BIN('%s'), 'test', NOW(), NOW());`, TestWordbookUuid))
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO user_wordbook 
-		(user_id, wordbook_uuid)
-	VALUES
-		(%d, UUID_TO_BIN('%s'));`, TestUserId, TestWordbookUuid))
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO wordbook 
-		(wordbook_uuid, wordbook_name, wordbook_seen_date, wordbook_update_date)
-	VALUES
-		(UUID_TO_BIN('%s'), '', NOW(), NOW());`, TestUnknownWordbookUuid))
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO unknown_wordbook 
-		(user_id, wordbook_uuid)
-	VALUES
-		(%d, UUID_TO_BIN('%s'));`, TestUserId, TestUnknownWordbookUuid))
+		(1, 'hoi', 'asdf');`)
 
 	db.Exec(`
 	INSERT INTO word
@@ -98,7 +66,7 @@ func setupDB(db *gorm.DB) {
 	INSERT INTO word
 		(word_id, word, word_pronunciation)
 	VALUES
-		(2, 'test', NULL);`)
+		(2, 'test2', NULL);`)
 
 	db.Exec(`
 	INSERT INTO definition
@@ -112,15 +80,4 @@ func setupDB(db *gorm.DB) {
 	VALUES
 		(2, 1, NULL, 'test');`)
 
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO wordbook_entry
-		(wordbook_uuid, definition_id, wordbook_entry_source_book, wordbook_entry_source_sentence, wordbook_entry_added_date, wordbook_entry_word_index)
-	VALUES
-		(UUID_TO_BIN('%s'), 1, 'book', 'asdf', NOW(), 0);`, TestWordbookUuid))
-
-	db.Exec(fmt.Sprintf(`
-	INSERT INTO wordbook_entry
-		(wordbook_uuid, definition_id, wordbook_entry_source_book, wordbook_entry_source_sentence, wordbook_entry_added_date, wordbook_entry_word_index)
-	VALUES
-		(UUID_TO_BIN('%s'), 1, 'book', 'asdf', NOW(), 0);`, TestUnknownWordbookUuid))
 }

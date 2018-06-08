@@ -1,15 +1,13 @@
 package dbh
 
 import (
-	"time"
-
 	"github.com/jinzhu/gorm"
 )
 
 type KnownWord struct {
-	UserId    int       `gorm:"column:user_id"`
-	WordId    int       `gorm:"column:word_id"`
-	AddedDate time.Time `gorm:"column:known_word_added_date"`
+	UserId int `gorm:"column:user_id"`
+	WordId int `gorm:"column:word_id"`
+	Number int `gorm:"column:known_word_number"`
 }
 
 func (KnownWord) TableName() string {
@@ -17,26 +15,20 @@ func (KnownWord) TableName() string {
 }
 
 func (u *User) AddKnownWord(db *gorm.DB, wordId int) error {
-	word := KnownWord{
-		UserId:    u.Id,
-		WordId:    wordId,
-		AddedDate: time.Now().UTC(),
-	}
-	err := db.Create(&word).Error
+	err := db.
+		Exec(`INSERT INTO known_word 
+				(user_id, word_id, known_word_number)
+			VALUES
+				(?, ?, 1) 
+			ON DUPLICATE KEY UPDATE 
+				known_word_number = known_word_number + 1;`,
+			u.Id, wordId).Error
 	return err
 }
 
-func (u *User) GetKnownWords(db *gorm.DB) ([]int, error) {
-	words := []KnownWord{}
-	if err := db.
-		Where("user_id = ?", u.Id).
-		Find(&words).Error; err != nil {
-		return nil, err
-	}
-
-	arr := make([]int, 0, len(words))
-	for _, w := range words {
-		arr = append(arr, w.WordId)
-	}
-	return arr, nil
+func (u *User) GetKnownWords(db *gorm.DB, minnum int) (words []KnownWord, err error) {
+	err = db.
+		Where("user_id = ? AND known_word_number >= ?", u.Id, minnum).
+		Find(&words).Error
+	return
 }

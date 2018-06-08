@@ -13,7 +13,7 @@ func TestWord(t *testing.T) {
 	a := assert.New(t)
 
 	word := dbh.Word{
-		Word: "test2",
+		Word: "test3",
 		Definitions: []dbh.Definition{
 			dbh.Definition{
 				Definition: "test1",
@@ -32,10 +32,10 @@ func TestWord(t *testing.T) {
 	err := dbh.AddWord(gorn.Mysql, &word)
 	a.Nil(err)
 
-	word2, err := dbh.GetWord(gorn.Mysql, word.Id)
+	word2, err := dbh.GetWordById(gorn.Mysql, word.Id)
 	a.Nil(err)
 
-	a.Equal("test2", word2.Word)
+	a.Equal("test3", word2.Word)
 
 	defs := word2.Definitions
 	a.Nil(err)
@@ -57,6 +57,6 @@ func TestGetWords(t *testing.T) {
 	words, err := dbh.GetWords(gorn.Mysql)
 	a.Nil(err)
 
-	a.Equal(1, len(words))
+	a.Equal(2, len(words))
 	a.Equal("test", words[0].Word)
 }

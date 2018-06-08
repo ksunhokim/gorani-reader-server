@@ -7,7 +7,29 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
-type RhymeCalculator struct {
+type wordSet map[int]struct{}
+
+func (a wordSet) Sub(b wordSet) wordSet {
+	out := make(wordSet, len(a))
+	for i := range a {
+		if _, ok := b[i]; !ok {
+			out[i] = struct{}{}
+		}
+	}
+	return out
+}
+
+func (a wordSet) Intersect(b wordSet) wordSet {
+	out := make(wordSet, len(a))
+	for i := range a {
+		if _, ok := b[i]; ok {
+			out[i] = struct{}{}
+		}
+	}
+	return out
+}
+
+type rhymeCalculator struct {
 }
 
 const maxToken = 39
@@ -20,13 +42,13 @@ var (
 )
 
 func init() {
-	err := RegisterCalculator(RhymeCalculator{})
+	err := calculators.add(rhymeCalculator{})
 	if err != nil {
 		panic(err)
 	}
 }
 
-func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph Graph, err error) {
+func (rhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph Graph, err error) {
 	// [token's offset in the syllables counting from the back][token number]wordSet
 	sufTokWordArr := [][maxToken]wordSet{}
 
@@ -139,6 +161,6 @@ func (RhymeCalculator) Calculate(minscore int, words []dbh.Word) (graph Graph, e
 	return
 }
 
-func (RhymeCalculator) RelType() string {
+func (rhymeCalculator) RelType() string {
 	return "rhyme"
 }

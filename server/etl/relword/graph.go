@@ -20,7 +20,7 @@ type Graph struct {
 	Reltype string
 }
 
-func (graph *Graph) UpsertToDB(db *gorm.DB) (err error) {
+func (graph *Graph) upsertToDB(db *gorm.DB) (err error) {
 	tx := db.Begin()
 	defer func() {
 		if err == nil {
@@ -42,6 +42,7 @@ func (graph *Graph) UpsertToDB(db *gorm.DB) (err error) {
 func (graph *Graph) addRelevantWords(db *gorm.DB) error {
 	c := make(chan dbh.RelevantWord)
 	errC := dbh.StreamAddRelevantWords(db, c)
+
 	for _, v := range graph.Vertexs {
 		for _, e := range v.Edges {
 			word := dbh.RelevantWord{
@@ -51,7 +52,10 @@ func (graph *Graph) addRelevantWords(db *gorm.DB) error {
 				Score:        e.Score,
 				VoteSum:      0,
 			}
+
 			c <- word
+
+			// check if there was an error
 			select {
 			case err := <-errC:
 				close(c)
@@ -60,6 +64,7 @@ func (graph *Graph) addRelevantWords(db *gorm.DB) error {
 			}
 		}
 	}
+	// in order to flush remaining buffer
 	close(c)
 
 	err := <-errC

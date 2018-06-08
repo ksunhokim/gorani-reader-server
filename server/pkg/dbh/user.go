@@ -36,19 +36,12 @@ func (UserDetail) TableName() string {
 	return "user_detail"
 }
 
-func GetUser(db *gorm.DB, id int) (User, error) {
-	out := User{}
-	if err := db.
-		First(&out, id).
-		Error; err != nil {
-		return out, err
-	}
-	return out, nil
+func GetUser(db *gorm.DB, id int) (user User, err error) {
+	err = db.First(&user, id).Error
+	return
 }
 
 func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
-	passport := OauthPassport{}
-
 	tx := db.Begin()
 	defer func() {
 		if err == nil {
@@ -58,17 +51,11 @@ func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 		}
 	}()
 
+	passport := OauthPassport{}
 	result := tx.
-		Raw(`SELECT
-				* 
-			FROM
-				oauth_passport
-			WHERE
-				oauth_service = ? AND
-				oauth_user_id = ?
-			LOCK IN SHARE MODE;`,
-			user.Service, user.Id).
-		Scan(&passport)
+		Where("oauth_service = ? AND oauth_user_id = ?").
+		Set("gorm:query_option", "LOCK IN SHARE MODE").
+		First(&passport)
 
 	if result.RecordNotFound() {
 		return createUser(tx, user)
@@ -81,12 +68,12 @@ func CreateOrGetUserWithOauth(db *gorm.DB, user auth.User) (_ User, err error) {
 	return GetUser(tx, passport.UserId)
 }
 
-func createUser(db *gorm.DB, user auth.User) (User, error) {
-	newUser := User{
-		Name: user.Username,
-	}
-	if err := db.Create(&newUser).Error; err != nil {
-		return User{}, err
+func createUser(db *gorm.DB, user auth.User) (newUser User, err error) {
+	newUser.Name = user.Username
+
+	err = db.Create(&newUser).Error
+	if err != nil {
+		return
 	}
 
 	newUserDetail := UserDetail{
@@ -94,8 +81,9 @@ func createUser(db *gorm.DB, user auth.User) (User, error) {
 		ProfileImage: user.Avator,
 		AddedDate:    time.Now().UTC(),
 	}
-	if err := db.Create(&newUserDetail).Error; err != nil {
-		return User{}, err
+	err = db.Create(&newUserDetail).Error
+	if err != nil {
+		return
 	}
 
 	newPassport := OauthPassport{
@@ -103,9 +91,10 @@ func createUser(db *gorm.DB, user auth.User) (User, error) {
 		UserId:      newUser.Id,
 		OauthUserId: user.Id,
 	}
-	if err := db.Create(&newPassport).Error; err != nil {
-		return User{}, err
+	err = db.Create(&newPassport).Error
+	if err != nil {
+		return
 	}
 
-	return newUser, nil
+	return
 }

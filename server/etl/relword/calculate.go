@@ -4,6 +4,7 @@ import (
 	"errors"
 	"sync"
 
+	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
@@ -12,17 +13,17 @@ var (
 	ErrNoSuch       = errors.New("relword: No such reltype")
 )
 
-type Calculator interface {
+type calculator interface {
 	Calculate(minscore int, words []dbh.Word) (Graph, error)
 	RelType() string
 }
 
 type calculatorSlice struct {
 	mu   sync.RWMutex
-	cals map[string]Calculator
+	cals map[string]calculator
 }
 
-func (cs *calculatorSlice) get(typ string) (Calculator, error) {
+func (cs *calculatorSlice) get(typ string) (calculator, error) {
 	cs.mu.RLock()
 	defer cs.mu.RUnlock()
 	if cal, ok := cs.cals[typ]; ok {
@@ -31,7 +32,7 @@ func (cs *calculatorSlice) get(typ string) (Calculator, error) {
 	return nil, ErrNoSuch
 }
 
-func (cs *calculatorSlice) add(cal Calculator) error {
+func (cs *calculatorSlice) add(cal calculator) error {
 	cs.mu.Lock()
 	defer cs.mu.Unlock()
 	if _, ok := cs.cals[cal.RelType()]; ok {
@@ -45,26 +46,27 @@ var calculators calculatorSlice
 
 func init() {
 	calculators = calculatorSlice{
-		cals: make(map[string]Calculator),
+		cals: make(map[string]calculator),
 	}
 }
 
-func RegisterCalculator(cal Calculator) error {
-	return calculators.add(cal)
-}
-
-func Calculate(reltype string, words []dbh.Word, minscore int) (graph Graph, err error) {
+func Calculate(db *gorm.DB, reltype string, words []dbh.Word, minscore int) error {
 	cal, err := calculators.get(reltype)
 	if err != nil {
-		return
+		return err
 	}
 
-	graph, err = cal.Calculate(minscore, words)
+	graph, err := cal.Calculate(minscore, words)
 	if err != nil {
-		return
+		return err
 	}
 
 	graph.Reltype = cal.RelType()
 
-	return
+	err = graph.upsertToDB(db)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
