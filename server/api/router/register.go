@@ -29,4 +29,8 @@ func (ro *Router) registerHandlers() {
 			r.Delete("/{word_id:[0-9+]}", ro.DeleteUnknownWord)
 		})
 	})
+
+	ro.Route("/genre", func(r chi.Router) {
+		r.Get("/", ro.GetGenres)
+	})
 }

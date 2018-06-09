@@ -46,7 +46,7 @@ func (BookRating) TableName() string {
 
 type BookGenre struct {
 	BookIsbn string `gorm:"column:book_isbn"`
-	Genre    string `gorm:"column:genre"`
+	Genre    int    `gorm:"column:genre_code"`
 }
 
 func (BookGenre) TableName() string {

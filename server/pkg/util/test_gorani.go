@@ -117,4 +117,10 @@ func setupDB(db *gorm.DB) {
 			(word_id, target_word_id, relevant_word_type, relevant_word_score, relevant_word_vote_sum)
 		VALUES
 			(1, 2, 'test', 10, 1);`)
+
+	mustExec(db, `
+		INSERT INTO genre
+			(genre_code, genre_name)
+		VALUES
+			(0, 'test');`)
 }

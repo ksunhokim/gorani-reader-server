@@ -32,10 +32,10 @@ func addBook(isbn string, epub string, addr string, redisurl string) error {
 		return err
 	}
 
-	red.Set("asdf", buf, time.Hour)
+	red.Set(isbn+"_book_temp", buf, time.Hour)
 
 	_, err = cli.AddBook(context.Background(), &pb.AddBookRequest{
-		RedisKey: "asdf",
+		RedisKey: isbn + "_book_temp",
 		Isbn:     isbn,
 	})
 

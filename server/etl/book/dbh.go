@@ -75,13 +75,22 @@ func (b *Book) AddToDB(db *gorm.DB) (err error) {
 	}
 
 	for _, genre := range b.Genre {
-		gen := dbh.BookGenre{
-			BookIsbn: b.Isbn,
-			Genre:    genre,
-		}
-		err = dbh.AddBookGenre(tx, &gen)
+		gen, err := dbh.GetGenreByName(tx, genre)
 		if err != nil {
-			return
+			gen.Name = genre
+			err = dbh.AddGenre(tx, &gen)
+			if err != nil {
+				return err
+			}
+		}
+		gen2 := dbh.BookGenre{
+			BookIsbn: b.Isbn,
+			Genre:    gen.Code,
+		}
+
+		err = dbh.AddBookGenre(tx, &gen2)
+		if err != nil {
+			return err
 		}
 	}
 
