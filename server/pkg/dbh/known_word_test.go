@@ -14,7 +14,7 @@ func TestKnownWords(t *testing.T) {
 
 	u, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	err = u.AddKnownWord(gorn.Mysql, dbh.Word{Id: 1})
+	err = u.AddKnownWord(gorn.Mysql, 1)
 	a.Nil(err)
 
 	words, err := u.GetKnownWords(gorn.Mysql, 1)
@@ -28,7 +28,7 @@ func TestKnownWords(t *testing.T) {
 	}
 	a.Equal(sol, words)
 
-	err = u.AddKnownWord(gorn.Mysql, dbh.Word{Id: 1})
+	err = u.AddKnownWord(gorn.Mysql, 1)
 	a.Nil(err)
 
 	words, err = u.GetKnownWords(gorn.Mysql, 1)

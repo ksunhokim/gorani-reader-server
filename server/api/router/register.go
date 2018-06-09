@@ -1,11 +1,8 @@
 package router
 
 import (
-	"fmt"
-
 	"github.com/go-chi/chi"
 	chimid "github.com/go-chi/chi/middleware"
-	"github.com/sunho/gorani-reader/server/pkg/auth"
 	mymid "github.com/sunho/gorani-reader/server/pkg/middleware"
 )
 
@@ -23,8 +20,13 @@ func (ro *Router) registerHandlers() {
 		r.Use(mymid.Auth(ro.ap.Mysql, ro.ap.Config.SecretKey))
 
 		r.Route("/known", func(r chi.Router) {
-			r.Post("/", ro.AddKnownWord)
+			r.Post("/", ro.AddKnownWords)
+		})
+
+		r.Route("/unknown", func(r chi.Router) {
+			r.Get("/", ro.GetUnknownWords)
+			r.Put("/{word_id:[0-9+]}", ro.PutUnknownWord)
+			r.Delete("/{word_id:[0-9+]}", ro.DeleteUnknownWord)
 		})
 	})
-	fmt.Println(auth.ApiKeyByUser(ro.ap.Config.SecretKey, 1, "asdf"))
 }

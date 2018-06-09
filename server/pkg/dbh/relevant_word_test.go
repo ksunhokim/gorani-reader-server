@@ -22,8 +22,8 @@ func TestFindRelevantWords(t *testing.T) {
 	a.Nil(err)
 	a.Equal(0, len(words))
 
-	user.AddKnownWord(gorn.Mysql, word)
-	user.AddKnownWord(gorn.Mysql, word2)
+	user.AddKnownWord(gorn.Mysql, word.Id)
+	user.AddKnownWord(gorn.Mysql, word2.Id)
 
 	words, err = user.FindRelevantKnownWords(gorn.Mysql, "test", word, 10)
 	a.Nil(err)

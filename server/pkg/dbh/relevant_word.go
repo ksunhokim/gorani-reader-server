@@ -72,7 +72,8 @@ func (u *User) FindRelevantKnownWords(db *gorm.DB, reltype string, word Word, ma
 		ORDER BY
 			rw.relevant_word_score DESC,
 			rw.relevant_word_vote_sum DESC
-		LIMIT ?;`, reltype, word.Id, u.Id, maxresult).
+		LIMIT ?;`,
+		reltype, word.Id, u.Id, maxresult).
 		Scan(&words).Error
 	return
 }
