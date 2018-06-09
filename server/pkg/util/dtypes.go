@@ -76,11 +76,10 @@ func (u *UUID) Scan(src interface{}) error {
 	}
 
 	if u2, ok := src.([]byte); ok {
-		u3, err := uuid.FromBytes(u2)
+		err := u.UUID.UnmarshalBinary(u2)
 		if err != nil {
 			return err
 		}
-		u.UUID = u3
 		return nil
 	}
 	return fmt.Errorf("Scan error")

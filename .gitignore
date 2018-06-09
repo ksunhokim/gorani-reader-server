@@ -23,3 +23,4 @@ server/etl/cli/cli
 
 err.sql
 asdf.epub
+server/vendor
