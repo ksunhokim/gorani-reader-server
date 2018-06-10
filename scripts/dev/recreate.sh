@@ -1,3 +1,4 @@
+#!/bin/bash
 PS3='enter: '
 options=("recreate gorani_reader" "recreate gorani_reader_test" "recreate both" "quit")
 select opt in "${options[@]}"

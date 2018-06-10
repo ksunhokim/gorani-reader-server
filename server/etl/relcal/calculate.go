@@ -4,7 +4,6 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
@@ -50,23 +49,18 @@ func init() {
 	}
 }
 
-func Calculate(db *gorm.DB, reltype string, words []dbh.Word, minscore int) error {
+func Calculate(reltype string, words []dbh.Word, minscore int) (graph Graph, err error) {
 	cal, err := calculators.get(reltype)
 	if err != nil {
-		return err
+		return
 	}
 
-	graph, err := cal.Calculate(words, minscore)
+	graph, err = cal.Calculate(words, minscore)
 	if err != nil {
-		return err
+		return
 	}
 
-	graph.Reltype = cal.RelType()
+	graph.RelType = cal.RelType()
 
-	err = graph.upsertToDB(db)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return
 }

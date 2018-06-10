@@ -1,4 +1,4 @@
-package relcal
+package relcal_test
 
 import (
 	"github.com/sunho/gorani-reader/server/pkg/dbh"

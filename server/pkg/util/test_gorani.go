@@ -59,12 +59,6 @@ func setupDB(db *gorm.DB) {
 			(%d, 'test');`, TestUserId))
 
 	mustExec(db, `
-		INSERT INTO oauth_passport
-			(user_id, oauth_service, oauth_user_id)
-		VALUES
-			(1, 'hoi', 'asdf');`)
-
-	mustExec(db, `
 		INSERT INTO word
 			(word_id, word, word_pronunciation)
 		VALUES
@@ -113,10 +107,16 @@ func setupDB(db *gorm.DB) {
 			(1, 2, 1);`)
 
 	mustExec(db, `
-		INSERT INTO relevant_word
-			(word_id, target_word_id, relevant_word_type, relevant_word_score, relevant_word_vote_sum)
+		INSERT INTO relevant_word_type
+			(relevant_word_type_code, relevant_word_type_name)
 		VALUES
-			(1, 2, 'test', 10, 1);`)
+			(1, 'test');`)
+
+	mustExec(db, `
+		INSERT INTO relevant_word
+			(word_id, target_word_id, relevant_word_type_code, relevant_word_score, relevant_word_vote_sum)
+		VALUES
+			(1, 2, 1, 10, 1);`)
 
 	mustExec(db, `
 		INSERT INTO genre

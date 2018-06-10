@@ -18,14 +18,17 @@ func TestFindRelevantWords(t *testing.T) {
 	a.Nil(err)
 	user, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
 	a.Nil(err)
-	words, err := user.FindRelevantKnownWords(gorn.Mysql, "test", word, 10)
+	reltype, err := dbh.GetRelevantWordTypeByName(gorn.Mysql, "test")
+	a.Nil(err)
+
+	words, err := user.FindRelevantKnownWords(gorn.Mysql, reltype, word, 10)
 	a.Nil(err)
 	a.Equal(0, len(words))
 
 	user.AddKnownWord(gorn.Mysql, word.Id)
 	user.AddKnownWord(gorn.Mysql, word2.Id)
 
-	words, err = user.FindRelevantKnownWords(gorn.Mysql, "test", word, 10)
+	words, err = user.FindRelevantKnownWords(gorn.Mysql, reltype, word, 10)
 	a.Nil(err)
 	a.Equal(1, len(words))
 }

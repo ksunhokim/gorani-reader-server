@@ -5,7 +5,7 @@ import (
 	"github.com/sunho/gorani-reader/server/pkg/dbh"
 )
 
-func (graph *Graph) upsertToDB(db *gorm.DB) (err error) {
+func (graph *Graph) UpsertToDB(db *gorm.DB) (err error) {
 	tx := db.Begin()
 	defer func() {
 		if err == nil {
@@ -15,16 +15,25 @@ func (graph *Graph) upsertToDB(db *gorm.DB) (err error) {
 		}
 	}()
 
-	err = dbh.DeleteRelevantWords(tx, graph.Reltype)
+	reltype, err := dbh.GetRelevantWordTypeByName(tx, graph.RelType)
+	if err != nil {
+		reltype.Name = graph.RelType
+		err = dbh.AddRelevantWordType(tx, &reltype)
+		if err != nil {
+			return
+		}
+	}
+
+	err = dbh.DeleteRelevantWords(tx, reltype)
 	if err != nil {
 		return
 	}
 
-	err = graph.addRelevantWords(tx)
+	err = graph.addRelevantWords(tx, reltype)
 	return
 }
 
-func (graph *Graph) addRelevantWords(db *gorm.DB) error {
+func (graph *Graph) addRelevantWords(db *gorm.DB, reltype dbh.RelevantWordType) error {
 	c := make(chan dbh.RelevantWord)
 	errC := dbh.StreamAddRelevantWords(db, c)
 
@@ -33,7 +42,7 @@ func (graph *Graph) addRelevantWords(db *gorm.DB) error {
 			word := dbh.RelevantWord{
 				WordId:       v.WordId,
 				TargetWordId: e.TargetId,
-				RelType:      graph.Reltype,
+				TypeCode:     reltype.Code,
 				Score:        e.Score,
 				VoteSum:      0,
 			}

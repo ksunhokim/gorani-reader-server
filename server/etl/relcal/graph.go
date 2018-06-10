@@ -12,5 +12,5 @@ type Vertex struct {
 
 type Graph struct {
 	Vertexs []Vertex
-	Reltype string
+	RelType string
 }
