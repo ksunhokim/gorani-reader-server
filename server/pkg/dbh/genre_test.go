@@ -31,3 +31,28 @@ func TestGenre(t *testing.T) {
 	a.Nil(err)
 	a.Equal(g, genre)
 }
+
+func TestUserPreferGenre(t *testing.T) {
+	gorn := util.SetupTestGorani()
+	a := assert.New(t)
+	u, err := dbh.GetUser(gorn.Mysql, util.TestUserId)
+	a.Nil(err)
+
+	genres, err := u.GetPreferGenres(gorn.Mysql)
+	a.Nil(err)
+	a.Equal(0, len(genres))
+
+	genres = append(genres, dbh.Genre{
+		Code: 1,
+		Name: "test",
+	})
+
+	err = u.PutPreferGenres(gorn.Mysql, genres)
+	a.Nil(err)
+
+	genres2, err := u.GetPreferGenres(gorn.Mysql)
+	a.Nil(err)
+	a.Equal(1, len(genres))
+
+	a.Equal(genres, genres2)
+}

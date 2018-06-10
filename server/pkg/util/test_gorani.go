@@ -122,5 +122,5 @@ func setupDB(db *gorm.DB) {
 		INSERT INTO genre
 			(genre_code, genre_name)
 		VALUES
-			(0, 'test');`)
+			(1, 'test');`)
 }

@@ -32,5 +32,10 @@ func (ro *Router) registerHandlers() {
 
 	ro.Route("/genre", func(r chi.Router) {
 		r.Get("/", ro.GetGenres)
+		r.Route("/prefer", func(r chi.Router) {
+			r.Use(mymid.Auth(ro.ap.Mysql, ro.ap.Config.SecretKey))
+			r.Get("/", ro.GetUserPreferGenres)
+			r.Put("/", ro.PutUserPreferGenres)
+		})
 	})
 }
