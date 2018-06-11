@@ -6,7 +6,7 @@ import (
 	"github.com/sunho/gorani-reader-server/go/etl/etl"
 	"github.com/sunho/gorani-reader-server/go/pkg/log"
 	"github.com/sunho/gorani-reader-server/go/pkg/util"
-	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/go/pkg/proto"
 	"google.golang.org/grpc"
 )
 

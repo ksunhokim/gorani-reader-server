@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
-	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/go/pkg/proto"
 )
 
 func addBook(isbn string, epub string, addr string, redisurl string) error {

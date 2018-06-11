@@ -5,7 +5,7 @@ import (
 
 	"github.com/sunho/gorani-reader-server/go/etl/relcal"
 	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
-	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/go/pkg/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -17,7 +17,7 @@ func (s *Service) CalculateRelevantWords(c context.Context, req *pb.CalculateRel
 		return nil, err
 	}
 
-	err = relcal.Calculate(s.e.Mysql, req.Reltype, words, 3)
+	_, err = relcal.Calculate(req.Reltype, words, 3)
 	if err != nil {
 		err = status.Error(codes.Internal, err.Error())
 		return nil, err

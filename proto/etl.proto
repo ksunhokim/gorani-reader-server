@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package etl;
+package pb;
 
 service ETLService {
     rpc GetWords (Empty) returns (GetWordsResponse) {}

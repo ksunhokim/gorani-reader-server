@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/sunho/gorani-reader-server/go/etl/book"
-	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/go/pkg/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
