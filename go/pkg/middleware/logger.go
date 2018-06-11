@@ -6,8 +6,8 @@ import (
 	"time"
 
 	chmid "github.com/go-chi/chi/middleware"
-	"github.com/sunho/gorani-reader-server/pkg/log"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/log"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func Logger(next http.Handler) http.Handler {

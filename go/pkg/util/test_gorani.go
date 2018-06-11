@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/go/pkg/gorani"
 )
 
 func SetupTestGorani() *gorani.Gorani {

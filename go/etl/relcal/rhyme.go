@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
 )
 
 type wordSet map[int]struct{}

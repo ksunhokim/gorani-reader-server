@@ -2,7 +2,7 @@ package relcal
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
 )
 
 func (graph *Graph) UpsertToDB(db *gorm.DB) (err error) {

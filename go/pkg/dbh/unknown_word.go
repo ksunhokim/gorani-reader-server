@@ -2,7 +2,7 @@ package dbh
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 type UnknownWord struct {

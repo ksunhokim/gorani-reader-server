@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/auth"
+	"github.com/sunho/gorani-reader-server/go/pkg/auth"
 )
 
 type OauthPassport struct {

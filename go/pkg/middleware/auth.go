@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/auth"
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/auth"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
 )
 
 var UserKey = &contextKey{name: "user id"}

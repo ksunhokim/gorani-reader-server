@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
-	"github.com/sunho/gorani-reader-server/pkg/util"
-	pb "github.com/sunho/gorani-reader-server/proto/etl"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
+	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

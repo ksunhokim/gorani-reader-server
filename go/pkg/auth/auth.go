@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func (s *Services) FetchUser(serviceName string, token string) (User, error) {

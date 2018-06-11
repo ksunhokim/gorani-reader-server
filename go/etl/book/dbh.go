@@ -2,8 +2,8 @@ package book
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func (b *Book) AddToDB(db *gorm.DB) (err error) {

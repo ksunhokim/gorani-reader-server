@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader-server/pkg/auth"
-	"github.com/sunho/gorani-reader-server/pkg/middleware"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/auth"
+	"github.com/sunho/gorani-reader-server/go/pkg/middleware"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func TestGenre(t *testing.T) {

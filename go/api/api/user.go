@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/sunho/gorani-reader-server/pkg/auth"
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/auth"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
 )
 
 func (ap *Api) RegisterUser(service string, token string) (string, error) {

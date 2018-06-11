@@ -4,11 +4,11 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/sunho/gorani-reader-server/etl/etl"
-	"github.com/sunho/gorani-reader-server/etl/service"
-	"github.com/sunho/gorani-reader-server/pkg/gorani"
-	"github.com/sunho/gorani-reader-server/pkg/log"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/etl/etl"
+	"github.com/sunho/gorani-reader-server/go/etl/service"
+	"github.com/sunho/gorani-reader-server/go/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/go/pkg/log"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func setup(conf gorani.Config, econf etl.Config) (*service.Service, error) {

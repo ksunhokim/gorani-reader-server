@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader-server/etl/relcal"
+	"github.com/sunho/gorani-reader-server/go/etl/relcal"
 )
 
 func TestRhymeCalculatorSimple(t *testing.T) {

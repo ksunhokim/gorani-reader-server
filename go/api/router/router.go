@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/sunho/gorani-reader-server/api/api"
+	"github.com/sunho/gorani-reader-server/go/api/api"
 )
 
 type Router struct {

@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/sunho/epubgo"
-	"github.com/sunho/gorani-reader-server/pkg/log"
-	"github.com/sunho/gorani-reader-server/pkg/sentencer"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/log"
+	"github.com/sunho/gorani-reader-server/go/pkg/sentencer"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 var (

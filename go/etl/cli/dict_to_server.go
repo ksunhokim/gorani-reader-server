@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	pb "github.com/sunho/gorani-reader-server/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/go/proto/etl"
 )
 
 type IWord struct {

@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader-server/pkg/dbh"
-	"github.com/sunho/gorani-reader-server/pkg/util"
+	"github.com/sunho/gorani-reader-server/go/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 func TestUnknownWord(t *testing.T) {
