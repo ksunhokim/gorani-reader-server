@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/sunho/gorani-reader/server/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/proto/etl"
 	"google.golang.org/grpc"
 )
 

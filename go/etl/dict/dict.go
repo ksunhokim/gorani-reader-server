@@ -6,7 +6,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
 )
 
 func Create(mysql *gorm.DB) (string, error) {

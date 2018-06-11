@@ -5,8 +5,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/sunho/gorani-reader/server/etl/book"
-	pb "github.com/sunho/gorani-reader/server/proto/etl"
+	"github.com/sunho/gorani-reader-server/etl/book"
+	pb "github.com/sunho/gorani-reader-server/proto/etl"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

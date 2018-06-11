@@ -1,8 +1,8 @@
 package etl
 
 import (
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	"github.com/sunho/gorani-reader/server/pkg/sentencer"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/sentencer"
 )
 
 func (e *Etl) ReloadSentencer() error {

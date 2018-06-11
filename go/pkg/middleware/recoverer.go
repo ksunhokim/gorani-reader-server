@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"github.com/sunho/gorani-reader/server/pkg/log"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/log"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func Recoverer(next http.Handler) http.Handler {

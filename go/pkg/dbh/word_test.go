@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func TestWord(t *testing.T) {

@@ -3,10 +3,10 @@ package service
 import (
 	"net"
 
-	"github.com/sunho/gorani-reader/server/etl/etl"
-	"github.com/sunho/gorani-reader/server/pkg/log"
-	"github.com/sunho/gorani-reader/server/pkg/util"
-	pb "github.com/sunho/gorani-reader/server/proto/etl"
+	"github.com/sunho/gorani-reader-server/etl/etl"
+	"github.com/sunho/gorani-reader-server/pkg/log"
+	"github.com/sunho/gorani-reader-server/pkg/util"
+	pb "github.com/sunho/gorani-reader-server/proto/etl"
 	"google.golang.org/grpc"
 )
 

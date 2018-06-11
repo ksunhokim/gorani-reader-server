@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sunho/gorani-reader/server/api/api"
-	"github.com/sunho/gorani-reader/server/api/router"
-	"github.com/sunho/gorani-reader/server/pkg/gorani"
-	"github.com/sunho/gorani-reader/server/pkg/log"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/api/api"
+	"github.com/sunho/gorani-reader-server/api/router"
+	"github.com/sunho/gorani-reader-server/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/pkg/log"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func setup(conf gorani.Config, aconf api.Config) (*http.Server, error) {

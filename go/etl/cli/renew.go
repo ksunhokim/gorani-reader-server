@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/sunho/gorani-reader/server/proto/etl"
+	pb "github.com/sunho/gorani-reader-server/proto/etl"
 )
 
 func relevantWords(addr, reltype string) error {

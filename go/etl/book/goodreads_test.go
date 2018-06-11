@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/etl/book"
+	"github.com/sunho/gorani-reader-server/etl/book"
 )
 
 func TestGoodReadsGenre(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func (ro *Router) UserWithOauth(w http.ResponseWriter, r *http.Request) {

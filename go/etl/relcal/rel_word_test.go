@@ -1,8 +1,8 @@
 package relcal_test
 
 import (
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 var (

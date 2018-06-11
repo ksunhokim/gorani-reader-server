@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/go-chi/chi"
 	chimid "github.com/go-chi/chi/middleware"
-	mymid "github.com/sunho/gorani-reader/server/pkg/middleware"
+	mymid "github.com/sunho/gorani-reader-server/pkg/middleware"
 )
 
 func (ro *Router) registerHandlers() {

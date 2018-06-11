@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/sunho/gorani-reader/server/etl/relcal"
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	pb "github.com/sunho/gorani-reader/server/proto/etl"
+	"github.com/sunho/gorani-reader-server/etl/relcal"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	pb "github.com/sunho/gorani-reader-server/proto/etl"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

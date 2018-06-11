@@ -1,7 +1,7 @@
 package etl
 
 import (
-	"github.com/sunho/gorani-reader/server/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/pkg/gorani"
 )
 
 type Etl struct {

@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/jinzhu/gorm"
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	"github.com/sunho/gorani-reader/server/pkg/middleware"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/middleware"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func genresToStrs(genres []dbh.Genre) []string {

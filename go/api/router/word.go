@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
-	"github.com/sunho/gorani-reader/server/pkg/middleware"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/middleware"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 var uwordbookContextKey = contextKey{"uwordbook"}

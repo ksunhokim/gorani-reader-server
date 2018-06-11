@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/sunho/gorani-reader/server/pkg/sentencer"
+	"github.com/sunho/gorani-reader-server/pkg/sentencer"
 )
 
 func splitSentences(str string) (sens []string) {

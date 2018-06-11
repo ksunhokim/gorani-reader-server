@@ -3,7 +3,7 @@ package sentencer
 import (
 	"strings"
 
-	"github.com/sunho/gorani-reader/server/pkg/dbh"
+	"github.com/sunho/gorani-reader-server/pkg/dbh"
 )
 
 type (

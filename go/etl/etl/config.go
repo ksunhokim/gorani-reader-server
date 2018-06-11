@@ -3,7 +3,7 @@ package etl
 import (
 	"io/ioutil"
 
-	"github.com/sunho/gorani-reader/server/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/pkg/gorani"
 	yaml "gopkg.in/yaml.v2"
 )
 

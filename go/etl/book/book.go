@@ -3,7 +3,7 @@ package book
 import (
 	"io"
 
-	"github.com/sunho/gorani-reader/server/pkg/sentencer"
+	"github.com/sunho/gorani-reader-server/pkg/sentencer"
 )
 
 type (

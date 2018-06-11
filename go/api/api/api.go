@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/sunho/gorani-reader/server/api/services"
-	"github.com/sunho/gorani-reader/server/pkg/auth"
-	"github.com/sunho/gorani-reader/server/pkg/gorani"
+	"github.com/sunho/gorani-reader-server/api/services"
+	"github.com/sunho/gorani-reader-server/pkg/auth"
+	"github.com/sunho/gorani-reader-server/pkg/gorani"
 )
 
 type Api struct {

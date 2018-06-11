@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/gavv/httpexpect"
-	"github.com/sunho/gorani-reader/server/api/api"
-	"github.com/sunho/gorani-reader/server/api/router"
-	"github.com/sunho/gorani-reader/server/pkg/util"
+	"github.com/sunho/gorani-reader-server/api/api"
+	"github.com/sunho/gorani-reader-server/api/router"
+	"github.com/sunho/gorani-reader-server/pkg/util"
 )
 
 func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server, *api.Api) {

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/sunho/gorani-reader/server/pkg/auth"
+	"github.com/sunho/gorani-reader-server/pkg/auth"
 )
 
 var (
