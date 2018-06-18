@@ -1,13 +1,11 @@
 package middleware
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"runtime/debug"
 
-	"github.com/sunho/gorani-reader-server/go/pkg/log"
-	"github.com/sunho/gorani-reader-server/go/pkg/util"
+	"github.com/yanyiwu/simplelog"
 )
 
 func Recoverer(next http.Handler) http.Handler {
@@ -15,13 +13,7 @@ func Recoverer(next http.Handler) http.Handler {
 		defer func() {
 			if rvr := recover(); rvr != nil {
 				body, _ := ioutil.ReadAll(r.Body)
-				log.Log(log.TopicError, util.M{
-					"panic":  fmt.Sprintf("%v", rvr),
-					"body":   body,
-					"stack":  string(debug.Stack()),
-					"req_id": GetRequestId(r).String(),
-				})
-
+				simplelog.Error("panic recovered | cause: %v \n body: %s \n stack: %s", rvr, body, string(debug.Stack()))
 				http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 			}
 		}()

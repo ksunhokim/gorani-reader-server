@@ -10,7 +10,7 @@ import (
 type Config struct {
 	// gorani config is initialized by etl.New
 	gorani.Config
-	Address               string  `yaml:"address"`
+	IsMaster              bool    `yaml:"is_master"`
 	DotSpecialCasesJson   *string `yaml:"dot_special_cases_json`
 	IrregularPastJson     *string `yaml:"irregular_past_json"`
 	IrregularCompleteJson *string `yaml:"irregular_complete_json"`

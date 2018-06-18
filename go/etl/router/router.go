@@ -2,20 +2,19 @@ package router
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/sunho/gorani-reader-server/go/api/api"
+	"github.com/sunho/gorani-reader-server/go/etl/etl"
 )
 
 type Router struct {
 	chi.Router
-	ap *api.Api
+	e *etl.Etl
 }
 
-func New(ap *api.Api) *Router {
+func New(e *etl.Etl) *Router {
 	r := &Router{
 		Router: chi.NewRouter(),
-		ap:     ap,
+		e:      e,
 	}
-	r.registerHandlers()
 
 	return r
 }

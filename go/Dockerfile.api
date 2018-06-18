@@ -1,0 +1,12 @@
+FROM gorani-base
+
+WORKDIR /go/src/github.com/sunho/gorani-reader-server/go
+
+COPY pkg pkg
+COPY api api
+
+RUN cd api && go install
+
+WORKDIR /home
+
+CMD ["api"]

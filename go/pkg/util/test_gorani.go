@@ -7,6 +7,7 @@ import (
 	"github.com/sunho/gorani-reader-server/go/pkg/gorani"
 )
 
+// this would not work if it is not used in file under two subdirectories of go
 func SetupTestGorani() *gorani.Gorani {
 	conf, err := gorani.NewConfig("../../config_test.yaml")
 	if err != nil {

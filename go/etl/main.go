@@ -3,34 +3,15 @@ package main
 import (
 	"os"
 	"os/signal"
+	"syscall"
 
 	"github.com/sunho/gorani-reader-server/go/etl/etl"
-	"github.com/sunho/gorani-reader-server/go/etl/service"
+	"github.com/sunho/gorani-reader-server/go/etl/router"
 	"github.com/sunho/gorani-reader-server/go/pkg/gorani"
-	"github.com/sunho/gorani-reader-server/go/pkg/log"
-	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
-func setup(conf gorani.Config, econf etl.Config) (*service.Service, error) {
-	gorn, err := gorani.New(conf)
-	if err != nil {
-		return nil, err
-	}
-
-	e, err := etl.New(gorn, econf)
-	if err != nil {
-		return nil, err
-	}
-
-	serv := service.New(e)
-
-	return serv, nil
-}
-
 func main() {
-	log.AppName = "etl"
-
-	conf, err := gorani.NewConfig("../config.yaml")
+	conf, err := gorani.NewConfig("config.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -40,24 +21,22 @@ func main() {
 		panic(err)
 	}
 
-	serv, err := setup(conf, econf)
+	gorn, err := gorani.New(conf)
 	if err != nil {
 		panic(err)
 	}
 
-	log.Log(log.TopicSystem, util.M{
-		"info":    "begin listening",
-		"address": serv.Addr,
-	})
-
-	err = serv.Open()
+	e, err := etl.New(gorn, econf)
 	if err != nil {
 		panic(err)
 	}
+
+	handler := router.New(e)
+	gorn.Start(":2018", handler)
 
 	signalChan := make(chan os.Signal, 1)
-	signal.Notify(signalChan, os.Interrupt)
+	signal.Notify(signalChan, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 	<-signalChan
 
-	serv.Close()
+	gorn.End()
 }

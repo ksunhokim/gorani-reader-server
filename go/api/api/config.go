@@ -10,9 +10,7 @@ import (
 type Config struct {
 	// gorani config is initialized by api.New
 	gorani.Config
-	Address     string `yaml:"address"`
-	ServicesUrl string `yaml:"services_url"`
-	SecretKey   string `yaml:"secret_key"`
+	SecretKey string `yaml:"secret_key"`
 }
 
 func NewConfig(path string) (Config, error) {

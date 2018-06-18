@@ -88,3 +88,6 @@
 [[override]]
   branch = "master"
   name = "github.com/antonholmquist/jason"
+[[constraint]]
+  branch = "master"
+  name = "github.com/yanyiwu/simplelog"
