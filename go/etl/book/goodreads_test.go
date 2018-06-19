@@ -12,7 +12,7 @@ func TestGoodReadsGenre(t *testing.T) {
 	p := book.GoodReadsProvider{}
 	gs, err := p.Genre("9780316501590")
 	a.Nil(err)
-	sol := []string{"Light Novel", "Fantasy", "Manga", "Horror", "Action"}
+	sol := []string{"Light Novel", "Fantasy", "Manga", "Horror"}
 	a.Equal(sol, gs)
 }
 

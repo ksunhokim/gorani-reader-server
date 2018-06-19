@@ -19,7 +19,7 @@ func TestUnknownWord(t *testing.T) {
 	u := 2
 	word := dbh.UnknownWord{
 		WordId:         1,
-		MemroySentence: "asdf",
+		MemroySentence: util.NewString("asdf"),
 		AddedDate:      util.RFCTime{time.Now().UTC().Round(time.Second)},
 		Sources: []dbh.UnknownWordSource{
 			dbh.UnknownWordSource{

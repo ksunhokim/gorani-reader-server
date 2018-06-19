@@ -8,8 +8,8 @@ import (
 type UnknownWord struct {
 	UserId         int                 `gorm:"column:user_id;primary_key" json:"-"`
 	WordId         int                 `gorm:"column:word_id;primary_key" json:"word_id"`
-	MemroySentence string              `gorm:"column:unknown_word_memory_sentence" json:"memory_sentence"`
 	AddedDate      util.RFCTime        `gorm:"column:unknown_word_added_date" json:"added_date"`
+	MemroySentence *string             `gorm:"column:unknown_word_memory_sentence" json:"memory_sentence"`
 	Sources        []UnknownWordSource `gorm:"association_save_reference:false;save_associations:false" json:"sources"`
 }
 
@@ -47,7 +47,7 @@ func (u *User) GetUnknownWord(db *gorm.DB, id int) (word UnknownWord, err error)
 
 func (u *User) GetUnknownWordWithQuizs(db *gorm.DB) (words []UnknownWordWithQuiz, err error) {
 	err = db.Raw(`
-			SELECT uw.*, q.*
+			SELECT uw.*, q.average_grade, q.quiz_date
 			FROM
 				unknown_word uw
 			LEFT JOIN
@@ -67,7 +67,7 @@ func (u *User) GetUnknownWordWithQuizs(db *gorm.DB) (words []UnknownWordWithQuiz
 			WHERE
 				uw.user_id = ?;`,
 		u.Id, u.Id).
-		Scan(&words).Error
+		Find(&words).Error
 	if err != nil {
 		return
 	}

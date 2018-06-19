@@ -13,9 +13,8 @@ import (
 func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server, *api.Api) {
 	gorn := util.SetupTestGorani()
 
-	aconf, err := api.NewConfig("../aconfig_test.yaml")
-	if err != nil {
-		panic(err)
+	aconf := api.Config{
+		SecretKey: "3273357538782F41",
 	}
 
 	ap, err := api.New(gorn, aconf)
@@ -23,7 +22,7 @@ func prepareServer(t *testing.T) (*httpexpect.Expect, *httptest.Server, *api.Api
 		panic(err)
 	}
 
-	router := router.NewRouter(ap)
+	router := router.New(ap)
 	server := httptest.NewServer(router)
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  server.URL,

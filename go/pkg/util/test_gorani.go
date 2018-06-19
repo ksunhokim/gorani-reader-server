@@ -2,16 +2,34 @@ package util
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	"github.com/sunho/gorani-reader-server/go/pkg/gorani"
 )
 
-// this would not work if it is not used in file under two subdirectories of go
 func SetupTestGorani() *gorani.Gorani {
-	conf, err := gorani.NewConfig("../../config_test.yaml")
-	if err != nil {
-		panic(err)
+	isCI := os.Getenv("ISCI")
+
+	conf := gorani.Config{}
+	if isCI == "true" {
+		conf.RedisURL = "redis://redis/"
+		conf.MysqlURL = "gorani:gorani@tcp(mysql:3306)/gorani_test?parseTime=true"
+		conf.S3EndPoint = "s3:9000"
+		conf.S3Id = "test1234"
+		conf.S3Secret = "test1234"
+		conf.S3Ssl = false
+		conf.GoMaxProcs = 2
+		conf.Debug = false
+	} else {
+		conf.RedisURL = "redis://127.0.0.1/"
+		conf.MysqlURL = "gorani:gorani@tcp(127.0.0.1:3306)/gorani_test?parseTime=true"
+		conf.S3EndPoint = "127.0.0.1:9000"
+		conf.S3Id = "test1234"
+		conf.S3Secret = "test1234"
+		conf.S3Ssl = false
+		conf.GoMaxProcs = 2
+		conf.Debug = false
 	}
 
 	gorn, err := gorani.New(conf)
