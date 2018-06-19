@@ -24,7 +24,7 @@ func (t testConsumer) Consume(j work.Job) {
 	t.a.Equal(job.Payload, j.Payload)
 	t.a.Equal(job.Timeout, j.Timeout)
 	time.Sleep(50 * time.Millisecond)
-	j.Complete()
+	j.Complete(work.Result{Success: true})
 }
 
 func (testConsumer) Kind() string {
@@ -36,21 +36,22 @@ func TestConsumer(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	gorn.WorkQueue.AddConsumer(testConsumer{a})
-	gorn.WorkQueue.StartConsuming()
+	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs.AddConsumer(testConsumer{a})
+	cs.Start()
 
-	a.Equal(0, gorn.WorkQueue.GetProcessing())
+	a.Equal(0, cs.GetProcessing())
 
 	err := gorn.WorkQueue.PushToWorkQueue(job)
 	a.Nil(err)
 
 	time.Sleep(10 * time.Millisecond)
 
-	a.Equal(1, gorn.WorkQueue.GetProcessing())
+	a.Equal(1, cs.GetProcessing())
 
 	time.Sleep(100 * time.Millisecond)
 
-	a.Equal(0, gorn.WorkQueue.GetProcessing())
+	a.Equal(0, cs.GetProcessing())
 }
 
 type testConsumer2 struct {
@@ -82,9 +83,10 @@ func TestCosumingMany(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	gorn.WorkQueue.AddConsumer(testConsumer2{a})
-	gorn.WorkQueue.AddConsumer(testConsumer3{a})
-	gorn.WorkQueue.StartConsuming()
+	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs.AddConsumer(testConsumer2{a})
+	cs.AddConsumer(testConsumer3{a})
+	cs.Start()
 
 	job3 := work.Job{
 		Kind: "test3",
@@ -104,7 +106,7 @@ func TestCosumingMany(t *testing.T) {
 
 	time.Sleep(100 * time.Millisecond)
 
-	a.Equal(8, gorn.WorkQueue.GetProcessing())
+	a.Equal(8, cs.GetProcessing())
 }
 
 type testConsumer4 struct {
@@ -113,7 +115,7 @@ type testConsumer4 struct {
 
 func (t testConsumer4) Consume(j work.Job) {
 	time.Sleep(50 * time.Millisecond)
-	j.Fail()
+	j.Complete(work.Result{Success: false})
 }
 
 func (testConsumer4) Kind() string {
@@ -125,19 +127,20 @@ func TestConsumerFail(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	gorn.WorkQueue.AddConsumer(testConsumer4{a})
-	gorn.WorkQueue.StartConsuming()
+	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs.AddConsumer(testConsumer4{a})
+	cs.Start()
 
-	a.Equal(0, gorn.WorkQueue.GetProcessing())
+	a.Equal(0, cs.GetProcessing())
 
 	err := gorn.WorkQueue.PushToWorkQueue(job)
 	a.Nil(err)
 
 	time.Sleep(10 * time.Millisecond)
 
-	a.Equal(1, gorn.WorkQueue.GetProcessing())
+	a.Equal(1, cs.GetProcessing())
 
 	time.Sleep(100 * time.Millisecond)
 
-	a.Equal(0, gorn.WorkQueue.GetProcessing())
+	a.Equal(0, cs.GetProcessing())
 }

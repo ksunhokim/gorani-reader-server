@@ -29,13 +29,6 @@ type Gorani struct {
 }
 
 func (g *Gorani) Start(addr string, handler http.Handler) {
-	if g.Config.IsConsumer {
-		g.WorkQueue.StartConsuming()
-	}
-	if g.Config.IsGarbageCollector {
-		g.WorkQueue.StartGarbageCollecting()
-	}
-
 	g.server = &http.Server{
 		Handler: handler,
 		Addr:    addr,
@@ -51,14 +44,9 @@ func (g *Gorani) Start(addr string, handler http.Handler) {
 }
 
 func (g *Gorani) End() {
-	err := g.WorkQueue.End()
-	if err != nil {
-		simplelog.Error("failed to gracefully shutdown work queue | err: %v", err)
-	}
-
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	err = g.server.Shutdown(ctx)
+	err := g.server.Shutdown(ctx)
 	if err != nil {
 		simplelog.Error("failed to gracefully shutdown http server | err: %v", err)
 	}

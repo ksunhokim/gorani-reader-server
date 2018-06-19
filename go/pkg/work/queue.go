@@ -2,76 +2,64 @@ package work
 
 import (
 	"encoding/json"
-	"errors"
-	"sync"
 	"time"
 
 	"github.com/go-redis/redis"
 	"github.com/yanyiwu/simplelog"
 )
 
-var (
-	ErrAlreadyExist   = errors.New("work: cosumer with the same kind already exist")
-	ErrGracefulFailed = errors.New("work: failed to shutdown gracefully")
+const (
+	redisQueueKey      = "gorani_work_queue"
+	redisProcessingKey = "gorani_processing_set"
+	redisEventChannel  = "gorani_event_channel"
+	brpopTimeout       = time.Hour
 )
 
-const (
-	redisQueueKey       = "gorani_work_queue"
-	redisProcessingKey  = "gorani_processing_set"
-	maxGracefulCheck    = 60
-	brpopTimeout        = time.Hour
-	consumeWaitDuration = time.Hour
-	gracefulCheckPeriod = time.Second
-	gcDuration          = 10 * time.Minute
-)
+type Result struct {
+	Kind    string
+	Success bool
+	Payload string
+}
 
 type Job struct {
 	Kind    string
 	Payload string
 	TakenAt time.Time
 	Timeout time.Duration
-	queue   *Queue
+	cs      *ConsumerSwitch
 }
 
 func (j Job) Deadline() time.Time {
 	return j.TakenAt.Add(j.Timeout)
 }
 
-func (j Job) Complete() {
-	j.queue.decreaseProcessing()
-	err := j.queue.removeFromProcessingSet(j)
-	if err != nil {
-		simplelog.Error("error while completing the job | err: %v", err)
-		return
+func (j Job) Complete(res Result) {
+	j.cs.decreaseProcessing()
+	if !res.Success {
+		simplelog.Info("job failed | job: %v", j)
+	} else {
+		err := j.cs.queue.removeFromProcessingSet(j)
+		if err != nil {
+			simplelog.Error("error while completing the job | err: %v", err)
+			return
+		}
+		simplelog.Info("job suceeded | job: %v res: %v", j, res)
 	}
 
-	simplelog.Info("job completed | job: %v", j)
-}
-
-func (j Job) Fail() {
-	j.queue.decreaseProcessing()
-	// beleive garbage collecting will send back the job to work queue
-	simplelog.Info("job failed | job: %v", j)
+	res.Kind = j.Kind
+	err := j.cs.queue.publishToEventChannel(res)
+	if err != nil {
+		simplelog.Error("error while publishing to event channel | err: %v", err)
+	}
 }
 
 type Queue struct {
-	MaxProcessing int
-
-	mu         sync.RWMutex
-	processing int
-	client     *redis.Client
-	consumers  map[string]Consumer
-	consumeEnd chan bool
-	garbageEnd chan bool
+	client *redis.Client
 }
 
 func New(client *redis.Client) *Queue {
 	return &Queue{
-		MaxProcessing: 8,
-		client:        client,
-		consumers:     make(map[string]Consumer),
-		consumeEnd:    make(chan bool),
-		garbageEnd:    make(chan bool),
+		client: client,
 	}
 }
 
@@ -87,57 +75,6 @@ func (q *Queue) PushToWorkQueue(job Job) error {
 	}
 
 	return nil
-}
-
-func (q *Queue) GetProcessing() int {
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-
-	return q.processing
-}
-
-func (q *Queue) increaseProcessing() {
-	q.mu.Lock()
-	defer q.mu.Unlock()
-
-	q.processing++
-}
-
-func (q *Queue) decreaseProcessing() {
-	q.mu.Lock()
-	defer q.mu.Unlock()
-
-	q.processing--
-}
-
-// gracefully end
-func (q *Queue) End() error {
-	select {
-	case q.consumeEnd <- true:
-	default:
-	}
-
-	select {
-	case q.garbageEnd <- true:
-	default:
-	}
-
-	try := 0
-
-	t := time.NewTicker(gracefulCheckPeriod)
-	for range t.C {
-		if try == maxGracefulCheck {
-			return ErrGracefulFailed
-		}
-
-		if q.GetProcessing() == 0 {
-			return nil
-		}
-
-		try++
-	}
-
-	panic("world is weird")
 }
 
 func (q *Queue) popFromWorkQueue() (job Job, err error) {
@@ -181,4 +118,73 @@ func (q *Queue) removeFromProcessingSet(job Job) error {
 	}
 
 	return nil
+}
+
+func (q *Queue) getAllFromProcessingSet() (jobs []Job, err error) {
+	result := q.client.SMembers(redisProcessingKey)
+	err = result.Err()
+	if err != nil {
+		simplelog.Error("redis error while getting processing set: %v", err)
+		return
+	}
+
+	vals := result.Val()
+	for _, val := range vals {
+		job := Job{}
+
+		err = json.Unmarshal([]byte(val), &job)
+		if err != nil {
+			simplelog.Error("json unmarshal failed | val: %s, err: %v", val, err)
+			err = nil
+			continue
+		}
+
+		jobs = append(jobs, job)
+	}
+
+	return
+}
+
+func (q *Queue) publishToEventChannel(res Result) error {
+	buf, err := json.Marshal(res)
+	if err != nil {
+		return err
+	}
+
+	err = q.client.Publish(redisEventChannel, buf).Err()
+	return err
+}
+
+func (q *Queue) subscribeToEventChannel() (c <-chan Result, done chan bool) {
+	pubsub := q.client.Subscribe(redisEventChannel)
+	c, done = eventChannelAdapter(pubsub)
+	return
+}
+
+func eventChannelAdapter(pubsub *redis.PubSub) (<-chan Result, chan bool) {
+	old := pubsub.Channel()
+	new := make(chan Result)
+	done := make(chan bool)
+	go func() {
+		for {
+			select {
+			case <-done:
+				err := pubsub.Close()
+				if err != nil {
+					simplelog.Error("error while closing pubsub | err: %v", err)
+				}
+				return
+			case msg := <-old:
+				buf := msg.Payload
+				res := Result{}
+				err := json.Unmarshal([]byte(buf), &res)
+				if err != nil {
+					simplelog.Error("error while json unmarshal | res: %v err: %v", buf, err)
+					break
+				}
+				new <- res
+			}
+		}
+	}()
+	return new, done
 }
