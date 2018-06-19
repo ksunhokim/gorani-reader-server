@@ -1,12 +1,6 @@
-FROM gorani-base
-
+FROM golang:alpine
 WORKDIR /go/src/github.com/sunho/gorani-reader-server/go
-
-COPY pkg pkg
-COPY api api
-
+COPY . .
 RUN cd api && go install
-
 WORKDIR /home
-
-CMD ["api"]
+CMD ["./api"]

@@ -1,24 +1,20 @@
+.DS_Store
 .vscode
 *.log*
-.DS_Store
 *.swp
 *.json
 *.db
+*.bak
 ._*
 
-db/err.mwb.bak
 scripts/epub/analyze/*.epub
 
 aconfig.yaml
 econfig.yaml
 config.yaml
-config_test.yaml
-aconfig_test.yaml
 services.yaml
 
 log.txt
 go/etl/cli/cli
 
-err.sql
 asdf.epub
-go/vendor

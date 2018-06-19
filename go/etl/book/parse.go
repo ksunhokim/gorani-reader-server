@@ -6,9 +6,7 @@ import (
 	"strings"
 
 	"github.com/sunho/epubgo"
-	"github.com/sunho/gorani-reader-server/go/pkg/log"
 	"github.com/sunho/gorani-reader-server/go/pkg/sentencer"
-	"github.com/sunho/gorani-reader-server/go/pkg/util"
 )
 
 var (
@@ -92,10 +90,10 @@ func (b *Book) parseSentences(epub *epubgo.Epub) error {
 		url := iter.URL()
 		// xhtml, html
 		if !strings.HasSuffix(url, "html") {
-			log.Log(log.TopicError, util.M{
-				"msg":  "name of file in epub spine doesn't end with html",
-				"path": url,
-			})
+			//			log.Log(log.TopicError, util.M{
+			//				"msg":  "name of file in epub spine doesn't end with html",
+			//				"path": url,
+			//})
 			continue
 		}
 

@@ -2,6 +2,8 @@ package work
 
 import (
 	"errors"
+	"log"
+	"strings"
 	"sync"
 	"time"
 
@@ -15,7 +17,7 @@ var (
 
 const (
 	maxGracefulCheck    = 60
-	consumeWaitDuration = time.Hour
+	consumeWaitDuration = time.Second
 	gracefulCheckPeriod = time.Second
 )
 
@@ -89,13 +91,12 @@ func (cs *ConsumerSwitch) Start() {
 }
 
 func (cs *ConsumerSwitch) End() error {
-	select {
-	case cs.end <- true:
-	default:
-	}
+	log.Println("trying to stop consuming")
+	cs.end <- true
 
 	try := 0
 	t := time.NewTicker(gracefulCheckPeriod)
+	log.Println("gracefully shutdowning consumers")
 	for range t.C {
 		if try == maxGracefulCheck {
 			return ErrGracefulFailed
@@ -124,7 +125,9 @@ func (cs *ConsumerSwitch) switching() {
 
 			job, err := cs.queue.popFromWorkQueue()
 			if err != nil {
-				simplelog.Error("error while getting job from work queue | err: %v", err)
+				if !strings.Contains(err.Error(), "nil") {
+					simplelog.Error("error while getting job from work queue | err: %v", err)
+				}
 				continue
 			}
 

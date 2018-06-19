@@ -1,12 +1,6 @@
-FROM gorani-base
-
+FROM golang:alpine
 WORKDIR /go/src/github.com/sunho/gorani-reader-server/go
-
-COPY pkg pkg
-COPY etl etl
-
+COPY . .
 RUN cd etl && go install
-
 WORKDIR /home
-
-CMD ["etl"]
+CMD ["./etl"]

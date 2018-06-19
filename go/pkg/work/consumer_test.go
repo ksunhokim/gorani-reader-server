@@ -9,21 +9,21 @@ import (
 	"github.com/sunho/gorani-reader-server/go/pkg/work"
 )
 
+type testConsumer struct {
+	a *assert.Assertions
+}
+
 var job = work.Job{
 	Kind:    "test",
 	Payload: "asdf",
 	Timeout: 10,
 }
 
-type testConsumer struct {
-	a *assert.Assertions
-}
-
 func (t testConsumer) Consume(j work.Job) {
 	t.a.Equal(job.Kind, j.Kind)
 	t.a.Equal(job.Payload, j.Payload)
 	t.a.Equal(job.Timeout, j.Timeout)
-	time.Sleep(50 * time.Millisecond)
+	time.Sleep(200 * time.Millisecond)
 	j.Complete(work.Result{Success: true})
 }
 
@@ -45,13 +45,16 @@ func TestConsumer(t *testing.T) {
 	err := gorn.WorkQueue.PushToWorkQueue(job)
 	a.Nil(err)
 
-	time.Sleep(10 * time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 
 	a.Equal(1, cs.GetProcessing())
 
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(300 * time.Millisecond)
 
 	a.Equal(0, cs.GetProcessing())
+
+	err = cs.End()
+	a.Nil(err)
 }
 
 type testConsumer2 struct {
@@ -60,6 +63,7 @@ type testConsumer2 struct {
 
 func (t testConsumer2) Consume(j work.Job) {
 	t.a.Equal(false, true)
+	j.Complete(work.Result{Success: true})
 }
 
 func (testConsumer2) Kind() string {
@@ -71,7 +75,8 @@ type testConsumer3 struct {
 }
 
 func (t testConsumer3) Consume(j work.Job) {
-	time.Sleep(10 * time.Second)
+	time.Sleep(200 * time.Millisecond)
+	j.Complete(work.Result{Success: true})
 }
 
 func (testConsumer3) Kind() string {
@@ -107,6 +112,11 @@ func TestCosumingMany(t *testing.T) {
 	time.Sleep(100 * time.Millisecond)
 
 	a.Equal(8, cs.GetProcessing())
+
+	err = cs.End()
+	a.Nil(err)
+
+	a.Equal(0, cs.GetProcessing())
 }
 
 type testConsumer4 struct {
@@ -114,7 +124,7 @@ type testConsumer4 struct {
 }
 
 func (t testConsumer4) Consume(j work.Job) {
-	time.Sleep(50 * time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 	j.Complete(work.Result{Success: false})
 }
 
@@ -136,11 +146,14 @@ func TestConsumerFail(t *testing.T) {
 	err := gorn.WorkQueue.PushToWorkQueue(job)
 	a.Nil(err)
 
-	time.Sleep(10 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 
 	a.Equal(1, cs.GetProcessing())
 
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(200 * time.Millisecond)
 
 	a.Equal(0, cs.GetProcessing())
+
+	err = cs.End()
+	a.Nil(err)
 }

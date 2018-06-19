@@ -1,0 +1,55 @@
+workspace:
+  base: /go
+  path: src/github.com/sunho/gorani-reader-server
+
+clone:
+  git:
+    image: plugins/git
+
+services:
+  s3:
+    image: minio/minio
+    command: ["server", "/home"]
+    environment:
+      - MINIO_ACCESS_KEY=test1234
+      - MINIO_SECRET_KEY=test1234
+
+  mysql:
+    image: ksunhokim/gorani-test-mysql
+    pull: true
+
+  redis:
+    image: redis
+
+pipeline:
+  go-test:
+    group: test
+    image: golang:stretch
+    commands:
+      - sleep 10
+      - go test -p 1 ./go/...
+    environment:
+      - ISCI=true
+
+  api-docker:
+    group: publish
+    image: plugins/docker
+    repo: ksunhokim/gorani-api
+    context: go
+    dockerfile: go/Dockerfile.api
+    secrets: [ docker_username, docker_password ]
+    tags:
+      - dev
+      - "${DRONE_COMMIT_SHA}"
+
+  etl-docker:
+    group: publish
+    image: plugins/docker
+    repo: ksunhokim/gorani-etl
+    context: go
+    dockerfile: go/Dockerfile.etl
+    secrets: [ docker_username, docker_password ]
+    tags:
+      - dev
+      - "${DRONE_COMMIT_SHA}"
+

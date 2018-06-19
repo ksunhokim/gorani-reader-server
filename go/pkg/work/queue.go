@@ -12,7 +12,7 @@ const (
 	redisQueueKey      = "gorani_work_queue"
 	redisProcessingKey = "gorani_processing_set"
 	redisEventChannel  = "gorani_event_channel"
-	brpopTimeout       = time.Hour
+	brpopTimeout       = time.Second
 )
 
 type Result struct {
