@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	ErrAlreadyExist = errors.New("relcal: Calculator with the same reltype already exists")
-	ErrNoSuch       = errors.New("relcal: No such reltype")
+	ErrAlreadyExist = errors.New("relcal: calculator with the same reltype already exists")
+	ErrNoSuch       = errors.New("relcal: no such reltype")
 )
 
 type calculator interface {

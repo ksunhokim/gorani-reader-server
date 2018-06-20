@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	ErrAlreadyExist = errors.New("auth: Service already exists")
-	ErrNotFound     = errors.New("auth: Service not found")
+	ErrAlreadyExist = errors.New("auth: service already exists")
+	ErrNotFound     = errors.New("auth: service not found")
 )
 
 type User struct {

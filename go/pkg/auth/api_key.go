@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	ErrInvalidLength = errors.New("auth: Invalid length")
-	ErrInvalidKey    = errors.New("auth: Invalid key")
+	ErrInvalidLength = errors.New("auth: invalid length")
+	ErrInvalidKey    = errors.New("auth: invalid key")
 )
 
 // the name from a valid api key is equal to the actual name in db

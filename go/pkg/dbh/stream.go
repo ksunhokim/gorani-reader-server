@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	ErrZeroColumn    = errors.New("dbh: Zero column to insert")
-	ErrValColNoMatch = errors.New("dbh: Number of columns and number of values don't match")
+	ErrZeroColumn    = errors.New("dbh: zero column to insert")
+	ErrValColNoMatch = errors.New("dbh: number of columns and number of values don't match")
 )
 
 func batchInsertRows(db *gorm.DB, table string, columns []string, values [][]interface{}) error {

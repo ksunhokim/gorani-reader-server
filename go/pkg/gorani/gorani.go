@@ -68,7 +68,7 @@ func New(conf Config) (*Gorani, error) {
 		return nil, err
 	}
 
-	w := work.New(r)
+	w := work.NewQueue(r)
 
 	gorn := &Gorani{
 		Config:    conf,

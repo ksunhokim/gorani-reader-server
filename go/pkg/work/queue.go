@@ -5,24 +5,27 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 	"github.com/yanyiwu/simplelog"
 )
 
 const (
-	redisQueueKey      = "gorani_work_queue"
-	redisProcessingKey = "gorani_processing_set"
-	redisEventChannel  = "gorani_event_channel"
+	redisQueueKey      = "gorani_work_queue_%s"
+	redisProcessingKey = "gorani_processing_set_%s"
+	redisEventChannel  = "gorani_event_channel_%s"
 	brpopTimeout       = time.Second
 )
 
 type Result struct {
+	Uuid    uuid.UUID
 	Kind    string
-	Success bool
 	Payload string
+	Success bool
 }
 
 type Job struct {
 	Kind    string
+	Uuid    uuid.UUID
 	Payload string
 	TakenAt time.Time
 	Timeout time.Duration
@@ -47,9 +50,16 @@ func (j Job) Complete(res Result) {
 	}
 
 	res.Kind = j.Kind
+	res.Uuid = j.Uuid
 	err := j.cs.queue.publishToEventChannel(res)
 	if err != nil {
 		simplelog.Error("error while publishing to event channel | err: %v", err)
+	}
+}
+
+func NewJob() Job {
+	return Job{
+		Uuid: uuid.New(),
 	}
 }
 
@@ -57,7 +67,7 @@ type Queue struct {
 	client *redis.Client
 }
 
-func New(client *redis.Client) *Queue {
+func NewQueue(client *redis.Client) *Queue {
 	return &Queue{
 		client: client,
 	}

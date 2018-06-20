@@ -10,8 +10,8 @@ import (
 )
 
 var (
-	ErrNoName        = errors.New("book: Epub doesn't have name")
-	ErrMultipleNames = errors.New("book: Epub metadata has multiple names")
+	ErrNoName        = errors.New("book: epub doesn't have name")
+	ErrMultipleNames = errors.New("book: epub metadata has multiple names")
 )
 
 func Parse(isbn string, r io.ReaderAt, size int64) (b Book, err error) {

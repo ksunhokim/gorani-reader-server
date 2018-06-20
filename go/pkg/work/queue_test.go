@@ -23,7 +23,7 @@ func setupQueueForTest() *Queue {
 		Addr: redisaddr,
 	})
 
-	return New(cli)
+	return NewQueue(cli)
 }
 
 func TestQueue(t *testing.T) {

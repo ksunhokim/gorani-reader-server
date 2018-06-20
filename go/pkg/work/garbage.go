@@ -37,6 +37,7 @@ func (gc *GarbageCollector) garbageCollecting() {
 		case <-gc.end:
 			simplelog.Info("garbageCollecting ended")
 			return
+
 		case <-t.C:
 			simplelog.Info("start work garbage collecting")
 			jobs, err := gc.queue.getAllFromProcessingSet()

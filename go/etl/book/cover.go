@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	ErrNoCover = errors.New("book: The epub doesn't have cover")
+	ErrNoCover = errors.New("book: the epub doesn't have cover")
 )
 
 func (b *Book) UploadCover(m *minio.Client) error {
