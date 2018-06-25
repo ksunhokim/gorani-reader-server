@@ -9,10 +9,10 @@ import (
 )
 
 func SetupTestGorani() *gorani.Gorani {
-	isCI := os.Getenv("ISCI")
+	isCompose := os.Getenv("COMPOSE")
 
 	conf := gorani.Config{}
-	if isCI == "true" {
+	if isCompose == "true" {
 		conf.RedisURL = "redis://redis/"
 		conf.MysqlURL = "gorani:gorani@tcp(mysql:3306)/gorani_test?parseTime=true"
 		conf.S3EndPoint = "s3:9000"

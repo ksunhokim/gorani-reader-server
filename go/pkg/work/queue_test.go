@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,7 +21,8 @@ func setupQueueForTest() *Queue {
 	}
 
 	cli := redis.NewClient(&redis.Options{
-		Addr: redisaddr,
+		Addr:     redisaddr,
+		PoolSize: 2,
 	})
 
 	return NewQueue(cli)
@@ -61,4 +63,29 @@ func TestProcessing(t *testing.T) {
 
 	err = q.removeFromProcessingSet(job)
 	a.Nil(err)
+}
+
+func TestSubscribe(t *testing.T) {
+	a := assert.New(t)
+
+	q := setupQueueForTest()
+	q.client.FlushDB()
+	c, _ := q.subscribeToEventChannel()
+	res := Result{
+		Uuid:    uuid.New(),
+		Kind:    "hello",
+		Payload: "world",
+		Success: true,
+	}
+
+	time.Sleep(500 * time.Millisecond)
+	err := q.publishToEventChannel(res)
+	a.Nil(err)
+
+	select {
+	case res2 := <-c:
+		a.Equal(res, res2)
+	case <-time.After(2 * time.Second):
+		a.Fail("Timeout")
+	}
 }

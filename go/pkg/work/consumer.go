@@ -26,7 +26,7 @@ type Consumer interface {
 	Consume(job Job)
 }
 
-type ConsumerSwitch struct {
+type ConsumerHub struct {
 	MaxProcessing int
 	processing    int
 	consumers     map[string]Consumer
@@ -35,8 +35,8 @@ type ConsumerSwitch struct {
 	mu            sync.RWMutex
 }
 
-func NewConsumerSwitch(q *Queue) *ConsumerSwitch {
-	return &ConsumerSwitch{
+func NewConsumerHub(q *Queue) *ConsumerHub {
+	return &ConsumerHub{
 		MaxProcessing: 8,
 		consumers:     make(map[string]Consumer),
 		queue:         q,
@@ -44,55 +44,51 @@ func NewConsumerSwitch(q *Queue) *ConsumerSwitch {
 	}
 }
 
-func (cs *ConsumerSwitch) AddConsumer(con Consumer) error {
-	cs.mu.Lock()
-	defer cs.mu.Unlock()
+func (ch *ConsumerHub) AddConsumer(con Consumer) error {
+	ch.mu.Lock()
+	defer ch.mu.Unlock()
 
-	if _, ok := cs.consumers[con.Kind()]; ok {
+	if _, ok := ch.consumers[con.Kind()]; ok {
 		return ErrAlreadyExist
 	}
-	cs.consumers[con.Kind()] = con
+	ch.consumers[con.Kind()] = con
 	return nil
 }
 
-func (cs *ConsumerSwitch) getConsumer(kind string) Consumer {
-	cs.mu.RLock()
-	defer cs.mu.RUnlock()
+func (ch *ConsumerHub) getConsumer(kind string) Consumer {
+	ch.mu.RLock()
+	defer ch.mu.RUnlock()
 
-	if con, ok := cs.consumers[kind]; ok {
+	if con, ok := ch.consumers[kind]; ok {
 		return con
 	}
 	return nil
 }
 
-func (cs *ConsumerSwitch) GetProcessing() int {
-	cs.mu.RLock()
-	defer cs.mu.RUnlock()
+func (ch *ConsumerHub) GetProcessing() int {
+	ch.mu.RLock()
+	defer ch.mu.RUnlock()
 
-	return cs.processing
+	return ch.processing
 }
 
-func (cs *ConsumerSwitch) increaseProcessing() {
-	cs.mu.Lock()
-	defer cs.mu.Unlock()
+func (ch *ConsumerHub) increaseProcessing() {
+	ch.mu.Lock()
+	defer ch.mu.Unlock()
 
-	cs.processing++
+	ch.processing++
 }
 
-func (cs *ConsumerSwitch) decreaseProcessing() {
-	cs.mu.Lock()
-	defer cs.mu.Unlock()
+func (ch *ConsumerHub) decreaseProcessing() {
+	ch.mu.Lock()
+	defer ch.mu.Unlock()
 
-	cs.processing--
+	ch.processing--
 }
 
-func (cs *ConsumerSwitch) Start() {
-	go cs.switching()
-}
-
-func (cs *ConsumerSwitch) End() error {
+func (ch *ConsumerHub) End() error {
 	log.Println("trying to stop consuming")
-	cs.end <- true
+	close(ch.end)
 
 	try := 0
 	t := time.NewTicker(gracefulCheckPeriod)
@@ -102,7 +98,7 @@ func (cs *ConsumerSwitch) End() error {
 			return ErrGracefulFailed
 		}
 
-		if cs.GetProcessing() == 0 {
+		if ch.GetProcessing() == 0 {
 			return nil
 		}
 
@@ -111,50 +107,52 @@ func (cs *ConsumerSwitch) End() error {
 	panic("world is weird")
 }
 
-func (cs *ConsumerSwitch) switching() {
-	for {
-		select {
-		case <-cs.end:
-			simplelog.Info("consumer switching ended")
-			return
-		default:
-			if cs.GetProcessing() >= cs.MaxProcessing {
-				time.Sleep(consumeWaitDuration)
-				continue
-			}
-
-			job, err := cs.queue.popFromWorkQueue()
-			if err != nil {
-				if !strings.Contains(err.Error(), "nil") {
-					simplelog.Error("error while getting job from work queue | err: %v", err)
+func (ch *ConsumerHub) Start() {
+	go func() {
+		for {
+			select {
+			case <-ch.end:
+				simplelog.Info("consumer hub ended")
+				return
+			default:
+				if ch.GetProcessing() >= ch.MaxProcessing {
+					time.Sleep(consumeWaitDuration)
+					continue
 				}
-				continue
-			}
 
-			con := cs.getConsumer(job.Kind)
-
-			if con == nil {
-				simplelog.Error("couldn't find appropriate consumer for job repushing to work queue | kind: %s", job.Kind)
-				err = cs.queue.PushToWorkQueue(job)
+				job, err := ch.queue.popFromWorkQueue()
 				if err != nil {
-					simplelog.Error("error while repushing the job | err: %v", err)
+					if !strings.Contains(err.Error(), "nil") {
+						simplelog.Error("error while getting job from work queue | err: %v", err)
+					}
+					continue
 				}
-				continue
+
+				con := ch.getConsumer(job.Kind)
+
+				if con == nil {
+					simplelog.Error("couldn't find appropriate consumer for job repushing to work queue | kind: %s", job.Kind)
+					err = ch.queue.PushToWorkQueue(job)
+					if err != nil {
+						simplelog.Error("error while repushing the job | err: %v", err)
+					}
+					continue
+				}
+
+				job.TakenAt = time.Now().UTC()
+
+				err = ch.queue.addToProcessingSet(job)
+				if err != nil {
+					simplelog.Error("redis error while adding job to processing set | err: %v", err)
+					continue
+				}
+
+				ch.increaseProcessing()
+				job.ch = ch
+				go con.Consume(job)
+
+				simplelog.Info("gave the job to consumer | job: %v", job)
 			}
-
-			job.TakenAt = time.Now().UTC()
-
-			err = cs.queue.addToProcessingSet(job)
-			if err != nil {
-				simplelog.Error("redis error while adding job to processing set | err: %v", err)
-				continue
-			}
-
-			cs.increaseProcessing()
-			job.cs = cs
-			go con.Consume(job)
-
-			simplelog.Info("gived the job to consumer | job: %v", job)
 		}
-	}
+	}()
 }

@@ -1,6 +1,0 @@
-FROM golang:alpine
-WORKDIR /go/src/github.com/sunho/gorani-reader-server/go
-COPY . .
-RUN cd etl && go install
-WORKDIR /home
-CMD ["./etl"]

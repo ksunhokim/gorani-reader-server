@@ -10,9 +10,9 @@ import (
 )
 
 const (
-	redisQueueKey      = "gorani_work_queue_%s"
-	redisProcessingKey = "gorani_processing_set_%s"
-	redisEventChannel  = "gorani_event_channel_%s"
+	redisQueueKey      = "gorani_work_queue"
+	redisProcessingKey = "gorani_processing_set"
+	redisEventChannel  = "gorani_event_channel"
 	brpopTimeout       = time.Second
 )
 
@@ -29,7 +29,7 @@ type Job struct {
 	Payload string
 	TakenAt time.Time
 	Timeout time.Duration
-	cs      *ConsumerSwitch
+	ch      *ConsumerHub
 }
 
 func (j Job) Deadline() time.Time {
@@ -37,11 +37,11 @@ func (j Job) Deadline() time.Time {
 }
 
 func (j Job) Complete(res Result) {
-	j.cs.decreaseProcessing()
+	j.ch.decreaseProcessing()
 	if !res.Success {
 		simplelog.Info("job failed | job: %v", j)
 	} else {
-		err := j.cs.queue.removeFromProcessingSet(j)
+		err := j.ch.queue.removeFromProcessingSet(j)
 		if err != nil {
 			simplelog.Error("error while completing the job | err: %v", err)
 			return
@@ -51,7 +51,7 @@ func (j Job) Complete(res Result) {
 
 	res.Kind = j.Kind
 	res.Uuid = j.Uuid
-	err := j.cs.queue.publishToEventChannel(res)
+	err := j.ch.queue.publishToEventChannel(res)
 	if err != nil {
 		simplelog.Error("error while publishing to event channel | err: %v", err)
 	}
@@ -175,6 +175,7 @@ func eventChannelAdapter(pubsub *redis.PubSub) (<-chan Result, chan bool) {
 	old := pubsub.Channel()
 	new := make(chan Result)
 	done := make(chan bool)
+
 	go func() {
 		for {
 			select {
@@ -196,5 +197,6 @@ func eventChannelAdapter(pubsub *redis.PubSub) (<-chan Result, chan bool) {
 			}
 		}
 	}()
+
 	return new, done
 }

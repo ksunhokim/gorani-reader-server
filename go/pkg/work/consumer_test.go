@@ -36,7 +36,7 @@ func TestConsumer(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs := work.NewConsumerHub(gorn.WorkQueue)
 	cs.AddConsumer(testConsumer{a})
 	cs.Start()
 
@@ -88,7 +88,7 @@ func TestCosumingMany(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs := work.NewConsumerHub(gorn.WorkQueue)
 	cs.AddConsumer(testConsumer2{a})
 	cs.AddConsumer(testConsumer3{a})
 	cs.Start()
@@ -137,7 +137,7 @@ func TestConsumerFail(t *testing.T) {
 	gorn.Redis.FlushDB()
 	a := assert.New(t)
 
-	cs := work.NewConsumerSwitch(gorn.WorkQueue)
+	cs := work.NewConsumerHub(gorn.WorkQueue)
 	cs.AddConsumer(testConsumer4{a})
 	cs.Start()
 

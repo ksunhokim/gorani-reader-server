@@ -26,7 +26,7 @@ func TestGarbageCollector(t *testing.T) {
 	gc := NewGarbageCollector(q)
 	gc.Start()
 
-	cs := NewConsumerSwitch(q)
+	cs := NewConsumerHub(q)
 	cs.AddConsumer(testConsumer5{})
 	cs.Start()
 
